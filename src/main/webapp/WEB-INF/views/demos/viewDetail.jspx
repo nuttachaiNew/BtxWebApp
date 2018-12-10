@@ -1,0 +1,53 @@
+<div xmlns:spring="http://www.springframework.org/tags"   xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"  xmlns:form="http://www.springframework.org/tags/form"  xmlns:c="http://java.sun.com/jsp/jstl/core"  xmlns:jsp="http://java.sun.com/JSP/Page"    version="2.0">
+  <jsp:directive.page contentType="text/html;charset=UTF-8" />
+  <jsp:output omit-xml-declaration="yes" />
+  
+
+  <c:set scope="request" var="LB_CODE"><spring:message code="LB_CODE"/></c:set>
+  <c:set scope="request" var="LB_NAME"><spring:message code="LB_NAME"/></c:set>
+  <c:set scope="request" var="LB_DOCUMENT_NUMBER"><spring:message code="LB_DOCUMENT_NUMBER"/></c:set>
+  <c:set scope="request" var="LB_SAVED_DATE"><spring:message code="LB_SAVED_DATE"/></c:set>
+  <c:set scope="request" var="LB_RECIEVE_DATE"><spring:message code="LB_RECIEVE_DATE"/></c:set>
+  <c:set scope="request" var="LB_AMOUNT"><spring:message code="LB_AMOUNT"/></c:set>
+  <c:set scope="request" var="LB_DELETE"><spring:message code="LB_DELETE"/></c:set>
+
+
+<style>
+    th{
+      color:black;
+    }
+     .marginTop:{
+        margin-top: 1%
+     }
+     .marginBottom{
+        margin-bottom: 1%
+     }
+     .wrapper{
+        position: fixed;
+        right: 20px;
+        top: 70px;
+     }
+</style>
+
+ 
+<div class="container" style="padding-top:15px;">
+    
+<jsp:text/>
+  <div class="panel panel-primary">
+    <div class="panel-body">
+      <div class="form-group">
+       <!--  -->
+      </div>
+    </div>
+  </div>
+  <!-- modal -->
+</div>
+ 
+
+
+<!-- load js -->
+    <spring:url value="${urls.getForLookupPath('/resources/scripts/application/demos/list.js')}" var="list" />
+    <script type="text/javascript"  src="${list}" ><!-- required for FF3 and Opera --></script>
+
+
+</div>

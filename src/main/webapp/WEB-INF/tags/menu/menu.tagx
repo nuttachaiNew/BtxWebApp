@@ -1,0 +1,41 @@
+<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+          xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags"
+          xmlns:sec="http://www.springframework.org/security/tags" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" version="2.0">
+	<jsp:output omit-xml-declaration="yes"/>
+
+    <jsp:directive.attribute name="id" type="java.lang.String" required="true" rtexprvalue="true" description="The identifier for this tag (do not change!)"/>
+	<jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />
+	<jsp:directive.attribute name="z" type="java.lang.String" required="false" description="Used for checking if element has been modified (to recalculate simply provide empty string value)"/>
+
+    
+    <c:set var="baseURL" value="${fn:replace(pageContext.request.requestURL, pageContext.request.requestURI, pageContext.request.contextPath)}" />
+
+
+    <!-- mp-menu -->
+	<nav id="mp-menu" class="mp-menu">
+		<div class="mp-level">
+			<h2 class="icon icon-world">Menu</h2>
+			<ul>
+			${sessionScope.menu}
+			</ul>
+		</div>
+	</nav>
+  <script type="text/javascript">
+    <![CDATA[
+    		
+    		var ullilist = $(".mp-level").find("ul").find("a");
+   			splitUrl = window.location.href.split("/")
+   			var temp =  splitUrl.length
+   			var url = "/"+splitUrl[temp-3]+"/"+splitUrl[temp-2]+"/"+splitUrl[temp-1];
+	   		
+	   		$.each(ullilist,function(index,item){
+				var urlMenu = $(item).attr("href");
+	   			var li = $(item).parent();
+   				if(urlMenu==url){
+   						$(li).css("background-color","#37474F");
+	   				}	
+	   		});
+	   		
+	   ]]>
+    </script>
+</jsp:root>

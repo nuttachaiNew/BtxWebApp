@@ -1,0 +1,180 @@
+<div id="header" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:spring="http://www.springframework.org/tags" xmlns:sec="http://www.springframework.org/security/tags" version="2.0">
+  <jsp:directive.page contentType="text/html;charset=UTF-8" />
+  <jsp:output omit-xml-declaration="yes" />
+  <jsp:useBean class="java.util.Date" id="now" scope="request" />
+  <c:set var="lang" value="${fn:toUpperCase(pageContext.response.locale)}" scope="request" />
+  <c:set var="user" value="${pageContext.request.userPrincipal.name}" scope="request" />
+  <c:set var="storeCode" value="${sessionScope.storeCode}" scope="request"/>
+  <c:set var="storeId" value="${sessionScope.storeId}" scope="request"/>
+  <c:set var="storeEngName" value="${sessionScope.storeEngName}" scope="request"/>
+  <c:set var="storeLocalName" value="${sessionScope.storeLocalName}" scope="request"/>
+  <spring:url var="logout" value="/logout"/>
+    <spring:url value="/logout" var="sign_out_url" />
+  <script type="text/javascript">
+        <![CDATA[
+
+        var session = {
+			       lang: "${lang}",                                             // the language is page language (eg. TH, EN)
+	          context: '${pageContext.request.contextPath}',              // the context path
+            date: new Date(Number("${now.time}")).setHours(0,0,0,0),    // the current date without time
+            time: new Date(Number("${now.time}")),                      // the current date with time
+            user: "${user}",
+            timeout: parseInt("${pageContext.session.maxInactiveInterval}"), 
+        };
+
+        var csrfParameter = '${_csrf.parameterName}';
+        var csrfToken = '${_csrf.token}';
+
+		var variableconstraints = {
+		
+		}
+        
+        ]]>
+    </script>
+    
+    <style>
+        /* Navigation Left Side Bar Color */
+        /* Button */
+        .navbar-material-grey-800.navbar {
+		    background-color: #4291e2;
+		    color: rgb(240, 255, 255);
+		}
+
+        .fa-home{
+            font-size: 1.5rem;
+        }
+
+        .container{
+            padding-top: 7em;
+        }
+        
+		.modal-backdrop {
+		    background: rgba(247, 245, 245, 0.96);
+		}
+		
+		.trblue {
+			background-color: rgba(0, 188, 212, 0.37) !important;
+		}
+
+    .dv-loading {
+        -webkit-animation: spin 1.5s infinite linear;
+    }
+
+    @-moz-keyframes spin {
+        from { -moz-transform: rotate(0deg); }
+        to { -moz-transform: rotate(360deg); }
+    }
+    @-webkit-keyframes spin {
+        from { -webkit-transform: rotate(0deg); }
+        to { -webkit-transform: rotate(360deg); }
+    }
+    @keyframes spin {
+        from {transform:rotate(0deg);}
+        to {transform:rotate(360deg);}
+    }
+
+    </style>
+    
+    <!-- Initial I18N -->
+  <c:set scope="request" var="LABEL_MENU"><spring:message code="LABEL_MENU"/></c:set>
+  <c:set scope="request" var="LABEL_LANGUAGE"><spring:message code="LABEL_LANGUAGE"/></c:set>
+  <c:set scope="request" var="BUTTON_LOGOUT"><spring:message code="BUTTON_LOGOUT"/></c:set>
+  <c:set scope="request" var="BUTTON_CLOSE_MENU"><spring:message code="BUTTON_CLOSE_MENU"/></c:set>
+  <c:set scope="request" var="BUTTON_MAIN_MENU"><spring:message code="BUTTON_MAIN_MENU"/></c:set>
+  <c:set scope="request" var="BUTTON_LANGUAGE"><spring:message code="BUTTON_LANGUAGE"/></c:set>
+  <c:set scope="request" var="BUTTON_LANGUAGE_TH"><spring:message code="BUTTON_LANGUAGE_TH"/></c:set>
+  <c:set scope="request" var="BUTTON_LANGUAGE_EN"><spring:message code="BUTTON_LANGUAGE_EN"/></c:set>
+    
+    <spring:url value="/resources/images/user.png" var="img_user" />
+    <div class="dv-background" style="display: none;">
+        <div class="dv-loading">
+            <spring:url value="/resources/images/ess-loader.png" var="image_loader_url" />
+            <div class="image-contain" style="background-image: url(${image_loader_url}); width:30px;height:30px;">
+                <jsp:text/>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="navbar navbar-fixed-top navbar-material-grey-800" role="navigation" style="background-color: #3f71a3;" >
+					    	<div class="container-fluid" style="height:40px;">
+					    		<div class="navbar-header"   >
+					    		    <div id="trigger" class="st-trigger-effects">
+						  				<div id="data_effect-st" data-effect="st-effect-13" style="height: 40px; width: 40px" >
+							  				<span id="hamburger" class="hamburger hamburger--collapse" >
+												<span class="hamburger-box">
+													<span class="hamburger-inner" ></span>
+												</span>
+											</span>
+										</div>   
+									</div>	
+					    		</div>
+					    		
+					    		<!-- <div class="collapse navbar-collapse" id="navbar-collapse-1"> -->
+					    		    <sec:authentication var="principal" property="principal" />
+					    
+								 		<form action="${fn:escapeXml(sign_out_url)}" method="post" id="logoutForm">
+                                        <input type="hidden"
+                                               name="${_csrf.parameterName}"
+                                               value="${_csrf.token}" />
+           							    </form>
+							
+				                    <ul class="nav navbar-nav navbar-right  col-sm-3" style="margin-left:10px;">
+				                    
+										<li class="dropdown col-sm-2 col-sm-offset-10" style="text-align: left;left: 9%;padding-left: 0px; ">
+											<a href="javascript:submitlogout()" style="padding-top: 0px; padding-bottom: 0px; padding-left: 5px;">
+												<h2 style="margin-top: 10px;color: azure;"><span class="fa fa-sign-out"></span></h2>
+											</a>
+										</li>
+				                    </ul>
+					    		<!-- </div> -->
+					    	</div>
+	</div>
+	
+
+
+
+    
+
+
+	<script type="text/javascript">
+        <![CDATA[
+
+		$(document).ready(function() {
+
+			timeoutVariable = setInterval(function () {
+				checkSessionTimeOut()
+			}, 1000);
+		});
+
+	
+
+		function submitlogout() {
+			$('#logoutForm').submit();
+		}
+
+
+		var secondTimeout = session['timeout'];
+		var timeoutVariable;
+
+		function checkSessionTimeOut() {
+			secondTimeout -= 1;
+            //console.log(secondTimeout);
+			if (secondTimeout <= -3) {
+				window.clearInterval(timeoutVariable);
+				swal({
+					title: "Warning",
+					text: "Your session has expired, please login again",
+					type: "warning",
+					confirmButtonClass: "btn-info",
+					confirmButtonText: "OK",
+					closeOnConfirm: false
+				},
+				function(){
+					window.location.href = window.location.href;
+				});
+			}
+		}
+        ]]>
+    </script>
+</div> 

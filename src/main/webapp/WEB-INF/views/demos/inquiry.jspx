@@ -1,0 +1,332 @@
+<div xmlns:spring="http://www.springframework.org/tags"   xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"  xmlns:form="http://www.springframework.org/tags/form"  xmlns:c="http://java.sun.com/jsp/jstl/core"  xmlns:jsp="http://java.sun.com/JSP/Page"    version="2.0">
+  <jsp:directive.page contentType="text/html;charset=UTF-8" />
+  <jsp:output omit-xml-declaration="yes" />
+  
+
+  <c:set scope="request" var="LB_CODE"><spring:message code="LB_CODE"/></c:set>
+  <c:set scope="request" var="LB_NAME"><spring:message code="LB_NAME"/></c:set>
+  <c:set scope="request" var="LB_DOCUMENT_NUMBER"><spring:message code="LB_DOCUMENT_NUMBER"/></c:set>
+  <c:set scope="request" var="LB_SAVED_DATE"><spring:message code="LB_SAVED_DATE"/></c:set>
+  <c:set scope="request" var="LB_RECIEVE_DATE"><spring:message code="LB_RECIEVE_DATE"/></c:set>
+  <c:set scope="request" var="LB_AMOUNT"><spring:message code="LB_AMOUNT"/></c:set>
+  <c:set scope="request" var="LB_DELETE"><spring:message code="LB_DELETE"/></c:set>
+
+
+<style>
+    th{
+      color:black;
+    }
+     .marginTop:{
+        margin-top: 1%
+     }
+     .marginBottom{
+        margin-bottom: 1%
+     }
+     .wrapper{
+        position: fixed;
+        right: 20px;
+        top: 70px;
+     }
+</style>
+
+  <spring:url value="${urls.getForLookupPath('/resources/scripts/util/JsGridUtil.js')}" var="jsgridUtil" />
+  <script type="text/javascript"  src="${jsgridUtil}" ><!-- required for FF3 and Opera --></script>
+ <div class="wrapper" >
+   <button id="btnSave" class="btn btn-lg btn-primary">
+      <span class="fa fa-floppy-o"></span>
+    </button>
+  </div>
+<div class="container" style="padding-top:15px;">
+    
+
+ 
+  <!-- alert Example -->
+    <div class="row">
+     <div class="panel-group">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse"   name="toggle" id="aPanelAlert"  href="#collapseAlert">Alert Msg Example <span id="iconCollapseAlert"  class="fa fa-caret-down" ><jsp:text/></span> </a>
+          </h4>
+        </div>
+        <div id="collapseAlert" class="panel-collapse collapse">
+          <div class="panel-body">
+              
+              <div class="form-group">
+                <div class="col-sm-12">
+                    <button class="btn btn-sm btn-success" id="success">
+                       Success
+                   </button>  &#160;
+                   <button class="btn btn-sm btn-warning" id="warning">
+                        Warning
+                   </button> &#160;
+                    <button class="btn btn-sm btn-danger" id="error">
+                        Error
+                   </button>   &#160; 
+
+                </div>
+              </div>
+              <div class="form-group">
+                  References : <a href="https://sweetalert.js.org/docs/#configuration" style="color:#FF80AB" > Sweet Alert </a>
+              </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="row" style="margin-top:-1%">
+     <div class="panel-group">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse"   name="toggle"   href="#collapseAutoComplete">AutoComplete(DDL) Example <span id="iconCollapseAlert"  class="fa fa-caret-down" ><jsp:text/></span> </a>
+          </h4>
+        </div>
+        <div id="collapseAutoComplete" class="panel-collapse collapse">
+          <div class="panel-body">
+              
+              <div class="form-group">
+                <jsp:text/>
+                  <div class="col-sm-3">
+                      <util:demoUtil id="demo" />
+                  </div>
+
+              </div>
+             
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+ <div class="row" style="margin-top:-1%">
+     <div class="panel-group">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse"   name="toggle"   href="#collapseLov">Lov <span id="iconCollapseAlert"  class="fa fa-caret-down" ><jsp:text/></span> </a>
+          </h4>
+        </div>
+        <div id="collapseLov" class="panel-collapse collapse">
+          <div class="panel-body">
+              
+              <div class="form-group">
+                <jsp:text/>
+                  <div class="col-sm-3"> 
+                     <util:lovUtil id="lovSearch"/>
+                  </div>
+
+              </div>
+             
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="margin-top:-1%">
+     <div class="panel-group">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse"  name="toggle"     href="#collapseTable">Table  and Pagging  <span id="iconCollapseTable"  class="fa fa-caret-down" ><jsp:text/></span>  </a>
+          </h4>
+        </div>
+        <div id="collapseTable" class="panel-collapse collapse">
+          <div class="panel-body">
+            
+
+            <!--  <div class="form-group"> 
+              <div class="col-sm-12">
+                <button type="button" data-target="#addModal" data-toggle="modal" titile="add" class="btn btn-sm btn-primary">
+                    <span class="fa  fa-plus-circle"><jsp:text/></span>
+                </button>
+              </div>
+             </div> 
+ -->
+            <div class="form-group">
+              <input type="text" id="money" class="form-control" />
+            </div>             
+
+
+              <div class="form-group" >
+                <div class="col-sm-12">
+                    <table class="table table-bordered" id="table-id">
+                      <thead style="background-color:#90CAF9;" >
+                        <tr>
+                            <th class="text-center" onclick="sortData(this)" id="code" style="color:black;">
+                              ${LB_CODE}   <span class="fa fa-caret-up"  style="display:none;"><jsp:text/></span>
+                            </th>
+                            <th class="text-center" onclick="sortData(this)" id="engName" style="color:black;">
+                              ${LB_NAME}  <span class="fa fa-caret-up" style="display:none;"><jsp:text/></span>
+                            </th>
+                             <th class="text-center" onclick="sortData(this)" id="referenceName" style="color:black;">
+                              ${LB_DOCUMENT_NUMBER}  <span class="fa fa-caret-up" style="display:none;"><jsp:text/></span>
+                            </th>
+                             <th class="text-center"  style="color:black;">
+                               ${LB_SAVED_DATE}
+                            </th>
+                            <th class="text-center"  style="color:black;">
+                               ${LB_RECIEVE_DATE} 
+                            </th>
+                            <th class="text-center" onclick="sortData(this)" id="moneyVar1" style="color:black;">
+                               ${LB_AMOUNT} <span class="fa fa-caret-up" style="display:none;"><jsp:text/></span>
+                            </th>
+                            <th class="text-center" id="" style="color:black;">
+                               ${LB_DELETE}
+                            </th>
+
+                            
+                        </tr>
+                      </thead> 
+                      <tbody id="dataGrid">
+                        <jsp:text/>
+                      </tbody>
+
+                    </table>
+                </div>
+              </div>
+            
+              <div class="form-group">
+                     <util:pagingutil id="paggingSearchMain"/>
+
+              </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+ <div class="row" style="margin-top:-1%">
+     <div class="panel-group">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse"  name="toggle"     href="#collapseTable2">Table  <span id="iconCollapseTable"  class="fa fa-caret-down" ><jsp:text/></span>  </a>
+          </h4>
+        </div>
+        <div id="collapseTable2" class="panel-collapse collapse">
+          <div class="panel-body">
+            
+
+            <!--  <div class="form-group"> 
+              <div class="col-sm-12">
+                <button type="button" data-target="#addModal" data-toggle="modal" titile="add" class="btn btn-sm btn-primary">
+                    <span class="fa  fa-plus-circle"><jsp:text/></span>
+                </button>
+              </div>
+             </div> 
+ -->
+            <div class="form-group">
+              <input type="text" id="money" class="form-control" />
+            </div>             
+
+
+              <div class="form-group" >
+                <div class="col-sm-12">
+                    <table class="table table-bordered" id="table-id">
+                      <thead style="background-color:#90CAF9;" >
+                        <tr>
+                            <th class="text-center" onclick="sortData(this)" id="code" style="color:black;">
+                              ${LB_CODE}   <span class="fa fa-caret-up"  style="display:none;"><jsp:text/></span>
+                            </th>
+                            <th class="text-center" onclick="sortData(this)" id="engName" style="color:black;">
+                              ${LB_NAME}  <span class="fa fa-caret-up" style="display:none;"><jsp:text/></span>
+                            </th>
+                             <th class="text-center" onclick="sortData(this)" id="referenceName" style="color:black;">
+                              ${LB_DOCUMENT_NUMBER}  <span class="fa fa-caret-up" style="display:none;"><jsp:text/></span>
+                            </th>
+                             <th class="text-center"  style="color:black;">
+                               ${LB_SAVED_DATE}
+                            </th>
+                            <th class="text-center"  style="color:black;">
+                               ${LB_RECIEVE_DATE} 
+                            </th>
+                            <th class="text-center" onclick="sortData(this)" id="moneyVar1" style="color:black;">
+                               ${LB_AMOUNT} <span class="fa fa-caret-up" style="display:none;"><jsp:text/></span>
+                            </th>
+                            <th class="text-center" id="" style="color:black;">
+                               ${LB_DELETE}
+                            </th>
+
+                            
+                        </tr>
+                      </thead> 
+                      <tbody id="dataGrid">
+                        <jsp:text/>
+                      </tbody>
+
+                    </table>
+                </div>
+              </div>
+            
+              <div class="form-group">
+                     <util:pagingutil id="paggingSearchMain"/>
+
+              </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="row">
+     <div class="panel-group">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse"  name="toggle" href="#jsgrid_table">jsgrid table <span id="iconCollapseTable"  class="fa fa-caret-down" ><jsp:text/></span>  </a>
+          </h4>
+        </div>
+        <div id="jsgrid_table" class="panel-collapse collapse">
+          <div class="panel-body">
+            <div class="form-group">
+                <div class="form-horizontal marginBottom">
+                   <button id="btnDelete" class="btn btn-danger" >
+                      <span class="fa fa-trash"  >
+                        <jsp:text/>
+                      </span>
+
+                   </button>
+                </div> 
+                <div id="jsGrid" >
+                  <jsp:text/>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+     <form id="formViewDetail" action="/MMC/demos/viewDetail" method="POST" >
+        <input class="hidden" name="id"/>
+        <input type="hidden"
+           name="${_csrf.parameterName}"
+           value="${_csrf.token}"/>
+      </form>
+
+  </div>
+
+    <!-- div container -->
+
+</div>
+
+  <!-- modal -->
+
+ 
+
+
+<!-- load js -->
+    <spring:url value="${urls.getForLookupPath('/resources/scripts/application/demos/inquiry.js')}" var="inquiry" />
+    <script type="text/javascript"  src="${inquiry}" ><!-- required for FF3 and Opera --></script>
+
+
+</div>
