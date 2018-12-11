@@ -34,8 +34,7 @@ $ mvn clean compile -Dmaven.test.skip=true -Djetty.port=8080 -Dcatalina.base=/tm
 before package 
 change port engine in 
 server.properties to
-EngineServer=http://localhost:8080/MMCEngine
-
+EngineServer=http://localhost:8080/
 
 mvn clean compile package -Dmaven.test.skip=true 
 
