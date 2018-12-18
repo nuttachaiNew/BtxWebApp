@@ -35,22 +35,38 @@ public class UserAuthorizationServiceImpl extends AbstractEngineService implemen
     /* For case Special Authentication */
     @Loggable
     public Object getUserDetail(String username) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-        headers.add("Content-Type", "application/json; charset=utf-8");
-        headers.add("userName", username);
-
-        HttpEntity<String> entity = new HttpEntity<String>("", headers);
-        String url = "/users/findUserByUserName?username=" + username;
+        try{
+            
+            HttpHeaders headers = new HttpHeaders();
+            headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+            headers.add("Content-Type", "application/json; charset=utf-8");
+            headers.add("userName", username);
+            HttpEntity<String> entity = new HttpEntity<String>("", headers);
+            String tokenUrl = "http://58.181.168.159:8081/getToken";
+            String token = restTemplate.exchange(tokenUrl, HttpMethod.GET, entity, String.class).getBody();
+            LOGGER.debug("token : {}",token.replace("\"", ""));
+            headers.add("Authorization", "Bearer " + token.replace("\"", ""));
+            entity = new HttpEntity<String>("", headers);
+            String url = "/api/users/findUserByUserName?username=" + username;
             LOGGER.info("CHECK USER URL ====>   {}",url);
-        String json = restTemplate.exchange(EngineServer + url, HttpMethod.GET, entity, String.class).getBody();
-        // Map userMap = gson.fromJson(json, Map.class);
-        LOGGER.info("information user : {}",json);
+            String json = restTemplate.exchange(EngineServer + url, HttpMethod.GET, entity, String.class).getBody();
+            // Map userMap = gson.fromJson(json, Map.class);
+            LOGGER.info("information user : {}",json);
 
-        /* Set Role by Stream*/
-        CustomUser userTmp = gson.fromJson(json, CustomUser.class);
+            /* Set Role by Stream*/
+            CustomUser userTmp = gson.fromJson(json, CustomUser.class);
+            // Map roles = (Map)userTmpMap.get("role");
+            // CustomUser userTmp = new CustomUser();
+            // userTmp.setUsername(userTmpMap.get("username").toString());
+            // userTmp.setAccessToken(userTmpMap.get("password").toString());
+            // userTmp.setPassword(userTmpMap.get("password").toString());
+            // userTmp.setRoles(roles.get("name").toString());
+            return userTmp;
 
-        return userTmp;
+        }catch(Exception e){
+            throw new RuntimeException(e);
+        }
+
     }
 
     public Double returnStatusLogin(String username) {

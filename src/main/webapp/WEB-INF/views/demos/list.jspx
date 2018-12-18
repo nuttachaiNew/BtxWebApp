@@ -58,7 +58,20 @@
   <!-- modal -->
 </div>
  
-
+<div class="modal fade" id="addModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Save</h4>
+        </div>
+        <div class="modal-body">
+            <jsp:text/>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 
 <!-- load js -->
     <spring:url value="${urls.getForLookupPath('/resources/scripts/application/demos/list.js')}" var="list" />
