@@ -109,11 +109,15 @@ public abstract class  AbstractEngineService {
             HttpHeaders headers = new HttpHeaders();
             headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
             headers.add("Content-Type", "application/json; charset=utf-8");
-            headers.add(ConstantVariableUtil.USER_NAME, SecurityContextHolder.getContext().getAuthentication().getName());
+            // headers.add("userName", username);
             HttpEntity<String> entity = new HttpEntity<String>("", headers);
+            String tokenUrl = "http://58.181.168.159:8081/getToken";
+            String token = restTemplate.exchange(tokenUrl, HttpMethod.GET, entity, String.class).getBody();
+            LOGGER.debug("token : {}",token.replace("\"", ""));
+            headers.add("Authorization", "Bearer " + token.replace("\"", ""));
+            entity = new HttpEntity<String>("", headers);
             LOGGER.info("=============ABSTRACT ENGINE============= {}",restTemplate);
             return restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
-
         }catch (Exception e){
             throw new RuntimeException(e);
         }
@@ -291,9 +295,19 @@ public abstract class  AbstractEngineService {
         MediaType mediaType = new MediaType("application","json", Charset.forName("UTF-8"));
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(mediaType);
-        headers.add(ConstantVariableUtil.USER_NAME, SecurityContextHolder.getContext().getAuthentication().getName());
+        // headers.add(ConstantVariableUtil.USER_NAME, SecurityContextHolder.getContext().getAuthentication().getName());
 
-        HttpEntity<String> entity = new HttpEntity<String>(json, headers);
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.add("Content-Type", "application/json; charset=utf-8");
+            // headers.add("userName", username);
+        HttpEntity<String> entity = new HttpEntity<String>("", headers);
+        String tokenUrl = "http://58.181.168.159:8081/getToken";
+        String token = restTemplate.exchange(tokenUrl, HttpMethod.GET, entity, String.class).getBody();
+        LOGGER.debug("token : {}",token.replace("\"", ""));
+        headers.add("Authorization", "Bearer " + token.replace("\"", ""));
+        entity = new HttpEntity<String>("", headers);
+
+       entity = new HttpEntity<String>(json, headers);
 
         LOGGER.info("entity :{}", entity);
         if(httpMethod==null){
@@ -308,7 +322,7 @@ public abstract class  AbstractEngineService {
         
         return responseEntity;
     }
-    
+
     public ResponseEntity<String> putWithJson(Map<String, String[]> parameterMap,HttpMethod httpMethod,String urlParam) {
     	String url = this.EngineServer +urlParam;
     	LOGGER.info("url :{}", url);

@@ -124,7 +124,7 @@ public class CustomUserDetailsService implements UserDetailsService, PasswordEnc
     public String md5Hash (String password) {
         LOGGER.debug("md5Hash========================================================= : {}",password);
         try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] messageDigest = md.digest(password.getBytes());
             BigInteger number = new BigInteger(1, messageDigest);
             String hashtext = number.toString(16);
