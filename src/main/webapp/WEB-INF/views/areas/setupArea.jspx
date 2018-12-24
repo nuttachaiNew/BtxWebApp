@@ -9,27 +9,6 @@
   <c:set scope="request" var="LB_RECIEVE_DATE"><spring:message code="LB_RECIEVE_DATE"/></c:set>
   <c:set scope="request" var="LB_DELETE"><spring:message code="LB_DELETE"/></c:set>
 
-
-<style>
-    th{
-      color:black;
-    }
-     .marginTop:{
-        margin-top: 1%
-     }
-     .marginBottom{
-        margin-bottom: 1%
-     }
-     .wrapper{
-        position: fixed;
-        right: 20px;
-        top: 70px;
-     }
-     .reboxing{
-        margin-top : -5%;
-     }
-
-</style>
 <div class="container reboxing">
   <div class="row">
     <div class="panel panel-primary">
