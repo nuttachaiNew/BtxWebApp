@@ -15,7 +15,24 @@
     src: url('../fonts/ThaiSansNeue-Regular.ttf') format('truetype');
 }
 
-
+.reboxing{
+    margin-top : -5%;
+ }
+.marginTop:{
+    margin-top: 1%
+ }
+ .marginBottom{
+    margin-bottom: 1%
+ }
+ .wrapper{
+    position: fixed;
+    right: 20px;
+    top: 70px;
+ }
+   th{
+      color:black;
+    }
+  
 @font-face {
     font-family: 'MeteoconsRegular';
     src: url('../fonts/meteocons.eot');
