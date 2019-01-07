@@ -198,11 +198,12 @@ public class UserServiceImpl extends AbstractEngineService implements BaseCommon
 	}
 
 	public ResponseEntity<String> findAllUser() {
-		String method = "/user/findAllUser";
+		String method = "/api/users/findAllUser";
 		String url = method;
 		return getResultStringAndSetUser(url);
 	}
 
+	
 	public ResponseEntity<String> editProfile(MultipartHttpServletRequest multipartHttpServletRequest) {
 		// return null;
 		String method = "/api/users/updateProfileWeb";

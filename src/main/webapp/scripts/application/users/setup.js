@@ -1,7 +1,7 @@
 // init global Variable
 var $btnSave =  $("#btnSave");
 var $tbody   =  $("#tableData");
-var tempArea = {};
+var tempUser = {};
 var $btnConfirmSave = $("#addModal").find("#btnConfirmSave");
 var $btnConfirmUpdate = $("#updateModal").find("button#btnConfirmSave");
 var $btnConfrimDelete = $("button#btnConfirmDelete")
@@ -22,7 +22,7 @@ function renderTable(){
 	    var json = $.ajax({
         type: "GET",
         dataType: "json",
-        url: session['context'] + '/areas/findAllAreas',
+        url: session['context'] + '/users/findAllUser',
         headers: {
             Accept: "application/json",
         },
@@ -39,16 +39,20 @@ function renderTable(){
 		$tbody.append(
 			"<tr>"+
 				"<td>"+ running+"</td>"+
+				"<td>"+ (item.username == null ? "" : item.username) +"</td>"+
+				"<td>"+ (item.firstName == null ? "" : item.firstName) +"</td>"+
+				"<td>"+ (item.lastName == null ? "" : item.lastName) +"</td>"+
+				"<td>"+ (item.telephoneNumber == null ? "" : item.telephoneNumber) +"</td>"+
+				"<td>"+ (item.email == null ? "" : item.email) +"</td>"+
+				"<td>"+ (item.role == null ? "" : item.role.name) +"</td>"+
+				"<td>"+ (item.branch == null ? "" : item.branch.name) +"</td>"+
 
-				"<td>"+ (item.code == null ? "" : item.code) +"</td>"+
-				"<td>"+ (item.name == null ? "" : item.name) +"</td>"+
-				"<td>"+ (item.detail == null ? "" : item.detail) +"</td>"+
 				"<td>"+ $btnEdit +"</td>"+
 				"<td>"+ $btnDelete +"</td>"+
 			"</tr>"
 			);
 		running++;
-		tempArea[item.id] = item;
+		tempUser[item.id] = item;
 	});
 
 }
@@ -56,16 +60,20 @@ function renderTable(){
 
 
 $btnConfirmSave.click(function(){
-	var code = $("#addModal").find("input#txtCode").val();
-	var name = $("#addModal").find("input#txtAreaName").val();
-	var detail = $("#addModal").find("input#txtAreaDeatail").val();
+	var username = $("#addModal").find("input#txtCode").val();
+	var password = $("#addModal").find("input#txtAreaName").val();
+	var confirmPassword = $("#addModal").find("input#txtAreaDeatail").val();
+	var firstName = $("#addModal").find("input#txtAreaDeatail").val();
+	var lastName = $("#addModal").find("input#txtAreaDeatail").val();
+	var telephoneNumber = $("#addModal").find("input#txtAreaDeatail").val();
+	var email = $("#addModal").find("input#txtAreaDeatail").val();
 
-	var data = {
-		code : code,
-		name : name,
-		detail : detail,
-		createdBy : session['user']
-	};
+	// var data = {
+	// 	code : code,
+	// 	name : name,
+	// 	detail : detail,
+	// 	createdBy : session['user']
+	// };
 
 	console.log(data);
 	 $('.dv-background').show();
@@ -143,7 +151,7 @@ $btnConfirmUpdate.click(function(){
 });
 
 function editData(id){
-	var itemEdit = tempArea[id];
+	var itemEdit = tempUser[id];
 	$("#updateModal").find("input#txtCode").val(itemEdit.code);
 	$("#updateModal").find("input#txtAreaName").val(itemEdit.name);
 	$("#updateModal").find("input#txtAreaDetail").val(itemEdit.detail);

@@ -63,6 +63,22 @@ public class UserController{
         }
     }
 
+    
+    @GetMapping("/findAllUser")
+    public ResponseEntity<String> findAllUser() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json; charset=utf-8");
+        ResponseEntity<String> responseEntity;
+        try {
+            responseEntity = userService.findAllUser();
+            return responseEntity;
+        } catch (Exception e) {
+            LOGGER.error("findAllUser[Controller] error msg : {}",e.getMessage());
+            return new ResponseEntity<String>("{\"ERROR\":" +e.getMessage()+ "\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
     @RequestMapping(value="/editProfile",method = RequestMethod.POST, produces = "text/html", headers = "Accept=application/json")
     public ResponseEntity<String> editProfile( MultipartHttpServletRequest multipartHttpServletRequest) {
         HttpHeaders headers = new HttpHeaders();

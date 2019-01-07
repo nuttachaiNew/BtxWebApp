@@ -66,7 +66,7 @@
         <div class="modal-body marginBottom">
             <!-- <jsp:text/> -->
             <div class="form-group">
-              <div class="col-sm-12">
+              <div class="col-sm-12 marginTop">
                 <div class="col-sm-4">
                   <label>Code :</label>
                 </div>
@@ -75,7 +75,7 @@
                 </div>
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group margintop">
               <div class="col-sm-12">
                 <div class="col-sm-4">
                   <label>Area Name :</label>
@@ -87,7 +87,7 @@
              </div> 
             <div class="form-group">
 
-              <div class="col-sm-12">
+              <div class="col-sm-12 margintop">
                 <div class="col-sm-4">
                   <label>Area Detail :</label>
                 </div>
@@ -126,7 +126,7 @@
         <div class="modal-body marginBottom">
             <!-- <jsp:text/> -->
             <div class="form-group">
-              <div class="col-sm-12">
+              <div class="col-sm-12 margintop">
                 <div class="col-sm-4">
                   <label>Code :</label>
                 </div>
@@ -136,7 +136,7 @@
               </div>
             </div>
             <div class="form-group">
-              <div class="col-sm-12">
+              <div class="col-sm-12 margintop">
                 <div class="col-sm-4">
                   <label>Area Name :</label>
                 </div>
@@ -147,7 +147,7 @@
              </div> 
             <div class="form-group">
 
-              <div class="col-sm-12">
+              <div class="col-sm-12 margintop">
                 <div class="col-sm-4">
                   <label>Area Detail :</label>
                 </div>
