@@ -33,6 +33,7 @@ public abstract class  AbstractEngineService {
 
 	protected String EngineServer = "localhost:8080/Engine/rest";
     protected static Properties connectProperties = null;
+    private static  String tokenUrl = "http://58.181.168.159:8081/getToken";
 
     protected String webServicesString = "";
     protected String resultString = "";
@@ -109,9 +110,7 @@ public abstract class  AbstractEngineService {
             HttpHeaders headers = new HttpHeaders();
             headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
             headers.add("Content-Type", "application/json; charset=utf-8");
-            // headers.add("userName", username);
             HttpEntity<String> entity = new HttpEntity<String>("", headers);
-            String tokenUrl = "http://58.181.168.159:8081/getToken";
             String token = restTemplate.exchange(tokenUrl, HttpMethod.GET, entity, String.class).getBody();
             LOGGER.debug("token : {}",token.replace("\"", ""));
             headers.add("Authorization", "Bearer " + token.replace("\"", ""));
@@ -295,13 +294,10 @@ public abstract class  AbstractEngineService {
         MediaType mediaType = new MediaType("application","json", Charset.forName("UTF-8"));
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(mediaType);
-        // headers.add(ConstantVariableUtil.USER_NAME, SecurityContextHolder.getContext().getAuthentication().getName());
 
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         headers.add("Content-Type", "application/json; charset=utf-8");
-            // headers.add("userName", username);
         HttpEntity<String> entity = new HttpEntity<String>("", headers);
-        String tokenUrl = "http://58.181.168.159:8081/getToken";
         String token = restTemplate.exchange(tokenUrl, HttpMethod.GET, entity, String.class).getBody();
         LOGGER.debug("token : {}",token.replace("\"", ""));
         headers.add("Authorization", "Bearer " + token.replace("\"", ""));
@@ -432,26 +428,27 @@ public abstract class  AbstractEngineService {
 
     	ResponseEntity<String> responseEntity;
 		try {
-			MultipartFile multipathFile = multipartHttpServletRequest.getFile("file");
-			String fileName =  multipartHttpServletRequest.getParameter("filename");
-			String name = URLEncoder.encode(multipathFile.getOriginalFilename(),"UTF-8");
-			String fileType = FilenameUtils.getExtension(name);
-			File convFile = new File(multipathFile.getOriginalFilename());
+
+            HttpHeaders header = new HttpHeaders();
+            header.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+            header.add("Content-Type", "application/json; charset=utf-8");
+            HttpEntity<String> entitys = new HttpEntity<String>("", header);
+            String token = restTemplate.exchange(tokenUrl, HttpMethod.GET, entitys, String.class).getBody();
+            LOGGER.debug("token : {}",token.replace("\"", ""));
+
+			MultipartFile multipathFile = multipartHttpServletRequest.getFile("image");
+			String json =  multipartHttpServletRequest.getParameter("json");
+        	File convFile = new File(multipathFile.getOriginalFilename());
 			multipathFile.transferTo(convFile);
-			
 			MediaType mediaType = MediaType.MULTIPART_FORM_DATA;
 			HttpHeaders headers = new HttpHeaders();
-            headers.add(ConstantVariableUtil.USER_NAME, SecurityContextHolder.getContext().getAuthentication().getName());
 			headers.setContentType(mediaType);
-
-			
+            headers.add("Authorization", "Bearer " + token.replace("\"", ""));
 			MultiValueMap<String, Object> body = new LinkedMultiValueMap<String, Object>();  
 			FileSystemResource file = new FileSystemResource(convFile);
-
 			body.add("file", file);
-			//body.add("fileType",fileType);
-			body.add("name",fileName);
-
+            LOGGER.debug("json : {}",json);
+			body.add("json",json);
 
 			HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<MultiValueMap<String, Object>>(body, headers);
 			

@@ -4,29 +4,109 @@
   <spring:message var="app_name" code="application_name" htmlEscape="false" />
   <spring:message var="title" code="welcome_titlepane" arguments="${app_name}" htmlEscape="false" />
   
-  
-    <style>
+  <spring:url value="/resources/images/user.png" var="img_user" />
+<div class="container-fluid">
+      <div class="row">
+          <div class="form-group">
+             <div class="col-sm-12">
+                <lable class="control-label white" >Profile Settings</lable>
+                <hr/>
+             </div>
+          </div>
+          <div class="form-group" style="margin-top:2%;">
+             <div class="col-sm-6">
+            <jsp:text/>
+            <div class="panel panel-default" style="height: 510px;">
+              <div class="panel-body">
+                <div class="form-group">
+                  <i class="fa fa-cog"><jsp:text/></i> &#160;&#160;&#160; General
+                </div>
+                <div class="form-group">
+                  <div  class="col-sm-offset-3 col-sm-6 " style="height: 210px;">
+                     <jsp:text/>
+                      <img class="img-circle" id="imgDashboard" src="${img_user}" style="width: 200px;height:200px " />
+                  </div>
+                </div>
+                 <div class="form-horizontal ">
+                   <div class="col-sm-offset-3 col-sm-6 margintop">
+                       <input type="file" class="form-control" id="file" />   
+                   </div> 
+                </div>
+                <div class="form-horizontal ">
+                   <div class="col-sm-offset-3 col-sm-6 margintop">
+                       <input type="text" class="form-control" id="txtFirstName" />   
+                   </div> 
+                </div>
+                <div class="form-horizontal margintop" >
+                   <div class="col-sm-offset-3 col-sm-6 margintop">
+                       <input type="text" class="form-control" id="txtLastName" />
+                   </div> 
+                </div>
+                <div class="form-horizontal margintop" >
+                   <div class="col-sm-offset-3 col-sm-6 margintop">
+                       <input type="text" class="form-control" id="txtEmail" />
+                   </div> 
+                </div>
+                <div class="form-horizontal margintop">
+                   <div class="col-sm-offset-3 col-sm-6 margintop">
+                       <input type="text" class="form-control" id="txtTelNo" />
+                   </div> 
+                </div>
 
-        body{
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
+              </div>
+                <div class="form-horizontal ">
+                  <div class="col-sm-offset-5 col-sm-3">
+                     <button class="btn btn-primary" id="btnSave" >Save</button>
+                  </div>
+                </div>
+            </div>
 
+          </div>
+           <div style="margin-left:-2%" class="col-sm-6">
+            <jsp:text/>
+              <div class="panel panel-default" style="height: 300px;">
+              <div class="panel-body">
+                 <i class="fa fa-building-o"><jsp:text/></i> &#160;&#160;&#160; Work
+                 <div class="form-group">
+                  <div style="margin-top:20%">
+                         <div class="col-sm-offset-3 col-sm-6 margintop">
+                          <input type="text" class="form-control" id="area"  readonly="true" />
+                        </div>            
+                  </div>
+                </div>
+              </div>
+            </div>
 
-            padding-left: 0;
-            padding-right: 0;
-            margin-left: 0;
-            margin-right: 0;
-            margin:0;
-            color:#6a6f8c;
-            font:600 16px/18px 'ThaiSansNeue',sans-serif;
-        }
+              <div class="panel panel-default" style="height: 200px;margin-top:-2%;">
+              <div class="panel-body">
+              <i class="fa fa-shield"><jsp:text/></i> &#160;&#160;&#160; Security Login
+                 <div class="form-group">
+                         <div class="col-sm-offset-3 col-sm-6 margintop">
+                          <input type="text" class="form-control" id="email" />
+                        </div>            
+                </div>
+                 <div class="form-group">
+                         <div class="col-sm-offset-3 col-sm-6 margintop">
+                          <a href="#" class="pull-right">Change Password</a>
+                        </div>            
+                </div>
 
-    </style>
- 	<center>
+              </div>
+            </div>
+          </div>
 
- 	</center>
+          </div>
+         
+      </div>
+      <div class="row">
+          <div class="col-sm-offset-5">
+            <button class="btn btn-danger" id="logout"> <i class="fa fa-sign-out"><jsp:text/></i> Log out</button>
+          </div>
+      </div>
+</div>
 
+    <spring:url value="${urls.getForLookupPath('/resources/scripts/application/index/setup.js')}" var="setup" />
+    <script type="text/javascript"  src="${setup}" ><!-- required for FF3 and Opera --></script>
 
 </div>
+

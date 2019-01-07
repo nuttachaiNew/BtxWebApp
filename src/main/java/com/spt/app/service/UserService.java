@@ -20,6 +20,7 @@ public interface UserService {
 	public ResponseEntity<String>   saveUser(String json);
 	public ResponseEntity<String>   updateUser(String json);
 	public ResponseEntity<String> findAllUser();
-
+	public ResponseEntity<String> editProfile(MultipartHttpServletRequest multipartHttpServletRequest);
+	public ResponseEntity<String>   getImage(String username);
 
 }

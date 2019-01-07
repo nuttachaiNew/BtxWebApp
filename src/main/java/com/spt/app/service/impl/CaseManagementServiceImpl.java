@@ -18,6 +18,14 @@ public class CaseManagementServiceImpl extends AbstractEngineService implements 
 
 	static final Logger LOGGER = LoggerFactory.getLogger(CaseManagementServiceImpl.class);
 
+		
+		@Override
+		@Autowired
+		public void setRestTemplate(RestTemplate restTemplate) {
+			// TODO Auto-generated method stub
+			super.restTemplate = restTemplate;
+		}
+
 
 		public ResponseEntity<String> findCaseByParameter(String json){
 			try{
