@@ -48,7 +48,7 @@
             border-radius:25px;
             background:rgba(255,255,255,.1);
             /*width:100%;*/
-            color:#fff;
+            color:black;
             display:block;
             font-size:16px;
         }
@@ -58,7 +58,7 @@
             height: 37px;
             width: 30%;
             border: 0px;
-            background: #e74c3c;
+            background-color: #b3d9ff;
             border-radius:7px;
             padding: 10px;
             color:white;
@@ -112,8 +112,9 @@
             width:100%;
             height:75%;
             position:absolute;
+            left: 300px;
             padding:0px 70px 50px 70px;
-            background:rgba(40,57,101,.8);
+            background:#e0e0d2;
 
         }
         .login-html .sign-in-htm,
@@ -218,7 +219,6 @@
             -ms-transform:rotate(0);
             transform:rotate(0);
         }
-*/
         input::-webkit-input-placeholder {
             font-size: 18px;
             line-height: 3;
@@ -233,31 +233,31 @@
     </style>
 
     <form name="f" action="${loginUrl}" method="POST" role="form" style="padding-top: 40px">
-        <div class="login-wrap">
+        <div class="login-wrap pu">
           
             <div class="login-html">
                 <input id="tab-1" type="radio"  name="tab" class="sign-in" checked="checked" /><label for="tab-1" class="tab"><!----></label>
                 <div class="login-form">
                     <div class="sign-in-htm">
                         <div class="row" style="text-align: left; margin-top: -10px;">
-                            <h2 style="text-align: center;color: white">Baxter Application</h2>
+                            <h2 style="text-align: center;color: #004080">Baxter</h2>
                         </div>
                         <div class="row">
                             <div class="form-group has-warning">
                                 <div class="col-sm-12">
-                                    <input id="j_username" style="color: white;width: 100%" type="text" class="form-control" name="j_username" autocomplete="off" placeholder="${label_security_username}" required="true"/>
+                                    <input id="j_username" style="background-color: white;width: 100%" type="text" class="form-control" name="j_username" autocomplete="off" placeholder="${label_security_username}" required="true"/>
                                 </div>
                             </div>
                         </div>
                         <div class="row" style="margin-top: 15px">
                             <div class="form-group has-warning">
                                 <div class="col-sm-12">
-                                    <input id="j_password" type="password" style="color: white;width: 100%" class="form-control " name="j_password" autocomplete="off" placeholder="${label_security_password}" required="true"/>
+                                    <input id="j_password" type="password" style="background-color: white;width: 100%" class="form-control " name="j_password" autocomplete="off" placeholder="${label_security_password}" required="true"/>
                                 </div>
                             </div>
                         </div>
                         <div style="margin-top: 15px;text-align: center">
-                            <button type="submit" id="submit_button" class="button" style="background-color: #eb1c2a;width: 250px;margin-top: 10px;font-size: 20px">LOGIN</button>
+                            <button type="submit" id="submit_button" class="button" style="background-color:#99ccff;width: 250px;margin-top: 10px;font-size: 20px">LOGIN</button>
                         </div>
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         <input type="hidden" id="screen_width" name="screen_width" value=""/>

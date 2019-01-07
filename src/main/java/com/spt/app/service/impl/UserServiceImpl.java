@@ -110,15 +110,14 @@ public class UserServiceImpl extends AbstractEngineService implements BaseCommon
 
 	@Override
 	public ResponseEntity<String> findByUsername(String username) {
-		// TODO Auto-generated method stub
-				HttpHeaders headers = new HttpHeaders();
-				headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-		        headers.add("Content-Type", "application/json; charset=utf-8");
+		        String url = "/api/users/findUserByUserName?username="+username;
+		        return getResultStringAndSetUser(url);
+	}
 
-		        HttpEntity<String> entity = new HttpEntity<String>("", headers);
-		        String method = "findByUsername";
-		        String url = "/users/search/"+method+"?username="+username;
-		        return getResultString(url,entity);
+	@Override
+	public ResponseEntity<String> getImage(String username) {
+		        String url = "/files/getImageUser?username="+username;
+		        return getResultStringAndSetUser(url);
 	}
 
 	@Override
@@ -202,6 +201,13 @@ public class UserServiceImpl extends AbstractEngineService implements BaseCommon
 		String method = "/user/findAllUser";
 		String url = method;
 		return getResultStringAndSetUser(url);
+	}
+
+	public ResponseEntity<String> editProfile(MultipartHttpServletRequest multipartHttpServletRequest) {
+		// return null;
+		String method = "/api/users/updateProfileWeb";
+		String url = method;
+		return uploadFile(multipartHttpServletRequest,url);
 	}
 
 
