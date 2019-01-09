@@ -70,5 +70,11 @@ public class CaseManagementController{
     }
 
 
+    @Loggable
+    @GetMapping("/listcase")
+    public String listcase() {
+        return "casemanagements/listcase";
+    }
+
 
 }

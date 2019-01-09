@@ -1,0 +1,66 @@
+<div xmlns:spring="http://www.springframework.org/tags"   xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"  xmlns:form="http://www.springframework.org/tags/form"  xmlns:c="http://java.sun.com/jsp/jstl/core"  xmlns:jsp="http://java.sun.com/JSP/Page"    version="2.0">
+  <jsp:directive.page contentType="text/html;charset=UTF-8" />
+  <jsp:output omit-xml-declaration="yes" />
+  
+
+  <c:set scope="request" var="LB_CODE"><spring:message code="LB_CODE"/></c:set>
+  <c:set scope="request" var="LB_NAME"><spring:message code="LB_NAME"/></c:set>
+  <c:set scope="request" var="LB_SAVED_DATE"><spring:message code="LB_SAVED_DATE"/></c:set>
+  <c:set scope="request" var="LB_RECIEVE_DATE"><spring:message code="LB_RECIEVE_DATE"/></c:set>
+  <c:set scope="request" var="LB_DELETE"><spring:message code="LB_DELETE"/></c:set>
+
+
+<div class="container reboxing">
+  <jsp:text/>
+  <div class="row">
+    <div class="col-sm-12">
+        <div class="col-sm-2">
+          <input class="form-control" type="text" />
+        </div>
+        <div class="col-sm-4">
+          <button class="btn btn-default">
+             clear
+          </button>
+        </div>
+         <div class=" col-sm-5">
+          <div class="col-sm-6 pull-right">
+              <input class="form-control " type="text" />
+          </div>
+        </div>
+        <div class="col-sm-1">
+          <button class="btn btn-primary">
+             search
+          </button>
+        </div>
+    </div>
+  </div>
+  <div class="row">
+      <div class="form-group" style="margin-top:2%;">
+          <div class="panel panel-default" >
+              <div class="panel-body">
+                <div class="form-group">
+                    <table class="table table-responsive">
+                      <thead>
+                        <th  class="black">case ID</th>
+                        <th  class="black">Date </th>
+                        <th  class="black">Case Type</th>
+                        <th  class="black">Customer Name</th>
+                        <th  class="black">Type</th>
+                        <th  class="black">Status</th>
+                        <th  class="black">Manage</th>
+                        <th  class="black">View</th>
+                      </thead>
+                    </table>
+                </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+<!-- load js -->
+    <spring:url value="${urls.getForLookupPath('/resources/scripts/application/casemanagements/bu/management.js')}" var="setup" />
+    <script type="text/javascript"  src="${setup}" ><!-- required for FF3 and Opera --></script>
+
+</div>

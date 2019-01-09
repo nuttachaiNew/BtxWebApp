@@ -33,7 +33,6 @@ public class PositionServiceImpl extends AbstractEngineService implements Positi
 
 	@Override
 	public ResponseEntity<String> findAllPosition() {
-		{
 			String url = "/api/roles/findAllRole";
 	        return getResultStringAndSetUser(url);
 	}

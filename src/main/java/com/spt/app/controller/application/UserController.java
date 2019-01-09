@@ -107,4 +107,39 @@ public class UserController{
         }
     }
 
+   @PostMapping("/insertUser")
+    public ResponseEntity<String> insertUser(HttpServletRequest request,@RequestBody String json) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json; charset=utf-8");
+        LOGGER.info("insertUser[Controller] :{}",json);
+        ResponseEntity<String> responseEntity;
+        
+        try {
+            responseEntity = userService.insertAppuser(json);
+            return responseEntity;
+        } catch (Exception e) {
+            LOGGER.error("insertUser[Controller] error msg : {}",e.getMessage());
+            return new ResponseEntity<String>("{\"ERROR\":" +e.getMessage()+ "\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+
+   @PostMapping("/updateUser")
+    public ResponseEntity<String> updateUser(HttpServletRequest request,@RequestBody String json) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json; charset=utf-8");
+        LOGGER.info("updateUser[Controller] :{}",json);
+        ResponseEntity<String> responseEntity;
+        
+        try {
+            responseEntity = userService.updateAppUser(json);
+            return responseEntity;
+        } catch (Exception e) {
+            LOGGER.error("updateUser[Controller] error msg : {}",e.getMessage());
+            return new ResponseEntity<String>("{\"ERROR\":" +e.getMessage()+ "\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
 }

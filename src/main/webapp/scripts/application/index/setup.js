@@ -92,6 +92,7 @@ $btnSave.click(function(){
 
 });
 
-$("btn#logout").click(function(){
-submitlogout()
+$("button#logout").click(function(){
+    console.log("clickloutout")
+    submitlogout()
 });

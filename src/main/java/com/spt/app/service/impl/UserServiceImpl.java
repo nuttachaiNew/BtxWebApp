@@ -212,4 +212,26 @@ public class UserServiceImpl extends AbstractEngineService implements BaseCommon
 	}
 
 
+	@Override
+	public ResponseEntity<String> insertAppuser(String json){
+        try{
+			String url = "/api/users/save";
+            return postWithStringJson(json, HttpMethod.POST, url);
+        }catch(Exception e){
+			e.printStackTrace();
+        	throw new RuntimeException(e.getMessage());
+        }
+	}
+
+	@Override
+	public ResponseEntity<String> updateAppUser(String json){
+        try{
+			String url = "/api/users/update";
+            return postWithStringJson(json, HttpMethod.POST, url);
+        }catch(Exception e){
+			e.printStackTrace();
+        	throw new RuntimeException(e.getMessage());
+        }
+	}
+
 }
