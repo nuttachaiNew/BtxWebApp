@@ -9,4 +9,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 public interface PositionService {
 		public ResponseEntity<String> findAllPosition();
+		public ResponseEntity<String> deletePosition(String json);
+		public ResponseEntity<String> insertPosition(String json);
+		public ResponseEntity<String> updatePosition(String json);
 }

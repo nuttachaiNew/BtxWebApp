@@ -37,5 +37,36 @@ public class PositionServiceImpl extends AbstractEngineService implements Positi
 	        return getResultStringAndSetUser(url);
 	}
 
-	
+	@Override
+	public ResponseEntity<String> insertPosition(String json){
+        try{
+			String url = "/api/roles/save";
+            return postWithStringJson(json, HttpMethod.POST, url);
+        }catch(Exception e){
+			e.printStackTrace();
+        	throw new RuntimeException(e.getMessage());
+        }
+	}
+
+	@Override
+	public ResponseEntity<String> updatePosition(String json){
+        try{
+			String url = "/api/roles/update";
+            return postWithStringJson(json, HttpMethod.POST, url);
+        }catch(Exception e){
+			e.printStackTrace();
+        	throw new RuntimeException(e.getMessage());
+        }
+	}
+
+	@Override
+	public ResponseEntity<String> deletePosition(String json){
+        try{
+			String url = "/api/roles/delete";
+            return postWithStringJson(json, HttpMethod.POST, url);
+        }catch(Exception e){
+			e.printStackTrace();
+        	throw new RuntimeException(e.getMessage());
+        }
+	}
 }
