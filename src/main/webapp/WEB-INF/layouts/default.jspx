@@ -37,7 +37,7 @@
 	
   	<body class="tundra spring" >
   	    <tiles:insertAttribute name="header" ignore="true" />
-  		<div class="container-mp" style="padding-top: 50px;background-color:#cce6ff" >
+  		<div class="container-mp" style="padding-top: 50px;background-color:#61b1fd" >
 			<!-- Push Wrapper -->
 			<div class="mp-pusher" id="mp-pusher"  style="padding-top: 1%;">
 				<tiles:insertAttribute name="menu" ignore="true" />	
