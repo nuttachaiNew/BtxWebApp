@@ -8,6 +8,39 @@
   <c:set scope="request" var="LB_RECIEVE_DATE"><spring:message code="LB_RECIEVE_DATE"/></c:set>
   <c:set scope="request" var="LB_DELETE"><spring:message code="LB_DELETE"/></c:set>
 
+
+<style type="text/css">
+	.nav-tabs>li.active>a {
+		color: #7dbefe!important;
+	}
+	.p-0 {
+		padding: 0px!important;
+	}
+	.mr-15 {
+		margin-right: 15px!important; 
+	}
+	.tab-style {
+		background: #dfeffe;
+		color: #7dbefe;
+		padding: 10px 30px!important;
+	}
+	.custompanel {
+		border-radius: 0px 5px 5px 5px!important;
+		border-top: none;
+		padding: 15px;
+	}
+
+	.ctrtop-tabs {
+		border-radius: 50px!important;
+	}
+	.btntop-tabs {
+		padding: 5px 40px!important;
+	}
+	.selecttop-tabs {
+		width: 150px!important;
+	}
+</style>
+
 <div class="container reboxing">
 	<div class="row">
 
