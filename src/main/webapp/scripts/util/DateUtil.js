@@ -37,13 +37,11 @@ DateUtil.coverStringToDate=function(dateString,lang){
     if(dateString==""||dateString==null){
         return null;
     }
-    var dateArray = dateString.split("/");
-    dateResult = new Date(dateArray[2], (dateArray[1] - 1), dateArray[0], 0, 0, 0, 0);
-   /* if(lang=='EN'||lang=='EN_US'){
-        dateResult = new Date(dateArray[2], (dateArray[1] - 1), dateArray[0], 0, 0, 0, 0);
-    }if(lang=='TH'){
-        dateResult = new Date(dateArray[2]-543, (dateArray[1] - 1), dateArray[0], 0, 0, 0, 0);
-    }*/
+    var dateArray = dateString.split("-");
+    // dateResult = new Date(dateArray[2], (dateArray[1] - 1), dateArray[0], 0, 0, 0, 0);
+    dateResult = new Date(dateArray[0], (dateArray[1] - 1), dateArray[2], 0, 0, 0, 0);
+   
+
     return dateResult.getTime();
 }
 
@@ -75,7 +73,7 @@ DateUtil.coverDateToStringAndTime=function(date,lang){
     if(stateDate){
         var dataDate = new Date(date);
         // dateResult = dataDate.format('dd-mm-yyyy HH:mm');
-        dateResult = dataDate.format('dd-mm-yyyy HH:MM');
+        dateResult = dataDate.format('dd/mm/yyyy');
         /* if(lang=='EN'||lang=='EN_US'){
          dateResult = dataDate.format('dd/mm/yyyy');
          }if(lang=='TH'){
@@ -84,6 +82,60 @@ DateUtil.coverDateToStringAndTime=function(date,lang){
     }
     return dateResult;
 }
+
+
+DateUtil.coverDateToStringAndTime3=function(date,lang){
+    var stateDate = date==null||date=="" ? false : true;
+    var dateResult="";
+    if(stateDate){
+        var dataDate = new Date(date);
+        // dateResult = dataDate.format('dd-mm-yyyy HH:mm');
+        dateResult = dataDate.format('yyyy-mm-dd');
+        /* if(lang=='EN'||lang=='EN_US'){
+         dateResult = dataDate.format('dd/mm/yyyy');
+         }if(lang=='TH'){
+         dateResult = new Date(dataDate.setFullYear(dataDate.getFullYear()+543)).format('dd/mm/yyyy');
+         }*/
+    }
+    return dateResult;
+}
+
+
+DateUtil.coverDateToStringAndTime2=function(date,lang){
+    var stateDate = date==null||date=="" ? false : true;
+    var dateResult="";
+    if(stateDate){
+        var dataDate = new Date(date);
+        // dateResult = dataDate.format('dd-mm-yyyy HH:mm:ss');
+
+        var dateResult = 
+                ("00" + (dataDate.getMonth() + 1)).slice(-2) 
+                + "/" + ("00" + dataDate.getDate()).slice(-2) 
+                + "/" + dataDate.getFullYear() + " " 
+                + ("00" + dataDate.getHours()).slice(-2) + ":" 
+                + ("00" + dataDate.getMinutes()).slice(-2) 
+                + ":" + ("00" + dataDate.getSeconds()).slice(-2); 
+    }
+    return dateResult;
+}
+
+DateUtil.coverDateToStringAndTime3=function(date,lang){
+    var stateDate = date==null||date=="" ? false : true;
+    var dateResult="";
+    if(stateDate){
+        var dataDate = new Date(date);
+        dateResult = dataDate.format('yyyy-mm-dd');
+        // dateResult = dataDate.format('dd/mm/yyyy');
+        /* if(lang=='EN'||lang=='EN_US'){
+         dateResult = dataDate.format('dd/mm/yyyy');
+         }if(lang=='TH'){
+         dateResult = new Date(dataDate.setFullYear(dataDate.getFullYear()+543)).format('dd/mm/yyyy');
+         }*/
+    }
+    return dateResult;
+}
+
+
 
 DateUtil.convertStringDateFrontToStringDateBack=function(date){
     var dateSplit = date.split("-");

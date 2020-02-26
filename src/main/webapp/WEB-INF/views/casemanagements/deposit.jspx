@@ -1,0 +1,220 @@
+<div xmlns:spring="http://www.springframework.org/tags"   xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"  xmlns:form="http://www.springframework.org/tags/form"  xmlns:c="http://java.sun.com/jsp/jstl/core"  xmlns:jsp="http://java.sun.com/JSP/Page"    version="2.0">
+  <jsp:directive.page contentType="text/html;charset=UTF-8" />
+  <jsp:output omit-xml-declaration="yes" />
+
+
+  <c:set scope="request" var="LB_CODE"><spring:message code="LB_CODE"/></c:set>
+  <c:set scope="request" var="LB_NAME"><spring:message code="LB_NAME"/></c:set>
+  <c:set scope="request" var="LB_SAVED_DATE"><spring:message code="LB_SAVED_DATE"/></c:set>
+  <c:set scope="request" var="LB_RECIEVE_DATE"><spring:message code="LB_RECIEVE_DATE"/></c:set>
+  <c:set scope="request" var="LB_DELETE"><spring:message code="LB_DELETE"/></c:set>
+
+  <style>
+    .icon {color: white!important;}
+    #ReturnDeposit{ background-color: #FCA338;color: white!important;}
+
+  </style>
+
+  <div id="wrapper">
+
+    <ul class="menuboom navbar-nav bg-gradient-light sidebar sidebar-light accordion" id="accordionSidebar">
+
+       <div class="container-fuild" style="padding-top: 0px;">
+      <div class="row" style="text-align:center">
+      <div class="col-12">
+      <br/>
+      <span>
+      <img src="${img_user}" class="rounded-circle" width="100" height="100" id="profileImage" />
+
+      </span>
+      </div>
+      <div class="col-12">
+      <p class="mr-2 d-none d-lg-inline text-light-600 xx-large" id="profileName" style="color:#219FEC">Valerie Luna</p><br/>
+      <p class="mr-2 d-none d-lg-inline text-light-600 large" id="profileRole" style="color:black">CS</p><br/>
+      <p class="mr-2 d-none d-lg-inline text-light-600 large" id="profileArea" >Baxter Area</p>
+      <div class="col-12">
+        <jsp:text/>
+      </div>
+        <jsp:text/>
+      </div>
+      <hr class="sidebar-divider my-0" />
+      <!-- Nav Item - Dashboard -->
+
+<ul class="nav nav-pills" id="menubarbu">
+  <li class="nav-item" id="Dashboard">
+    <a class="nav-link text-center" href="/BaxterApplication/casemanagements/dashboard" style="color:#219FEC">
+      <i class="fas fa-fw fa-tachometer-alt icon" style="color:#5DB2FC!important"><jsp:text/></i>
+      <span>Dashboard</span>
+    </a>
+
+  </li>
+  <li class="nav-item" id="ViewCase">
+    <a class="nav-link text-center collapse-inner rounded" href="/BaxterApplicationcasemanagements/listviewcase" style="color:#F64236">
+      <i class="fas fa-align-justify icon case" style="color:#F26C4F!important"><jsp:text/></i>
+      <span>View Case</span>
+    </a>
+ </li>
+
+             <li class="nav-item" id="depositView">
+              <a class="nav-link activeVC text-center collapse-inner rounded" href="/BaxterApplication/casemanagements/depositlist" style="color:white;background-color:#FFA700">
+                <i class="far fa-calendar-alt icon" style="color:white!important"><jsp:text/></i>
+                <span>Return Deposit</span>
+              </a>
+             </li>
+
+        <li class="nav-item" id="ViewReport">
+        <a class="nav-link text-center" href="/BaxterApplication/casemanagements/viewReport" style="color:#5ADA79;">
+          <i style="color:#3CB878!important" class="far fa-chart-bar icon"><jsp:text/></i>
+          <span>View Report</span></a>
+      </li>
+        <li class="nav-item" id="viewProduct">
+        <a class="nav-link text-center" href="/BaxterApplication/machines/setupMachine" >
+          <i class="fas fa-cog icon"  style="color:red!important"><jsp:text/></i>
+          <span style="color:red!important">Manage Product</span></a>
+      </li>
+
+       <li class="nav-item" id="logout">
+        <a id="logout" href="#" class="nav-link text-center" onlick="submitlogout()" style="color:#5ADA79;">
+          <i style="color:#5ADA79!important" ><jsp:text/></i>
+          <span>Logout</span></a>
+      </li>
+
+</ul>
+
+
+
+      <div class="text-center d-none d-md-inline">
+
+      </div>
+
+    </div></div></ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content" style="background-color:#5DB2FC">
+
+        <!-- Topbar -->
+
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+            <jsp:include page="../appbar.jspx">
+                <jsp:param name="title" value="View Case"/>
+            </jsp:include>
+
+          <hr/>
+
+
+          <form class="user">
+              <div class="row">
+
+                <!-- Area Chart -->
+                <div class="col-12" id="user-1">
+                  <div class="card shadow mb-4">
+                    <div class="card-body" style="margin:-1%">
+                      <table class="table-sm table-borderless">
+                        <tbody><tr>
+                          <td style="width:30px"></td>
+                          <td style="width:1%">
+                              <i class="fas fa-circle" style="color:#3CB878"><jsp:text/></i>
+                          </td>
+                          <td>
+                            <h5 style="color:black;" class="b2 headerB2">Finance</h5>
+                          </td>
+
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td style="text-align:right;font-size:16pt;width:70%">
+                            Case ID: <span style="color:black" name="caseNumber" ><jsp:text/></span><![CDATA[&nbsp;]]><![CDATA[&nbsp;]]>
+                              <img id="profileImage" style="margin-right:2%" src="${img_user}" class="rounded-circle" width="50px" height="50px"/>
+                            <i class="fas fa-caret-down fa-2x collapsed" data-toggle="collapse" href="#User1" aria-expanded="false" aria-controls="alluser" style="color:#219FEC;margin-right:1%"><jsp:text/></i>
+                          </td>
+                        </tr>
+                      </tbody></table>
+
+                    <!-- data -->
+
+                      <div class="collapse show" id="User1" style="">
+                        <div class="card card-block">
+                          <div class="row" style="margin:2%">
+                            <div class="col-6 py-2 b2">
+                                <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]><![CDATA[&nbsp;]]><![CDATA[&nbsp;]]>
+                                <label style="text-align:left;margin-left:20px" class="headerB2 b2">Return Deposit</label>
+                                <div class="" style="margin:20px">
+                                  <h6 class="b2">Recipient's Name</h6>
+                                  <input type="text" style="text-align:left" class="form-control form-control-user" placeholder="Name Surname" id="depositName" />
+                                  <br/>
+                                  <h6 class="b2">Date</h6>
+                                    <div class="dropdown">
+                                    <input type="date" id="depositDate" data-date-format="DD/MM/YYYY" class="btn btn-light" style="width:100%;border: 1px solid #d1d3e2;"/>
+                                  </div>
+
+                                  <br/>
+                                  <h6 class="b2">Payment Type</h6>
+                               
+                                  <select class="form-control form-control-user" id="depositPaymentType">
+                                    <jsp:text/>
+                                  </select>
+                                  <br/>
+                                  <h6 class="b2">Bank</h6>
+                                  <select class="form-control form-control-user" id="depositBankName">
+                                    <jsp:text/>
+                                  </select>
+                                  <br/>
+                                  <h6 class="b2">Amount</h6>
+                                  <input type="text" id="depositAmount" style="text-align:left" class="form-control form-control-user" />
+                                </div>
+                            </div>
+                            <div class="col-6 py-2" style="text-align:center;margin-top:30px">
+                              <div class="">
+                                  <div class="col-md-12">
+                                    <h5 class="b2">Upload Pay in file</h5>
+                                    <br/>
+                                    <input type="file" name="img" multiple="" class="btn-white user form-control-user" id="uploadPayInFile" style="border: 2px solid #ccc;"/><br/>
+                                    <br/>
+                                    Drag or Drop file here
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-12" style="text-align:center;">
+
+                              <div class="center">
+                                        <button type="button" style="width:100px;font-size:16pt" class="btn btn-blue btn-info user" id="saveDeposit">
+                                          Send
+                                        </button>
+                              </div>
+                              <br/>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  <!-- end card body -->
+                  </div>
+                </div>
+
+                <!-- col  -->
+
+              </div></form>
+
+
+
+      </div>
+        </div>
+      </div>
+    </div>
+     <spring:url value="${urls.getForLookupPath('/resources/scripts/application/cases/deposit.js')}" var="setup" />
+    <script type="text/javascript"  src="${setup}" ><!-- required for FF3 and Opera --></script>
+</div>

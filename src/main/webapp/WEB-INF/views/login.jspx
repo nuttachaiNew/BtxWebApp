@@ -10,10 +10,25 @@
     <spring:message code="LB0001.security_username" var="label_security_username"/>
     <spring:message code="LB0002.security_password" var="label_security_password"/>
     <spring:message code="BT0001.login" var="button_login" />
+    
+<spring:url value="/resources/images/background.jpg" var="url_background"/>
+<spring:url value="/resources/images/favicon.png" var="favicon"/>
 
     <style>
-
+        #submit_button{
+            background-color:#99ccff;
+            font-size: 24px;
+            font-weight: lighter;
+            border-radius:30px;
+            background-color:rgba(97, 176, 254, 1.0);
+            height: unset;
+            width: unset;
+            padding: 12px 50px;
+            margin-top: 30px;
+        }
         body {
+            background: url("${url_background}") no-repeat center center fixed;
+
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
@@ -101,29 +116,36 @@
         a{color:inherit;text-decoration:none}
 
         .login-wrap{
-            width:100%;
-            margin:auto;
-            margin-top: 10%;
-            max-width:500px;
-            min-height:400px;
-            position:relative;
+            display: flex;
+            flex-grow: 1;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
         .login-html{
-            width:100%;
-            height:75%;
-            position:absolute;
-            left: 300px;
-            padding:0px 70px 50px 70px;
-            background:#e0e0d2;
+            flex-basis: 500px;
+            height:480px;
+            position:relative;
+            padding: 0px 20px;
 
+            background-color: rgba(255, 255, 255, 1.0);
+            border-radius: 5px;
+            opacity: 0.87;
+        }
+        @media only screen and (min-width: 900px) {
+            .login-html {
+                left: -250px;
+            }
+        }
+        @media only screen and (min-width: 1300px) {
+            .login-html {
+                left: -350px;
+            }
         }
         .login-html .sign-in-htm,
-        .login-html .sign-up-htm{
-            top:0;
-            left:0;
-            right:0;
-            bottom:0;
-            position:absolute;
+        .login-html .sign-up-htm {
+            margin: auto;
+            max-width: 300px;
             -webkit-transform:rotateY(180deg);
             -ms-transform:rotateY(180deg);
             transform:rotateY(180deg);
@@ -230,34 +252,37 @@
             font-family: "ThaiSansNeue", sans-serif;
         }
 
+        .form-input {
+            box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 5px;
+        }
     </style>
 
-    <form name="f" action="${loginUrl}" method="POST" role="form" style="padding-top: 40px">
+    <form name="f" action="${loginUrl}" method="POST" role="form" >
         <div class="login-wrap pu">
           
             <div class="login-html">
                 <input id="tab-1" type="radio"  name="tab" class="sign-in" checked="checked" /><label for="tab-1" class="tab"><!----></label>
                 <div class="login-form">
                     <div class="sign-in-htm">
-                        <div class="row" style="text-align: left; margin-top: -10px;">
-                            <h2 style="text-align: center;color: #004080">Baxter</h2>
+                        <div class="row" style="text-align: center; margin-top: -10px;">
+                            <img src="${login_1548322883716}" height="70px" style="margin: 25px 0 0" />
+                            <h3 style="color:rgba(88, 183, 231, 1.0); line-height: 25px; font-weight: normal">Welcome To<br />Homechoice APD Application</h3>
+                          <h1 style="color:rgba(88, 183, 231, 1.0); font-weight: normal; margin-bottom: 30px">Login</h1>
                         </div>
                         <div class="row">
-                            <div class="form-group has-warning">
-                                <div class="col-sm-12">
-                                    <input id="j_username" style="background-color: white;width: 100%" type="text" class="form-control" name="j_username" autocomplete="off" placeholder="${label_security_username}" required="true"/>
+                            <div class="col-sm-12">
+                                <div class="form-group has-warning">
+                                    <input id="j_username" style="background-color: white;width: 100%;opacity: 1;" type="text" class="form-control form-input" name="j_username" autocomplete="off" placeholder="${label_security_username}" required="true"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-12" style="margin-top: 15px">
+                                <div class="form-group has-warning">
+                                    <input id="j_password" type="password" style="background-color: white;width: 100%;opacity: 1;" class="form-control form-input" name="j_password" autocomplete="off" placeholder="${label_security_password}" required="true"/>
                                 </div>
                             </div>
                         </div>
-                        <div class="row" style="margin-top: 15px">
-                            <div class="form-group has-warning">
-                                <div class="col-sm-12">
-                                    <input id="j_password" type="password" style="background-color: white;width: 100%" class="form-control " name="j_password" autocomplete="off" placeholder="${label_security_password}" required="true"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="margin-top: 15px;text-align: center">
-                            <button type="submit" id="submit_button" class="button" style="background-color:#99ccff;width: 250px;margin-top: 10px;font-size: 20px">LOGIN</button>
+                        <div style="text-align: center">
+                            <button type="submit" id="submit_button" class="button" >LOGIN</button>
                         </div>
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         <input type="hidden" id="screen_width" name="screen_width" value=""/>
@@ -272,17 +297,17 @@
             </div>
         </div>
     </form>
-
+<!-- 
     <div class="navbar" style="height: 70px">
         <form>
             <div style="text-align: right">
                 <blockquote style="margin-top:1%">
-                    <strong>Btx Web Application</strong><br/>
+                    <strong>Baxter Web Application</strong><br/>
                 </blockquote>
             </div>
         </form>
     </div>
 
-
+ -->
 
 </div>

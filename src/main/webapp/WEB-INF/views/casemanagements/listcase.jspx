@@ -12,10 +12,10 @@
 
 <div class="container reboxing">
   <jsp:text/>
-  <div class="row">
+  <div class="row hidden">
     <div class="col-sm-12">
         <div class="col-sm-2">
-          <input class="form-control" type="text" />
+          <input class="form-control" placeholder="dd/mm/yyyy" type="text" />
         </div>
         <div class="col-sm-4">
           <button class="btn btn-default">
@@ -24,7 +24,7 @@
         </div>
          <div class=" col-sm-5">
           <div class="col-sm-6 pull-right">
-              <input class="form-control " type="text" />
+              <input class="form-control " placeholder="Search by CaseID" type="text" />
           </div>
         </div>
         <div class="col-sm-1">
@@ -41,15 +41,18 @@
                 <div class="form-group">
                     <table class="table table-responsive">
                       <thead>
-                        <th  class="black">case ID</th>
-                        <th  class="black">Date </th>
-                        <th  class="black">Case Type</th>
-                        <th  class="black">Customer Name</th>
-                        <th  class="black">Type</th>
-                        <th  class="black">Status</th>
-                        <th  class="black">Manage</th>
-                        <th  class="black">View</th>
+                        <th  class="text-center black">case ID</th>
+                        <th  class="text-center black">Date </th>
+                        <th  class="text-center black">Case Type</th>
+                        <th  class="text-center black">Customer Name</th>
+                        <th  class="text-center black">Type</th>
+                        <th  class="text-center black">Status</th>
+                        <th  class="text-center black">Manage</th>
+                        <!-- <th  class="text-center black">View</th> -->
                       </thead>
+                      <tbody>
+                        <jsp:text/>
+                      </tbody>
                     </table>
                 </div>
               </div>
@@ -60,7 +63,7 @@
 
 
 <!-- load js -->
-    <spring:url value="${urls.getForLookupPath('/resources/scripts/application/casemanagements/bu/management.js')}" var="setup" />
+    <spring:url value="${urls.getForLookupPath('/resources/scripts/application/cases/list.js')}" var="setup" />
     <script type="text/javascript"  src="${setup}" ><!-- required for FF3 and Opera --></script>
 
 </div>

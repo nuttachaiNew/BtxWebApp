@@ -1,0 +1,425 @@
+<div xmlns:spring="http://www.springframework.org/tags"   xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"  xmlns:form="http://www.springframework.org/tags/form"  xmlns:c="http://java.sun.com/jsp/jstl/core"  xmlns:jsp="http://java.sun.com/JSP/Page"    version="2.0">
+  <jsp:directive.page contentType="text/html;charset=UTF-8" />
+  <jsp:output omit-xml-declaration="yes" />
+    <spring:url value="/resources/images/cancel.png" var="img_cancel"/>
+    <spring:url value="/resources/images/checked.png" var="img_checked"/>
+
+  <c:set scope="request" var="LB_CODE"><spring:message code="LB_CODE"/></c:set>
+  <c:set scope="request" var="LB_NAME"><spring:message code="LB_NAME"/></c:set>
+  <c:set scope="request" var="LB_SAVED_DATE"><spring:message code="LB_SAVED_DATE"/></c:set>
+  <c:set scope="request" var="LB_RECIEVE_DATE"><spring:message code="LB_RECIEVE_DATE"/></c:set>
+  <c:set scope="request" var="LB_DELETE"><spring:message code="LB_DELETE"/></c:set>
+  <spring:url value="/resources/images/user.png" var="img_user" />
+
+  <style>
+              .Pend{
+                color:#FBC311;
+                 font-weight: bold;
+              }
+              .Rejec{
+                 color:red;
+                 font-weight: bold;
+              }
+              .Approve{
+                color:#3CB878;
+                 font-weight: bold;
+              }
+              .searchblue{
+                text-align:center;
+                color:#219FEC;
+              }
+              .editblue{
+                text-align:center;
+                color:#5DB2FC;
+              }
+              .editgray{
+                text-align:center;
+                color:#909798;
+              }
+                 .icon {color: white!important;}
+
+              </style>
+
+ <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="menuboom navbar-nav bg-gradient-light sidebar sidebar-light accordion" id="accordionSidebar">
+
+      <!-- Sidebar - Brand -->
+      <div class="container-fuild" style="padding-top: 0px;">
+      <div class="row" style="text-align:center">
+      <div class="col-12">
+      <br/>
+      <span>
+      <img src="${img_user}" class="rounded-circle" width="100" height="100" id="profileImage" />
+
+      </span>
+      </div>
+      <div class="col-12">
+      <p class="mr-2 d-none d-lg-inline text-light-600 xx-large" id="profileName" style="color:#5DB2FC">Valerie Luna</p><br/>
+      <p class="mr-2 d-none d-lg-inline text-light-600 large" id="profileRole" style="color:black">CS</p><br/>
+      <p class="mr-2 d-none d-lg-inline text-light-600 large" id="profileArea" >Baxter Area</p>
+      <div class="col-12">
+        <jsp:text/>
+      </div>
+        <jsp:text/>
+      </div>
+         <!--  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div class="sidebar-brand-icon rotate-n-15">
+          <i class="fas fa-laugh-wink"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+      </a> -->
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0" />
+
+      <!-- Nav Item - Dashboard -->
+
+      <ul class="nav nav-pills" id="menubarbu">
+
+            <li class="nav-item" id="Dashboard">
+              <a class="nav-link text-center" href="/BaxterApplication/casemanagements/dashboard" style="color:#219FEC">
+                <div class="input-group">
+                  <div style="width:70px">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="26" viewBox="0 0 26 26">
+                      <path id="Path_67" data-name="Path 67" d="M26.111,5.889V8.778H20.333V5.889h5.778m-14.444,0v8.667H5.889V5.889h5.778M26.111,17.444v8.667H20.333V17.444h5.778M11.667,23.222v2.889H5.889V23.222h5.778M29,3H17.444v8.667H29V3ZM14.556,3H3V17.444H14.556V3ZM29,14.556H17.444V29H29V14.556ZM14.556,20.333H3V29H14.556V20.333Z" transform="translate(-3 -3)" fill="#72A7E9"/>
+                    </svg>
+                  </div>
+                  <div style="text-align:left">
+                   <span>Dashboard</span>
+                  </div>
+              </div>
+              </a>
+            </li>
+              <li class="nav-item" id="ViewCase">
+
+              <a class="nav-link activeVC text-center collapse-inner rounded"  >
+                <div class="input-group">
+                  <div style="width:70px">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="22.75" viewBox="0 0 26 22.75">
+                      <path id="Path_9" data-name="Path 9" d="M4,21.25H30V18H4Zm0,6.5H30V24.5H4Zm0-13H30V11.5H4ZM4,5V8.25H30V5Z" transform="translate(-4 -5)" fill="white"/>
+                    </svg>
+                  </div>
+                  <div style="text-align:left">
+                  <span>View Case</span>
+                  </div>
+              </div>
+              </a>
+            </li>
+
+
+
+            <li class="nav-item" id="depositView">
+             <a class="nav-link text-center collapse-inner rounded" href="/BaxterApplication/casemanagements/depositlist" style="color:#FFA700">
+               <div class="input-group">
+                 <div style="width:60px">
+
+                   <svg id="Outline" xmlns="http://www.w3.org/2000/svg" width="16" height="27.75" viewBox="0 0 27.272 27.272">
+                     <g id="Group_51" data-name="Group 51">
+                       <path id="Path_48" data-name="Path 48" d="M29.575,6.379,27.469,3.833A2.2,2.2,0,0,0,25.727,3H7.545a2.252,2.252,0,0,0-1.758.833L3.7,6.379A2.967,2.967,0,0,0,3,8.3V27.242a3.039,3.039,0,0,0,3.03,3.03H27.242a3.039,3.039,0,0,0,3.03-3.03V8.3A2.967,2.967,0,0,0,29.575,6.379ZM7.909,6.03H25.363L26.591,7.5H6.7ZM6.03,27.242V10.576H27.242V27.242Z" transform="translate(-3 -3)" fill="#ffa700"/>
+                       <path id="Path_49" data-name="Path 49" d="M16.257,10H11.864v4.545H8l6.061,6.061,6.061-6.061H16.257Z" transform="translate(-0.424 0.606)" fill="#ffa700"/>
+                     </g>
+                   </svg>
+                 </div>
+                 <div style="text-align:left"><span>Return Deposit</span></div>
+               </div>
+
+             </a>
+            </li>
+            
+             <li class="nav-item" id="returnTracking">
+                <a class="nav-link text-center" href="/BaxterApplication/casemanagements/swapMachine" style="color:#FFA700">
+                  <div class="input-group">
+                    <div style="width:60px">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="22.75" viewBox="0 0 25.979 25.979">
+                    <g id="Group_757" data-name="Group 757" transform="translate(-3262.021 -2173.581)">
+                      <path id="Subtraction_1" data-name="Subtraction 1" d="M23.093,25.98H2.887A2.89,2.89,0,0,1,0,23.093V2.887A2.89,2.89,0,0,1,2.887,0H23.093A2.895,2.895,0,0,1,25.98,2.887V6.512H23.093V2.887H2.887V23.093H23.093V19.6H25.98v3.5a2.895,2.895,0,0,1-2.887,2.887Z" transform="translate(3262.021 2173.581)" fill="#ffa700"/>
+                      <g id="Group_750" data-name="Group 750" transform="translate(3269.116 2179.231)">
+                        <path id="Path_461" data-name="Path 461" d="M0,7.294,7.294,0l7.294,7.294" transform="translate(13.27 0) rotate(90)" fill="none" stroke="#ffa700" stroke-width="4"/>
+                        <rect id="Rectangle_1010" data-name="Rectangle 1010" width="11.216" height="3.365" transform="translate(0 5.722)" fill="#FFA700"/>
+                      </g>
+                    </g>
+                  </svg>
+                </div>
+
+                    <div style="text-align:left"><span>Swap/Return <br/>Machine</span></div>
+                  </div>
+                  </a>
+              </li>
+
+              <li class="nav-item" id="viewProduct">
+                <a class="nav-link text-center" href="/BaxterApplication/machines/setupMachine" style="color:#5981BA">
+                  <div class="input-group">
+                    <div style="width:60px">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="22.75" viewBox="0 0 26 25.987">
+                        <path id="Path_397" data-name="Path 397" d="M21.383,5.5l3.808,3.808-3.808,3.808L17.575,9.307,21.383,5.5m-10.308.646v5.383H5.692V6.144h5.383M24.532,19.6v5.383H19.149V19.6h5.383m-13.458,0v5.383H5.692V19.6h5.383M21.383,1.69l-7.617,7.6,7.617,7.617L29,9.294l-7.617-7.6ZM13.766,3.453H3V14.219H13.766V3.453ZM27.224,16.91H16.458V27.677H27.224V16.91Zm-13.458,0H3V27.677H13.766V16.91Z" transform="translate(-3 -1.69)" fill="#5981BA"/>
+                      </svg>
+                    </div>
+                    <div style="text-align:left">
+                      <span>Manage Product</span>
+                    </div>
+                  </div>
+                  </a>
+              </li>
+              <li class="nav-item" id="ViewReport">
+              <a class="nav-link text-center" href="/BaxterApplication/casemanagements/viewReport" style="color:#5ADA79">
+                <div class="input-group">
+                  <div style="width:60px">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="22.75" viewBox="0 0 26 26">
+                      <g id="Group_2" data-name="Group 2" transform="translate(2009 -420)">
+                        <path id="Path_7" data-name="Path 7" d="M26.111,3H5.889A2.9,2.9,0,0,0,3,5.889V26.111A2.9,2.9,0,0,0,5.889,29H26.111A2.9,2.9,0,0,0,29,26.111V5.889A2.9,2.9,0,0,0,26.111,3Zm0,23.111H5.889V5.889H26.111Z" transform="translate(-2012 417)" fill="#3CB878"/>
+                        <rect id="Rectangle_6" data-name="Rectangle 6" width="2.889" height="10.111" transform="translate(-2003.222 430.111)" fill="#3cb878"/>
+                        <rect id="Rectangle_7" data-name="Rectangle 7" width="2.889" height="14.444" transform="translate(-1997.444 425.778)" fill="#3cb878"/>
+                        <rect id="Rectangle_8" data-name="Rectangle 8" width="2.889" height="5.778" transform="translate(-1991.667 434.444)" fill="#3cb878"/>
+                      </g>
+                    </svg>
+                  </div>
+
+                <div style="text-align:left"><span>View Report</span></div>
+              </div>
+              </a>
+            </li>
+             <li class="nav-item" id="productTracking">
+                     <a class="nav-link text-center" href="/BaxterApplication/machines/productTracking" style="color:#5ADA79">
+                    <i style="color:#5ADA79!important" class="far fa-calendar-alt icon"><jsp:text/></i>
+                    <span>Product tracking</span></a>
+                </li>
+              <li class="nav-item" id="logout">
+              <a id="logout" href="#" class="nav-link text-center" onlick="submitlogout()" style="color:#61B0FE;">
+                <i style="color:#5ADA79!important" ><jsp:text/></i>
+                <span>Logout</span></a>
+            </li>
+
+
+      </ul>
+
+      <div class="text-center d-none d-md-inline">
+        <jsp:text/>
+      </div>
+
+    </div></div>
+
+</ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content" style="background-color:#5DB2FC">
+
+        <!-- Topbar -->
+
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid" >
+
+          <!-- Page Heading -->
+          <br/>
+          <div class="row d-sm-flex align-items-center justify-content-between" style="padding-top:5px">
+           <div class="col-8"> <label class="headerB1 text-light">View Case</label></div>
+           <div class="col-2">
+
+             <h1 class="h6 text-light">
+
+               <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="29.274" height="34.967" viewBox="0 0 29.274 34.967">
+                 <defs>
+                   <clipPath id="clip-path">
+                     <rect width="29.274" height="34.967" fill="none"/>
+                   </clipPath>
+                 </defs>
+                 <g id="Symbol_7_2" data-name="Symbol 7 – 2" clip-path="url(#clip-path)">
+                   <path id="Path_11" data-name="Path 11" d="M10.01,21.01a3.236,3.236,0,1,0,6.473,0Z" transform="translate(1.391 10.72)" fill="#fff"/>
+                   <path id="Path_12" data-name="Path 12" d="M17.637,8.819a8.135,8.135,0,0,1,8.132,8.132V28.335H9.505V16.95a8.135,8.135,0,0,1,8.132-8.132Zm0-7.319A2.436,2.436,0,0,0,15.2,3.94v1.9A11.374,11.374,0,0,0,6.253,16.95v9.758L3,29.961v1.626H32.274V29.961l-3.253-3.253V16.95A11.374,11.374,0,0,0,20.077,5.842V3.94a2.436,2.436,0,0,0-2.44-2.44Z" transform="translate(-3 -1.5)" fill="#fff"/>
+                   <rect id="Rectangle_10" data-name="Rectangle 10" width="3.253" height="6.505" transform="translate(13.011 10.571)" fill="#fff"/>
+                   <rect id="Rectangle_11" data-name="Rectangle 11" width="3.253" height="3.253" transform="translate(13.011 20.329)" fill="#fff"/>
+                 </g>
+               </svg>
+
+
+               <div class="dropdown-menu" style="font-size:16pt!important" >
+                   <div class="container-fulid" style="color:black;padding:10px;">
+                       Notification
+
+                     <hr class="grayhr90"/>
+                     <center><a href="All-Notifaication-BU.html">View all</a></center>
+                   </div>
+               </div>
+             <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]><![CDATA[&nbsp;]]><![CDATA[&nbsp;]]><![CDATA[&nbsp;]]>
+              <label style="padding-left:10px">  Notification </label>
+
+
+             <div style="display:inline-block;width:20px;height:20px;background-color:#F26C4F;border-radius: 50px;font-size:13pt;color:White;margin-left:-95px;margin-top:-22px"><div style="margin-left:2px;">0</div></div>
+
+             </h1>
+           </div>
+
+              <div class="col-2">
+                <h1 class="h6 text-light">
+                  <a href="/BaxterApplication/users/updateProfile">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30.412" height="31.265" viewBox="0 0 30.412 31.265">
+                      <defs>
+                        <clipPath id="clip-path">
+                          <rect width="30.411" height="31.265" fill="none"/>
+                        </clipPath>
+                      </defs>
+                      <g id="Outline" clip-path="url(#clip-path)">
+                        <g id="Group_5" data-name="Group 5">
+                          <path id="Path_14" data-name="Path 14" d="M29.095,19.164a12.182,12.182,0,0,0,.109-1.532,12.182,12.182,0,0,0-.109-1.532l3.3-2.579a.789.789,0,0,0,.188-1L29.454,7.112a.781.781,0,0,0-.688-.391.73.73,0,0,0-.266.047L24.608,8.331A11.421,11.421,0,0,0,21.966,6.8l-.594-4.143A.762.762,0,0,0,20.606,2H14.353a.762.762,0,0,0-.766.657L12.993,6.8a12.01,12.01,0,0,0-2.642,1.532L6.459,6.768a.885.885,0,0,0-.281-.047.774.774,0,0,0-.672.391L2.379,12.521a.771.771,0,0,0,.188,1l3.3,2.579a12.4,12.4,0,0,0-.109,1.532,12.4,12.4,0,0,0,.109,1.532l-3.3,2.579a.789.789,0,0,0-.188,1l3.126,5.409a.781.781,0,0,0,.688.391.73.73,0,0,0,.266-.047l3.892-1.563a11.421,11.421,0,0,0,2.642,1.532l.594,4.143a.762.762,0,0,0,.766.657h6.253a.762.762,0,0,0,.766-.657l.594-4.143a12.01,12.01,0,0,0,2.642-1.532L28.5,28.5a.885.885,0,0,0,.281.047.774.774,0,0,0,.672-.391l3.126-5.409a.789.789,0,0,0-.188-1ZM26,16.491a8.352,8.352,0,0,1,.078,1.141c0,.328-.031.672-.078,1.141l-.219,1.766,1.391,1.094,1.688,1.313-1.094,1.892-1.985-.8-1.626-.657-1.407,1.063a9.155,9.155,0,0,1-1.954,1.141l-1.657.672-.25,1.766-.313,2.11H16.386l-.3-2.11-.25-1.766-1.657-.672a8.87,8.87,0,0,1-1.923-1.11l-1.423-1.094-1.657.672-1.985.8L6.1,22.963,7.788,21.65l1.391-1.094L8.96,18.789c-.047-.485-.078-.844-.078-1.157s.031-.672.078-1.141l.219-1.766L7.788,13.63,6.1,12.317l1.094-1.892,1.985.8,1.626.657,1.407-1.063a9.155,9.155,0,0,1,1.954-1.141L15.823,9l.25-1.766.313-2.11h2.173l.3,2.11L19.106,9l1.657.672a8.87,8.87,0,0,1,1.923,1.11l1.423,1.094,1.657-.672,1.985-.8L28.844,12.3,27.172,13.63l-1.391,1.094Z" transform="translate(-2.271 -2)" fill="#fff"/>
+                          <path id="Path_15" data-name="Path 15" d="M14.253,8a6.253,6.253,0,1,0,6.253,6.253A6.251,6.251,0,0,0,14.253,8Zm0,9.379a3.126,3.126,0,1,1,3.126-3.126A3.136,3.136,0,0,1,14.253,17.379Z" transform="translate(0.956 1.379)" fill="#fff"/>
+                        </g>
+                      </g>
+                    </svg>
+
+
+                </a>
+                  Settings
+                </h1>
+              </div>
+          </div>
+          <hr/>
+          <form class="user">
+            <div class="row">
+
+              <!-- Earnings (Monthly) Card Example -->
+              <div class="col-6">
+                <div class="row">
+                  <div class="dropdown col-4">
+                    <input type="date" style="font-size:16pt;color:#5DB2FC" id="txtDate" class="btn btn-light" />
+                    <script>
+                    var today = moment().format('YYYY-MM-DD');
+                    document.getElementById("txtDate").value = today;
+
+                    </script>
+                  </div>
+                  <div class="col-8">
+                    <button type="button" style="font-size:16pt;color:#5DB2FC;width:200px" id="btnSearch" class="btn btn-light btn-user btn-block">
+                     Clear
+                   </button>
+                  </div>
+               </div>
+              </div>
+
+
+
+              <!-- Earnings (Monthly) Card Example -->
+              <div class="col-6 " style="text-align:right">
+                 <div class="row">
+                   <div class="col-8">
+                     <div class="input-group">
+                       <style>
+                       ::placeholder { /* Firefox, Chrome, Opera */
+                              color: #5DB2FC!important;
+
+                          }
+                       </style>
+                        <input type="text" style="border-bottom-left-radius: 2rem;border-top-left-radius:2rem;border: 0px;font-size:16pt;color:#5DB2FC!important" class="form-control form-control-user" id="txtCaseNumber" placeholder="Search by Case ID or Name" />
+                        <div style="padding-right:10px;background-color:White;border-bottom-right-radius: 2rem;border-top-right-radius:2rem;border: 0px;">
+                          <svg id="baseline-search-24px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40.371" height="40.371" viewBox="0 0 40.371 40.371">
+                            <defs>
+                              <clipPath id="clip-path">
+                                <rect width="29.42" height="29.42" fill="none"/>
+                              </clipPath>
+                            </defs>
+                            <g id="Symbol_8_2" data-name="Symbol 8 – 2" transform="translate(5.046 5.046)" clip-path="url(#clip-path)">
+                              <path id="Path_17" data-name="Path 17" d="M24.027,21.5H22.7l-.471-.454a10.95,10.95,0,1,0-1.177,1.177l.454.471v1.329l8.411,8.394,2.506-2.506Zm-10.093,0a7.57,7.57,0,1,1,7.57-7.57A7.559,7.559,0,0,1,13.934,21.5Z" transform="translate(-3 -3)" fill="#61b0fe"/>
+                            </g>
+                            <path id="Path_18" data-name="Path 18" d="M0,0H40.371V40.371H0Z" fill="none"/>
+                          </svg>
+                        </div>
+                     </div>
+
+                   </div>
+                   <div class="col-4">
+                     <button type="button" style="font-size:16pt;color:#5DB2FC" id="btnSearch" class="btn btn-light btn-user btn-block">
+                      Search
+                    </button>
+                   </div>
+                 </div>
+                 <br/>
+              </div>
+
+            </div>
+          </form>
+
+<!-- Modal -->
+
+          <form class="user">
+              <div class="row">
+
+                <!-- Area Chart -->
+                <div class="col">
+                  <div class="card shadow mb-4">
+
+                <div class="card-body">
+                  <div class="table">
+                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
+                      <div class="row">
+                        <div class="col-sm-12">
+                      <table class="table table-sm dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;color:#000000">
+                      <thead class="table-borderless">
+                        <tr role="row" style="color:#868686" >
+                          <th class="text-center">Case ID</th>
+                          <th class="text-primary text-center" sortBy="" name="sortDate" data-sorter="false" >Create Date <i class="fas fa-caret-down"><jsp:text/></i></th>
+                          <th class="text-primary text-center">Case Type <i class="fas fa-caret-down"><jsp:text/></i></th>
+                          <th class="text-center">Customer Name</th>
+                          <th class="text-primary text-center">Type <i class="fas fa-caret-down"><jsp:text/></i></th>
+                          <th class="text-primary text-center">Status <i class="fas fa-caret-down"><jsp:text/></i></th>
+                          <th class="text-primary text-center">Manage</th>
+                          <th class="text-center">View</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                       <jsp:text/>
+                      </tbody>
+
+                    </table>
+                    <!-- end of table -->
+
+                  </div>
+                </div>
+              </div>
+                  </div>
+                </div>
+                <!-- end card body -->
+              </div>
+                </div>
+
+                <!-- col  -->
+
+              </div>
+            </form>
+
+
+          </div>
+
+          <!-- Content Row -->
+
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top" style="display: inline;">
+    <i class="fas fa-angle-up"><jsp:text/></i>
+  </a>
+
+
+  <spring:url value="${urls.getForLookupPath('/resources/scripts/application/cases/list.js')}" var="setup" />
+    <script type="text/javascript"  src="${setup}" ><!-- required for FF3 and Opera --></script>
+
+</div>

@@ -5,8 +5,23 @@
 
 <tiles-definitions>
 
-  <definition name="machines/setupMachine" extends="default">
+  <definition name="machines/setupMachine" extends="defaultMaster">
     <put-attribute name="body" value="/WEB-INF/views/machines/setupMachine.jspx" />
   </definition>
+   <definition name="machines/manageProduct" extends="defaultMaster">
+    <put-attribute name="body" value="/WEB-INF/views/machines/manageProduct.jspx" />
+  </definition>
+   <definition name="machines/productTracking" extends="defaultMaster">
+    <put-attribute name="body" value="/WEB-INF/views/machines/productTracking.jspx" />
+  </definition>
+   <definition name="machines/returnMachine" extends="defaultMaster">
+    <put-attribute name="body" value="/WEB-INF/views/machines/returnMachine.jspx" />
+  </definition>
+    <definition name="machines/addProduct" extends="defaultMaster">
+    <put-attribute name="body" value="/WEB-INF/views/machines/addProduct.jspx" />
+  </definition>
+
+  
+
 
 </tiles-definitions>

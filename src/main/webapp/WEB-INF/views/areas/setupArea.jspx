@@ -56,7 +56,7 @@
   </div>
 <!--for modal  -->
    
-<div class="modal fade" id="addModal" role="dialog" >
+<div class="modal fade" id="addModalArea" role="dialog" >
     <div class="modal-dialog">
       <!-- Modal content-->
       <div class="modal-content">
@@ -101,7 +101,7 @@
             <br/>
             <br/>
             <div class="form-group">
-              <button class="btn btn-primary" id="btnConfirmSave"> 
+              <button class="btn btn-primary" id="btnConfirmSaveArea"> 
                 Save
               </button>
               <button class="btn btn-danger" data-dismiss="modal"> 
@@ -116,7 +116,7 @@
   </div>
 
    
-<div class="modal fade" id="updateModal" role="dialog" >
+<div class="modal fade" id="updateModalArea" role="dialog" >
     <div class="modal-dialog">
       <!-- Modal content-->
       <div class="modal-content">
@@ -161,7 +161,7 @@
             <br/>
             <br/>
             <div class="form-group">
-              <button class="btn btn-primary" id="btnConfirmSave"> 
+              <button class="btn btn-primary" id="btnConfirmSaveArea"> 
                 Save
               </button>
               <button class="btn btn-danger" data-dismiss="modal"> 
@@ -176,7 +176,7 @@
   </div>
 
 
-  <div class="modal fade" id="deleteModal" role="dialog" >
+  <div class="modal fade" id="deleteModalArea" role="dialog" >
     <div class="modal-dialog">
       <!-- Modal content-->
       <div class="modal-content">
@@ -190,7 +190,7 @@
             <br/>
             <br/>
             <div class="form-group">
-              <button class="btn btn-primary" id="btnConfirmDelete"> 
+              <button class="btn btn-primary" id="btnConfirmDeleteArea"> 
                 Delete
               </button>
               <button class="btn btn-danger" data-dismiss="modal"> 

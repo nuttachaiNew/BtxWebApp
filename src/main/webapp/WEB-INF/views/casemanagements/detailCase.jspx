@@ -1,0 +1,1423 @@
+<div xmlns:spring="http://www.springframework.org/tags"   xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"  xmlns:form="http://www.springframework.org/tags/form"  xmlns:c="http://java.sun.com/jsp/jstl/core"  xmlns:jsp="http://java.sun.com/JSP/Page"    version="2.0">
+  <jsp:directive.page contentType="text/html;charset=UTF-8" />
+  <jsp:output omit-xml-declaration="yes" />
+
+
+  <c:set scope="request" var="LB_CODE"><spring:message code="LB_CODE"/></c:set>
+  <c:set scope="request" var="LB_NAME"><spring:message code="LB_NAME"/></c:set>
+  <c:set scope="request" var="LB_SAVED_DATE"><spring:message code="LB_SAVED_DATE"/></c:set>
+  <c:set scope="request" var="LB_RECIEVE_DATE"><spring:message code="LB_RECIEVE_DATE"/></c:set>
+  <c:set scope="request" var="LB_DELETE"><spring:message code="LB_DELETE"/></c:set>
+  <style>
+     * {
+       box-sizing: border-box;
+     }
+
+
+     /* The actual timeline (the vertical ruler) */
+     .timeline {
+       position: relative;
+       max-width: 1200px;
+       margin: 0 auto;
+     }
+
+     /* The actual timeline (the vertical ruler) */
+     .timeline::after {
+       content: '';
+       position: absolute;
+       width: 3px;
+       background-color: #6AD56D;
+       top: 0;
+       bottom: 0;
+       left: 50%;
+       margin-left: -3px;
+     }
+
+     /* Container around content */
+     .containerTL {
+       padding: 10px 20px;
+       position: relative;
+       background-color: inherit;
+       width: 50%;
+     }
+
+     /* The circles on the timeline */
+     .containerTL::after {
+       content: '';
+       position: absolute;
+       width: 25px;
+       height: 25px;
+       right: -12px;
+       background-color: #6AD56D;
+       border: 4px solid #6AD56D;
+       top: 15px;
+       border-radius: 50%;
+       z-index: 1;
+     }
+
+     /* Place the container to the left */
+     .left {
+       left: 0;
+     }
+
+     /* Place the container to the right */
+     .right {
+       left: 50%;
+     }
+
+     /* Add arrows to the left container (pointing right) */
+     .left::before {
+       content: " ";
+       height: 0;
+       position: absolute;
+       top: 22px;
+       width: 0;
+       z-index: 1;
+       right: 30px;
+       border: medium solid white;
+       border-width: 10px 0 10px 10px;
+       border-color: transparent transparent transparent white;
+
+     }
+
+     /* Add arrows to the right container (pointing left) */
+     .right::before {
+       content: " ";
+       height: 0;
+       position: absolute;
+       top: 22px;
+       width: 0;
+       z-index: 1;
+       left: 30px;
+       border: medium solid white;
+       border-width: 10px 10px 10px 0;
+       border-color: transparent white transparent transparent;
+     }
+
+     /* Fix the circle for containers on the right side */
+     .right::after {
+       left: -16px;
+     }
+
+     /* The actual content */
+     .content {
+       padding: 20px 20px;
+       background-color: white;
+       position: relative;
+       border-radius: 6px;
+       border-style: solid;
+       border-width: 1px;
+     }
+
+     /* Media queries - Responsive timeline on screens less than 600px wide */
+     @media screen and (max-width: 600px) {
+       /* Place the timelime to the left */
+       .timeline::after {
+       left: 31px;
+       }
+
+       /* Full-width containers */
+       .containerTL {
+       width: 100%;
+       padding-left: 70px;
+       padding-right: 25px;
+       }
+
+       /* Make sure that all arrows are pointing leftwards */
+       .containerTL::before {
+       left: 60px;
+       border: medium solid white;
+       border-width: 10px 10px 10px 0;
+       border-color: transparent white transparent transparent;
+       }
+
+       /* Make sure all circles are at the same spot */
+       .left::after, .right::after {
+       left: 15px;
+       }
+
+       /* Make all right containers behave like the left ones */
+       .right {
+       left: 0%;
+       }
+     }
+     /* -----------------------------2222----------------------------- */
+     .timeline2 {
+       position: relative;
+       max-width: 1200px;
+       margin: 0 auto;
+     }
+
+     /* The actual timeline2 (the vertical ruler) */
+     .timeline2::after {
+       content: '';
+       position: absolute;
+       width: 1px;
+       background-color: gray;
+       top: 0;
+       bottom: 0;
+       left: 50%;
+       margin-left: -2px;
+     }
+
+     /* Container around content2 */
+     .containerTL2 {
+       padding: 10px 20px;
+       position: relative;
+       background-color: inherit;
+       width: 50%;
+     }
+
+     /* The circles on the timeline2 */
+     .containerTL2::after {
+       content: '';
+       position: absolute;
+       width: 25px;
+       height: 25px;
+       right: -12px;
+       background-color: white;
+       border: 1px solid gray;
+       top: 15px;
+       border-radius: 50%;
+       z-index: 1;
+     }
+
+     /* Place the container to the left */
+     .left2 {
+       left: 0;
+     }
+
+     /* Place the container to the right */
+     .right2 {
+       left: 50%;
+     }
+
+     /* Add arrows to the left container (pointing right) */
+     .left2::before {
+       content: " ";
+       height: 0;
+       position: absolute;
+       top: 22px;
+       width: 0;
+       z-index: 1;
+       right: 30px;
+       border: medium solid white;
+       border-width: 10px 0 10px 10px;
+       border-color: transparent transparent transparent white;
+
+     }
+
+     /* Add arrows to the right container (pointing left) */
+     .right2::before {
+       content: " ";
+       height: 0;
+       position: absolute;
+       top: 22px;
+       width: 0;
+       z-index: 1;
+       left: 30px;
+       border: medium solid white;
+       border-width: 10px 10px 10px 0;
+       border-color: transparent white transparent transparent;
+     }
+
+     /* Fix the circle for containers on the right side */
+     .right2::after {
+       left: -16px;
+     }
+
+     /* The actual content2 */
+     .content2 {
+       padding: 20px 20px;
+       background-color: white;
+       position: relative;
+       border-radius: 6px;
+       border-style: solid;
+       border-width: 0px;
+     }
+
+     /* Media queries - Responsive timeline2 on screens less than 600px wide */
+     @media screen and (max-width: 600px) {
+       /* Place the timelime to the left */
+       .timeline2::after {
+       left: 31px;
+       }
+
+       /* Full-width containers */
+       .containerTL2 {
+       width: 100%;
+       padding-left: 70px;
+       padding-right: 25px;
+       }
+
+       /* Make sure that all arrows are pointing leftwards */
+       .containerTL2::before {
+       left: 60px;
+       border: medium solid white;
+       border-width: 10px 10px 10px 0;
+       border-color: transparent white transparent transparent;
+       }
+
+       /* Make sure all circles are at the same spot */
+       .left2::after, .right2::after {
+       left: 15px;
+       }
+
+       /* Make all right containers behave like the left ones */
+       .right2 {
+       left: 0%;
+       }
+     }
+
+     .Sgreen{color: green}
+     .TLleft{margin-left:55%;text-align:left;margin-top:-14%;font-size:10pt;}
+     .TLRight{margin-right:55%;text-align:right;margin-top:-14%;font-size:10pt;}
+     .TLleft2{margin-left:55%;text-align:left;margin-top:-14%;font-size:10pt;}
+     .TLRight2{margin-right:55%;text-align:right;margin-top:-14%;font-size:10pt;}
+    .container{
+
+    padding-top: 0px;
+
+    }
+
+  </style>
+
+  <!-- Page Wrapper -->
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <ul class="menuboom navbar-nav bg-gradient-light sidebar sidebar-light accordion" id="accordionSidebar">
+        <!-- Sidebar - Brand -->
+        <div class="container-fuild">
+          <div class="row" style="text-align:center">
+            <div class="col-12">
+              <br/>
+              <span>
+                 <img src="${img_user}" class="rounded-circle" width="100" height="100" id="profileImage" />
+
+             </span>
+            </div>
+            <div class="col-12">
+            <p class="mr-2 d-none d-lg-inline text-light-600 xx-large" id="profileName" style="color:#5DB2FC">Valerie Luna</p><br/>
+            <p class="mr-2 d-none d-lg-inline text-light-600 large" id="profileRole" style="color:black">CS</p><br/>
+            <p class="mr-2 d-none d-lg-inline text-light-600 large" id="profileArea" >Baxter Area</p>
+              <div class="col-12">
+                <jsp:text/>
+              </div>
+                <jsp:text/>
+            </div>
+            <hr class="sidebar-divider my-0" />
+            <ul class="nav nav-pills" id="menubarbu">
+
+                  <li class="nav-item" id="Dashboard">
+                    <a class="nav-link text-center" href="/BaxterApplication/casemanagements/dashboard" style="color:#219FEC">
+                      <div class="input-group">
+                        <div style="width:70px">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="26" viewBox="0 0 26 26">
+                            <path id="Path_67" data-name="Path 67" d="M26.111,5.889V8.778H20.333V5.889h5.778m-14.444,0v8.667H5.889V5.889h5.778M26.111,17.444v8.667H20.333V17.444h5.778M11.667,23.222v2.889H5.889V23.222h5.778M29,3H17.444v8.667H29V3ZM14.556,3H3V17.444H14.556V3ZM29,14.556H17.444V29H29V14.556ZM14.556,20.333H3V29H14.556V20.333Z" transform="translate(-3 -3)" fill="#72A7E9"/>
+                          </svg>
+                        </div>
+                        <div style="text-align:left">
+                         <span>Dashboard</span>
+                        </div>
+                    </div>
+                    </a>
+
+                  </li>
+                    <li class="nav-item" id="ViewCase">
+
+                    <a class="nav-link activeVC text-center collapse-inner rounded"  >
+                      <div class="input-group">
+                        <div style="width:70px">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="22.75" viewBox="0 0 26 22.75">
+                            <path id="Path_9" data-name="Path 9" d="M4,21.25H30V18H4Zm0,6.5H30V24.5H4Zm0-13H30V11.5H4ZM4,5V8.25H30V5Z" transform="translate(-4 -5)" fill="white"/>
+                          </svg>
+                        </div>
+                        <div style="text-align:left">
+                        <span>View Case</span>
+                       
+                        </div>
+                    </div>
+                    </a>
+                  </li>
+
+
+
+                  <li class="nav-item" id="depositView">
+                   <a class="nav-link text-center collapse-inner rounded" href="/BaxterApplication/casemanagements/depositlist" style="color:#FFA700">
+                     <div class="input-group">
+                       <div style="width:60px">
+
+                         <svg id="Outline" xmlns="http://www.w3.org/2000/svg" width="16" height="27.75" viewBox="0 0 27.272 27.272">
+                           <g id="Group_51" data-name="Group 51">
+                             <path id="Path_48" data-name="Path 48" d="M29.575,6.379,27.469,3.833A2.2,2.2,0,0,0,25.727,3H7.545a2.252,2.252,0,0,0-1.758.833L3.7,6.379A2.967,2.967,0,0,0,3,8.3V27.242a3.039,3.039,0,0,0,3.03,3.03H27.242a3.039,3.039,0,0,0,3.03-3.03V8.3A2.967,2.967,0,0,0,29.575,6.379ZM7.909,6.03H25.363L26.591,7.5H6.7ZM6.03,27.242V10.576H27.242V27.242Z" transform="translate(-3 -3)" fill="#ffa700"/>
+                             <path id="Path_49" data-name="Path 49" d="M16.257,10H11.864v4.545H8l6.061,6.061,6.061-6.061H16.257Z" transform="translate(-0.424 0.606)" fill="#ffa700"/>
+                           </g>
+                         </svg>
+                       </div>
+                       <div style="text-align:left"><span>Return Deposit</span></div>
+                     </div>
+
+                   </a>
+                  </li>
+
+                   <li class="nav-item" id="returnTracking">
+                      <a class="nav-link text-center" href="/BaxterApplication/casemanagements/swapMachine" style="color:#FFA700">
+                        <div class="input-group">
+                          <div style="width:60px">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="22.75" viewBox="0 0 25.979 25.979">
+                          <g id="Group_757" data-name="Group 757" transform="translate(-3262.021 -2173.581)">
+                            <path id="Subtraction_1" data-name="Subtraction 1" d="M23.093,25.98H2.887A2.89,2.89,0,0,1,0,23.093V2.887A2.89,2.89,0,0,1,2.887,0H23.093A2.895,2.895,0,0,1,25.98,2.887V6.512H23.093V2.887H2.887V23.093H23.093V19.6H25.98v3.5a2.895,2.895,0,0,1-2.887,2.887Z" transform="translate(3262.021 2173.581)" fill="#ffa700"/>
+                            <g id="Group_750" data-name="Group 750" transform="translate(3269.116 2179.231)">
+                              <path id="Path_461" data-name="Path 461" d="M0,7.294,7.294,0l7.294,7.294" transform="translate(13.27 0) rotate(90)" fill="none" stroke="#ffa700" stroke-width="4"/>
+                              <rect id="Rectangle_1010" data-name="Rectangle 1010" width="11.216" height="3.365" transform="translate(0 5.722)" fill="#FFA700"/>
+                            </g>
+                          </g>
+                        </svg>
+                      </div>
+
+                          <div style="text-align:left"><span>Swap/Return <br/>Machine</span></div>
+                        </div>
+                        </a>
+                    </li>
+
+                    <li class="nav-item" id="viewProduct">
+                      <a class="nav-link text-center" href="/BaxterApplication/machines/setupMachine" style="color:#5981BA">
+                        <div class="input-group">
+                          <div style="width:60px">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="22.75" viewBox="0 0 26 25.987">
+                              <path id="Path_397" data-name="Path 397" d="M21.383,5.5l3.808,3.808-3.808,3.808L17.575,9.307,21.383,5.5m-10.308.646v5.383H5.692V6.144h5.383M24.532,19.6v5.383H19.149V19.6h5.383m-13.458,0v5.383H5.692V19.6h5.383M21.383,1.69l-7.617,7.6,7.617,7.617L29,9.294l-7.617-7.6ZM13.766,3.453H3V14.219H13.766V3.453ZM27.224,16.91H16.458V27.677H27.224V16.91Zm-13.458,0H3V27.677H13.766V16.91Z" transform="translate(-3 -1.69)" fill="#5981BA"/>
+                            </svg>
+                          </div>
+                          <div style="text-align:left">
+                            <span>Manage Product</span>
+                          </div>
+                        </div>
+                        </a>
+                    </li>
+                    <li class="nav-item" id="ViewReport">
+                    <a class="nav-link text-center" href="/BaxterApplication/casemanagements/viewReport" style="color:#5ADA79">
+                      <div class="input-group">
+                        <div style="width:60px">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="22.75" viewBox="0 0 26 26">
+                            <g id="Group_2" data-name="Group 2" transform="translate(2009 -420)">
+                              <path id="Path_7" data-name="Path 7" d="M26.111,3H5.889A2.9,2.9,0,0,0,3,5.889V26.111A2.9,2.9,0,0,0,5.889,29H26.111A2.9,2.9,0,0,0,29,26.111V5.889A2.9,2.9,0,0,0,26.111,3Zm0,23.111H5.889V5.889H26.111Z" transform="translate(-2012 417)" fill="#3CB878"/>
+                              <rect id="Rectangle_6" data-name="Rectangle 6" width="2.889" height="10.111" transform="translate(-2003.222 430.111)" fill="#3cb878"/>
+                              <rect id="Rectangle_7" data-name="Rectangle 7" width="2.889" height="14.444" transform="translate(-1997.444 425.778)" fill="#3cb878"/>
+                              <rect id="Rectangle_8" data-name="Rectangle 8" width="2.889" height="5.778" transform="translate(-1991.667 434.444)" fill="#3cb878"/>
+                            </g>
+                          </svg>
+                        </div>
+
+                      <div style="text-align:left"><span>View Report</span></div>
+                    </div>
+                    </a>
+                  </li>
+                   <li class="nav-item" id="productTracking">
+                           <a class="nav-link text-center" href="/BaxterApplication/machines/productTracking" style="color:#5ADA79">
+                          <i style="color:#5ADA79!important" class="far fa-calendar-alt icon"><jsp:text/></i>
+                          <span>Product tracking</span></a>
+                      </li>
+                    <li class="nav-item" id="logout">
+                    <a id="logout" href="#" class="nav-link text-center" onlick="submitlogout()" style="color:#61B0FE;">
+                      <i style="color:#5ADA79!important" ><jsp:text/></i>
+                      <span>Logout</span></a>
+                  </li>
+
+
+            </ul>
+
+            <div class="text-center d-none d-md-inline">
+              <jsp:text/>
+            </div>
+          </div>
+        </div>
+      </ul>
+
+      <div id="content-wrapper" class="d-flex flex-column" style="background-color:#5DB2FC">
+        <div id="content">
+          <div class="container-fluid">
+
+            <div class="row d-sm-flex align-items-center justify-content-between" style="padding-top:5px">
+               <div class="col-8"> <h1 class="text-light headerB1">    <a class="h6 text-light headerB2" id="backPage" style="font-weight:bold"><i class="fas fa-less-than" id="backPage"><jsp:text/></i>   &#160;  <label id ="pageName">View Case</label> </a></h1>
+               </div>
+               <div class="col-2">
+
+                 <h1 class="h6 text-light">
+
+                   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="29.274" height="34.967" viewBox="0 0 29.274 34.967">
+                     <defs>
+                       <clipPath id="clip-path">
+                         <rect width="29.274" height="34.967" fill="none"/>
+                       </clipPath>
+                     </defs>
+                     <g id="Symbol_7_2" data-name="Symbol 7 – 2" clip-path="url(#clip-path)">
+                       <path id="Path_11" data-name="Path 11" d="M10.01,21.01a3.236,3.236,0,1,0,6.473,0Z" transform="translate(1.391 10.72)" fill="#fff"/>
+                       <path id="Path_12" data-name="Path 12" d="M17.637,8.819a8.135,8.135,0,0,1,8.132,8.132V28.335H9.505V16.95a8.135,8.135,0,0,1,8.132-8.132Zm0-7.319A2.436,2.436,0,0,0,15.2,3.94v1.9A11.374,11.374,0,0,0,6.253,16.95v9.758L3,29.961v1.626H32.274V29.961l-3.253-3.253V16.95A11.374,11.374,0,0,0,20.077,5.842V3.94a2.436,2.436,0,0,0-2.44-2.44Z" transform="translate(-3 -1.5)" fill="#fff"/>
+                       <rect id="Rectangle_10" data-name="Rectangle 10" width="3.253" height="6.505" transform="translate(13.011 10.571)" fill="#fff"/>
+                       <rect id="Rectangle_11" data-name="Rectangle 11" width="3.253" height="3.253" transform="translate(13.011 20.329)" fill="#fff"/>
+                     </g>
+                   </svg>
+
+
+                   <div class="dropdown-menu " style="font-size:16pt!important" >
+                       <div class="container-fulid" style="color:black;padding:10px;">
+                           Notification
+                         <div id="no1">
+                           <hr class="grayhr90"/>
+                           <table class="">
+                             <tr>
+                               <td style="width:30%">
+
+                                 <img style="margin-right:2%" src="https://images.unsplash.com/photo-1544868501-b2f493d76e35?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=668&amp;q=80" class="rounded-circle" width="50px" height="50px"/>
+
+                                 <div style="display:inline-block;width:20px;height:20px;background-color:#F26C4F;border-radius: 50px;font-size:13pt;color:White;margin-left:30px;margin-top:-80px"></div>                                </td>
+                               <style> .red{color:red; } </style>
+                               <td style="width:70%">
+                                 <span class="red">Case ID:</span><span> AC0518/01/08</span>
+                                 <span class="red">Pending than 1 day</span>
+                                 <span>08/03/2018  02:30 PM.</span>
+                               </td>
+                             </tr>
+                           </table>
+                         </div>
+                         <div id="no2">
+                           <hr class="grayhr90"/>
+                           <table class="">
+                             <tr>
+                               <td style="width:30%">
+                                 <img style="margin-right:2%" src="https://images.unsplash.com/photo-1544868501-b2f493d76e35?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=668&amp;q=80" class="rounded-circle" width="50px" height="50px"/>
+                                 <div style="display:inline-block;width:20px;height:20px;background-color:#FFA700;border-radius: 50px;font-size:13pt;color:White;margin-left:30px;margin-top:-80px"></div>
+
+                               </td>
+                               <style> .red{color:red; } </style>
+                               <td style="width:70%">
+                                 <span >Case ID: AN0918/01/08</span>
+                                 <span >Choronic Case Approved</span>
+                                 <span>08/03/2018  02:30 PM.</span>
+                               </td>
+                             </tr>
+                           </table>
+                         </div>
+                         <div id="no3">
+                           <hr class="grayhr90"/>
+                           <table class="">
+                             <tr>
+                               <td style="width:30%">
+                                 <img style="margin-right:2%" src="https://images.unsplash.com/photo-1544868501-b2f493d76e35?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=668&amp;q=80" class="rounded-circle" width="50px" height="50px"/>
+                                 <div style="display:inline-block;width:20px;height:20px;background-color:#3CB878;border-radius: 50px;font-size:13pt;color:White;margin-left:30px;margin-top:-80px"></div>
+
+                               </td>
+                               <style> .red{color:red; } </style>
+                               <td style="width:70%">
+                                 <span >Case ID: AM0018/01/08</span>
+                                 <span >Choronic Case Reject</span>
+                                 <span>08/03/2018  02:30 PM.</span>
+                               </td>
+                             </tr>
+                           </table>
+                         </div>
+                         <div id="no4">
+                           <hr class="grayhr90"/>
+                           <table class="">
+                             <tr>
+                               <td style="width:30%">
+                                 <img style="margin-right:2%" src="https://images.unsplash.com/photo-1544868501-b2f493d76e35?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=668&amp;q=80" class="rounded-circle" width="50px" height="50px"/>
+                               </td>
+                               <style> .red{color:red; } </style>
+                               <td style="width:70%">
+                                 <span >Case ID: AC0518/01/08</span>
+                                 <span >Choronic Case Approved</span>
+                                 <span>08/03/2018  02:30 PM.</span>
+                               </td>
+                             </tr>
+                           </table>
+                         </div>
+                         <hr class="grayhr90"/>
+                         <center><a href="All-Notifaication-BU.html">View all</a></center>
+                       </div>
+                   </div>
+                 <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]><![CDATA[&nbsp;]]><![CDATA[&nbsp;]]><![CDATA[&nbsp;]]>
+                  <label style="padding-left:10px">  Notification </label>
+
+
+                 <div style="display:inline-block;width:20px;height:20px;background-color:#F26C4F;border-radius: 50px;font-size:13pt;color:White;margin-left:-95px;margin-top:-22px"><div style="margin-left:2px;">12</div></div>
+
+                 </h1>
+               </div>
+               <div class="col-2">
+
+                   <h1 class="h6 text-light">
+                     <a href="/BaxterApplication/users/updateProfile">
+                       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30.412" height="31.265" viewBox="0 0 30.412 31.265">
+                         <defs>
+                           <clipPath id="clip-path">
+                             <rect width="30.411" height="31.265" fill="none"/>
+                           </clipPath>
+                         </defs>
+                         <g id="Outline" clip-path="url(#clip-path)">
+                           <g id="Group_5" data-name="Group 5">
+                             <path id="Path_14" data-name="Path 14" d="M29.095,19.164a12.182,12.182,0,0,0,.109-1.532,12.182,12.182,0,0,0-.109-1.532l3.3-2.579a.789.789,0,0,0,.188-1L29.454,7.112a.781.781,0,0,0-.688-.391.73.73,0,0,0-.266.047L24.608,8.331A11.421,11.421,0,0,0,21.966,6.8l-.594-4.143A.762.762,0,0,0,20.606,2H14.353a.762.762,0,0,0-.766.657L12.993,6.8a12.01,12.01,0,0,0-2.642,1.532L6.459,6.768a.885.885,0,0,0-.281-.047.774.774,0,0,0-.672.391L2.379,12.521a.771.771,0,0,0,.188,1l3.3,2.579a12.4,12.4,0,0,0-.109,1.532,12.4,12.4,0,0,0,.109,1.532l-3.3,2.579a.789.789,0,0,0-.188,1l3.126,5.409a.781.781,0,0,0,.688.391.73.73,0,0,0,.266-.047l3.892-1.563a11.421,11.421,0,0,0,2.642,1.532l.594,4.143a.762.762,0,0,0,.766.657h6.253a.762.762,0,0,0,.766-.657l.594-4.143a12.01,12.01,0,0,0,2.642-1.532L28.5,28.5a.885.885,0,0,0,.281.047.774.774,0,0,0,.672-.391l3.126-5.409a.789.789,0,0,0-.188-1ZM26,16.491a8.352,8.352,0,0,1,.078,1.141c0,.328-.031.672-.078,1.141l-.219,1.766,1.391,1.094,1.688,1.313-1.094,1.892-1.985-.8-1.626-.657-1.407,1.063a9.155,9.155,0,0,1-1.954,1.141l-1.657.672-.25,1.766-.313,2.11H16.386l-.3-2.11-.25-1.766-1.657-.672a8.87,8.87,0,0,1-1.923-1.11l-1.423-1.094-1.657.672-1.985.8L6.1,22.963,7.788,21.65l1.391-1.094L8.96,18.789c-.047-.485-.078-.844-.078-1.157s.031-.672.078-1.141l.219-1.766L7.788,13.63,6.1,12.317l1.094-1.892,1.985.8,1.626.657,1.407-1.063a9.155,9.155,0,0,1,1.954-1.141L15.823,9l.25-1.766.313-2.11h2.173l.3,2.11L19.106,9l1.657.672a8.87,8.87,0,0,1,1.923,1.11l1.423,1.094,1.657-.672,1.985-.8L28.844,12.3,27.172,13.63l-1.391,1.094Z" transform="translate(-2.271 -2)" fill="#fff"/>
+                             <path id="Path_15" data-name="Path 15" d="M14.253,8a6.253,6.253,0,1,0,6.253,6.253A6.251,6.251,0,0,0,14.253,8Zm0,9.379a3.126,3.126,0,1,1,3.126-3.126A3.136,3.136,0,0,1,14.253,17.379Z" transform="translate(0.956 1.379)" fill="#fff"/>
+                           </g>
+                         </g>
+                       </svg>
+
+
+                   </a>
+                     Settings
+                   </h1>
+
+               </div>
+            </div>
+            <hr/>
+            <div class="row">
+              <!-- Content Column left-->
+              <div class="col-lg-6 mb-4">
+                <!-- Project Card Example -->
+                <div class="card shadow mb-4">
+                  <div class="card-header py-3">
+                    <div class="row">
+                      <div class="col-4">
+                        <label class="m-0 font-weight-bold headerB2 b2" style="color:black">Timeline Status</label>
+                      </div>
+                      <div class="col-2"><jsp:text/></div>
+                      <div class="col-3" name="caseNumber"><jsp:text/></div>
+                      <div class="col-3">Date: <span name="date"><jsp:text/></span></div>
+                    </div>
+                  </div>
+
+                  <div class="card-body" >
+                    <div class="row">
+                      <div  class="timeline2" style="font-size:12pt;width:100%;color:black">
+                        <div id="saleContainerTimeLine" class="containerTL2 right">
+                          <div class="content">
+                            <table class="table table-sm table-borderless" style="text-align:left;color:black">
+                              <tr>
+                                <td><b>Sales</b></td>
+                                <td>
+                                  <span id="saleName"> <jsp:text/></span> <br/>
+                                  <span id="saleArea"> <jsp:text/></span> <br/>
+
+                                  <i class="fas fa-phone" style="width:14%;height:50%"><jsp:text/></i><span id="saleTel"> <jsp:text/></span><br/>
+                                  <i class="fas fa-envelope" style="width:14%;height:50%"><jsp:text/></i><span id="saleMail"> <jsp:text/></span><br/>
+                            </td>
+                              </tr>
+                            </table>
+                          </div>
+                        </div>
+                        <div class="TLRight" style="">
+                          <span class="Sgreen" id="saleAction"> <jsp:text/>  </span>
+                          <br/>
+                          <span id="saleActionDate"><jsp:text/></span>
+                        </div>
+
+                        <div id="asmContainerTimeLine" class="containerTL2 left">
+                          <div class="content">
+                            <table class="table table-sm table-borderless" style="text-align:left;color:black">
+                              <tr>
+                                <td><b>ASM</b></td>
+                                <td>
+                              <span id="asmName"> <jsp:text/></span> <br/>
+                              <span id="asmArea"> <jsp:text/></span> <br/>
+                                  <i class="fas fa-phone" style="width:14%;height:50%"><jsp:text/></i><span id="asmTel"> <jsp:text/></span><br/>
+                                  <i class="fas fa-envelope" style="width:14%;height:50%"><jsp:text/></i><span id="asmMail"> <jsp:text/></span><br/>
+                            </td>
+                              </tr>
+                            </table>
+                          </div>
+                        </div>
+                        <div class="TLleft" style="">
+                          <span class="Sgreen" id="asmAction"> <jsp:text/>  </span>
+                          <br/>
+                          <span id="asmActionDate"><jsp:text/></span>
+                        </div>
+
+                         <div id="buContainerTimeLine" class="containerTL2 right">
+                          <div class="content">
+                            <table class="table table-sm table-borderless" style="text-align:left;color:black">
+                              <tr>
+                                <td><b>BU</b></td>
+                                <td>
+                                  <span id="buName"> <jsp:text/></span> <br/>
+                                  <span id="buArea"> <jsp:text/></span> <br/>
+
+                                  <i class="fas fa-phone" style="width:14%;height:50%"><jsp:text/></i><span id="buTel"> <jsp:text/></span><br/>
+                                  <i class="fas fa-envelope" style="width:14%;height:50%"><jsp:text/></i><span id="buMail"> <jsp:text/></span><br/>
+                            </td>
+                              </tr>
+                            </table>
+                          </div>
+                        </div>
+                        <div class="TLRight" style="">
+                          <span class="Sgreen" id="buAction"> <jsp:text/>  </span>
+                          <br/>
+                          <span id="buActionDate"><jsp:text/></span>
+                        </div>
+                        <br/> <br/>
+                      </div>
+                      <div class="timeline2" style="font-size:12pt;width:100%">
+                        <style>
+                        .alleft{text-align: right;}
+                        .alright{text-align: left;}
+                        </style>
+
+                          <div id="fnContainerTimeLine" class="containerTL2 left">
+                          <div class="content">
+                            <table class="table table-sm table-borderless" style="text-align:left;color:black">
+                              <tr>
+                                <td><b>Finance</b></td>
+                                <td>
+                              <span id="fnName"> <jsp:text/></span> <br/>
+                              <span id="fnArea"> <jsp:text/></span> <br/>
+                                  <i class="fas fa-phone" style="width:14%;height:50%"><jsp:text/></i><span id="fnTel"> <jsp:text/></span><br/>
+                                  <i class="fas fa-envelope" style="width:14%;height:50%"><jsp:text/></i><span id="fnMail"> <jsp:text/></span><br/>
+                            </td>
+                              </tr>
+                            </table>
+                          </div>
+                        </div>
+                        <div class="TLleft" style="">
+                          <span class="Sgreen" id="fnAction"> <jsp:text/>  </span>
+                          <br/>
+                          <span id="fnActionDate"><jsp:text/></span>
+                        </div>
+                      <div id="tsContainerTimeLine" class="containerTL2 right">
+                          <div class="content">
+                            <table class="table table-sm table-borderless" style="text-align:left;color:black">
+                              <tr>
+                                <td><b>TS</b></td>
+                                <td>
+                                  <span id="tsName"> <jsp:text/></span> <br/>
+                                  <span id="tsArea"> <jsp:text/></span> <br/>
+
+                                  <i class="fas fa-phone" style="width:14%;height:50%"><jsp:text/></i><span id="tsTel"> <jsp:text/></span><br/>
+                                  <i class="fas fa-envelope" style="width:14%;height:50%"><jsp:text/></i><span id="tsMail"> <jsp:text/></span><br/>
+                            </td>
+                              </tr>
+                            </table>
+                          </div>
+                        </div>
+                        <div class="TLRight" style="">
+                          <span class="Sgreen" id="tsAction"> <jsp:text/>  </span>
+                          <br/>
+                          <span id="tsActionDate"><jsp:text/></span>
+                        </div>
+
+                        <div id="csContainerTimeLine" class="containerTL2 left">
+                          <div class="content">
+                            <table class="table table-sm table-borderless" style="text-align:left;color:black;font-size:12pt">
+                              <tr>
+                                <td><b>cs</b></td>
+                                <td>
+                              <span id="csName"> <jsp:text/></span> <br/>
+                              <span id="csArea"> <jsp:text/></span> <br/>
+                                  <i class="fas fa-phone" style="width:14%;height:50%"><jsp:text/></i><span id="csTel"> <jsp:text/></span><br/>
+                                  <i class="fas fa-envelope" style="width:14%;height:50%"><jsp:text/></i><span id="csMail"> <jsp:text/></span><br/>
+                            </td>
+                              </tr>
+                            </table>
+                          </div>
+                        </div>
+                        <div class="TLleft" style="">
+                          <span class="Sgreen" id="csAction"> <jsp:text/>  </span>
+                          <br/>
+                          <span id="csActionDate"><jsp:text/></span>
+                        </div>
+                        <br/> <br/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                <!-- Card right -->
+              <div class="col-lg-6 mb-4">
+                <!-- Illustrations -->
+                <div class="card shadow mb-4">
+                  <div class="card-header py-3">
+                    <div class="row">
+                      <div class="col-4">
+                        <label class="m-0 font-weight-bold headerB2 b2" style="color:black">Case Detail</label>
+                      </div>
+                      <div class="col-2"><jsp:text/></div>
+                      <div class="col-3" name="caseNumber"><jsp:text/></div>
+                      <div class="col-3">Date: <span name="date"> <jsp:text/> </span></div>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <!-- row 1 -->
+                      <div class="row">
+                         <div class="col-3" style="font-weight:bold;color:black"><b>Note : </b></div>
+                         <div class="col-8" >
+                        <span id ="note">
+                          <jsp:text/>
+                        </span>
+                      </div>
+                      </div>
+                      <br/>
+                    <div class="row">
+                      <div class="col-3" style="color:green;font-weight:bold">Customer Datail</div>
+                      <div class="col-8" style="background-color:black;height:1px;margin-top:10px"><hr style="color:black!important"/></div>
+                      <div class="col-1"><i class="fas fa-caret-up" data-toggle="collapse" data-target="#CustomerDatail"><jsp:text/></i></div>
+                    </div>
+                    <div id="CustomerDatail" class="collapse show">
+                        <table class="table table-sm table-borderless" style="color:black">
+                          <tbody>
+                            <tr>
+                              <td style="font-weight:bold">Name:</td>
+                              <td id="customerName"><jsp:text/></td>
+                            </tr>
+                            <tr>
+                              <td style="font-weight:bold">National ID:</td>
+                              <td id="nationId"><jsp:text/></td>
+                            </tr>
+                            <tr>
+                              <td style="font-weight:bold">Current Address:</td>
+                              <td id="currentAddress"><jsp:text/></td>
+                            </tr>
+                            <tr>
+                              <td style="font-weight:bold">Tel No.:</td>
+                              <td id="customerTelNo"><jsp:text/></td>
+                            </tr>
+                            <tr>
+                              <td style="font-weight:bold">Customer Type:</td>
+                              <td id="customerType"><jsp:text/></td>
+                            </tr>
+
+                          </tbody>
+                        </table>
+                    </div>
+                    <!-- row 2 -->
+                    <div class="row">
+                      <div class="col-3" style="color:red;font-weight:bold">Product Datail</div>
+                      <div class="col-8" style="background-color:black;height:1px;margin-top:10px"><hr style="color:black!important" /></div>
+                      <div class="col-1"><i class="fas fa-caret-up" data-toggle="collapse" data-target="#ProductDetail"><jsp:text/></i></div>
+                    </div>
+                    <div id="ProductDetail" class="collapse show">
+                      <label style="font-weight:bold;color:black" >  Case Type: </label>
+                      <span id="caseType"> <jsp:text/></span>
+                        <table class="table table-sm table-borderless" style="color:black">
+                          <thead>
+                            <tr>
+                              <th>Order</th>
+                              <th>Product Type</th>
+                              <th>Product Name</th>
+                              <th>Product No.</th>
+                            </tr>
+                          </thead>
+                          <tbody name="product">
+                            <jsp:text/>
+
+                          </tbody>
+                        </table>
+                  
+                    </div>
+                    <!-- row 3 -->
+                   
+                    <div class="row">
+                      <div class="col-3" style="color:#F5BC4B;font-weight:bold">Delivery Datail</div>
+                      <div class="col-8" style="background-color:black;height:1px;margin-top:10px"><hr style="color:black!important"/></div>
+                      <div class="col-1"><i class="fas fa-caret-up" data-toggle="collapse" data-target="#DeliveryDatail"><jsp:text/></i></div>
+                    </div>
+                    <div id="DeliveryDatail" class="collapse show">
+                        <table class="table table-sm table-borderless" style="color:black">
+                          <tbody>
+                            <tr>
+                              <td style="font-weight:bold">Delivery Name:</td>
+                              <td id="deliverName"><jsp:text/></td>
+                            </tr>
+                            <tr>
+                              <td style="font-weight:bold">Delivery Type:</td>
+                              <td id="deliverType"><jsp:text/></td>
+                            </tr>
+                            <tr>
+                              <td style="font-weight:bold">Tel No.:</td>
+                              <td id="deliverTelno"><jsp:text/></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </div>
+                    <!-- row 4 -->
+                    <div class="row">
+                      <div class="col-3" style="color:#CB6EFA;font-weight:bold">Documentation</div>
+                      <div class="col-8" style="background-color:black;height:1px;margin-top:10px"><hr style="color:black!important"/></div>
+                      <div class="col-1"><i class="fas fa-caret-up" data-toggle="collapse" data-target="#Documentation"><jsp:text/></i></div>
+                    </div>
+                    <!-- test modal -->
+
+
+
+                    <div id="Documentation" class="collapse show">
+                      <div class="row" >
+                        <div class="col-5" style="text-align:right">
+                          <button id="copyId" type="button" class="btn btn-lg btn-blue btn-info" style="box-shadow: 2px 2px 2px #999999;">
+                          <div class="container-fuild">Copy of ID card
+                          <i class="fas fa-search"><jsp:text/></i>
+                        </div>
+                        </button>
+                          <div id="myModal-ID" class="modalBoom">
+                              <span class="closeBoom close1" style="border-radius: 30px;width:50px;height:50px;text-align:center">
+                                <i class="fas fa-times-circle" style="color:white"><jsp:text/></i>
+                              </span>
+                              <center>
+                                <h4 id="captionImg" style="color:white">Test</h4>
+                                <img class="modalBoom-content" id="img01" />
+                                <br/><br/>
+                                  <a href="#" style="width:15%" class="btn btn-primary btn-icon-split">
+                                    <span  class="text"><h5>Save</h5></span>
+                                  </a>
+
+                              </center>
+                          </div>
+                        </div>
+
+                        <div class="col-3">
+                          <button type="button" id="psId"  class="btn btn-lg btn-blue btn-info" style="box-shadow: 2px 2px 2px #999999;">
+                          Pay Slip
+                          <i class="fas fa-search"><jsp:text/></i>
+                          </button>
+                            <div id="myModal-Slip" class="modalBoom">
+                              <span class="closeBoom close2" style="border-radius: 30px;width:50px;height:50px;text-align:center">
+                                <i class="fas fa-times-circle" style="color:white"><jsp:text/></i>
+                              </span>
+                              <center>
+                                <h4 id="captionImg2" style="color:white">Test</h4>
+                                <img class="modalBoom-content" id="img02" />
+                                <br/><br/>
+                                <a href="#" style="width:15%" class="btn btn-primary btn-icon-split">
+                                  <span  class="text"><h5>Save</h5></span>
+                                </a>
+
+                              </center>
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                          <button id="contractId" type="button" class="btn btn-lg btn-blue btn-info"  style="box-shadow: 2px 2px 2px #999999;">
+                            <div class="container-fuild" id="agreementFile">
+                                Agreement
+                                <i class="fas fa-search"><jsp:text/></i>
+                            </div>
+                          </button>
+                          <div id="myModal-Agreement" class="modalBoom">
+                            <span class="closeBoom close3" style="border-radius: 30px;width:50px;height:50px;text-align:center">
+                              <i class="fas fa-times-circle" style="color:white"><jsp:text/></i>
+                            </span>
+                            <center>
+                              <h4 id="captionImg3" style="color:white">Test</h4>
+                              <img class="modalBoom-content" id="img03" />
+                              <br/><br/>
+                              <a href="#" style="width:15%" class="btn btn-primary btn-icon-split">
+                                <span  class="text"><h5>Export as PDF</h5></span>
+                              </a>
+
+                            </center>
+                          </div>
+                        </div>
+                      </div>
+
+                       <div class="row" style="margin-top:1%" >
+                        <div class="col-5" style="text-align:right">
+                          <button id="btnReceipt" type="button" class="btn btn-lg btn-blue btn-info" style="box-shadow: 2px 2px 2px #999999;">
+                          <div class="container-fuild">Receipt
+                          <i class="fas fa-search"><jsp:text/></i>
+                        </div>
+                        </button>
+                        
+                        </div>
+
+                        <div class="col-3">
+                          <button type="button" id="btnPrescription"  class="btn btn-lg btn-blue btn-info" style="box-shadow: 2px 2px 2px #999999;">
+                          Prescription
+                          <i class="fas fa-search"><jsp:text/></i>
+                          </button>
+                            
+                        </div>
+
+                        <div class="col-4">
+                          <button id="installationFile" type="button" class="btn btn-lg btn-blue btn-info"  style="box-shadow: 2px 2px 2px #999999;">
+                            <div class="container-fuild" id="agreementFile">
+                                Installation
+                                <i class="fas fa-search"><jsp:text/></i>
+                            </div>
+                          </button>
+                          <div id="myModal-Agreement" class="modalBoom">
+                            <span class="closeBoom close3" style="border-radius: 30px;width:50px;height:50px;text-align:center">
+                              <i class="fas fa-times-circle" style="color:white"><jsp:text/></i>
+                            </span>
+                            <center>
+                              <h4 id="captionImg3" style="color:white">Test</h4>
+                              <img class="modalBoom-content" id="img03" />
+                              <br/><br/>
+                              <a href="#" style="width:15%" class="btn btn-primary btn-icon-split">
+                                <span  class="text"><h5>Export as PDF</h5></span>
+                              </a>
+
+                            </center>
+                          </div>
+                        </div>
+                      </div>
+
+                      
+                   </div>
+
+                    <!-- end row  -->
+                  </div>
+                </div>
+                <!-- Approach -->
+              </div>
+              <!-- end case detail -->
+            </div>
+
+            <div class="modal fade" id="ChangePassModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header" style="background-color:#04AEDC;color:white">
+                      <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+                      <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="modal-body">
+                        <form class="user" style="margin-left:15%;margin-right:15%">
+                          <div class="form-group">
+                            <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Current Password"/>
+                          </div>
+                          <div class="form-group">
+                            <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="New Password"/>
+                          </div>
+                          <div class="form-group">
+                            <input type="repassword" class="form-control form-control-user" id="exampleInputrePassword" placeholder="Retype NewPassword"/>
+                          </div>
+                          <a  class="btn btn-info btn-user btn-block">
+                            Save
+                          </a>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a class="scroll-to-top rounded" href="#page-top2" style="display: inline;">
+      <i class="fas fa-angle-up"><jsp:text/></i>
+    </a>
+
+
+ <div class="modal fade" id="prescriptionModal" role="dialog" >
+    <div class="modal-dialog modal-md">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+
+          <div class="col-sm-7">
+            <h3 class="modal-title">Prescription  </h3>
+          </div>
+
+          <div class="col-sm-5">
+            <h5 class="modal-title"> Case Number : <span name="caseNumber"><jsp:text/> </span>
+             </h5>
+          </div>
+
+        </div>
+        <div class="modal-body marginBottom">
+          <hr/>
+          <div class="row">
+            <div class="col-sm-3">
+               <label>Patient Name</label>
+            </div>
+             <div class="col-sm-7">
+                 <label name="patientName"><jsp:text/></label>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-sm-3">
+                 <label>Hospital Name</label>
+              </div>
+               <div class="col-sm-7">
+                 <label name="hospitalName"><jsp:text/></label>
+              </div>
+          </div>
+          <div class="row">
+                <div class="col-sm-3">
+                   <label>Serial Number</label>
+                </div>
+                 <div class="col-sm-7">
+                   <label name="serialNumber"><jsp:text/></label>
+                </div>
+          </div>
+          <hr/>
+          <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#home">Nurse Menu&#160;&#160;</a></li>
+            <li><a data-toggle="tab" href="#menu1">Make Adjust&#160;&#160;</a></li>
+            <li><a data-toggle="tab" href="#menu2">Change Programe&#160;&#160;</a></li>
+          </ul>
+
+        <div class="tab-content">
+          <div id="home" class="tab-pane fade in active">
+             <div class="row">
+              <div class="col-4">
+                 <label>Mode :</label>
+              </div>
+               <div class="col-7">
+                   <label name="modes"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                 <label>Min Drain VOL :</label>
+              </div>
+               <div class="col-7">
+                   <label name="minDrawVol"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                 <label>Min Drain Time :</label>
+              </div>
+               <div class="col-7">
+                   <label name="minDrainTime"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                 <label>Neg Of Limit :</label>
+              </div>
+               <div class="col-7">
+                   <label name="negOfLimit"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                 <label>Pos Of Limit :</label>
+              </div>
+               <div class="col-7">
+                   <label name="postOfLimit"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                 <label>Smart Dwells :</label>
+              </div>
+               <div class="col-7">
+                   <label name="smartDwells"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                 <label>Heater Bag Empty :</label>
+              </div>
+               <div class="col-7">
+                   <label name="heaterBagEmpty"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                 <label>Tidal Full Drns :</label>
+              </div>
+               <div class="col-7">
+                   <label name="tidalFullDrns"><jsp:text/></label>
+              </div>
+            </div>
+             <div class="row">
+              <div class="col-4">
+                 <label>Language :</label>
+              </div>
+               <div class="col-7">
+                   <label name="language"><jsp:text/></label>
+                </div>
+            </div>
+             <div class="row">
+              <div class="col-4">
+                 <label>Flush :</label>
+              </div>
+               <div class="col-7">
+                   <label name="flush"><jsp:text/></label>
+                </div>
+            </div>
+
+            <div class="row">
+              <div class="col-4">
+                 <label>Program Locked :</label>
+              </div>
+               <div class="col-7">
+                   <label name="programLocked"><jsp:text/></label>
+                </div>
+            </div>
+             <div class="row">
+              <div class="col-4">
+                 <label>Weight Reset :</label>
+              </div>
+               <div class="col-7">
+                   <label name="weightReset"><jsp:text/></label>
+                </div>
+              </div>
+          </div>
+          <div id="menu1" class="tab-pane fade">
+             <div class="row">
+              <div class="col-6">
+                 <label>Adjust Brightness :</label>
+              </div>
+               <div class="col-6">
+                   <label name="adjustBrightNess"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>Adjust Loudness :</label>
+              </div>
+               <div class="col-6">
+                   <label name="adjustLoudness"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>Auto Dim :</label>
+              </div>
+               <div class="col-6">
+                   <label name="autoDim"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>Set Clock :</label>
+              </div>
+               <div class="col-6">
+                   <label name="setClock"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>Set Date :</label>
+              </div>
+               <div class="col-6">
+                   <label name="setDate"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>I-Drain Time:(LOW-Fill)(Min) :</label>
+              </div>
+               <div class="col-6">
+                   <label name="drainTime"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>I-Drain Alram:(OFF/0-3,000ml) :</label>
+              </div>
+               <div class="col-6">
+                   <label name="drainAlram"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>Confort Control (35-37) :</label>
+              </div>
+               <div class="col-6">
+                   <label name="comfortControl"><jsp:text/></label>
+                </div>
+            </div>
+             <div class="row">
+              <div class="col-6">
+                 <label>Last manual Drain :</label>
+              </div>
+               <div class="col-6">
+                   <label name="lastManualDrain"><jsp:text/></label>
+                </div>
+            </div>
+             <div class="row">
+                <div class="col-6">
+                   <label>In Case  Y Pop to</label>
+                </div>
+            </div>
+
+            <div class="row">
+              <div class="col-6">
+                 <label> - UF target (ml) :</label>
+              </div>
+               <div class="col-6">
+                   <label name="ufTarget"><jsp:text/></label>
+                </div>
+            </div>
+             <div class="row">
+              <div class="col-6">
+                 <label> - Alram (Y/N) :</label>
+              </div>
+               <div class="col-6">
+                   <label name="alram"><jsp:text/></label>
+                </div>
+              </div>
+          </div>
+          <div id="menu2" class="tab-pane fade">
+            <jsp:text/>
+            <div class="row">
+              <div class="col-6">
+                 <label class="control-label">CCPD / IPD</label>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>Thearapy :</label>
+              </div>
+               <div class="col-6">
+                   <label name="opdThearapy"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>Total VOL(200ml-80/000 ml) :</label>
+              </div>
+               <div class="col-6">
+                   <label name="opdTotalVol"><jsp:text/></label>
+                </div>
+            </div>
+             <div class="row">
+              <div class="col-6">
+                 <label>Thearapy Time :</label>
+              </div>
+               <div class="col-6">
+                   <label name="opdThearapyTime"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>Fill VOL(60ml-3/000 ml) :</label>
+              </div>
+               <div class="col-6">
+                   <label name="opdFillVol"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>Last Fill VOL(0ml-3/000 ml) :</label>
+              </div>
+               <div class="col-6">
+                   <label name="opdLastFillVol"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>DEXTROSE (SAME/DIFFERENCE) :</label>
+              </div>
+               <div class="col-6">
+                   <label name="opdDextRose"><jsp:text/></label>
+                </div>
+            </div>
+             <div class="row">
+              <div class="col-6">
+                 <label>Weight Unit(KG/LG) :</label>
+              </div>
+               <div class="col-6">
+                   <label name="opdWeightUnit"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>Patient Weight :</label>
+              </div>
+               <div class="col-6">
+                   <label name="opdPatientWeight"><jsp:text/></label>
+                </div>
+            </div>
+             <hr/>
+
+         <div class="row">
+              <div class="col-6">
+                 <label class="control-label">Tidal</label>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>Thearapy :</label>
+              </div>
+               <div class="col-6">
+                   <label name="therapy"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>Total VOL(200ml-80/000 ml) :</label>
+              </div>
+               <div class="col-6">
+                   <label name="totalOf"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>Thearapy Time :</label>
+              </div>
+               <div class="col-6">
+                   <label name="therapyTime"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>Fill VOL(60ml-3/000 ml) :</label>
+              </div>
+               <div class="col-6">
+                   <label name="fillVol"><jsp:text/></label>
+                </div>
+            </div>
+             <div class="row">
+              <div class="col-6">
+                 <label>Last Fill VOL(0ml-3/000 ml) :</label>
+              </div>
+               <div class="col-6">
+                   <label name="lastFillVol"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>Full Drain Every(1-99) :</label>
+              </div>
+               <div class="col-6">
+                   <label name="fullDrainEvery"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>DEXTROSE (SAME/DIFFERENCE)  :</label>
+              </div>
+               <div class="col-6">
+                   <label name="dextRose"><jsp:text/></label>
+                </div>
+            </div>
+             <div class="row">
+              <div class="col-6">
+                 <label>Weight Unit(KG/LG) :</label>
+              </div>
+               <div class="col-6">
+                   <label name="weightUnit"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>Patient Weight :</label>
+              </div>
+               <div class="col-6">
+                   <label name="patientWeight"><jsp:text/></label>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <spring:url value="${urls.getForLookupPath('/resources/scripts/application/cases/detailCase.js')}" var="setup" />
+    <script type="text/javascript"  src="${setup}" ><!-- required for FF3 and Opera --></script>
+
+
+</div>

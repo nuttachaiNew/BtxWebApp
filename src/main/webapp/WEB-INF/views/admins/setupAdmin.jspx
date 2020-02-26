@@ -1,102 +1,1601 @@
 <div xmlns:spring="http://www.springframework.org/tags"   xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"  xmlns:form="http://www.springframework.org/tags/form"  xmlns:c="http://java.sun.com/jsp/jstl/core"  xmlns:jsp="http://java.sun.com/JSP/Page"    version="2.0">
   <jsp:directive.page contentType="text/html;charset=UTF-8" />
   <jsp:output omit-xml-declaration="yes" />
-  
+
+
   <c:set scope="request" var="LB_CODE"><spring:message code="LB_CODE"/></c:set>
   <c:set scope="request" var="LB_NAME"><spring:message code="LB_NAME"/></c:set>
   <c:set scope="request" var="LB_SAVED_DATE"><spring:message code="LB_SAVED_DATE"/></c:set>
   <c:set scope="request" var="LB_RECIEVE_DATE"><spring:message code="LB_RECIEVE_DATE"/></c:set>
   <c:set scope="request" var="LB_DELETE"><spring:message code="LB_DELETE"/></c:set>
 
+  <style>
+    /* .icon {color: white!important;} */
+    ul, menu, dir {
+   display: block;
+   list-style-type: disc;
+   margin-block-start: 1em;
+   margin-block-end: 1em;
+   margin-inline-start: 0px;
+   margin-inline-end: 0px;
+   padding-inline-start: 40px;
+ }
+ li {
+   display: list-item;
+   text-align: -webkit-match-parent;
+}
 
-<style type="text/css">
-	.nav-tabs>li.active>a {
-		color: #7dbefe!important;
-	}
-	.p-0 {
-		padding: 0px!important;
-	}
-	.mr-15 {
-		margin-right: 15px!important; 
-	}
-	.tab-style {
-		background: #dfeffe;
-		color: #7dbefe;
-		padding: 10px 30px!important;
-	}
-	.custompanel {
-		border-radius: 0px 5px 5px 5px!important;
-		border-top: none;
-		padding: 15px;
-	}
+    .nav2-tabs>li.active>a, .nav2-tabs>li.active>a:focus, .nav2-tabs>li.active>a:hover {
+   color: #555!important;
+   cursor: default;
+   background-color: #fff!important;
+   border: 1px solid #ddd!important;
+   border-bottom-color: transparent;
+   }
+   .nav2-tabs>li>a {
+   margin-right: 2px;
+   line-height: 1.42857143;
+   border: 1px solid transparent;
+   border-radius: 4px 4px 0 0;
+ }
+ .nav2>li>a {
+   position: relative;
+   display: block;
+   padding: 10px 15px;
+}
+ .nav2 {
+     padding-left: 0;
+     margin-bottom: 0;
+     list-style: none;
+ }
 
-	.ctrtop-tabs {
-		border-radius: 50px!important;
-	}
-	.btntop-tabs {
-		padding: 5px 40px!important;
-	}
-	.selecttop-tabs {
-		width: 150px!important;
-	}
-</style>
+ .toppill  {
+     background-color:#BAF2F9;border: 1px solid transparent;
+     border-radius: 4px 4px 0 0;
+   }
+    #ViewAccount{ background-color: #6610f2; color: white!important; }
+    .circleNew {
+      border: 1px solid #1EDE4D;
+      padding: 10px;
+      border-radius: 50px;
+      background-color:#1EDE4D;
+      color:white;
+      text-align:center;
+   }
+   .circleApprove {
+     border: 1px solid #ECC822;
+     padding: 10px;
+     border-radius: 30px;
+     background-color:#ECC822;
+     color:white;
+     text-align:center;
+  }
+  .circleReject {
+    border: 1px solid #F95B24;
+    padding: 10px;
+    border-radius: 30px;
+    background-color:#F95B24;
+    color:white;
+    text-align:center;
+ }
+ .GraphRed {
+ border: 1px solid #FD643F;
+ padding: 10px;
+ border-radius: 30px;
+ background-color:#FD643F;
+ color:white;
+ text-align:center;
+ width:10%auto;
+ height:10%auto;
+}
+.GraphGreen {
+border: 1px solid #3ACE91;
+padding: 10px;
+border-radius: 30px;
+background-color:#3ACE91;
+color:white;
+text-align:center;
+width:10%auto;
+height:10%auto;
+}
+.GraphBlue {
+border: 1px solid #488BF9;
+padding: 10px;
+border-radius: 30px;
+background-color:#488BF9;
+color:white;
+text-align:center;
+width:10%auto;
+height:10%auto;
+}
+.GraphWhite {
+border: 1px solid #DDE2EB;
+padding: 10px;
+border-radius: 30px;
+background-color:#DDE2EB;
+color:white;
+text-align:center;
+width:10%auto;
+height:10%auto;
+}
 
-<div class="container reboxing">
-	<div class="row">
+.nav-tabs>li>a {
+      margin-right: 2px;
+      line-height: 1.42857143;
+      border: 1px solid transparent;
+      border-radius: 4px 4px 0 0;
+}
+.nav>li>a {
+    position: relative;
+    /* display: block; */
+    padding: 10px 15px;
+}
+  </style>
 
-		<ul class="nav nav-tabs">
-			<li class="active"><a class="tab-style" data-toggle="tab" href="#position">Position Management</a></li>
-			<li><a class="tab-style" data-toggle="tab" href="#area">Area Management</a></li>
-			<li><a class="tab-style" data-toggle="tab" href="#personal">Personal Managment</a></li>
-      		<li style="float:right;">
-				<div class="form-inline">
-				  <label class="mr-15" for="areaselc">Area : </label>
-				  <select class="form-control mr-15 ctrtop-tabs selecttop-tabs" id="areaselc">
-				    <option>All</option>
-				  </select>
-				  <button type="button" class="btn btn-success btntop-tabs ctrtop-tabs">Add Personal</button>
-				</div>
-			</li>
-		</ul>
 
-		<div class="tab-content p-0">
-			<div id="position" class="tab-pane fade in active">
-				<div class="panel panel-default custompanel">
-					<div class="panel-body">
-						<div class="row">
-							<div class="col-md-12">
-								Position Management Panel
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div id="area" class="tab-pane fade">
-				<div class="panel panel-default custompanel">
-					<div class="panel-body">
-						<div class="row">
-							<div class="col-md-12">
-								Area Management Panel
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div id="personal" class="tab-pane fade">
-				<div class="panel panel-default custompanel">
-					<div class="panel-body">
-						<div class="row">
-							<div class="col-md-12">
-								Personal Management Panel
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-	</div>
-</div>
+ <!-- Page Wrapper -->
+ <div id="wrapper">
+
+   <!-- Sidebar -->
+   <ul class="menuboom navbar-nav bg-gradient-light sidebar sidebar-light accordion" id="accordionSidebar">
+     <div class="container" style="text-align:center; text-align:center;padding-top: 0px;">
+       <div class="row" >
+       <div class="col-12">
+       <br/>
+       <span>
+
+      <img src="${img_user}" class="rounded-circle" width="100" height="100" id="profileImage" />
+      
+       </span>
+       </div>
+       <div class="col-12">
+      <p class="mr-2 d-none d-lg-inline text-light-600 xx-large" id="profileName" style="color:#219FEC">Valerie Luna</p><br/>
+      <p class="mr-2 d-none d-lg-inline text-light-600 large" id="profileRole" style="color:black">CS</p><br/>
+      <p class="mr-2 d-none d-lg-inline text-light-600 large" id="profileArea" >Baxter Area</p>
+      <div class="col-12"><jsp:text/>
+      </div>
+      </div>
+
+       <!-- Divider -->
+       <hr class="sidebar-divider my-0"/>
+
+       <!-- Nav Item - Dashboard -->
+       <style>
+         i.case:hover{background-color:#1cc88a;color: white}
+       </style>
+       <ul class="nav nav-pills" id="menubarbu">
+         
+         <li class="nav-item" id="ViewAccount">
+           <a class="nav-link text-center" style="color:white">
+             <i class="far fa-user-circle" style="color:white!important"><jsp:text/></i>
+             <span>Manage Account</span>
+           </a>
+         </li>
+         <li class="nav-item" id="logout">
+        <a id="logout" href="#" class="nav-link text-center" onlick="submitlogout()" style="color:#5ADA79;">
+          <i style="color:#5ADA79!important" ><jsp:text/></i>
+          <span>Logout</span></a>
+      </li>
+       </ul>
+
+
+
+     </div>
+     </div>
+   </ul>
+   <div id="content-wrapper" class="d-flex flex-column" style="background-color:#219FEC">
+     <div id="content">
+       <!-- <div class="container-fluid"> -->
+         <br/>
+         <div class="row d-sm-flex align-items-center justify-content-between" style="padding-top:5px" id="top-menu">
+           <div class="col-8"> <h1 class="h5 text-light b2">Manage Account</h1></div>
+         
+         </div>
+         <hr/>
+         <div class="col-sm-12">
+
+           <ul class="nav nav-tabs" >
+             <li ><a style="text-decoration:none;font-weight: bold;" id="postion" data-toggle="tab" href="#home" class="tab-pane toppill active" >Position Management</a></li>
+             <li><a style="text-decoration:none;font-weight: bold;" id="area" data-toggle="tab" href="#menu1" class="tab-pane toppill" >Area Management</a></li>
+             <li><a style="text-decoration:none;font-weight: bold;" id="user"  data-toggle="tab" href="#menu2" class="tab-pane toppill" >Personal Management</a></li>
+             
+             <!-- <li><a data-toggle="tab" href="#menu3" class="toppill">Menu 3</a></li> -->
+             <div class="row" id="pm" style="width:400px">
+               <div class="col-6"><button class="btn btn-md btn-success" id="addPostion"><i class="fas fa-plus-circle"><jsp:text/></i>Add Position</button></div>
+             </div>
+             <div class="row" id="am" style="width:400px;display:none;">
+               <div class="col-6"><button class="btn btn-md btn-success" id="addArea"><i class="fas fa-plus-circle"><jsp:text/></i>Add Area</button></div>
+             </div>
+             <div class="row" id="pmm" style="width:400px;display:none;">
+          
+               <div class="col-6"><button class="btn btn-md btn-success" id="addUser"><i class="fas fa-plus-circle"><jsp:text/></i>Add Personal</button></div>
+             </div>
+           </ul>
+
+           <div class="tab-content " style="background-color:white">
+             <div id="home" class="tab-pane  in active show" style="width:100%">
+               <table class="table table-condensed">
+                 <thead>
+                   <tr>
+                     <th>Order</th>
+                     <th>Position Name</th>
+                     <th>Position Note</th>
+                     <th style="color:#219FEC">Edit</th>
+                     <th style="color:red">Delete</th>
+                   </tr>
+                 </thead>
+                 <tbody id="tablePosition">
+                   <jsp:text/>
+                 </tbody>
+               </table>
+             </div>
+             <div id="menu1" class="tab-pane  show" style="width:100%">
+               
+               <table class="table table-condensed">
+                 <thead>
+                   <tr>
+                     <th>Order</th>
+                     <th>Code</th>
+                     <th>Area Name</th>
+                     <th>Area Note</th>
+                     <th style="color:#219FEC">Edit</th>
+                     <th style="color:red">Delete</th>
+                   </tr>
+                 </thead>
+                 <tbody id="tableArea">
+                      <jsp:text/>
+<!--                      <td>
+                       <i class="fas fa-edit " style="color:#219FEC"><jsp:text/></i>
+                     </td>
+                     <td>
+                       <i class="fas fa-trash " style="color:red"><jsp:text/></i>
+                     </td> -->
+                 </tbody>
+               </table>
+             </div>
+   
+             <div id="menu2" class="tab-pane  show" style="width:100%">
+              <div class="row">
+                <div class="col-sm-12">
+                 <table class="table table-condensed">
+                 <thead>
+                   <tr>
+                     <th>Order</th>
+                     <th>Username</th>
+                     <!-- <th>Name</th> -->
+                     <!-- <th>Surname</th> -->
+                     <th>Tel No.</th>
+                     <th>E-mail</th>
+                     <th>Position</th>
+                     <th>Area</th>
+                     <th style="color:#219FEC">Edit</th>
+                   </tr>
+                 </thead>
+                 <tbody id="tableUser">
+                  <jsp:text/>
+                 </tbody>
+               </table>
+              </div>
+              </div>
+              
+              
+             </div>
+           </div>
+         </div>
+       <!-- </div> -->
+   
+     </div>
+
+   </div>
+
+ </div>
+
+ <!--for modal  -->
+  <div class="modal fade" id="addModalPosition" role="dialog" >
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Insert</h4>
+        </div>
+        <div class="modal-body marginBottom">
+            <!-- <jsp:text/> -->
+            <div class="form-group">
+              <div class="col-sm-12 marginTop">
+                <div class="col-sm-4">
+                  <label>Position Name :</label>
+                </div>
+                <div class="col-sm-8">
+                  <input type="text" autocomplete="false" class="form-control" id="txtPosiName" />
+                </div>
+              </div>
+            </div>
+            <div class="form-group margintop">
+              <div class="col-sm-12">
+                <div class="col-sm-4">
+                  <label>Position Note :</label>
+                </div>
+                <div class="col-sm-8">
+                  <input type="text" autocomplete="false" class="form-control" id="txtPosiNote" />
+                </div>
+              </div>
+             </div>
+        </div>
+        <div class="modal-footer marginTop">
+            <br/>
+            <br/>
+            <div class="form-group">
+              <button class="btn btn-primary" id="btnConfirmSavePosition">
+                Save
+              </button>
+              <button class="btn btn-danger" data-dismiss="modal">
+                 Cancel
+              </button>
+            </div>
+            <!-- <jsp:text/> -->
+        </div>
+      </div>
+
+      </div>
+  </div>
+
+ <div class="modal fade" id="updateModalPosition" role="dialog" >
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Update</h4>
+          </div>
+          <div class="modal-body marginBottom">
+              <!-- <jsp:text/> -->
+              <div class="form-group">
+                <div class="col-sm-12 margintop">
+                  <div class="col-sm-4">
+                    <label>Position Name :</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <input type="text" autocomplete="false" class="form-control" id="txtPosiName" />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-12 margintop">
+                  <div class="col-sm-4">
+                    <label>Position Note :</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <input type="text" autocomplete="false" class="form-control" id="txtPosiNote" />
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="modal-footer marginTop">
+              <br/>
+              <br/>
+              <div class="form-group">
+                <button class="btn btn-primary" id="btnConfirmSavePosition">
+                  Save
+                </button>
+                <button class="btn btn-danger" data-dismiss="modal">
+                  Cancel
+                </button>
+              </div>
+              <!-- <jsp:text/> -->
+          </div>
+        </div>
+
+      </div>
+  </div>
+
+ <div class="modal fade" id="deleteModalPosition" role="dialog" >
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Confirm to delete</h4>
+        </div>
+        <div class="modal-body marginBottom">
+          <jsp:text/>
+          Confirm to delete
+        </div>
+        <div class="modal-footer marginTop">
+            <br/>
+            <br/>
+            <div class="form-group">
+              <button class="btn btn-primary" id="btnConfirmDeletePosition">
+                Delete
+              </button>
+              <button class="btn btn-danger" data-dismiss="modal">
+                Cancel
+              </button>
+            </div>
+            <!-- <jsp:text/> -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+<div class="modal fade" id="addModalArea" role="dialog" >
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Insert</h4>
+        </div>
+        <div class="modal-body marginBottom">
+            <!-- <jsp:text/> -->
+            <div class="form-group">
+              <div class="col-sm-12 marginTop">
+                <div class="col-sm-4">
+                  <label>Code :</label>
+                </div>
+                <div class="col-sm-8">
+                  <input type="text" autocomplete="false" class="form-control" id="txtCode" />
+                </div>
+              </div>
+            </div>
+            <div class="form-group margintop">
+              <div class="col-sm-12">
+                <div class="col-sm-4">
+                  <label>Area Name :</label>
+                </div>
+                <div class="col-sm-8">
+                  <input type="text" autocomplete="false" class="form-control" id="txtAreaName" />
+                </div>
+              </div>
+             </div> 
+            <div class="form-group">
+
+              <div class="col-sm-12 margintop">
+                <div class="col-sm-4">
+                  <label>Area Detail :</label>
+                </div>
+                <div class="col-sm-8">
+                  <input type="text" autocomplete="false" class="form-control" id="txtAreaDeatail" />
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer marginTop">
+            <br/>
+            <br/>
+            <div class="form-group">
+              <button class="btn btn-primary" id="btnConfirmSaveArea"> 
+                Save
+              </button>
+              <button class="btn btn-danger" data-dismiss="modal"> 
+                 Cancel
+              </button>
+            </div>
+            <!-- <jsp:text/> -->
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+   
+<div class="modal fade" id="updateModalArea" role="dialog" >
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Update</h4>
+        </div>
+        <div class="modal-body marginBottom">
+            <!-- <jsp:text/> -->
+            <div class="form-group">
+              <div class="col-sm-12 margintop">
+                <div class="col-sm-4">
+                  <label>Code :</label>
+                </div>
+                <div class="col-sm-8">
+                  <input type="text" autocomplete="false" class="form-control" id="txtCode" />
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-12 margintop">
+                <div class="col-sm-4">
+                  <label>Area Name :</label>
+                </div>
+                <div class="col-sm-8">
+                  <input type="text" autocomplete="false" class="form-control" id="txtAreaName" />
+                </div>
+              </div>
+             </div> 
+            <div class="form-group">
+
+              <div class="col-sm-12 margintop">
+                <div class="col-sm-4">
+                  <label>Area Detail :</label>
+                </div>
+                <div class="col-sm-8">
+                  <input type="text" autocomplete="false" class="form-control" id="txtAreaDetail" />
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer marginTop">
+            <br/>
+            <br/>
+            <div class="form-group">
+              <button class="btn btn-primary" id="btnConfirmSaveArea"> 
+                Save
+              </button>
+              <button class="btn btn-danger" data-dismiss="modal"> 
+                 Cancel
+              </button>
+            </div>
+            <!-- <jsp:text/> -->
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="deleteModalArea" role="dialog" >
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Confirm to delete</h4>
+        </div>
+        <div class="modal-body marginBottom">
+          <jsp:text/>
+          Confirm to delete
+        </div>
+        <div class="modal-footer marginTop">
+            <br/>
+            <br/>
+            <div class="form-group">
+              <button class="btn btn-primary" id="btnConfirmDeleteArea"> 
+                Delete
+              </button>
+              <button class="btn btn-danger" data-dismiss="modal"> 
+                 Cancel
+              </button>
+            </div>
+            <!-- <jsp:text/> -->
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+   
+<div class="modal fade" id="addModalUser" role="dialog" >
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Insert</h4>
+        </div>
+        <div class="modal-body marginBottom">
+            <!-- <jsp:text/> -->
+            <div class="form-group">
+              <div class="col-sm-12 margintop">
+                <div class="col-sm-4">
+                  <label>Username :</label>
+                </div>
+                <div class="col-sm-8">
+                  <input type="text" autocomplete="false" class="form-control" id="txtUsername" />
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-12 margintop">
+                <div class="col-sm-4">
+                  <label>Password :</label>
+                </div>
+                <div class="col-sm-8">
+                  <input type="password" autocomplete="false" class="form-control" id="txtPassword" />
+                </div>
+              </div>
+             </div> 
+             <div class="form-group">
+              <div class="col-sm-12 margintop">
+                <div class="col-sm-4">
+                  <label>Confirm Password :</label>
+                </div>
+                <div class="col-sm-8">
+                  <input type="password" autocomplete="false" class="form-control" id="txtConfirmPassword" />
+                </div>
+              </div>
+             </div> 
+
+            <div class="form-group">
+
+              <div class="col-sm-12 margintop">
+                <div class="col-sm-4">
+                  <label>First Name :</label>
+                </div>
+                <div class="col-sm-8 margintop">
+                  <input type="text" autocomplete="false" class="form-control" id="txtFirstName" />
+                </div>
+              </div>
+            </div>
+
+             <div class="form-group">
+              <div class="col-sm-12 margintop">
+                <div class="col-sm-4">
+                  <label>Last Name :</label>
+                </div>
+                <div class="col-sm-8 margintop">
+                  <input type="text" autocomplete="false" class="form-control" id="txtLastName" />
+                </div>
+              </div>
+            </div>
+
+           <div class="form-group">
+              <div class="col-sm-12 margintop">
+                <div class="col-sm-4">
+                  <label>Email :</label>
+                </div>
+                <div class="col-sm-8 margintop">
+                  <input type="text" autocomplete="false" class="form-control" id="txtEmail" />
+                </div>
+              </div>
+            </div>
+             <div class="form-group">
+              <div class="col-sm-12 margintop">
+                <div class="col-sm-4">
+                  <label>Telephone Number :</label>
+                </div>
+                <div class="col-sm-8 margintop">
+                  <input type="text" autocomplete="false" maxlength="12" class="form-control" id="txtTelephoneNumber" />
+                </div>
+              </div>
+
+            </div>
+             <div class="form-group">
+              <div class="col-sm-12 margintop">
+                <div class="col-sm-4">
+                  <label>Area :</label>
+                </div>
+                <div class="col-sm-8 margintop">
+                  <select class="form-control" id="txtArea"> <jsp:text/></select>
+                </div>
+              </div>
+            </div>
+             <div class="form-group">
+              <div class="col-sm-12 margintop">
+                <div class="col-sm-4">
+                  <label>Position :</label>
+                </div>
+                <div class="col-sm-8 margintop">
+                  <select class="form-control" id="txtRole"> <jsp:text/></select>
+                </div>
+              </div>
+            </div>
+
+        </div>
+        <div class="modal-footer marginTop">
+            <br/>
+            <br/>
+            <div class="form-group margintop">
+              <button class="btn btn-primary" id="btnConfirmSaveUser"> 
+                Save
+              </button>
+              <button class="btn btn-danger" data-dismiss="modal"> 
+                 Cancel
+              </button>
+            </div>
+            <!-- <jsp:text/> -->
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+   
+<div class="modal fade" id="updateModalUser" role="dialog" >
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Update</h4>
+        </div>
+        <div class="modal-body marginBottom">
+            <!-- <jsp:text/> -->
+             <div class="form-group">
+              <div class="col-sm-12 margintop">
+                <div class="col-sm-4">
+                  <label>Username :</label>
+                </div>
+                <div class="col-sm-8">
+                  <input type="text" autocomplete="false" class="form-control" id="txtUsername" />
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-12 margintop">
+                <div class="col-sm-4">
+                  <label>Password :</label>
+                </div>
+                <div class="col-sm-8">
+                  <input type="password" autocomplete="false" class="form-control" id="txtPassword" />
+                </div>
+              </div>
+             </div> 
+             <div class="form-group">
+              <div class="col-sm-12 margintop">
+                <div class="col-sm-4">
+                  <label>Confirm Password :</label>
+                </div>
+                <div class="col-sm-8">
+                  <input type="password" autocomplete="false" class="form-control" id="txtConfirmPassword" />
+                </div>
+              </div>
+             </div> 
+
+            <div class="form-group">
+
+              <div class="col-sm-12 margintop">
+                <div class="col-sm-4">
+                  <label>First Name :</label>
+                </div>
+                <div class="col-sm-8 margintop">
+                  <input type="text" autocomplete="false" class="form-control" id="txtFirstName" />
+                </div>
+              </div>
+            </div>
+
+             <div class="form-group">
+              <div class="col-sm-12 margintop">
+                <div class="col-sm-4">
+                  <label>Last Name :</label>
+                </div>
+                <div class="col-sm-8 margintop">
+                  <input type="text" autocomplete="false" class="form-control" id="txtLastName" />
+                </div>
+              </div>
+            </div>
+             <div class="form-group">
+              <div class="col-sm-12 margintop">
+                <div class="col-sm-4">
+                  <label>Email :</label>
+                </div>
+                <div class="col-sm-8 margintop">
+                  <input type="text" autocomplete="false" class="form-control" id="txtEmail" />
+                </div>
+              </div>
+
+            </div>
+             <div class="form-group">
+              <div class="col-sm-12 margintop">
+                <div class="col-sm-4">
+                  <label>Telephone Number :</label>
+                </div>
+                <div class="col-sm-8 margintop">
+                  <input type="text" autocomplete="false" class="form-control" maxlength="12" id="txtTelephoneNumber" />
+                </div>
+              </div>
+
+            </div>
+             <div class="form-group">
+              <div class="col-sm-12 margintop">
+                <div class="col-sm-4">
+                  <label>Area :</label>
+                </div>
+                <div class="col-sm-8 margintop">
+                  <select class="form-control" id="txtArea" name="area"> <jsp:text/></select>
+                </div>
+              </div>
+            </div>
+             <div class="form-group">
+              <div class="col-sm-12 margintop">
+                <div class="col-sm-4">
+                  <label>Position :</label>
+                </div>
+                <div class="col-sm-8 margintop">
+                  <select class="form-control" id="txtRole" name="role"> <jsp:text/></select>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer margintop">
+            <br/>
+            <br/>
+            <div class="form-group">
+              <button class="btn btn-primary" id="btnConfirmSaveUser"> 
+                Save
+              </button>
+              <button class="btn btn-danger" data-dismiss="modal"> 
+                 Cancel
+              </button>
+            </div>
+            <!-- <jsp:text/> -->
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="deleteModalUser" role="dialog" >
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Confirm to delete</h4>
+        </div>
+        <div class="modal-body marginBottom">
+          <jsp:text/>
+        </div>
+        <div class="modal-footer marginTop">
+            <br/>
+            <br/>
+            <div class="form-group">
+              <button class="btn btn-primary" id="btnConfirmDeleteUser"> 
+                Delete
+              </button>
+              <button class="btn btn-danger" data-dismiss="modal"> 
+                 Cancel
+              </button>
+            </div>
+            <!-- <jsp:text/> -->
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  
+
+ <script>
+
+     <![CDATA[
+
+var $tbodyPosition   =  $("#tablePosition");
+var tempPosition = {};
+var $btnConfirmSavePosition = $("#addModalPosition").find("#btnConfirmSavePosition");
+var $btnConfirmUpdatePosition = $("#updateModalPosition").find("button#btnConfirmSavePosition");
+var $btnConfrimDeletePosition = $("button#btnConfirmDeletePosition")
+
+var $tbodyArea   =  $("#tableArea");
+var tempArea = {};
+var $btnConfirmSaveArea = $("#addModalArea").find("#btnConfirmSaveArea");
+var $btnConfirmUpdateArea = $("#updateModalArea").find("button#btnConfirmSaveArea");
+var $btnConfrimDeleteArea = $("button#btnConfirmDeleteArea")
+
+
+var $tbodyUser = $("#tableUser");
+var $btnConfirmSaveUser = $("#addModalUser").find("#btnConfirmSaveUser");
+var $btnConfirmUpdateUser = $("#updateModalUser").find("button#btnConfirmSaveUser");
+var $btnConfrimDeleteUser = $("button#btnConfirmDeleteUser")
+var tempUser ={};
+var listRole = [];
+var listArea = [];
+
+
+ $(document).ready(function () {
+    renderDataBranch();
+    renderDataRole();
+    renderProfile();
+    renderTablePosition();
+    renderTableArea();
+    renderTableUser();
+
+  });
+
+function renderDataBranch(){
+  var data = $.ajax({
+          type: "GET",
+          dataType: "json",
+          url: session['context'] + '/areas/findAllAreas',
+          headers: {
+              Accept: "application/json",
+          },
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          async: false
+      }).responseJSON;
+
+      listArea = data;
+
+
+  $.each(listArea,function(index,item){
+    $("#addModalUser").find("#txtArea").append("<option value="+item.id+" > "+(item.name == null?'':item.name ) +"</option>");
+    $("#updateModalUser").find("#txtArea").append("<option value="+item.id+" > "+(item.name == null?'':item.name ) +"</option>");
+  });
+  
+
+}
+
+function renderDataRole(){
+  var data = $.ajax({
+          type: "GET",
+          dataType: "json",
+          url: session['context'] + '/areas/findAllPosition',
+          headers: {
+              Accept: "application/json",
+          },
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          async: false
+      }).responseJSON;
+  listRole = data;
+
+  $.each(listRole,function(index,item){
+    $("#addModalUser").find("#txtRole").append("<option value="+item.id+" > "+(item.name == null?'':item.name ) +"</option>");
+    $("#updateModalUser").find("#txtRole").append("<option value="+item.id+" > "+(item.name == null?'':item.name ) +"</option>");
+  });
+}
+
+
+$("a#logout").click(function(){
+  submitlogout();
+})
+function submitlogout() {
+  console.log("submitlogout")
+      $('#logoutForm').submit();
+    }
+
+  $btnConfrimDeleteArea.click(function(){
+  var listDelete = [];
+  listDelete.push($btnConfrimDeleteArea.attr("itemId"));
+  var data = {"id": listDelete};
+  $('.dv-background').show();
+       $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                headers: {
+                    Accept: "application/json"
+                },
+                url:session['context']+"/areas/deleteArea",
+                data:JSON.stringify(data),
+                complete:function(xhr){
+                    if(xhr.readyState==4){
+                       if(xhr.getResponseHeader('errorStatus')=="N"){
+                             swal({
+                                  title:"Success",
+                                  text: "Delete Success",
+                                  type: "success",
+                                  showCancelButton: false,
+                                  // timer: 1500,
+                                  showConfirmButton: true,
+                                  closeOnConfirm: true
+                                },function(){
+                                 renderTableArea()
+                                   
+                                });
+                         }else{
+                            alert(xhr.getResponseHeader("errorMsg"));
+                        }
+                    }
+         $('.dv-background').hide();
+                    
+                },
+                async:false
+            });
+  $("#deleteModalArea").modal('hide');
+  // $("#deleteModal").hide();
+});
+
+function editDataArea(id){
+  var itemEdit = tempArea[id];
+  $("#updateModalArea").find("input#txtCode").val(itemEdit.code);
+  $("#updateModalArea").find("input#txtAreaName").val(itemEdit.name);
+  $("#updateModalArea").find("input#txtAreaDetail").val(itemEdit.detail);
+  $("#updateModalArea").find("button#btnConfirmSaveArea").attr("itemId",id);
+  $("#updateModalArea").modal("show");
+}
+
+function deleteDataArea(id){
+  var deleteId = id;
+  $btnConfrimDeleteArea.attr("itemId",deleteId);
+  $("#deleteModalArea").modal('show');
+}
+
+function renderTableArea(){
+  $tbodyArea.empty();
+      var json = $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: session['context'] + '/areas/findAllAreas',
+        headers: {
+            Accept: "application/json",
+        },
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        async: false
+    }).responseJSON;
+   var running = 1;
+  $.each(json,function(index,item){
+
+    var $btnEdit  = "<button class='btn btn-sm btn-warning' onclick='editDataArea("+item.id+")' name='btnEdit' id="+item.id+" > <span class='fas fa-edit' ></span></button>" ;
+    var $btnDelete  = "<button class='btn btn-sm btn-danger' onclick='deleteDataArea("+item.id+")' name='btnDelete' id="+item.id+" > <span class='fas fa-trash'></span></button>" ;
+
+    $tbodyArea.append(
+      "<tr>"+
+        "<td>"+ running+"</td>"+
+
+        "<td>"+ (item.code == null ? "" : item.code) +"</td>"+
+        "<td>"+ (item.name == null ? "" : item.name) +"</td>"+
+        "<td>"+ (item.detail == null ? "" : item.detail) +"</td>"+
+        "<td>"+ $btnEdit +"</td>"+
+        "<td>"+ $btnDelete +"</td>"+
+      "</tr>"
+      );
+    running++;
+    tempArea[item.id] = item;
+  });
+
+}
+
+
+$btnConfirmUpdateArea.click(function(){
+  var id = $(this).attr("itemId");
+  var code = $("#updateModalArea").find("input#txtCode").val();
+  var name = $("#updateModalArea").find("input#txtAreaName").val();
+  var detail = $("#updateModalArea").find("input#txtAreaDetail").val();
+  var updatedBy = session['user'];
+  var data = { 
+    id : id,
+    code  : code , 
+    name : name,
+    detail: detail,
+    updatedBy : updatedBy
+  };
+
+   $('.dv-background').show();
+       $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                headers: {
+                    Accept: "application/json"
+                },
+                url:session['context']+"/areas/updateArea",
+                data:JSON.stringify(data),
+                complete:function(xhr){
+                    if(xhr.readyState==4){
+                         if(xhr.getResponseHeader('errorStatus')=="N"){
+                             swal({
+                                  title:"Success",
+                                  text: "Save Success",
+                                  type: "success",
+                                  showCancelButton: false,
+                                  // timer: 1500,
+                                  showConfirmButton: true,
+                                  closeOnConfirm: true
+                                },function(){
+                                 renderTableArea()
+                                   
+                                });
+                         }else{
+                            alert(xhr.getResponseHeader("errorMsg"));
+                        }
+                    }
+         $('.dv-background').hide();
+                    
+                },
+                async:false
+            });
+
+  $("#updateModalArea").modal('hide');
+});
+
+
+$btnConfirmSaveArea.click(function(){
+  var code = $("#addModalArea").find("input#txtCode").val();
+  var name = $("#addModalArea").find("input#txtAreaName").val();
+  var detail = $("#addModalArea").find("input#txtAreaDeatail").val();
+
+  var data = {
+    code : code,
+    name : name,
+    detail : detail,
+    createdBy : session['user']
+  };
+
+  console.log(data);
+   $('.dv-background').show();
+       $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                headers: {
+                    Accept: "application/json"
+                },
+                url:session['context']+"/areas/insertArea",
+                data:JSON.stringify(data),
+                complete:function(xhr){
+                    if(xhr.readyState==4){
+                    if(xhr.getResponseHeader('errorStatus')=="N"){
+                             swal({
+                                  title:"Success",
+                                  text: "Save Success",
+                                  type: "success",
+                                  showCancelButton: false,
+                                  // timer: 1500,
+                                  showConfirmButton: true,
+                                  closeOnConfirm: true
+                                },function(){
+                                 renderTableArea()
+                                   
+                                });
+                         }else{
+                            alert(xhr.getResponseHeader("errorMsg"));
+                        }
+                    }
+         $('.dv-background').hide();
+                    
+                },
+                async:false
+            });
+
+
+
+  $("#addModalArea").modal('hide');
+
+});
+
+
+ 
+           $("#addPostion").click(function(){
+            $("#addModalPosition").modal('show')
+           });
+           $("#addArea").click(function(){
+            $("#addModalArea").modal('show')
+
+
+           }); 
+           $("#addUser").click(function(){
+            $("#addModalUser").modal('show')
+           }); 
+
+           $("#user").click(function(){
+             user();
+           });
+           $("#area").click(function(){
+             area();
+           });
+            $("#position").click(function(){
+             position();
+           });
+           
+           function area(){
+              $("#pm").hide();
+              $("#am").show();
+              $("#pmm").hide();
+          
+           }
+           function position(){
+              $("#pm").show();
+              $("#am").hide();
+              $("#pmm").hide();
+
+           }
+           function user(){
+              $("#pm").hide();
+              $("#am").hide();
+              $("#pmm").show();
+           }
+
+function renderTablePosition(){
+  $tbodyPosition.empty();
+      var json = $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: session['context'] + '/areas/findAllPosition',
+        headers: {
+            Accept: "application/json",
+        },
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        async: false
+    }).responseJSON;
+   var running = 1;
+  $.each(json,function(index,item){
+
+    var $btnEdit  = "<button class='btn btn-sm btn-warning' onclick='editData("+item.id+")' name='btnEdit' id="+item.id+" > <span class='fas fa-edit '></span></button>" ;
+    var $btnDelete  = "<button class='btn btn-sm btn-danger' onclick='deleteData("+item.id+")' name='btnDelete' id="+item.id+" > <span class='fas fa-trash'></span></button>" ;
+
+    $tbodyPosition.append(
+      "<tr>"+
+        "<td>"+ running+"</td>"+
+        "<td>"+ (item.name == null ? "" : item.name) +"</td>"+
+        "<td>"+ (item.detail == null ? "" : item.detail) +"</td>"+
+        "<td>"+ $btnEdit +"</td>"+
+        "<td>"+ $btnDelete +"</td>"+
+      "</tr>"
+      );
+    running++;
+    tempPosition[item.id] = item;
+  });
+
+}
+             // 
+
+
+function editData(id){
+  var itemEdit = tempPosition[id];
+  $("#updateModalPosition").find("input#txtPosiName").val(itemEdit.name);
+  $("#updateModalPosition").find("input#txtPosiNote").val(itemEdit.detail);
+  $("#updateModalPosition").find("button#btnConfirmSavePosition").attr("itemId",id);
+  $("#updateModalPosition").modal("show");
+}
+
+
+function deleteData(id){
+  var deleteId = id;
+  $btnConfrimDeletePosition.attr("itemId",deleteId);
+  $("#deleteModalPosition").modal('show');
+}
+
+
+$btnConfirmSavePosition.click(function(){
+  var name = $("#addModalPosition").find("input#txtPosiName").val();
+  var detail = $("#addModalPosition").find("input#txtPosiNote").val();
+  console.log('tag', name);
+  console.log('tag', detail);
+
+  var data = {
+    name : name,
+    detail : detail,
+    createdBy : session['user']
+  };
+
+  console.log('tag', data);
+
+  console.log(data);
+   $('.dv-background').show();
+       $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                headers: {
+                    Accept: "application/json"
+                },
+                url:session['context']+"/areas/insertPosition",
+                data:JSON.stringify(data),
+                complete:function(xhr){
+                    if(xhr.readyState==4){
+                        if(xhr.getResponseHeader('errorStatus')=="N"){
+                             swal({
+                                  title:"Success",
+                                  text: "Save Success",
+                                  type: "success",
+                                  showCancelButton: false,
+                                  // timer: 1500,
+                                  showConfirmButton: true,
+                                  closeOnConfirm: true
+                                },function(){
+                                 renderTablePosition()
+                                   
+                                });
+                         }else{
+                            alert(xhr.getResponseHeader("errorMsg"));
+                        }
+                    }
+         $('.dv-background').hide();
+                    
+                },
+                async:false
+            });
+
+
+
+  $("#addModalPosition").modal('hide');
+
+});
+
+
+$btnConfirmUpdatePosition.click(function(){
+  var id = $(this).attr("itemId");
+  var name = $("#updateModalPosition").find("input#txtPosiName").val();
+  var detail = $("#updateModalPosition").find("input#txtPosiNote").val();
+  console.log('tag', name);
+  console.log('tag', detail);
+  
+  var updatedBy = session['user'];
+  var data = { 
+    id : id,
+    name : name,
+    detail: detail,
+    updatedBy : updatedBy
+  };
+
+   $('.dv-background').show();
+       $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                headers: {
+                    Accept: "application/json"
+                },
+                url:session['context']+"/areas/updatePosition",
+                data:JSON.stringify(data),
+                complete:function(xhr){
+                    if(xhr.readyState==4){
+                        if(xhr.getResponseHeader('errorStatus')=="N"){
+                             swal({
+                                  title:"Success",
+                                  text: "Save Success",
+                                  type: "success",
+                                  showCancelButton: false,
+                                  // timer: 1500,
+                                  showConfirmButton: true,
+                                  closeOnConfirm: true
+                                },function(){
+                                 renderTablePosition()
+                                   
+                                });
+                         }else{
+                            alert(xhr.getResponseHeader("errorMsg"));
+                        }
+                    }
+         $('.dv-background').hide();
+                    
+                },
+                async:false
+            });
+
+  $("#updateModalPosition").modal('hide');
+});
+
+
+$btnConfrimDeletePosition.click(function(){
+  var listDelete = [];
+  listDelete.push($btnConfrimDeletePosition.attr("itemId"));
+  var data = {"id": listDelete};
+  $('.dv-background').show();
+       $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                headers: {
+                    Accept: "application/json"
+                },
+                url:session['context']+"/areas/deletePosition",
+                data:JSON.stringify(data),
+                complete:function(xhr){
+                    if(xhr.readyState==4){
+                      if(xhr.getResponseHeader('errorStatus')=="N"){
+                             swal({
+                                  title:"Success",
+                                  text: "Delete Success",
+                                  type: "success",
+                                  showCancelButton: false,
+                                  // timer: 1500,
+                                  showConfirmButton: true,
+                                  closeOnConfirm: true
+                                },function(){
+                                 renderTablePosition()
+                                   
+                                });
+                         }else{
+                            alert(xhr.getResponseHeader("errorMsg"));
+                        }
+                    }
+         $('.dv-background').hide();
+                    
+                },
+                async:false
+            });
+  $("#deleteModalPosition").modal('hide');
+});
+
+
+
+
+function renderTableUser(){
+  $tbodyUser.empty();
+      var json = $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: session['context'] + '/users/findAllUser',
+        headers: {
+            Accept: "application/json",
+        },
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        async: false
+    }).responseJSON;
+   var running = 1;
+  $.each(json,function(index,item){
+
+    var $btnEdit  = "<button class='btn btn-sm btn-warning' onclick='editDataUser("+item.id+")' name='btnEdit' id="+item.id+" > <span class='fas fa-edit'></span></button>" ;
+    var $btnDelete  = "<button class='btn btn-sm btn-danger' onclick='deleteDataUser("+item.id+")' name='btnDelete' id="+item.id+" > <span class='fas fa-trash'></span></button>" ;
+    if(item.username!="temp"){
+            $tbodyUser.append(
+          "<tr>"+
+            "<td>"+ running+"</td>"+
+            "<td>"+ (item.username == null ? "" : item.username) +"</td>"+
+            // "<td>"+ (item.firstName == null ? "" : item.firstName) +"</td>"+
+            // "<td>"+ (item.lastName == null ? "" : item.lastName) +"</td>"+
+            "<td>"+ (item.telephoneNumber == null ? "" : item.telephoneNumber) +"</td>"+
+            "<td>"+ (item.email == null ? "" : item.email) +"</td>"+
+            "<td>"+ (item.role == null ? "" : item.role.name) +"</td>"+
+            "<td>"+ (item.branch == null ? "" : item.branch.name) +"</td>"+
+
+            "<td>"+ $btnEdit +"</td>"+
+          "</tr>"
+          );
+    running++;
+
+    }
+
+    tempUser[item.id] = item;
+  });
+
+}
+
+
+$btnConfirmSaveUser.click(function(){
+  var username = $("#addModalUser").find("input#txtUsername").val();
+  var password = $("#addModalUser").find("input#txtPassword").val();
+  var confirmPassword = $("#addModalUser").find("input#txtConfirmPassword").val();
+  var firstName = $("#addModalUser").find("input#txtFirstName").val();
+  var lastName = $("#addModalUser").find("input#txtLastName").val();
+  var telephoneNumber = $("#addModalUser").find("input#txtTelephoneNumber").val();
+  var email = $("#addModalUser").find("input#txtEmail").val();
+  var role = $("#addModalUser").find("#txtRole").val();
+  var area = $("#addModalUser").find("#txtArea").val();
+
+  if( password!=confirmPassword ){
+    console.log("password wrong");
+  }else{
+    if(password.length < 8){
+      alert("password must 8 char or more");
+
+    }
+  var data = {
+    createdBy:session['user'],
+    username:username,
+    accessToken:password,
+    firstName:firstName,
+    lastName:lastName,
+    telephoneNumber:telephoneNumber,
+    email:email,
+    role:{ "id" : role},
+      branch:{"id":  area},
+      accountNonExpired:true,
+    credentialsNonExpired:true,
+    accountNonLocked:true
+  };
+  console.log(data);
+
+     $('.dv-background').show();
+       $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                headers: {
+                    Accept: "application/json"
+                },
+                url:session['context']+"/users/insertUser",
+                data:JSON.stringify(data),
+                complete:function(xhr){
+                    if(xhr.readyState==4){
+                      if(xhr.getResponseHeader('errorStatus')=="N"){
+                             swal({
+                                  title:"Success",
+                                  text: "Save Success",
+                                  type: "success",
+                                  showCancelButton: false,
+                                  // timer: 1500,
+                                  showConfirmButton: true,
+                                  closeOnConfirm: true
+                                },function(){
+                                 renderTableUser();
+                                   
+                                });
+                         }else{
+                            alert(xhr.getResponseHeader("errorMsg"));
+                        }
+                    }
+                  $('.dv-background').hide();
+                    
+                },
+                async:false
+            });
+
+
+
+      $("#addModalUser").modal('hide');
+  }
+
+
+  
+
+});
+
+
+function editDataUser(id){
+  var itemEdit = tempUser[id];
+  
+
+  $("#updateModalUser").find("input#txtUsername").val(itemEdit.username);
+  $("#updateModalUser").find("input#txtPassword").val(itemEdit.accessToken);
+  $("#updateModalUser").find("input#txtConfirmPassword").val(itemEdit.accessToken);
+  $("#updateModalUser").find("input#txtFirstName").val(itemEdit.firstName);
+  $("#updateModalUser").find("input#txtLastName").val(itemEdit.lastName);
+  $("#updateModalUser").find("input#txtTelephoneNumber").val(itemEdit.telephoneNumber);
+  $("#updateModalUser").find("input#txtEmail").val(itemEdit.email);
+  $("#updateModalUser").find("#txtRole").val(itemEdit.role==null?'':itemEdit.role.id);
+  $("#updateModalUser").find("#txtArea").val(itemEdit.branch==null?'':itemEdit.branch.id);
+  $("#updateModalUser").find("button#btnConfirmSaveUser").attr("itemId",id);
+  $("#updateModalUser").modal("show");
+}
+
+$btnConfirmUpdateUser.click(function(){
+  
+  var id = $(this).attr("itemId");
+  var username = $("#updateModalUser").find("input#txtUsername").val();
+  var password = $("#updateModalUser").find("input#txtPassword").val();
+  var confirmPassword = $("#updateModalUser").find("input#txtConfirmPassword").val();
+  var firstName = $("#updateModalUser").find("input#txtFirstName").val();
+  var lastName = $("#updateModalUser").find("input#txtLastName").val();
+  var telephoneNumber = $("#updateModalUser").find("input#txtTelephoneNumber").val();
+  var email = $("#updateModalUser").find("input#txtEmail").val();
+  var role = $("#updateModalUser").find("#txtRole").val();
+  var area = $("#updateModalUser").find("#txtArea").val();
+
+  if( password!=confirmPassword ){
+    console.log("password wrong");
+  }else{
+  var data = {
+    id:id,
+    createdBy:session['user'],
+    username:username,
+    accessToken:password,
+    firstName:firstName,
+    lastName:lastName,
+    telephoneNumber:telephoneNumber,
+    email:email,
+    role:{ "id" : role},
+    branch:{"id":  area},
+    accountNonExpired:true,
+    credentialsNonExpired:true,
+    accountNonLocked:true
+  };
+
+   $('.dv-background').show();
+       $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                headers: {
+                    Accept: "application/json"
+                },
+                url:session['context']+"/users/updateUser",
+                data:JSON.stringify(data),
+                complete:function(xhr){
+                    if(xhr.readyState==4){
+                       if(xhr.getResponseHeader('errorStatus')=="N"){
+                             swal({
+                                  title:"Success",
+                                  text: "Save Success",
+                                  type: "success",
+                                  showCancelButton: false,
+                                  // timer: 1500,
+                                  showConfirmButton: true,
+                                  closeOnConfirm: true
+                                },function(){
+                                 renderTableUser();
+                                   
+                                });
+                         }else{
+                            alert(xhr.getResponseHeader("errorMsg"));
+                        }
+                    }
+         $('.dv-background').hide();
+                    
+                },
+                async:false
+            });
+
+    $("#updateModalUser").modal('hide');
+  }
+});
+
+
+ ]]> </script>
 
 
 </div>

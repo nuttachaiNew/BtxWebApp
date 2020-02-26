@@ -1,0 +1,430 @@
+<div xmlns:spring="http://www.springframework.org/tags"   xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"  xmlns:form="http://www.springframework.org/tags/form"  xmlns:c="http://java.sun.com/jsp/jstl/core"  xmlns:jsp="http://java.sun.com/JSP/Page"    version="2.0">
+  <jsp:directive.page contentType="text/html;charset=UTF-8" />
+  <jsp:output omit-xml-declaration="yes" />
+
+
+  <c:set scope="request" var="LB_CODE"><spring:message code="LB_CODE"/></c:set>
+  <c:set scope="request" var="LB_NAME"><spring:message code="LB_NAME"/></c:set>
+  <c:set scope="request" var="LB_SAVED_DATE"><spring:message code="LB_SAVED_DATE"/></c:set>
+  <c:set scope="request" var="LB_RECIEVE_DATE"><spring:message code="LB_RECIEVE_DATE"/></c:set>
+  <c:set scope="request" var="LB_DELETE"><spring:message code="LB_DELETE"/></c:set>
+
+
+  <style>
+      .icon {color: white!important;}
+      #ViewReport{ background-color: #5ADA79; color: white!important; }
+        #ViewAccount a:hover { background-color: #B01AD8; color: white!important; }
+
+
+    </style>
+
+   <div id="wrapper">
+
+       <!-- Sidebar -->
+       <ul class="menuboom navbar-nav bg-gradient-light sidebar sidebar-light accordion" id="accordionSidebar">
+
+         <!-- Sidebar - Brand -->
+         <div class="container">
+         <div class="row" style="text-align:center">
+         <div class="col-12">
+         <br/>
+         <span>
+         <img src="https://images.unsplash.com/photo-1544868501-b2f493d76e35?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=668&amp;q=80" class="rounded-circle" width="100" height="100"/>
+
+         </span>
+         </div>
+         <div class="col-12">
+         <p class="mr-2 d-none d-lg-inline text-light-600 xx-large" style="color:#219FEC">คุณมาร์ค</p><br/>
+         <p class="mr-2 d-none d-lg-inline text-light-600 large" style="color:black">Manager</p><br/>
+         <p class="mr-2 d-none d-lg-inline text-light-600 large">Baxter Area</p>
+         <div class="col-12">
+           <jsp:text/>
+         </div>
+         </div>
+         <hr class="sidebar-divider my-0"/>
+
+         <ul class="nav nav-pills" id="menubarbu">
+                 <li class="nav-item" id="Dashboard">
+                   <a class="nav-link text-center" href="Dashboard-FN.html" style="color:#219FEC">
+                     <i class="fas fa-fw fa-tachometer-alt icon" style="color:#219FEC!important"><jsp:text/></i>
+                     <span>Dashboard</span>
+                   </a>
+
+                 </li>
+                 <li class="nav-item" id="ViewCase">
+
+                 <a class="nav-link text-center collapse-inner rounded" href="View-Case-FN1.html" style="color:red">
+                   <i class="fas fa-align-justify icon case" style="color:red!important"><jsp:text/></i>
+                   <span>View Case</span></a>
+                </li>
+
+
+                 <li class="nav-item" id="ViewReport">
+                   <a class="nav-link text-center" href="View-Report-FN.html" style="color:white">
+                     <i class="far fa-chart-bar icon" style="color:white!important"><jsp:text/></i>
+                     <span>View Report</span>
+                   </a>
+                 </li>
+                 <li class="nav-item" id="ViewAccount">
+                   <a class="nav-link text-center" href="View-Report-FN.html" style="color:#B01AD8">
+                     <i class="far fa-user-circle" style="color:#B01AD8!important"><jsp:text/></i>
+                     <span>View Account</span>
+                   </a>
+                 </li>
+         </ul>
+
+         <div class="text-center d-none d-md-inline">
+
+         </div>
+
+       </div></div></ul>
+       <!-- End of Sidebar -->
+
+       <!-- Content Wrapper -->
+       <div id="content-wrapper" class="d-flex flex-column">
+
+         <!-- Main Content -->
+         <div id="content" style="background-color:#219FEC">
+
+           <!-- Topbar -->
+
+           <!-- End of Topbar -->
+
+           <!-- Begin Page Content -->
+           <div class="container-fluid" >
+
+             <!-- Page Heading -->
+             <br/>
+             <div class="row d-sm-flex align-items-center justify-content-between" style="padding-top:5px">
+               <div class="col-8"> <h1 class="h6 text-light">View Case</h1></div>
+               <div class="col-2">
+                 <jsp:text/>
+               </div>
+                 <div class="col-2"><h1 class="h6 text-light"><i class="fas fa-cog"><jsp:text/></i>   Settings</h1></div>
+             </div>
+             <hr/>
+           <form class="user">
+
+             <div class="row">
+
+               <!-- Earnings (Monthly) Card Example -->
+               <div class="col-xl-2 col-md-6" style="color:white">
+                   <div class="form-group row">
+                                 <div class="col-sm-6 mb-3 mb-sm-0">
+                                   Duration
+                                 </div>
+                                 <div class="col-sm-6" style="margin-left:-15%">
+                                   <!-- <div class="dropdown">
+                                   <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown">Month
+                                   <span class="caret"></span>
+                                  </button>
+                                 <ul class="dropdown-menu">
+                                   <li><a href="#">HTML</a></li>
+                                   <li><a href="#">CSS</a></li>
+                                   <li><a href="#">JavaScript</a></li>
+                                 </ul>
+                                 </div> -->
+                                 <div class="dropdown">
+                                   <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Month</button>
+                                   <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
+                                     <a class="dropdown-item" href="#">Date</a>
+                                     <a class="dropdown-item" href="#">Year</a>
+                                     <a class="dropdown-item" href="#">Custom</a>
+                                   </div>
+                                 </div>
+                               </div>
+                   </div>
+
+
+     </div>
+
+               <!-- Earnings (Monthly) Card Example -->
+               <div class="col-xl-4 col-md-6 ">
+                 <div class="row">
+                   <div class="col-sm-6" style="margin-left:-13%">
+
+
+
+
+                       <div class="dropdown">
+                         <input type="date" class="btn btn-light"/>
+
+                         </div>
+                   </div>
+                   <div class="col-sm-6" style="color:white;display:none" id="todate1">
+                     <div class="row">
+                       <div class="col-2">
+                         <span style="margin-left:1%">To</span>
+                       </div>
+                       <div class="col-8">
+                        <div class="dropdown" style="margin:left:-10%">
+                             <input type="date" class="btn btn-light"/>
+                          </div>
+                        </div>
+                    </div>
+                   </div>
+                 </div>
+
+             </div>
+
+               <!-- Earnings (Monthly) Card Example -->
+               <div class="col-xl-2 col-md-6" style="color:white">
+                 <div class="form-group row">
+                     <div class="col-sm-6 mb-3 mb-sm-0">
+                       Area
+                     </div>
+                     <div class="col-sm-6" style="margin-left:-20%">
+                       <div class="dropdown">
+                                   <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Phayathai</button>
+                                   <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
+                                     <a class="dropdown-item" href="#">Option A</a>
+                                     <a class="dropdown-item" href="#">Option B</a>
+                                     <a class="dropdown-item" href="#">Option C</a>
+                                   </div>
+                                 </div>
+                     </div>
+                   </div>
+
+
+                 </div>
+
+               <!-- Pending Requests Card Example -->
+               <div class="col-xl-1 col-md-6 ">
+                 <a href="login.html" class="btn btn-light btn-user btn-block">
+                     Search
+                   </a>
+               </div>
+               <div class="col-xl-1 col-md-6 ">
+                 <a href="login.html" class="btn btn-light btn-user btn-block">
+                     Clear
+                   </a>
+               </div>
+             </div></form>
+
+
+             <!-- Content Row -->
+
+
+             <div class="row">
+
+               <!-- Area Chart -->
+               <div class="col">
+                 <div class="card shadow mb-4">
+                   <!-- Card Header - Dropdown -->
+
+                   <!-- Card Body -->
+                   <div class="card-body">
+                     <div class="row">
+                       <div class="col-xl-4 col-md-6">
+                         <label><h4>Over all</h4></label>
+
+
+                         <div class="card-body">
+                         <jsp:text/>
+                           <hr/>
+                          </div>
+                             <div class="card-body" style="text-align:left">
+                             <table class="table-sm table-borderless">
+                               <tbody>
+                                 <tr>
+                                   <td style="color:#1cc88a"><i class="fas fa-circle"><jsp:text/></i></td>
+                                   <td>Choronic Case</td>
+                                   <td style="color:#1cc88a"><i class="fas fa-circle-notch"><jsp:text/></i></td>
+                                   <td>56</td>
+                                   <td style="text-align:right">Cases</td>
+                                 </tr>
+                                 <tr>
+                                   <td style="color:#FD6861"><i class="fas fa-circle"><jsp:text/></i></td>
+                                   <td>Acute Case</td>
+                                   <td style="color:#FD6861"><i class="fas fa-circle-notch"><jsp:text/></i></td>
+                                   <td>16</td>
+                                   <td style="text-align:right">Cases</td>
+                                 </tr>
+                                 <tr>
+                                   <td style="color:#4e73df"><i class="fas fa-circle"><jsp:text/></i></td>
+                                   <td>Change Machine</td>
+                                   <td style="color:#4e73df"><i class="fas fa-circle-notch"><jsp:text/></i></td>
+                                   <td>8</td>
+                                   <td style="text-align:right">Cases</td>
+                                 </tr>
+                                 <tr>
+                                   <td style="color:#F5DC4B"><i class="fas fa-circle"><jsp:text/></i></td>
+                                   <td>Retuen Machine</td>
+                                   <td style="color:#F5DC4B"><i class="fas fa-circle-notch"><jsp:text/></i></td>
+                                   <td>0</td>
+                                   <td style="text-align:right">Cases</td>
+                                 </tr>
+
+
+                               </tbody>
+                             </table>
+                           </div>
+
+
+                          <div class="text-center">
+                            <form class="user text-center">
+                            <a href="login.html" class="btn btn-primary btn-user " style="width:30%">
+                              <label>  Print  </label>
+                            </a>
+                          </form>
+                          </div>
+
+                 <!-- </div> -->
+
+                       </div>
+
+                       <div class="col-xl-8 col-md-6">
+
+                         <div class="row">
+                           <div class="col-2">
+                               <span>By Case</span>
+                           </div>
+                           <div class="col-4">
+                             <jsp:text/>
+                           </div>
+                           <div style="text-align:right" class="col-2">
+                               <span>Filter</span>
+                           </div>
+                           <div class="col-2">
+                             <jsp:text/>
+                                 <script>
+
+                                     <![CDATA[
+                                 function displayChoronic() {
+                                   document.getElementById("demo").innerHTML = "Choronic Case";
+                                   $("#todate1").css("display", "none");
+                                   var element = document.getElementById("demo");
+                                   element.classList.add("btn-success");
+
+                                   // $("demo").removeClass("btn btn-success dropdown-toggle");
+                                   //  $( "p" ).removeClass( "myClass noClass" )
+                                   document.getElementById("demo").classList.remove("btn btn-success dropdown-toggle");
+                                   document.getElementById("todate").style.display = "none";
+
+
+
+                                   //document.getElementById("demo").classList.add('btn btn-warning dropdown-toggle');
+
+
+                                 }
+                                 function displayAcute() {
+                                   document.getElementById("demo").innerHTML = "Acute Case";
+                                     $("#todate1").css("display", "inline");
+                                     var element = document.getElementById("demo");
+                                     element.classList.add("btn-danger");
+                                   //document.getElementById("demo").style.color = "blue";
+
+
+                                 }
+                                 function displayChange() {
+                                   document.getElementById("demo").innerHTML = "Change Machine";
+                                   $("#todate1").css("display", "inline");
+                                   var element = document.getElementById("demo");
+                                   element.classList.add("btn-blue");
+                                 }
+                                 function displayReturn() {
+                                   document.getElementById("demo").innerHTML = "Return Machine";
+                                   $("#todate1").css("display", "inline");
+                                   var element = document.getElementById("demo");
+                                   element.classList.add("btn-warning");
+                                 }
+                                   ]]>
+                                 </script>
+                                 <style>
+                                 a.a1:hover{background-color:#1cc88a;color: white}
+                                 a.a2:hover{background-color:#e74a3b;color: white}
+                                 a.a3:hover{background-color:#309FF7;color: white}
+                                 a.a4:hover{background-color:#f6c23e;color: white}
+                                 </style>
+
+                               <div class="dropdown">
+                                 <button type="button" class="btn btn-success dropdown-toggle" id="demo" data-toggle="dropdown" aria-expanded="false">Choronic Case</button>
+                                 <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
+                                   <a class="dropdown-item a1" href="#" onclick="displayChoronic()" id="c1">Choronic Case</a>
+                                   <a class="dropdown-item a2" href="#" onclick="displayAcute()">Acute Case</a>
+                                   <a class="dropdown-item a3" href="#" onclick="displayChange()">Change Machine </a>
+                                   <a class="dropdown-item a4" href="#" onclick="displayReturn()">Return Machine</a>
+                                 </div>
+                               </div>
+
+
+                           </div>
+                         </div>
+                         <div class="row">
+                           <div class="card-body">
+                             <div class="table">
+                                 <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4"><div class="row"><div class="col-sm-12"><table class="table" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                   <thead style="font-size:15px;">
+                                     <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">Order</th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending">Case ID</th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending">Customer Name</th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending">Address</th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Active</th></tr>
+                                   </thead>
+
+                                   <tbody style="font-size:13px;">
+                                   <tr role="row" class="odd">
+                                       <td class="sorting_1">1</td>
+                                       <td>CR0618/13/01</td>
+                                       <td>Tony Star</td>
+                                       <td>
+                                       45/1 ถนนมิตรภาพ ปราจีนบุรี
+                                       </td>
+                                       <td>1 day 4 hours</td>
+
+                                     </tr>
+                                     <tr role="row" class="odd">
+                                         <td class="sorting_1">2</td>
+                                         <td>CR0618/13/01</td>
+                                         <td>Tony Star</td>
+                                         <td>
+                                         45/1 ถนนมิตรภาพ ปราจีนบุรี
+                                         </td>
+                                         <td>1 day 4 hours</td>
+
+                                       </tr>
+                                       <tr role="row" class="odd">
+                                           <td class="sorting_1">3</td>
+                                           <td>CR0618/13/01</td>
+                                           <td>Tony Star</td>
+                                           <td>
+                                           45/1 ถนนมิตรภาพ ปราจีนบุรี
+                                           </td>
+                                           <td>1 day 4 hours</td>
+
+                                         </tr>
+                                         <tr role="row" class="odd">
+                                             <td class="sorting_1">4</td>
+                                             <td>CR0618/13/01</td>
+                                             <td>Tony Star</td>
+                                             <td>
+                                             45/1 ถนนมิตรภาพ ปราจีนบุรี
+                                             </td>
+                                             <td>1 day 4 hours</td>
+
+                                           </tr>
+
+                                   </tbody>
+                                 </table></div></div></div>
+                               </div>
+                             <div class="text-center">
+                               <form class="user text-center">
+                               <a href="login.html" class="btn btn-primary btn-user " style="width:15%">
+                                 <label>  Print  </label>
+                               </a>
+                             </form>
+                             </div>
+                           </div>
+                         </div>
+
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+
+           </div>
+
+         </div>
+
+       </div>
+
+     </div>
+</div>

@@ -1,3 +1,5 @@
+
+
     body{
             -webkit-background-size: cover;
             -moz-background-size: cover;
@@ -13,6 +15,10 @@
             color:#6a6f8c;
             font:600 16px/18px 'ThaiSansNeue',sans-serif;
         }
+
+label{
+    padding :5px;
+}
 .black{
     color:black;
 }
@@ -42,7 +48,7 @@
 .reboxing{
     margin-top : -5%;
  }
-.marginTop:{
+.marginTop{
     margin-top: 1%
  }
  .marginBottom{
@@ -651,62 +657,6 @@ div.col-space-less {
     font-size: 17px;
 }
 
-/*textarea.form-control{
-  background-image: linear-gradient(#009688, #009688), linear-gradient(#000, #000);
-  background-color :#E3F2FD;
-  border-radius: 4px;
-}
-select.form-control{
-  background-image: linear-gradient(#009688, #009688), linear-gradient(#000, #000);
-  background-color : #E3F2FD;
-    height: 25px; !important;
-
-}
-input.form-control{
-  background-image: linear-gradient(#009688, #009688), linear-gradient(#000, #000);
-  background-color : #E3F2FD;
-  border-radius: 4px;
-}
-select.form-control[disabled]{
-    background-image: linear-gradient(#009688, #009688), linear-gradient(#000, #000);
-    background-color : #E0E0E0;
-    height: 25px; !important;
-
-}
-input.form-control[disabled]{
-    background-image: linear-gradient(#009688, #009688), linear-gradient(#000, #000);
-    background-color : #E0E0E0;
-    border-radius: 4px;
-}*/
-
-/*.ui-autocomplete { position: absolute; cursor: default;z-index:2000 !important;}*/
-
-/*.ui-autocomplete { position: absolute; cursor: default;z-index:2000 !important; max-height: 200px; overflow-y: scroll; overflow-x: hidden;}*/
-
-/*table{
-    border:1px solid black;
-    border-collapse: separate;
-    border-top-width: 0px;
-}*/
-/*.table-bordered>tbody>tr>td{
-    border:1px solid black;
-}
-
-.table-bordered>thead>tr>th{
-    border-top:1;
-    border:1px solid black;
-}
-
-.table-bordered>tfoot>tr>td{
-    border:1px solid black;
-}
-
-.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td{
-        padding: 5px;
-        line-height: 1;
-        vertical-align: middle;
-}*/
-
 tr .btn{
     margin-top: 2px; 
     margin-bottom: 2px;
@@ -773,14 +723,4 @@ input[type=checkbox][disabled]+label div.checkboxCss{opacity: 0.4}
 
 .table-bordered2>tbody>tr>td {
      border: 1px solid #ddd; 
-}
-
-.panel {
-    border-radius: 10px;
-    /*border:1px solid;*/
-}
-
-.modal-content{
-    border-radius: 10px;
-    /*border:1px solid;*/
 }

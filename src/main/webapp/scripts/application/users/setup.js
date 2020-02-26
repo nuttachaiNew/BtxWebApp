@@ -94,7 +94,6 @@ function renderTable(){
 				"<td>"+ (item.branch == null ? "" : item.branch.name) +"</td>"+
 
 				"<td>"+ $btnEdit +"</td>"+
-				"<td>"+ $btnDelete +"</td>"+
 			"</tr>"
 			);
 		running++;
@@ -266,41 +265,41 @@ function editData(id){
 }
 
 
-function deleteData(id){
-	var deleteId = id;
-	$btnConfrimDelete.attr("itemId",deleteId);
-	$("#deleteModal").modal('show');
-}
+// function deleteData(id){
+// 	var deleteId = id;
+// 	$btnConfrimDelete.attr("itemId",deleteId);
+// 	$("#deleteModal").modal('show');
+// }
 
 
-$btnConfrimDelete.click(function(){
-	var listDelete = [];
-	listDelete.push($btnConfrimDelete.attr("itemId"));
-	var data = {"id": listDelete};
-	$('.dv-background').show();
- 	     $.ajax({
-                type: "POST",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                headers: {
-                    Accept: "application/json"
-                },
-                url:session['context']+"/areas/deleteArea",
-                data:JSON.stringify(data),
-                complete:function(xhr){
-                    if(xhr.readyState==4){
-                        if(xhr.getResponseHeader('errorStatus')=="N"){
-                          	console.log("save Success");
-                          	renderTable();
-						 }else{
-                          	console.log("save error : "+ xhr.getResponseHeader("errorMsg"));
-                        }
-                    }
-				 $('.dv-background').hide();
+// $btnConfrimDelete.click(function(){
+// 	var listDelete = [];
+// 	listDelete.push($btnConfrimDelete.attr("itemId"));
+// 	var data = {"id": listDelete};
+// 	$('.dv-background').show();
+//  	     $.ajax({
+//                 type: "POST",
+//                 contentType: "application/json; charset=utf-8",
+//                 dataType: "json",
+//                 headers: {
+//                     Accept: "application/json"
+//                 },
+//                 url:session['context']+"/areas/deleteArea",
+//                 data:JSON.stringify(data),
+//                 complete:function(xhr){
+//                     if(xhr.readyState==4){
+//                         if(xhr.getResponseHeader('errorStatus')=="N"){
+//                           	console.log("save Success");
+//                           	renderTable();
+// 						 }else{
+//                           	console.log("save error : "+ xhr.getResponseHeader("errorMsg"));
+//                         }
+//                     }
+// 				 $('.dv-background').hide();
                     
-                },
-                async:false
-            });
-	$("#deleteModal").modal('hide');
-	// $("#deleteModal").hide();
-});
+//                 },
+//                 async:false
+//             });
+// 	$("#deleteModal").modal('hide');
+// 	// $("#deleteModal").hide();
+// });

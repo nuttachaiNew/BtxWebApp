@@ -1,0 +1,409 @@
+<div xmlns:spring="http://www.springframework.org/tags"   xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"  xmlns:form="http://www.springframework.org/tags/form"  xmlns:c="http://java.sun.com/jsp/jstl/core"  xmlns:jsp="http://java.sun.com/JSP/Page"    version="2.0">
+  <jsp:directive.page contentType="text/html;charset=UTF-8" />
+  <jsp:output omit-xml-declaration="yes" />
+
+
+  <c:set scope="request" var="LB_CODE"><spring:message code="LB_CODE"/></c:set>
+  <c:set scope="request" var="LB_NAME"><spring:message code="LB_NAME"/></c:set>
+  <c:set scope="request" var="LB_SAVED_DATE"><spring:message code="LB_SAVED_DATE"/></c:set>
+  <c:set scope="request" var="LB_RECIEVE_DATE"><spring:message code="LB_RECIEVE_DATE"/></c:set>
+  <c:set scope="request" var="LB_DELETE"><spring:message code="LB_DELETE"/></c:set>
+
+  <style>
+     /* .icon {color: white!important;} */
+
+
+     /* #Dashboard{ background-color: #219FEC; color: white!important; } */
+     i.case:hover{background-color:#1cc88a;color: white}
+     .Wait{
+       color:orange;
+     }
+     .Rejec{
+       color:orange;
+     }
+     .Approve{
+       color:green;
+     }
+     .searchblue{
+       text-align:center;
+       color:#219FEC;
+     }
+     .editblue{
+       text-align:center;
+       color:#219FEC;
+     }
+     .editgray{
+       text-align:center;
+       color:#909798;
+     }
+
+
+   </style>
+
+   <div id="wrapper">
+
+     <ul class="menuboom navbar-nav bg-gradient-light sidebar sidebar-light accordion" id="accordionSidebar">
+
+      <!-- Sidebar - Brand -->
+      <div class="container">
+      <div class="row" style="text-align:center">
+      <div class="col-12">
+      <br/>
+      <span>
+
+      <img src="https://images.unsplash.com/photo-1544868501-b2f493d76e35?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=668&amp;q=80" class="rounded-circle" width="100" height="100"/>
+      </span>
+      </div>
+      <div class="col-12">
+      <p class="mr-2 d-none d-lg-inline text-light-600 xx-large" style="color:#219FEC">คุณมาร์ค</p><br/>
+      <p class="mr-2 d-none d-lg-inline text-light-600 large" style="color:black">Manager</p><br/>
+      <p class="mr-2 d-none d-lg-inline text-light-600 large">Baxter Area</p>
+      <div class="col-12">
+        <jsp:text/>
+      </div>
+      </div>
+
+      <hr class="sidebar-divider my-0"/>
+
+      <!-- Nav Item - Dashboard -->
+
+      <ul class="nav nav-pills" id="menubarbu">
+              <li class="nav-item" id="Dashboard">
+                <a class="nav-link text-center" href="Dashboard-FN.html" style="color:#219FEC">
+                  <i class="fas fa-fw fa-tachometer-alt icon" style="color:#219FEC!important"><jsp:text/></i>
+                  <span>Dashboard</span>
+                </a>
+
+              </li>
+              <li class="nav-item" id="ViewCase">
+
+              <a class="nav-link text-center collapse-inner rounded" href="View-Case-FN1.html" style="color:red">
+                <i class="fas fa-align-justify icon case" style="color:#F64236!important"><jsp:text/></i>
+                <span>View Case</span></a>
+             </li>
+
+
+              <li class="nav-item" id="ViewReport">
+                <a class="nav-link text-center" href="View-Report-FN.html" style="color:#5ADA79">
+                  <i class="far fa-chart-bar icon" style="color:#5ADA79!important"><jsp:text/></i>
+                  <span>View Report</span>
+                </a>
+              </li>
+              <li class="nav-item" id="ViewAccount">
+                <a class="nav-link text-center" href="View-Report-FN.html" style="color:#B01AD8">
+                  <i class="far fa-user-circle" style="color:#B01AD8!important"><jsp:text/></i>
+                  <span>View Account</span>
+                </a>
+              </li>
+      </ul>
+
+      <div class="text-center d-none d-md-inline">
+
+      </div>
+
+    </div></div>
+  </ul>
+
+     <div id="content-wrapper" class="d-flex flex-column" style="background-color:#219FEC">
+      <div id="content">
+        <div class="container-fluid">
+          <br/>
+          <div class="row d-sm-flex align-items-center justify-content-between" style="padding-top:5px">
+           <div class="col-2" style="text-align:left"> <h1 class="h5 text-light">Profile Setting</h1></div>
+           <div class="col-6"><jsp:text/></div>
+          <div class="col-2">
+            <h1 class="h6 text-light"><i class="fas fa-bell"><jsp:text/><jsp:text/></i>   Notification</h1>
+          </div>
+          <div class="col-2"><h1 class="h6 text-light"><i class="fas fa-cog"><jsp:text/><jsp:text/></i>   Settings</h1>
+          </div>
+
+          </div>
+
+        <form class="user">
+<jsp:text/>
+
+
+          </form>
+
+          <!-- Content Row -->
+
+ <hr/>
+
+ <div class="row">
+
+   <!-- Content Column -->
+   <div class="col-lg-6 mb-4">
+
+     <!-- Project Card Example -->
+     <div class="card shadow mb-4">
+       <div class="card-header py-3">
+         <h6 class="m-0 font-weight-bold text-info">
+           <i class="fas fa-cog"><jsp:text/></i>
+           General</h6>
+       </div>
+       <div class="card-body" style="padding-left:150px;padding-right:150px">
+
+         <script>
+         <![CDATA[
+         $("#imageUpload").change(function() {
+             readURL(this);
+             alert("input");
+         });
+         function readURL(input) {
+
+             if (input.files && input.files[0]) {
+                 alert(input);
+                 var reader = new FileReader();
+                 reader.onload = function(e) {
+                     $('#imagePreview').css('background-image', 'url('+e.target.result +')');
+                     $('#imagePreview').hide();
+                     $('#imagePreview').fadeIn(650);
+                 }
+                 reader.readAsDataURL(input.files[0]);
+             }
+         }
+             ]]>
+         </script>
+         <style>
+
+
+         .avatar-upload {
+           position: relative;
+           max-width: 205px;
+           margin: 50px auto;
+         }
+         .avatar-upload .avatar-edit {
+           position: absolute;
+           right: 12px;
+           z-index: 1;
+           top: 70%;
+         }
+         .avatar-upload .avatar-edit input {
+           display: none;
+         }
+         .avatar-upload .avatar-edit input + label {
+           display: inline-block;
+           width: 34px;
+           height: 34px;
+           margin-bottom: 0;
+           border-radius: 100%;
+           background: #FFFFFF;
+           border: 1px solid transparent;
+           box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+           cursor: pointer;
+           font-weight: normal;
+           transition: all 0.2s ease-in-out;
+         }
+         .avatar-upload .avatar-edit input + label:hover {
+           background: #f1f1f1;
+           border-color: #d6d6d6;
+         }
+         .avatar-upload .avatar-edit input + label:after {
+           /* content: "\f040";
+           font-family: 'FontAwesome'; */
+           color: #757575;
+           position: absolute;
+           top: 10px;
+           left: 0;
+           right: 0;
+           text-align: center;
+           margin: auto;
+         }
+         .avatar-upload .avatar-preview {
+           width: 192px;
+           height: 192px;
+           position: relative;
+           border-radius: 100%;
+           border: 6px solid #F8F8F8;
+           box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+         }
+         .avatar-upload .avatar-preview > div {
+           width: 100%;
+           height: 100%;
+           border-radius: 100%;
+           background-size: cover;
+           background-repeat: no-repeat;
+           background-position: center;
+         }
+         </style>
+         <div class="avatar-upload">
+             <div class="avatar-edit">
+                 <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg"/>
+                 <label for="imageUpload"><jsp:text/><i class="fas fa-pencil-alt" style="margin-left:30%;margin-top:25%">  <jsp:text/></i></label>
+             </div>
+             <div class="avatar-preview">
+               <div id="imagePreview" style="background-image: url(https://images.unsplash.com/photo-1544868501-b2f493d76e35?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=668&amp;q=80);">
+                  <jsp:text/>
+
+               </div>
+             </div>
+         </div>
+
+
+     <br/>
+
+
+<form class="user">
+
+       <div class="form-group">
+         <input type="email" class="form-control form-control-user" id="Name" placeholder="Name"/>
+       </div>
+       <div class="form-group">
+         <input type="email" class="form-control form-control-user" id="Surname" placeholder="Surname"/>
+       </div>
+       <div class="form-group">
+         <input type="email" class="form-control form-control-user" id="Tel No" placeholder="Tel No"/>
+       </div>
+
+       <a href="login.html" class="btn btn-primary btn-user btn-block" data-toggle="modal" data-target="#SaveModal">
+         Save
+       </a>
+       <hr/>
+
+     </form>
+     <div class="modal fade" id="SaveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="display: none;" aria-hidden="true">
+         <div class="modal-dialog modal-sm" role="document">
+             <div class="modal-content">
+               <div class="modal-header bg-success" style="color:white;">
+                 <div class="container" style="text-align:center">
+                   <div class="row">
+                     <div class="col-12">
+                       <i class="far fa-check-circle fa-5x"><jsp:text/></i>
+                     </div>
+                     <div class="col-12">
+                       <h5 class="modal-title" id="exampleModalLabel">Saved Complete</h5>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+               <div class="modal-body">
+                 <div class="modal-body">
+                     <div class="container" style="text-align:center">
+                           <center>
+                             <a href="" style="width:150px" data-toggle="modal" data-target="#SaveModal" class="btn btn-success btn-user btn-block">
+                               OK
+                             </a>
+                           </center>
+                     </div>
+               </div>
+               </div>
+
+             </div>
+           </div>
+       </div>
+
+
+
+
+
+
+
+
+       </div>
+     </div>
+
+     <!-- Color System -->
+
+
+   </div>
+
+   <div class="col-lg-6 mb-4">
+
+     <!-- Illustrations -->
+     <div class="card shadow mb-4">
+       <div class="card-header py-3">
+         <h6 class="m-0 font-weight-bold text-danger"><i class="fas fa-briefcase"><jsp:text/></i>   Work</h6>
+       </div>
+       <div class="card-body">
+         <div class="card-body"><div class="card-body"><div class="card-body">
+         <form class="user">
+           <div class="form-group">
+             <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Area"/>
+           </div>
+
+         </form>
+
+       </div></div></div></div>
+     </div>
+
+     <!-- Approach -->
+     <div class="card shadow mb-4">
+       <div class="card-header py-3">
+         <h6 class="m-0 font-weight-bold text-success"><i class="fas fa-shield-alt"><jsp:text/></i>   Security Login</h6>
+       </div>
+       <div class="card-body"><div class="card-body"><div class="card-body"><div class="card-body">
+         <form class="user">
+           <div class="form-group">
+             <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="E-mail"/>
+
+           </div>
+            <div class="form-group">
+                          <input type="email" class="form-control form-control-user" id="exampleInputPassword" aria-describedby="emailHelp" placeholder="Password"/>
+                </div>
+         </form>
+
+         <p class="mb-0 small" data-toggle="modal" data-target="#ChangePassModal" style="text-align: right;color:#219FEC">Change Password</p>
+       </div></div></div></div>
+     </div>
+
+   </div>
+ </div>
+
+          <div class="modal fade" id="ChangePassModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header" style="background-color:#04AEDC;color:white">
+                    <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="modal-body">
+                    <form class="user" style="margin-left:15%;margin-right:15%">
+                    <div class="form-group">
+                      <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Current Password"/>
+                    </div>
+                    <div class="form-group">
+                      <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="New Password"/>
+                    </div>
+                    <div class="form-group">
+                      <input type="repassword" class="form-control form-control-user" id="exampleInputrePassword" placeholder="Retype NewPassword"/>
+                    </div>
+
+                    <a href="index.html" class="btn btn-info btn-user btn-block">
+                      Save
+                    </a>
+                  </form>
+
+                  </div>
+                </div>
+                  <div class="modal-footer">
+                    <jsp:text/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <div class="row">
+            <div class="col-5">
+              <jsp:text/>
+            </div>
+            <div class="col-4">
+              <a href="#" class="btn btn-danger btn-icon-split">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-sign-out-alt"><jsp:text/></i>
+                    </span>
+                    <span class="text">Log out</span>
+                  </a>
+            </div>
+            <div class="col-3">
+              <jsp:text/>
+            </div>
+          </div>
+          <br/>
+        </div>
+      </div>
+    </div>
+
+    </div>
+</div>

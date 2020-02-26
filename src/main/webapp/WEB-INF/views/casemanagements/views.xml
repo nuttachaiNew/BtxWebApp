@@ -18,5 +18,52 @@
     <put-attribute name="body" value="/WEB-INF/views/casemanagements/listcase.jspx" />
   </definition>
 
+   <definition name="casemanagements/manage" extends="default">
+    <put-attribute name="body" value="/WEB-INF/views/casemanagements/manage.jspx" />
+  </definition>
+ <definition name="casemanagements/mockup1" extends="default">
+    <put-attribute name="body" value="/WEB-INF/views/casemanagements/mockup1.jspx" />
+  </definition> <definition name="casemanagements/mockup2" extends="default">
+    <put-attribute name="body" value="/WEB-INF/views/casemanagements/mockup2.jspx" />
+  </definition> <definition name="casemanagements/mockup3" extends="default">
+    <put-attribute name="body" value="/WEB-INF/views/casemanagements/mockup3.jspx" />
+  </definition>
+
+
+   <definition name="casemanagements/listviewcase" extends="defaultMaster">
+    <put-attribute name="body" value="/WEB-INF/views/casemanagements/listviewcase.jspx" />
+  </definition>
+  <definition name="casemanagements/manageWorkflowCase" extends="defaultMaster">
+    <put-attribute name="body" value="/WEB-INF/views/casemanagements/manageWorkflowCase.jspx" />
+  </definition>
+   <definition name="casemanagements/dashboard" extends="defaultMaster">
+    <put-attribute name="body" value="/WEB-INF/views/casemanagements/dashboard.jspx" />
+  </definition>
+   <definition name="casemanagements/detailCase" extends="defaultMaster">
+    <put-attribute name="body" value="/WEB-INF/views/casemanagements/detailCase.jspx" />
+  </definition>
+ <definition name="casemanagements/viewReport" extends="defaultMaster">
+    <put-attribute name="body" value="/WEB-INF/views/casemanagements/viewReport.jspx" />
+  </definition>
+
+   <definition name="casemanagements/depositView" extends="defaultMaster">
+    <put-attribute name="body" value="/WEB-INF/views/casemanagements/depositView.jspx" />
+  </definition>
+   <definition name="casemanagements/deposit" extends="defaultMaster">
+    <put-attribute name="body" value="/WEB-INF/views/casemanagements/deposit.jspx" />
+  </definition>
+   <definition name="casemanagements/swapMachine" extends="defaultMaster">
+    <put-attribute name="body" value="/WEB-INF/views/casemanagements/swapMachine.jspx" />
+  </definition>
+    <definition name="casemanagements/swapMachineDetail" extends="defaultMaster">
+    <put-attribute name="body" value="/WEB-INF/views/casemanagements/swapMachineDetail.jspx" />
+  </definition>
+ 
+   <definition name="casemanagements/popup" extends="popup">
+    <put-attribute name="body" value="/WEB-INF/views/casemanagements/popup.jspx" />
+  </definition>
+    <definition name="casemanagements/popupDigitalSignature" extends="popup">
+    <put-attribute name="body" value="/WEB-INF/views/casemanagements/popupDigitalSignature.jspx" />
+  </definition>
 
 </tiles-definitions>

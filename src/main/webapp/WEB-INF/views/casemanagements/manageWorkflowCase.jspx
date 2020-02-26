@@ -1,0 +1,1385 @@
+<div xmlns:spring="http://www.springframework.org/tags"   xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"  xmlns:form="http://www.springframework.org/tags/form"  xmlns:c="http://java.sun.com/jsp/jstl/core"  xmlns:jsp="http://java.sun.com/JSP/Page"    version="2.0">
+  <jsp:directive.page contentType="text/html;charset=UTF-8" />
+  <jsp:output omit-xml-declaration="yes" />
+    <spring:url value="/resources/images/cancel.png" var="img_cancel"/>
+    <spring:url value="/resources/images/checked.png" var="img_checked"/>
+
+  <c:set scope="request" var="LB_CODE"><spring:message code="LB_CODE"/></c:set>
+  <c:set scope="request" var="LB_NAME"><spring:message code="LB_NAME"/></c:set>
+  <c:set scope="request" var="LB_SAVED_DATE"><spring:message code="LB_SAVED_DATE"/></c:set>
+  <c:set scope="request" var="LB_RECIEVE_DATE"><spring:message code="LB_RECIEVE_DATE"/></c:set>
+  <c:set scope="request" var="LB_DELETE"><spring:message code="LB_DELETE"/></c:set>
+    <spring:url value="/resources/images/user.png" var="img_user" />
+ <style>
+   #ViewCase { background-color: #F26C4F; }
+   #ViewCase a { color: white !important; }
+   #ViewCase path { fill: white !important; }
+   .green{
+    color:#3CB878;
+   }
+   .gray{
+    color:#BBBAB7;
+   }
+   .form-control,[type=text],[type=date]{
+    font-size: 20px;
+   }
+ </style>
+ <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <jsp:include page="../sidebar.jspx"/>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content" style="background-color:#5DB2FC">
+
+        <!-- Topbar -->
+
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid" >
+
+          <!-- Page Heading -->
+          <br/>
+          <div class="row d-sm-flex align-items-center justify-content-between" style="padding-top:5px">
+           <div class="col-8"> <a class="h6 text-light headerB2" id="backPage" style="font-weight:bold"><i class="fas fa-less-than" id="backPage"><jsp:text/></i>    View Case /  <label id ="pageName">Customer Service Management</label> </a></div>
+           <div class="col-2">
+
+             <h1 class="h6 text-light">
+
+               <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="29.274" height="34.967" viewBox="0 0 29.274 34.967">
+                 <defs>
+                   <clipPath id="clip-path">
+                     <rect width="29.274" height="34.967" fill="none"/>
+                   </clipPath>
+                 </defs>
+                 <g id="Symbol_7_2" data-name="Symbol 7 – 2" clip-path="url(#clip-path)">
+                   <path id="Path_11" data-name="Path 11" d="M10.01,21.01a3.236,3.236,0,1,0,6.473,0Z" transform="translate(1.391 10.72)" fill="#fff"/>
+                   <path id="Path_12" data-name="Path 12" d="M17.637,8.819a8.135,8.135,0,0,1,8.132,8.132V28.335H9.505V16.95a8.135,8.135,0,0,1,8.132-8.132Zm0-7.319A2.436,2.436,0,0,0,15.2,3.94v1.9A11.374,11.374,0,0,0,6.253,16.95v9.758L3,29.961v1.626H32.274V29.961l-3.253-3.253V16.95A11.374,11.374,0,0,0,20.077,5.842V3.94a2.436,2.436,0,0,0-2.44-2.44Z" transform="translate(-3 -1.5)" fill="#fff"/>
+                   <rect id="Rectangle_10" data-name="Rectangle 10" width="3.253" height="6.505" transform="translate(13.011 10.571)" fill="#fff"/>
+                   <rect id="Rectangle_11" data-name="Rectangle 11" width="3.253" height="3.253" transform="translate(13.011 20.329)" fill="#fff"/>
+                 </g>
+               </svg>
+
+
+               <div class="dropdown-menu " style="font-size:16pt!important" >
+                   <div class="container-fulid" style="color:black;padding:10px;">
+                       Notification
+                     <div id="no1">
+                       <hr class="grayhr90"/>
+                       <table class="">
+                         <tr>
+                           <td style="width:30%">
+
+                             <img style="margin-right:2%" src="https://images.unsplash.com/photo-1544868501-b2f493d76e35?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=668&amp;q=80" class="rounded-circle" width="50px" height="50px"/>
+
+                             <div style="display:inline-block;width:20px;height:20px;background-color:#F26C4F;border-radius: 50px;font-size:13pt;color:White;margin-left:30px;margin-top:-80px"></div>                                </td>
+                           <style> .red{color:red; } </style>
+                           <td style="width:70%">
+                             <span class="red">Case ID:</span><span> AC0518/01/08</span>
+                             <span class="red">Pending than 1 day</span>
+                             <span>08/03/2018  02:30 PM.</span>
+                           </td>
+                         </tr>
+                       </table>
+                     </div>
+                     <div id="no2">
+                       <hr class="grayhr90"/>
+                       <table class="">
+                         <tr>
+                           <td style="width:30%">
+                             <img style="margin-right:2%" src="https://images.unsplash.com/photo-1544868501-b2f493d76e35?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=668&amp;q=80" class="rounded-circle" width="50px" height="50px"/>
+                             <div style="display:inline-block;width:20px;height:20px;background-color:#FFA700;border-radius: 50px;font-size:13pt;color:White;margin-left:30px;margin-top:-80px"></div>
+
+                           </td>
+                           <style> .red{color:red; } </style>
+                           <td style="width:70%">
+                             <span >Case ID: AN0918/01/08</span>
+                             <span >Choronic Case Approved</span>
+                             <span>08/03/2018  02:30 PM.</span>
+                           </td>
+                         </tr>
+                       </table>
+                     </div>
+                     <div id="no3">
+                       <hr class="grayhr90"/>
+                       <table class="">
+                         <tr>
+                           <td style="width:30%">
+                             <img style="margin-right:2%" src="https://images.unsplash.com/photo-1544868501-b2f493d76e35?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=668&amp;q=80" class="rounded-circle" width="50px" height="50px"/>
+                             <div style="display:inline-block;width:20px;height:20px;background-color:#3CB878;border-radius: 50px;font-size:13pt;color:White;margin-left:30px;margin-top:-80px"></div>
+
+                           </td>
+                           <style> .red{color:red; } </style>
+                           <td style="width:70%">
+                             <span >Case ID: AM0018/01/08</span>
+                             <span >Choronic Case Reject</span>
+                             <span>08/03/2018  02:30 PM.</span>
+                           </td>
+                         </tr>
+                       </table>
+                     </div>
+                     <div id="no4">
+                       <hr class="grayhr90"/>
+                       <table class="">
+                         <tr>
+                           <td style="width:30%">
+                             <img style="margin-right:2%" src="https://images.unsplash.com/photo-1544868501-b2f493d76e35?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=668&amp;q=80" class="rounded-circle" width="50px" height="50px"/>
+                           </td>
+                           <style> .red{color:red; } </style>
+                           <td style="width:70%">
+                             <span >Case ID: AC0518/01/08</span>
+                             <span >Choronic Case Approved</span>
+                             <span>08/03/2018  02:30 PM.</span>
+                           </td>
+                         </tr>
+                       </table>
+                     </div>
+                     <hr class="grayhr90"/>
+                     <center><a href="All-Notifaication-BU.html">View all</a></center>
+                   </div>
+               </div>
+             <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]><![CDATA[&nbsp;]]><![CDATA[&nbsp;]]><![CDATA[&nbsp;]]>
+              <label style="padding-left:10px">  Notification </label>
+
+
+             <div style="display:inline-block;width:20px;height:20px;background-color:#F26C4F;border-radius: 50px;font-size:13pt;color:White;margin-left:-95px;margin-top:-22px"><div style="margin-left:2px;">12</div></div>
+
+             </h1>
+           </div>
+           <div class="col-2">
+
+               <h1 class="h6 text-light">
+                 <a href="/BaxterApplication/users/updateProfile">
+                   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30.412" height="31.265" viewBox="0 0 30.412 31.265">
+                     <defs>
+                       <clipPath id="clip-path">
+                         <rect width="30.411" height="31.265" fill="none"/>
+                       </clipPath>
+                     </defs>
+                     <g id="Outline" clip-path="url(#clip-path)">
+                       <g id="Group_5" data-name="Group 5">
+                         <path id="Path_14" data-name="Path 14" d="M29.095,19.164a12.182,12.182,0,0,0,.109-1.532,12.182,12.182,0,0,0-.109-1.532l3.3-2.579a.789.789,0,0,0,.188-1L29.454,7.112a.781.781,0,0,0-.688-.391.73.73,0,0,0-.266.047L24.608,8.331A11.421,11.421,0,0,0,21.966,6.8l-.594-4.143A.762.762,0,0,0,20.606,2H14.353a.762.762,0,0,0-.766.657L12.993,6.8a12.01,12.01,0,0,0-2.642,1.532L6.459,6.768a.885.885,0,0,0-.281-.047.774.774,0,0,0-.672.391L2.379,12.521a.771.771,0,0,0,.188,1l3.3,2.579a12.4,12.4,0,0,0-.109,1.532,12.4,12.4,0,0,0,.109,1.532l-3.3,2.579a.789.789,0,0,0-.188,1l3.126,5.409a.781.781,0,0,0,.688.391.73.73,0,0,0,.266-.047l3.892-1.563a11.421,11.421,0,0,0,2.642,1.532l.594,4.143a.762.762,0,0,0,.766.657h6.253a.762.762,0,0,0,.766-.657l.594-4.143a12.01,12.01,0,0,0,2.642-1.532L28.5,28.5a.885.885,0,0,0,.281.047.774.774,0,0,0,.672-.391l3.126-5.409a.789.789,0,0,0-.188-1ZM26,16.491a8.352,8.352,0,0,1,.078,1.141c0,.328-.031.672-.078,1.141l-.219,1.766,1.391,1.094,1.688,1.313-1.094,1.892-1.985-.8-1.626-.657-1.407,1.063a9.155,9.155,0,0,1-1.954,1.141l-1.657.672-.25,1.766-.313,2.11H16.386l-.3-2.11-.25-1.766-1.657-.672a8.87,8.87,0,0,1-1.923-1.11l-1.423-1.094-1.657.672-1.985.8L6.1,22.963,7.788,21.65l1.391-1.094L8.96,18.789c-.047-.485-.078-.844-.078-1.157s.031-.672.078-1.141l.219-1.766L7.788,13.63,6.1,12.317l1.094-1.892,1.985.8,1.626.657,1.407-1.063a9.155,9.155,0,0,1,1.954-1.141L15.823,9l.25-1.766.313-2.11h2.173l.3,2.11L19.106,9l1.657.672a8.87,8.87,0,0,1,1.923,1.11l1.423,1.094,1.657-.672,1.985-.8L28.844,12.3,27.172,13.63l-1.391,1.094Z" transform="translate(-2.271 -2)" fill="#fff"/>
+                         <path id="Path_15" data-name="Path 15" d="M14.253,8a6.253,6.253,0,1,0,6.253,6.253A6.251,6.251,0,0,0,14.253,8Zm0,9.379a3.126,3.126,0,1,1,3.126-3.126A3.136,3.136,0,0,1,14.253,17.379Z" transform="translate(0.956 1.379)" fill="#fff"/>
+                       </g>
+                     </g>
+                   </svg>
+
+
+               </a>
+                 Settings
+               </h1>
+
+           </div>
+          </div>
+            <hr/>
+
+
+
+
+  <div class="col-12"  id="buHeader">
+    <div class="card shadow mb-4">
+      <div class="card-header" id="headingOne">
+        <h5 class="mb-0">
+
+                    <table class="table-sm table-borderless"  >
+                          <tr>
+                            <td style="width:30px"></td>
+                            <td style="width:1%">
+                                <i class="fas fa-circle" style="color:#3CB878" ><jsp:text/></i>
+                            </td>
+                            <td>
+                              <h5 style="color:black;font-weight:bold" class="headerB2">BU</h5>
+                            </td>
+
+                            <td></td>
+                            <td></td>
+                            <td style="text-align:right;font-size:9pt;width:70%;font-size:16pt" >
+                              Case ID: <span style="color:black" class="caseNumber">CR0518/01/01</span>&#160; &#160;
+                              Date: <span style="color:black" class="date">CR0518/01/01</span> &#160; &#160;
+                              <img id="imgBU" style="margin-right:2%" src="${img_user}" class="rounded-circle" width="50px" height="50px" />
+
+                              <i class="fas fa-caret-down fa-2x" data-toggle="collapse" name="toggle" href="#collapseBU" style="color:#219FEC;margin-right:1%"><jsp:text/></i>
+                            </td>
+                          </tr>
+                        </table>
+        </h5>
+      </div>
+
+      <div id="collapseBU" class="collapse show" aria-labelledby="headingOne" data-parent="#user-1">
+        <div class="col">
+    <div  class="card card-block">
+                            <div class="row">
+                              <div class="col-4 py-2">
+                               &#160;<span style="text-align:center"><h5 class="b2 headerB2">View Approve Documents</h5></span>
+                                <span style="text-align:center"><h6 class="b2 headerB2">ASM Approved </h6></span>
+                               <table class="table">
+                                 <tr>
+                                   <td style="text-align:right"><i class="fas fa-check-circle fa-2x "  id="idPass"><jsp:text/></i></td>
+                                   <td style="text-align:center">Copy of ID card</td>
+                                   <td style="text-align:left"><button id="copyId" class="btn btn-info  " style="Color:white"><i class="fas fa-search fa-2x "><jsp:text/></i></button></td>
+                                 </tr>
+                                 <tr>
+                                   <td style="text-align:right"><i class="fas fa-check-circle fa-2x "  id="payslipPass"  ><jsp:text/></i></td>
+                                   <td style="text-align:center">Pay Slip</td>
+                                   <td style="text-align:left"><button id="psId"  class="btn btn-info " style="Color:white"><i class="fas fa-search fa-2x "><jsp:text/></i></button></td>
+                                 </tr>
+                                 <tr>
+                                   <td style="text-align:right"><i class="fas fa-check-circle fa-2x " id="prescriptionPass"  ><jsp:text/></i></td>
+                                   <td style="text-align:center">Prescription</td>
+                                   <td style="text-align:left"><button class="btn btn-info " style="Color:white" id="btnPrescription" data-toggle="modal" data-target="#prescriptionModal"  ><i class="fas fa-search fa-2x "><jsp:text/></i></button></td>
+                                 </tr>
+                               </table>
+                               <span style="text-align:center"><h6 class="b2 headerB2">BU Approved </h6></span>
+                               <table class="table">
+                                 <tr>
+                                   <td style="text-align:right"><i class="fas fa-check-circle fa-2x "  id="dsPass"  ><jsp:text/></i></td>
+                                   <td style="text-align:center">Installation Form</td>
+                                   <td style="text-align:left"><button class="btn btn-info "  id="dsId" style="Color:white"><i class="fas fa-search fa-2x "><jsp:text/></i></button></td>
+                                 </tr>
+                               </table>
+                              </div>
+                              <div class="col-8 py-2">
+                                  &#160;<span style="text-align:center"><h5 class="b2 headerB2">Approve Installation Form</h5></span>
+                                  <div class="row" style="margin:5%">
+                                    <div class="col" style="text-align:left">
+                                        <span style="text-align:center"><h6 class="b2 headerB2">Installation Request Form</h6></span>
+                                    </div>
+                                    <div class="col" style="text-align:right;font-size:9pt;width:70%;font-size:16pt">
+                                      Case ID: <span class="caseNumber">CR0518/01/01</span> &#160;&#160; Date: <span class="date">06/03/2018</span>
+                                    </div>
+                                  </div>
+                                  <style>
+                                    .b30b{
+                                      width:30%;font-weight:bold;text-align:right;color:black
+                                    }
+                                  </style>
+                                  <table class="table table-borderless">
+                                    <tr>
+                                      <td class="b30b">Date</td>
+                                      <td style="width:70%">
+                                        <input type="text" style="text-align:left" disabled="true" class="form-control form-control-user" id="txtDate" placeholder="06/03/2018" />
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td class="b30b">Patient Name</td>
+                                      <td style="width:70%">
+                                        <input type="text" style="text-align:left" disabled="true" class="form-control form-control-user" id="txtPatientName" placeholder="Name Surname" />
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td class="b30b">Installation Place</td>
+                                      <td style="width:70%">
+                                      <input type="text" style="text-align:left" disabled="true" class="form-control form-control-user" id="txtInstallationPlace"  placeholder="PD House" />
+                                      </td>
+                                    </tr>
+                                  </table>
+                                  <hr/>
+                                  <p style="text-align:center;font-size:16pt;">บริษัท แบ๊กซ์เตอร์ เฮลธ์แคร์(ประเทศไทย) จำกัด มีความประสงค์ที่จะวางของเครื่อง ตามรายการดังต่อไปนี้</p>
+                                  <table class="table table-md" style="font-size:16pt">
+                                    <thead style="color:black">
+                                      <th>Order</th>
+                                      <th>Product No.</th>
+                                      <th>Product Items</th>
+                                      <th>Unit</th>
+                                    </thead>
+                                    <tbody name="product">
+                                    <jsp:text/>
+
+                                    </tbody>
+                                  </table>
+
+                                  <div class="container-fuild" style="width:90%">
+                                    <hr style=" border-color:#B4BDBF;" />
+                                    <span class="b30b py-2">Order</span>
+                                    <table class="table table-sm table-borderless" style="color:black;margin-top:2%">
+                                      <tr>
+                                        <td class="normal">
+                                          <div class="form-group">
+                                            <div class="custom-control custom-checkbox small">
+                                              <input readonly="true" type="checkbox"  class="custom-control-input" id="Choronicc3" />
+                                              <label class="custom-control-label" for="Choronicc3" style="font-size:16pt">Chronic Case</label>
+                                            </div>
+                                          </div>
+                                        </td>
+                                        <td class="normal">
+                                          <div class="form-group">
+                                            <div class="custom-control custom-checkbox small">
+                                              <input readonly="true" type="checkbox" class="custom-control-input" id="AcuteCasec3" />
+                                              <label class="custom-control-label" for="AcuteCasec3" style="font-size:16pt">Acute Case</label>
+                                            </div>
+                                          </div>
+                                        </td>
+                                        
+                                        <td><jsp:text/></td>
+                                      </tr>
+                                      <tr>
+                                        <td class="normal">
+                                          <div class="form-group">
+                                            <div class="custom-control custom-checkbox small">
+                                              <input readonly="true" type="checkbox" class="custom-control-input" id="Demo2" />
+                                              <label class="custom-control-label" for="Demo2" style="font-size:16pt">Demo</label>
+                                            </div>
+                                          </div>
+                                        </td>
+                                        <td class="normal">
+                                          <div class="form-group">
+                                            <div class="custom-control custom-checkbox small">
+                                              <input readonly="true" type="checkbox" class="custom-control-input" id="Package2" />
+                                              <label class="custom-control-label" for="Package2" style="font-size:16pt">เช่ายืมพร้อม Package พร้อมรับเครื่องกลับ</label>
+                                            </div>
+                                          </div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                         <td class="return">
+                                          <div class="form-group">
+                                            <div class="custom-control custom-checkbox small">
+                                              <input readonly="true" type="checkbox" class="custom-control-input" id="returnCase3" />
+                                              <label class="custom-control-label" for="returnCase3" style="font-size:16pt">รับเครื่องกลับ</label>
+                                            </div>
+                                          </div>
+                                        </td>
+                                      </tr>
+                                    </table>
+                                    <hr style=" border-color:#B4BDBF;" />
+                                    <div class="row" style="margin-left:2%;margin-right:2%">
+                                      <div class="col" style="text-align:right">
+                                        <button  id="reject" type="button" class="btn btn-lg btn-warning" style="width:100%">
+                                            <h5>Reject</h5>
+                                        </button>
+                                      </div>
+                                      <div class="col" style="text-align:left">
+                                        <button type="button" id="approve" style="width:100%" data-toggle="modal" data-target="#browsingSig" class="btn btn-blue btn-info">
+                                          <h5>Approve</h5>
+                                          <!-- <h6>browsing signature</h6> -->
+                                        </button>
+                                      </div>
+                                    </div>
+                                    <!-- Modal Approved -->
+
+                                   <!-- Button trigger modal -->
+
+                                    <!-- end modal -->
+                                    <div class="row py-4">
+                                      <div class="col-12">
+                                        <div class="form-group">
+
+                                          <textarea class="form-control" id="buNote" placeholder="Note" rows="3"><jsp:text/></textarea>
+                                        </div>
+                                      </div>
+                                      <div class="col-12" style="text-align:center">
+                                        <button id="buSend" type="button" style="width:50%;font-size:16pt;" class="btn btn-lg btn-blue btn-info">
+                                          Send
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
+
+
+                              </div>
+                            </div>
+                          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+                 <div class="col-12"  id="tsHeader">
+                  <div class="card shadow mb-4">
+                          <div class="card-header" id="headingOne">
+                              <h5 class="mb-0">
+
+                                          <table class="table-sm table-borderless">
+
+
+                                                <tbody>  <tr>
+                                                  <td style="width:30px"></td>
+                                                  <td style="width:1%">
+                                                      <i class="fas fa-circle" style="color:#3CB878" ><jsp:text/></i>
+                                                  </td>
+                                                  <td>
+                                                    <h5 style="color:black;font-weight:bold" class="headerB2">TS</h5>
+                                                  </td>
+
+                                                  <td></td>
+                                                  <td></td>
+                                                  <td style="text-align:right;font-size:9pt;width:70%;font-size:16pt" >
+                                                    Case ID: <span style="color:black" class="caseNumber">CR0518/01/01</span>&#160; &#160;
+                                                    Date: <span style="color:black" class="date">CR0518/01/01</span> &#160; &#160;
+                                                    <img id="imgTs" style="margin-right:2%" src="${img_user}" class="rounded-circle" width="50px" height="50px"/>
+
+                                                    <i class="fas fa-caret-down fa-2x" data-toggle="collapse" name="toggle" href="#collapseTS" style="color:#219FEC;margin-right:1%"><jsp:text/></i>
+                                                  </td>
+                                                </tr>
+                                              </tbody></table>
+
+                              </h5>
+                            </div>
+                    <div class="col">
+
+
+
+                    <!-- data -->
+
+                      <div class="collapse" id="collapseTS">
+
+                        <div class="card card-block" style="font-size:16pt">
+                          <div class="row">
+                            <label class="headerB2 b2" style="padding:30px">Checklist</label>
+                          </div>
+                          <div class="col-sm-12">
+                            <table class="table ">
+                              <thead  style="color:black">
+                                <tr>
+                                <th class="text-center"><input type="checkbox" id="checkAll" /></th>
+                                <th class="text-center">Code</th>
+                                <th class="text-center">Serial No.</th>
+                                <th class="text-center">Name</th>
+                                </tr>
+                              </thead>
+                              <tbody id="tsFlag">
+                                <jsp:text/>
+                              </tbody>
+
+                           </table>
+                          </div>
+
+                        <div class="row">
+                          <div class="offset-1 col-sm-3">
+                            วันที่ต้องการใช้เครื่อง  :  <span id="usedDate"><jsp:text/></span>
+                          </div>
+                         </div>
+                         <div class="row">
+                          <div class="offset-1 col-sm-10">
+                            <textarea class="form-control" id="tsNote" placeholder="Note" rows="3"><jsp:text/></textarea>
+
+                          </div>
+                         </div>
+
+                          <div class="row">
+
+                            <hr class="grayhr90"/>
+                            <div class="col-12" style="padding:30px">
+                              <div class="" style="text-align:left"><h5 class="b2 headerB2">Document review</h5></div>
+                              <div class="" style="text-align:right">
+                                <a style="font-size:16pt;" href="#" id="yourlink" class="btn btn-info">Download all</a>
+                              </div>
+                            <div class="row" style="padding:30px">
+
+                              <div class="col-3">
+                                <button type="button" style="width:100%;font-size:16pt" class="btn btn-lg btn-blue btn-info border3" onclick="downloadAgreement()">
+                                  <div class="container-fuild">Agreement<br/>
+                                    <i class="fas fa-search"><jsp:text/></i>
+                                  </div>
+                                </button>
+                              </div>
+                              <div class="col-3">
+                                <button type="button" style="width:100%;font-size:16pt" class="btn btn-lg btn-blue btn-info border3" onclick="downloadReceipt()">
+                                  <div class="container-fuild">Receipt<br/>
+                                    <i class="fas fa-search"><jsp:text/></i>
+                                  </div>
+                                </button>
+                              </div>
+                              <div class="col-3">
+                                <button type="button" style="width:100%;font-size:16pt" class="btn btn-lg btn-blue btn-info border3" onclick="downloadPrescription()">
+                                  <div class="container-fuild">Prescription<br/>
+                                    <i class="fas fa-search"><jsp:text/></i>
+                                  </div>
+                                </button>
+                              </div>
+                              <div class="col-3">
+                                <button type="button" style="width:100%;font-size:16pt" class="btn btn-lg btn-blue btn-info border3" onclick="downloadInstallation()">
+                                  <div class="">Installation<br/>
+                                    <i class="fas fa-search"><jsp:text/></i>
+                                  </div>
+                                </button>
+                              </div>
+
+                            </div>
+
+                            </div>
+                            <div class="col-12 py-3" style="text-align:center;margin-bottom:10px;">
+
+                              <br/>
+                               <button type="button" id="tsSave" style="width:100px;font-size:16pt;" class="btn btn-blue btn-info user" data-toggle="modal" data-target="#SaveModal">
+                                 Save
+                              </button>
+                              &#160;
+                              &#160;
+                              <button type="button" id="tsSend" style="width:100px;font-size:16pt;" class="btn btn-green btn-success user" data-toggle="modal" data-target="#SaveModal">
+                              Send
+                              </button>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                  <!-- end card body -->
+                  </div>
+                </div>
+
+                <div class="col-12"  id="csHeader">
+                                  <div class="card shadow mb-4">
+                                    <div class="col">
+                                      <div class="card-header">
+                                    <h5  class="mb-0">
+                                      <table class="table-sm table-borderless">
+                                        <tbody><tr>
+                                          <td style="width:30px"></td>
+                                          <td style="width:1%">
+                                              <i class="fas fa-circle" style="color:#3CB878"></i>
+                                          </td>
+                                          <td>
+                                            <h5 class="headerB2" style="color:black;font-weight:bold">CS</h5>
+                                          </td>
+
+                                          <td></td>
+                                          <td></td>
+                                          <td style="text-align:right;font-size:9pt;width:70%;font-size:16pt">
+                                            Case ID: <span style="color:black" class="caseNumber">CR0518/01/01</span>   <![CDATA[&nbsp;]]>  <![CDATA[&nbsp;]]>
+                                            <img id="imgCs" style="margin-right:2%" class="rounded-circle" src="${img_user}"   height="50px"/>
+
+                                            <i class="fas fa-caret-down fa-2x" data-toggle="collapse" href="#collapseCS" aria-expanded="true" aria-controls="alluser" style="color:#219FEC;margin-right:1%"></i>
+                                          </td>
+                                        </tr>
+                                       </tbody>
+                                     </table>
+                                   </h5>
+                                 </div>
+
+                                    <!-- data -->
+
+                                      <div class="collapse show" id="collapseCS" style="">
+                                        <div class="card card-block">
+
+                                          <div class="row">
+                                            <div class="col-6 py-2" style="font-size:16pt;">
+                                              <div class="" style="padding:30px">
+                                                <label class="b2 headerB2">Delivery</label>
+                                                  <div style="margin-left:10%">
+                                                    <label class="b2">Delivery Provider</label><br/>
+                                                    <!-- <label>TNT Express</label><br/> -->
+                                                    <select class="form-control form-control-user" id="deliveryType">
+                                                      <option value="TNT express">TNT Express </option>
+                                                      <option value="OTH">Other </option>
+                                                    </select><br/>
+                                                    <input type="text" class="form-control form-control-user " id="txtOTh" style="display:none;" /><br/>
+                                                    <label class="b2"> Delivery Staff Name</label>
+                                                    <div class="form-group">
+                                                      <input type="text" class="form-control form-control-user" maxlength="255" id="txtDeliveryName" placeholder="Name Surname"/>
+                                                    </div>
+                                                    <label class="b2">Tel No</label>
+                                                    <div class="form-group">
+                                                      <input type="text" maxlength="10" class="form-control form-control-user" id="deliveryTelNo" placeholder="XXX XXX XXXX"/>
+                                                    </div>
+                                                  </div>
+                                              </div>
+                                            </div>
+                                            <div class="col-6 py-2">
+                                              <br/>
+                                              <h6 class="b2">Date</h6>
+                                              <div class="" style="padding:30px">
+                                                <div class="dropdown">
+                                                  <input type="date" id="txtDeliveryDate" class="btn btn-light" style="border: 1px solid #d1d3e2;"/>
+                                                </div><br/>
+                                                <div class="form-group">
+
+                                                        <textarea class="form-control" id="txtDeliveryNote" placeholder="Note" rows="3"><jsp:text/></textarea>
+                                                </div>
+                                              </div>
+
+                                            </div>
+                                             <div class="col-12 py-2 b2 headerB2">
+                                <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]><![CDATA[&nbsp;]]><![CDATA[&nbsp;]]>
+                                <h5 style="text-align:left;margin-left:20px" class="b2 headerB2">Shipping Address</h5>
+                                <div class="container-fuild" style="margin:20px;padding-top: 0px;">
+                                  <table class="table table-borderless table-lg">
+                                    <tr>
+                                      <td>
+                                        <input type="text" id="shippingAddress1" style="text-align:left" class="form-control form-control-user" autocomplete="false"  placeholder="No."/>
+                                      </td>
+                                      <td>
+                                        <input type="text" id="shippingAddress3" style="text-align:left" class="form-control form-control-user" autocomplete="false"  placeholder="Sub-District"/>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <input type="text" id="shippingAddress2" style="text-align:left" class="form-control form-control-user" autocomplete="false" placeholder="Rd."/>
+                                      </td>
+                                      <td>
+                                        <input type="text" id="shippingAddress4" style="text-align:left" class="form-control form-control-user" autocomplete="false"  placeholder="Province"/>
+                                      </td>
+                                      <td></td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <input type="text" id="shippingAddress5" style="text-align:left" class="form-control form-control-user" autocomplete="false"  placeholder="Postocode"/>
+                                      </td>
+                                      <td></td>
+                                      <td></td>
+                                    </tr>
+                                  </table>
+
+
+                                </div>
+                            </div>
+                                            <div class="col-12" style="text-align:center;margin-bottom:10px;">
+                                              <button type="button" style="width:100px;font-size:16pt" class="btn btn-blue btn-info user" id="csSend" >
+                                                        Send
+                                              </button>
+
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                  </div>
+                                  <!-- end card body -->
+                                  </div>
+                                </div>
+        <div class="col-12"  id="fnHeader">
+                  <div class="card shadow mb-4">
+                      <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+
+                  <table class="table-sm table-borderless">
+
+
+                        <tbody>  <tr>
+                          <td style="width:30px"></td>
+                          <td style="width:1%">
+                              <i class="fas fa-circle" style="color:#3CB878" ><jsp:text/></i>
+                          </td>
+                          <td>
+                            <h5 style="color:black;font-weight:bold" class="headerB2">Finance</h5>
+                          </td>
+
+                          <td></td>
+                          <td></td>
+                          <td style="text-align:right;font-size:9pt;width:70%;font-size:16pt" >
+                            Case ID: <span style="color:black" class="caseNumber">CR0518/01/01</span>&#160; &#160;
+                            Date: <span style="color:black" class="date">CR0518/01/01</span> &#160; &#160;
+                            <img id="imgFn" style="margin-right:2%" src="${img_user}" class="rounded-circle" width="50px" height="50px"/>
+
+                            <i class="fas fa-caret-down fa-2x" data-toggle="collapse" name="toggle" href="#collapseFN" style="color:#219FEC;margin-right:1%"><jsp:text/></i>
+                          </td>
+                        </tr>
+                      </tbody></table>
+
+      </h5>
+    </div>
+                    <div class="col">
+
+                    <!-- data -->
+
+                      <div class="collapse" id="collapseFN">
+                        <div class="card card-block">
+                          <div class="row">
+                            <div class="col-6 py-2 b2 headerB2">
+                                <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]><![CDATA[&nbsp;]]><![CDATA[&nbsp;]]>
+                                <h5 style="text-align:left;margin-left:20px" class="b2 headerB2">Pay Slip</h5>
+                                <div class="container-fuild" style="margin:20px;padding-top:0px;">
+                                  <h6 class="b2">Pay Date</h6>
+                                  <div class="dropdown">
+                                    <input type="date" data-date-format="DD/MM/YYYY" id="payDate" class="btn btn-light" style="width:100%;border: 1px solid #d1d3e2;"/>
+                                  </div>
+                                  <br/>
+                                  <h6 class="b2">Payment Type</h6>
+                                  <!-- <input type="text" id="paymentType" style="text-align:left" class="form-control form-control-user" /> -->
+                                  <select id="paymentType" style="text-align:left" class="form-control form-control-user">
+                                    <jsp:text/>
+                                  </select>
+                                <!--   <div class="dropdown">
+                                    <input type="text" class="btn btn-light" id="paymentType" style="width:100%;border: 1px solid #d1d3e2;"/>
+
+                                    <button type="button" style="width:100%;border: 1px solid #d1d3e2;" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Transfer money</button>
+                                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 31px, 0px);">
+                                      <a class="dropdown-item" href="#">Option A</a>
+                                      <a class="dropdown-item" href="#">Option B</a>
+                                      <a class="dropdown-item" href="#">Option C</a>
+                                    </div>
+                                  </div -->
+                                  <br/>
+                                  <h6 class="b2">Bank</h6>
+                                   <select id="bank" style="text-align:left" class="form-control form-control-user">
+                                    <jsp:text/>
+                                  </select>
+                                  <br/>
+                                  <h6 class="b2">Amount</h6>
+                                  <input type="text" id="amount" style="text-align:left" class="form-control form-control-user" />
+                                  <br/>
+                                  <textarea class="form-control" id="fnNote" placeholder="Note" rows="3"><jsp:text/></textarea>
+                                </div>
+                            </div>
+                            <div class="col-4 py-2" style="text-align:center;margin-top:30px">
+                              <img style="margin-right:0%" id="payslipImage" width="400" height="400" class="rounded"/>
+
+                            <jsp:text/>
+                            </div>
+                          </div>
+                          <center>
+                            <hr style=" border-color:gray;width:70%;"/>
+                          </center>
+                          <div class="row">
+                            <div class="col-12 py-2 b2 headerB2">
+                                <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]><![CDATA[&nbsp;]]><![CDATA[&nbsp;]]>
+                                <h5 style="text-align:left;margin-left:20px" class="b2 headerB2">Receipt</h5>
+                                <div class="container-fuild" style="margin:20px;padding-top: 0px;">
+                                  <table class="table table-borderless table-lg">
+                                    <tr >
+                                      <td >  <h6 class="b2">Recipient's Name</h6></td>
+                                      <td >
+
+                                      </td>
+                                      <td ><h6 class="b2" >Receipt No.</h6></td>
+                                    </tr>
+                                    <tr >
+                                      <td >  <input type="text" id="receipientName" style="text-align:left" class="form-control form-control-user" /></td>
+                                      <td ><input type="text" id="receipientSur" style="text-align:left" class="form-control form-control-user" /></td>
+                                      <td >
+                                        <div class="dropdown">
+                                        <input type="text" id="receiptNo" class="btn btn-light" style="width:100%;border: 1px solid #d1d3e2;"/>
+                                      </div>
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                      <td>  <h6 class="b2">Recipient's Address</h6></td>
+                                      <td></td>
+                                      <td><h6 class="b2">Date</h6></td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <input type="text" id="receipientAddress1" style="text-align:left" class="form-control form-control-user" autocomplete="false" placeholder="No."/>
+                                      </td>
+                                      <td>
+                                        <input type="text" id="receipientAddress3" style="text-align:left" class="form-control form-control-user" autocomplete="false" placeholder="Sub-District"/>
+                                      </td>
+                                      <td>
+                                          <div class="dropdown">
+                                          <input type="date" id="receiptDate" data-date-format="DD/MM/YYYY" class="btn btn-light" style="width:100%;border: 1px solid #d1d3e2;"/>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <input type="text" id="receipientAddress2" style="text-align:left" class="form-control form-control-user" autocomplete="false" placeholder="Rd."/>
+                                      </td>
+                                      <td>
+                                        <input type="text" id="receipientAddress4" style="text-align:left" class="form-control form-control-user" autocomplete="false" placeholder="Province"/>
+                                      </td>
+                                      <td></td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <input type="text" id="receipientAddress5" style="text-align:left" class="form-control form-control-user" autocomplete="false" placeholder="Postocode"/>
+                                      </td>
+                                      <td></td>
+                                      <td></td>
+                                    </tr>
+                                  </table>
+
+
+                                </div>
+                            </div>
+                            <div class="col-12 py-2 b2 headerB2">
+
+                              <div class="row" style="padding:30px;">
+
+                                <div class="col-12 py-3">
+                                <div class="row">
+                                   <table class="table table-md" style="font-size:16pt">
+                                    <thead style="color:black">
+                                      <th>Order</th>
+                                      <th>Product No.</th>
+                                      <th>Product Items</th>
+                                      <th>Unit</th>
+                                    </thead>
+                                    <tbody name="product">
+                                    <jsp:text/>
+                                    </tbody>
+                                    <tfoot class="table-borderless b2">
+                                      <tr>
+                                        <td></td>
+                                        <td>รวมเงินก่อนภาษีมูลค่า</td>
+                                        <td><input id="sum" type="text" class="btn btn-light" style="width:100%;border: 1px solid #d1d3e2;" disabled="true"/></td>
+                                        <td>THB</td>
+                                      </tr>
+                                      <tr>
+                                        <td></td>
+                                        <td>ภาษีมูลค่าเพิ่ม 7%</td>
+                                        <td><input id="vat" type="text" class="btn btn-light" style="width:100%;border: 1px solid #d1d3e2;" disabled="true"/></td>
+                                        <td>THB</td>
+                                      </tr>
+                                      <tr>
+                                        <td></td>
+                                        <td>Total Price/Order</td>
+                                        <td>
+                                          <div class="dropdown">
+                                            <input type="text" id="total" disabled="true" onchange="checkField(this.value)" class="btn btn-light" style="width:100%;border: 1px solid #d1d3e2;"/>
+                                          </div>
+                                        </td>
+                                        <td>THB</td>
+                                      </tr>
+                                    </tfoot>
+                                  </table>
+
+
+
+
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                   <div class="col-2 right">.</div>
+                                    <div class="col-4 right">
+
+                                          <button type="button" style="width:100%;font-size:16pt;" onclick="myModalAgreement()" class="btn-user btn-lg btn-danger hide">Generate to Excel</button>
+
+                                    </div>
+                                    <div class="col-6 left">
+                                      <form class="user">
+                                        <button type="button" style="width:100px;font-size:16pt" class="btn-lg btn-blue btn-info user" data-toggle="modal" id="fnSend" data-target="#SaveModal">
+                                          Send
+                                        </button>
+                                      </form>
+
+                                    </div>
+                              </div>
+                              <br/>
+
+
+
+
+                            </div>
+                          </div>
+
+                        </div>
+
+                      </div>
+
+                    </div>
+                  <!-- end card body -->
+                  </div>
+                </div>
+
+
+
+
+</div>
+
+          <!-- Content Row -->
+
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top" style="display: inline;">
+    <i class="fas fa-angle-up"><jsp:text/></i>
+  </a>
+
+  <!-- Logout Modal-->
+<!--   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+ -->
+
+ <div class="modal fade" id="prescriptionModal" role="dialog" >
+    <div class="modal-dialog modal-md">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+
+          <div class="col-sm-7">
+            <h3 class="modal-title">Prescription  </h3>
+          </div>
+
+          <div class="col-sm-5">
+            <h5 class="modal-title"> Case Number : <span name="caseNumber"><jsp:text/> </span>
+             </h5>
+          </div>
+
+        </div>
+        <div class="modal-body marginBottom">
+          <hr/>
+          <div class="row">
+            <div class="col-sm-3">
+               <label>Patient Name</label>
+            </div>
+             <div class="col-sm-7">
+                 <label name="patientName"><jsp:text/></label>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-sm-3">
+                 <label>Hospital Name</label>
+              </div>
+               <div class="col-sm-7">
+                 <label name="hospitalName"><jsp:text/></label>
+              </div>
+          </div>
+          <div class="row">
+                <div class="col-sm-3">
+                   <label>Serial Number</label>
+                </div>
+                 <div class="col-sm-7">
+                   <label name="serialNumber"><jsp:text/></label>
+                </div>
+          </div>
+          <hr/>
+          <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#home">Nurse Menu&#160;&#160;</a></li>
+            <li><a data-toggle="tab" href="#menu1">Make Adjust&#160;&#160;</a></li>
+            <li><a data-toggle="tab" href="#menu2">Change Programe&#160;&#160;</a></li>
+          </ul>
+
+        <div class="tab-content">
+          <div id="home" class="tab-pane fade in active">
+             <div class="row">
+              <div class="col-4">
+                 <label>Mode :</label>
+              </div>
+               <div class="col-7">
+                   <label name="modes"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                 <label>Min Drain VOL :</label>
+              </div>
+               <div class="col-7">
+                   <label name="minDrawVol"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                 <label>Min Drain Time :</label>
+              </div>
+               <div class="col-7">
+                   <label name="minDrainTime"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                 <label>Neg Of Limit :</label>
+              </div>
+               <div class="col-7">
+                   <label name="negOfLimit"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                 <label>Pos Of Limit :</label>
+              </div>
+               <div class="col-7">
+                   <label name="postOfLimit"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                 <label>Smart Dwells :</label>
+              </div>
+               <div class="col-7">
+                   <label name="smartDwells"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                 <label>Heater Bag Empty :</label>
+              </div>
+               <div class="col-7">
+                   <label name="heaterBagEmpty"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                 <label>Tidal Full Drns :</label>
+              </div>
+               <div class="col-7">
+                   <label name="tidalFullDrns"><jsp:text/></label>
+              </div>
+            </div>
+             <div class="row">
+              <div class="col-4">
+                 <label>Language :</label>
+              </div>
+               <div class="col-7">
+                   <label name="language"><jsp:text/></label>
+                </div>
+            </div>
+             <div class="row">
+              <div class="col-4">
+                 <label>Flush :</label>
+              </div>
+               <div class="col-7">
+                   <label name="flush"><jsp:text/></label>
+                </div>
+            </div>
+
+            <div class="row">
+              <div class="col-4">
+                 <label>Program Locked :</label>
+              </div>
+               <div class="col-7">
+                   <label name="programLocked"><jsp:text/></label>
+                </div>
+            </div>
+             <div class="row">
+              <div class="col-4">
+                 <label>Weight Reset :</label>
+              </div>
+               <div class="col-7">
+                   <label name="weightReset"><jsp:text/></label>
+                </div>
+              </div>
+          </div>
+          <div id="menu1" class="tab-pane fade">
+             <div class="row">
+              <div class="col-6">
+                 <label>Adjust Brightness :</label>
+              </div>
+               <div class="col-6">
+                   <label name="adjustBrightNess"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>Adjust Loudness :</label>
+              </div>
+               <div class="col-6">
+                   <label name="adjustLoudness"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>Auto Dim :</label>
+              </div>
+               <div class="col-6">
+                   <label name="autoDim"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>Set Clock :</label>
+              </div>
+               <div class="col-6">
+                   <label name="setClock"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>Set Date :</label>
+              </div>
+               <div class="col-6">
+                   <label name="setDate"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>I-Drain Time:(LOW-Fill)(Min) :</label>
+              </div>
+               <div class="col-6">
+                   <label name="drainTime"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>I-Drain Alram:(OFF/0-3,000ml) :</label>
+              </div>
+               <div class="col-6">
+                   <label name="drainAlram"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>Confort Control (35-37) :</label>
+              </div>
+               <div class="col-6">
+                   <label name="comfortControl"><jsp:text/></label>
+                </div>
+            </div>
+             <div class="row">
+              <div class="col-6">
+                 <label>Last manual Drain :</label>
+              </div>
+               <div class="col-6">
+                   <label name="lastManualDrain"><jsp:text/></label>
+                </div>
+            </div>
+             <div class="row">
+                <div class="col-6">
+                   <label>In Case  Y Pop to</label>
+                </div>
+            </div>
+
+            <div class="row">
+              <div class="col-6">
+                 <label> - UF target (ml) :</label>
+              </div>
+               <div class="col-6">
+                   <label name="ufTarget"><jsp:text/></label>
+                </div>
+            </div>
+             <div class="row">
+              <div class="col-6">
+                 <label> - Alram (Y/N) :</label>
+              </div>
+               <div class="col-6">
+                   <label name="alram"><jsp:text/></label>
+                </div>
+              </div>
+          </div>
+          <div id="menu2" class="tab-pane fade">
+            <jsp:text/>
+            <div class="row">
+              <div class="col-6">
+                 <label class="control-label">CCPD / IPD</label>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>Thearapy :</label>
+              </div>
+               <div class="col-6">
+                   <label name="opdThearapy"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>Total VOL(200ml-80/000 ml) :</label>
+              </div>
+               <div class="col-6">
+                   <label name="opdTotalVol"><jsp:text/></label>
+                </div>
+            </div>
+             <div class="row">
+              <div class="col-6">
+                 <label>Thearapy Time :</label>
+              </div>
+               <div class="col-6">
+                   <label name="opdThearapyTime"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>Fill VOL(60ml-3/000 ml) :</label>
+              </div>
+               <div class="col-6">
+                   <label name="opdFillVol"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>Last Fill VOL(0ml-3/000 ml) :</label>
+              </div>
+               <div class="col-6">
+                   <label name="opdLastFillVol"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>DEXTROSE (SAME/DIFFERENCE) :</label>
+              </div>
+               <div class="col-6">
+                   <label name="opdDextRose"><jsp:text/></label>
+                </div>
+            </div>
+             <div class="row">
+              <div class="col-6">
+                 <label>Weight Unit(KG/LG) :</label>
+              </div>
+               <div class="col-6">
+                   <label name="opdWeightUnit"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>Patient Weight :</label>
+              </div>
+               <div class="col-6">
+                   <label name="opdPatientWeight"><jsp:text/></label>
+                </div>
+            </div>
+             <hr/>
+
+         <div class="row">
+              <div class="col-6">
+                 <label class="control-label">Tidal</label>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>Thearapy :</label>
+              </div>
+               <div class="col-6">
+                   <label name="therapy"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>Total VOL(200ml-80/000 ml) :</label>
+              </div>
+               <div class="col-6">
+                   <label name="totalOf"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>Thearapy Time :</label>
+              </div>
+               <div class="col-6">
+                   <label name="therapyTime"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>Fill VOL(60ml-3/000 ml) :</label>
+              </div>
+               <div class="col-6">
+                   <label name="fillVol"><jsp:text/></label>
+                </div>
+            </div>
+             <div class="row">
+              <div class="col-6">
+                 <label>Last Fill VOL(0ml-3/000 ml) :</label>
+              </div>
+               <div class="col-6">
+                   <label name="lastFillVol"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>Full Drain Every(1-99) :</label>
+              </div>
+               <div class="col-6">
+                   <label name="fullDrainEvery"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>DEXTROSE (SAME/DIFFERENCE)  :</label>
+              </div>
+               <div class="col-6">
+                   <label name="dextRose"><jsp:text/></label>
+                </div>
+            </div>
+             <div class="row">
+              <div class="col-6">
+                 <label>Weight Unit(KG/LG) :</label>
+              </div>
+               <div class="col-6">
+                   <label name="weightUnit"><jsp:text/></label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                 <label>Patient Weight :</label>
+              </div>
+               <div class="col-6">
+                   <label name="patientWeight"><jsp:text/></label>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+  <div class="modal fade" id="browsingSig" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+                                    <div class="modal-dialog modal-sm" role="document">
+                                      <div class="modal-content">
+                                        <div class="modal-header bg-warning" style="color:white;height:150px;">
+                                          <div class="" style="color:white;height:150px;text-align:center;padding-left:70px;">
+                                            <i class="far fa-question-circle fa-3x"><jsp:text/></i>
+                                            <br/>
+                                            <b>Please Confirm identity <br/>
+                                              by fill your Password
+                                            </b>
+                                          </div>
+
+                                          <button class="close" type="button" data-dismiss="modal" style="color:white" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body">
+                                          <div class="modal-body">
+                                          <!-- <form method="POST" class="user" style="margin-left:15%;margin-right:15%"> -->
+                                            <div class="row">
+                                              <div class="col-12">
+                                                <div class="form-group" style="color:#F7C330">
+
+                                                  <input type="password" style="border: 1px solid #F7C330;:color:#F7C330" class="form-control form-control-user" id="inputPassword"  placeholder="Password" />
+                                                </div>
+                                                <div class="form-group" style="color:#F7C330">
+
+                                                 <!-- <input type="file" id="fileDigitalSignature" class="form-control "   /> -->
+                                                </div>
+                                              </div>
+                                              <div class="col-6">
+                                                <div class="form-group">
+                                                  <a   data-dismiss="modal" class="btn btn-yellow btn-user btn-block">
+                                                    Back
+                                                  </a>
+
+
+                                                </div>
+                                              </div>
+                                              <div class="col-6">
+                                                <div class="form-group">
+                                                  <a  class="btn btn-yellow btn-user btn-block" id="btnConfirmSave">
+                                                    Confirm
+                                                  </a>
+
+                                                </div>
+                                              </div>
+
+                                            </div>
+                                        <!-- </form> -->
+
+                                        </div>
+                                      </div>
+
+                                      </div>
+                                    </div>
+                                  </div>
+    <spring:url value="${urls.getForLookupPath('/resources/scripts/application/cases/manage.js')}" var="setup" />
+    <script type="text/javascript"  src="${setup}" ><!-- required for FF3 and Opera --></script>
+</div>

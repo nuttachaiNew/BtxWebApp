@@ -24,6 +24,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.http.HttpHeaders;
+import com.spt.app.service.PositionService;
 
 
 @Controller
@@ -35,6 +36,8 @@ public class AreaController{
     @Autowired
     AreaService areaService;
 
+    @Autowired
+    PositionService positionService;
 
     @Loggable
     @GetMapping("/setupArea")
@@ -105,6 +108,73 @@ public class AreaController{
             return responseEntity;
         } catch (Exception e) {
             LOGGER.error("deleteArea[Controller] error msg : {}",e.getMessage());
+            return new ResponseEntity<String>("{\"ERROR\":" +e.getMessage()+ "\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+     
+    @GetMapping("/findAllPosition")
+    public ResponseEntity<String> findAllPosition( HttpServletRequest request ) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json; charset=utf-8");
+        ResponseEntity<String> responseEntity;
+        try {
+            responseEntity = positionService.findAllPosition();
+            return responseEntity;
+        } catch (Exception e) {
+            LOGGER.error("findAllPosition[Controller] error msg : {}",e.getMessage());
+            return new ResponseEntity<String>("{\"ERROR\":" +e.getMessage()+ "\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/insertPosition")
+    public ResponseEntity<String> insertPosition(HttpServletRequest request,@RequestBody String json) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json; charset=utf-8");
+        LOGGER.info("insertPosition[Controller] :{}",json);
+        ResponseEntity<String> responseEntity;
+        
+        try {
+            responseEntity = positionService.insertPosition(json);
+            return responseEntity;
+        } catch (Exception e) {
+            LOGGER.error("insertPosition[Controller] error msg : {}",e.getMessage());
+            return new ResponseEntity<String>("{\"ERROR\":" +e.getMessage()+ "\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+    @PostMapping("/updatePosition")
+    public ResponseEntity<String> updatePosition(HttpServletRequest request,@RequestBody String json) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json; charset=utf-8");
+        LOGGER.info("updatePosition[Controller] :{}",json);
+        ResponseEntity<String> responseEntity;
+        
+        try {
+            responseEntity = positionService.updatePosition(json);
+            return responseEntity;
+        } catch (Exception e) {
+            LOGGER.error("updatePosition[Controller] error msg : {}",e.getMessage());
+            return new ResponseEntity<String>("{\"ERROR\":" +e.getMessage()+ "\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+
+    @PostMapping("/deletePosition")
+    public ResponseEntity<String> deletePosition(HttpServletRequest request,@RequestBody String json) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json; charset=utf-8");
+        LOGGER.info("deletePosition[Controller] :{}",json);
+        ResponseEntity<String> responseEntity;
+        
+        try {
+            responseEntity = positionService.deletePosition(json);
+            return responseEntity;
+        } catch (Exception e) {
+            LOGGER.error("deletePosition[Controller] error msg : {}",e.getMessage());
             return new ResponseEntity<String>("{\"ERROR\":" +e.getMessage()+ "\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 

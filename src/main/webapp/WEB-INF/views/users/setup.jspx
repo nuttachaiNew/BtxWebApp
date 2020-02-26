@@ -44,7 +44,6 @@
                              <th class="black" >Area</th>
 
                              <th class="black" >Edit</th>
-                             <th class="black" >Delete</th>
                            </tr>
                         </thead>
                         <tbody id="tableData">

@@ -14,8 +14,8 @@
         <![CDATA[
 
         var session = {
-			       lang: "${lang}",                                             // the language is page language (eg. TH, EN)
-	          context: '${pageContext.request.contextPath}',              // the context path
+             lang: "${lang}",                                             // the language is page language (eg. TH, EN)
+            context: '${pageContext.request.contextPath}',              // the context path
             date: new Date(Number("${now.time}")).setHours(0,0,0,0),    // the current date without time
             time: new Date(Number("${now.time}")),                      // the current date with time
             user: "${user}",
@@ -25,9 +25,27 @@
         var csrfParameter = '${_csrf.parameterName}';
         var csrfToken = '${_csrf.token}';
 
-		var variableconstraints = {
-		
-		}
+    var variableconstraints = {
+    
+    }
+
+var fileHttp = "http://203.150.199.131/engine/forms";
+var caseType ={
+  "CR" :"Chronic",
+  "AR" :"Acute",
+  "CH":"Swap",
+  "RT":"Return"
+}
+var customerType={
+  "1":"Person",
+  "2":"Hospital"
+}
+var caseStatus ={
+  "R":"<label class='label label-danger'>Reject</label>",
+  "W":"<label class='label label-warning'>Pending</label>",
+  "A":"<label class='label label-success'> Approved</label>",
+  "F":"<label class='label label-success'>Finished </label>"
+}
         
         ]]>
     </script>
@@ -36,9 +54,20 @@
         /* Navigation Left Side Bar Color */
         /* Button */
         .navbar-material-grey-800.navbar {
-		    background-color: #4291e2;
-		    color: rgb(240, 255, 255);
-		}
+        background-color: #4291e2;
+        color: rgb(240, 255, 255);
+    }
+.fade.in {
+  opacity: 1;
+}
+.modal.in .modal-dialog {
+  -webkit-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
+  transform: translate(0, 0);
+}
+.modal-backdrop.in {
+  opacity: 0.5;
+}
 
         .fa-home{
             font-size: 1.5rem;
@@ -48,13 +77,13 @@
             padding-top: 7em;
         }
         
-		.modal-backdrop {
-		    background: rgba(247, 245, 245, 0.96);
-		}
-		
-		.trblue {
-			background-color: rgba(0, 188, 212, 0.37) !important;
-		}
+    .modal-backdrop {
+        background: rgba(247, 245, 245, 0.96);
+    }
+    
+    .trblue {
+      background-color: rgba(0, 188, 212, 0.37) !important;
+    }
 
     .dv-loading {
         -webkit-animation: spin 1.5s infinite linear;
@@ -73,8 +102,11 @@
         to {transform:rotate(360deg);}
     }
 
+ .modal-blue{
+      background-color:rgba(223, 240, 255, 1.0)
+    }
     </style>
-    
+     
     <!-- Initial I18N -->
   <c:set scope="request" var="LABEL_MENU"><spring:message code="LABEL_MENU"/></c:set>
   <c:set scope="request" var="LABEL_LANGUAGE"><spring:message code="LABEL_LANGUAGE"/></c:set>
@@ -95,86 +127,115 @@
         </div>
     </div>
 
+      <div class="dv-background" style="display: none;">
+        <div class="dv-loading">
+            <spring:url value="/resources/images/ess-loader.png" var="image_loader_url" />
+            <div class="image-contain" style="background-image: url(${image_loader_url}); width:30px;height:30px;">
+                <jsp:text/>
+            </div>
+        </div>
+    </div>
 
-    <div class="navbar navbar-fixed-top navbar-material-grey-800" role="navigation" style="background-color: #3f71a3;" >
-					    	<div class="container-fluid" style="height:40px;">
-					    		<div class="navbar-header"   >
-					    		    <div id="trigger" class="st-trigger-effects">
-						  				<div id="data_effect-st" data-effect="st-effect-13" style="height: 40px; width: 40px" >
-							  				<span id="hamburger" class="hamburger hamburger--collapse" >
-												<span class="hamburger-box">
-													<span class="hamburger-inner" ></span>
-												</span>
-											</span>
-										</div>   
-									</div>	
-					    		</div>
-					    		
-					    		<!-- <div class="collapse navbar-collapse" id="navbar-collapse-1"> -->
-					    		    <sec:authentication var="principal" property="principal" />
-					    
-								 		<form action="${fn:escapeXml(sign_out_url)}" method="post" id="logoutForm">
+
+
+
+<!--   <a href="javascript:submitlogout()" style="padding-top: 0px; padding-bottom: 0px; padding-left: 5px;">
+                        <h2 style="margin-top: 10px;color: azure;"><span class="fa fa-sign-out"></span></h2>
+                      </a>
+ --> 
+     <form action="${fn:escapeXml(sign_out_url)}" method="post" id="logoutForm">
                                         <input type="hidden"
                                                name="${_csrf.parameterName}"
                                                value="${_csrf.token}" />
-           							    </form>
-							
-				                    <ul class="nav navbar-nav navbar-right  col-sm-3" style="margin-left:10px;">
-				                    
-										<li class="dropdown col-sm-2 col-sm-offset-10" style="text-align: left;left: 9%;padding-left: 0px; ">
-											<a href="javascript:submitlogout()" style="padding-top: 0px; padding-bottom: 0px; padding-left: 5px;">
-												<h2 style="margin-top: 10px;color: azure;"><span class="fa fa-sign-out"></span></h2>
-											</a>
-										</li>
-				                    </ul>
-					    		<!-- </div> -->
-					    	</div>
-	</div>
-	
-
-
-
+                            </form>
     
 
 
-	<script type="text/javascript">
+  <script type="text/javascript">
         <![CDATA[
 
-		$(document).ready(function() {
+    $(document).ready(function() {
 
-			timeoutVariable = setInterval(function () {
-				checkSessionTimeOut()
-			}, 1000);
-		});
-
-	
-
-		function submitlogout() {
-			$('#logoutForm').submit();
-		}
+      timeoutVariable = setInterval(function () {
+        checkSessionTimeOut()
+      }, 1000);
 
 
-		var secondTimeout = session['timeout'];
-		var timeoutVariable;
 
-		function checkSessionTimeOut() {
-			secondTimeout -= 1;
+
+    });
+    function renderProfile(){
+        var json = $.ajax({
+          type: "GET",
+          dataType: "json",
+          url: session['context'] + '/users/getUserProfile?username='+session['user'],
+          headers: {
+              Accept: "application/json",
+          },
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          async: false
+      }).responseJSON;
+      $("#profileName").text((json.firstName==null?"":json.firstName)+" "+(json.lastName==null?"":json.lastName) )
+      $("#profileRole").text((json.role==null?"":json.role.name) )
+      $("#profileArea").text((json.branch==null?"":json.branch.name) )
+      if(json.authorities[0].name != "TS"){
+         $("#viewProduct").hide() 
+         $("#returnTracking").hide();
+
+      }
+      if(json.authorities[0].name != "FN"){
+
+         $("#depositView").hide() ;
+
+      }
+      if(json.authorities[0].name != "CS"){
+          $("#productTracking").hide();
+      }
+       var json = $.ajax({
+          type: "GET",
+          dataType: "json",
+          url: session['context'] + '/users/getImage?username='+session['user'],
+          headers: {
+              Accept: "application/json",
+          },
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          async: false
+      }).responseJSON;
+      $("#profileImage").attr("src", "data:image/png;base64," + json);
+
+
+  }
+  
+
+    function submitlogout() {
+      $('#logoutForm').submit();
+    }
+
+
+    var secondTimeout = session['timeout'];
+    var timeoutVariable;
+
+    function checkSessionTimeOut() {
+      secondTimeout -= 1;
             //console.log(secondTimeout);
-			if (secondTimeout <= -3) {
-				window.clearInterval(timeoutVariable);
-				swal({
-					title: "Warning",
-					text: "Your session has expired, please login again",
-					type: "warning",
-					confirmButtonClass: "btn-info",
-					confirmButtonText: "OK",
-					closeOnConfirm: false
-				},
-				function(){
-					window.location.href = window.location.href;
-				});
-			}
-		}
+      if (secondTimeout <= -3) {
+        window.clearInterval(timeoutVariable);
+        swal({
+          title: "Warning",
+          text: "Your session has expired, please login again",
+          type: "warning",
+          confirmButtonClass: "btn-info",
+          confirmButtonText: "OK",
+          closeOnConfirm: false
+        },
+        function(){
+          window.location.href = window.location.href;
+        });
+      }
+    }
+
         ]]>
     </script>
 </div> 

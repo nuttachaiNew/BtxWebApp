@@ -1,0 +1,396 @@
+<div xmlns:spring="http://www.springframework.org/tags"   xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"  xmlns:form="http://www.springframework.org/tags/form"  xmlns:c="http://java.sun.com/jsp/jstl/core"  xmlns:jsp="http://java.sun.com/JSP/Page"    version="2.0">
+  <jsp:directive.page contentType="text/html;charset=UTF-8" />
+  <jsp:output omit-xml-declaration="yes" />
+    <spring:url value="/resources/images/cancel.png" var="img_cancel"/>
+    <spring:url value="/resources/images/checked.png" var="img_checked"/>
+
+  <c:set scope="request" var="LB_CODE"><spring:message code="LB_CODE"/></c:set>
+  <c:set scope="request" var="LB_NAME"><spring:message code="LB_NAME"/></c:set>
+  <c:set scope="request" var="LB_SAVED_DATE"><spring:message code="LB_SAVED_DATE"/></c:set>
+  <c:set scope="request" var="LB_RECIEVE_DATE"><spring:message code="LB_RECIEVE_DATE"/></c:set>
+  <c:set scope="request" var="LB_DELETE"><spring:message code="LB_DELETE"/></c:set>
+
+
+    <spring:url value="/resources/vendor/chart.js/Chart.js" var="chart_js_url" />
+    <spring:url value="/resources/vendor/chart.js/Chart.min.js" var="Chart_min_js"/>
+
+
+    <spring:url value="/resources/js/demo/chart-area-demo.js" var="chart_area_demo_js" />
+    <spring:url value="/resources/js/demo/chart-pie-demo.js" var="chart_pie_demo_js" />
+    <spring:url value="/resources/js/demo/chart-bar-demo.js" var="chart_bar_demo_js" />
+
+    <script src="${chart_js_url}"><!-- required for FF3 and Opera --></script>
+    <script src="${Chart_min_js}"><!-- required for FF3 and Opera --></script>
+
+
+
+
+
+
+  <style>
+      #ViewReport{ background-color: #1cc88a; }
+      #ViewReport a { color: white !important; }
+      #ViewReport i { color: white !important; }
+
+              .Pend{
+                color:red;
+              }
+              .Rejec{
+                color:orange;
+              }
+              .Approve{
+                color:green;
+              }
+              .searchblue{
+                text-align:center;
+                color:#5DB2FC;
+              }
+              .editblue{
+                text-align:center;
+                color:#5DB2FC;
+              }
+              .editgray{
+                text-align:center;
+                color:#909798;
+              }
+
+              </style>
+              <style type="text/css">/* Chart.js */
+            @-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style>
+ <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <jsp:include page="../sidebar.jspx"/>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content" style="background-color:#5DB2FC">
+
+        <!-- Topbar -->
+
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid" >
+
+          <!-- Page Heading -->
+          <jsp:include page="../appbar.jspx">
+            <jsp:param name="title" value="View Report"/>
+          </jsp:include>
+
+          <hr />
+        <form class="user">
+
+          <div class="row">
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-2 col-md-6" style="color:white">
+                <div class="form-group row">
+                              <div class="col-sm-6 mb-3 mb-sm-0">
+                                <label class="" style="font-size:16pt">Duration </label><![CDATA[&nbsp;]]>
+                              </div>
+                              <div class="col-sm-6" style="margin-left:-15%">
+                                <!-- <div class="dropdown">
+                                <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown">Month
+                                <span class="caret"></span>
+                               </button>
+                              <ul class="dropdown-menu">
+                                <li><a href="#">HTML</a></li>
+                                <li><a href="#">CSS</a></li>
+                                <li><a href="#">JavaScript</a></li>
+                              </ul>
+                              </div> -->
+                              <div class="dropdown">
+                                <button type="button" style="font-size:16pt;color:#5DB2FC;border-radius:50px" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Month</button>
+                                <div class="dropdown-menu"  x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);font-size:16pt;color:#5DB2FC">
+                                  <a class="dropdown-item" style="font-size:16pt;color:#5DB2FC" href="#">Date</a>
+                                  <a class="dropdown-item" style="font-size:16pt;color:#5DB2FC" href="#">Year</a>
+                                  <a class="dropdown-item" style="font-size:16pt;color:#5DB2FC" href="#">Custom</a>
+                                </div>
+                              </div>
+                              <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]>
+                            </div>
+                </div>
+
+
+            </div>
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-4 col-md-6 ">
+              <div class="row">
+                <div  style="margin-left:-5%">
+                  <div class="input-group">
+                    <div class="dropdown">
+                      <input type="date"  id="dateFrom" style="font-size:16pt;color:#5DB2FC;border-radius:50px" class="btn btn-light form-control"/>
+                    </div>
+                    <![CDATA[&nbsp;]]><label style="color:white">To</label><![CDATA[&nbsp;]]>
+                    <div class="dropdown">
+                      <input type="date" id="dateTo" style="font-size:16pt;color:#5DB2FC;border-radius:50px" class="btn btn-light form-control"/>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6" style="color:white;display:none" id="todate1">
+                  <div class="row">
+                    <div class="col-2">
+                      <span style="margin-left:1%;color:#5DB2FC">To</span>
+                    </div>
+                    <div class="col-8">
+                     <div class="dropdown" style="margin:left:-10%">
+                          <input type="date" class="btn btn-light"/>
+                      </div>
+                     </div>
+                 </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-2 col-md-6" style="color:white">
+              <div class="form-group row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    Area
+                  </div>
+                  <div class="col-sm-6" style="margin-left:-20%">
+                    <select id="selectArea" class="form-control">
+                      <jsp:text/>
+                    </select>
+                   <!--  <div class="dropdown">
+                      <button type="button" style="font-size:16pt;color:#5DB2FC;border-radius:50px" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Phayathai</button>
+                      <div class="dropdown-menu"  x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);font-size:16pt;color:#5DB2FC">
+                        <a class="dropdown-item" style="font-size:16pt;color:#5DB2FC" href="#">Magkason</a>
+                        <a class="dropdown-item" style="font-size:16pt;color:#5DB2FC" href="#">Ratchathewi  </a>
+                        <a class="dropdown-item" style="font-size:16pt;color:#5DB2FC" href="#">Dindaeng</a>
+                      </div>
+                    </div> -->
+                  </div>
+              </div>
+            </div>
+
+            <!-- Pending Requests Card Example -->
+            <div class="col-xl-1 col-md-6 ">
+              <a href="login.html" class="btn btn-light btn-user btn-block" style="font-size:16pt;color:#5DB2FC">
+                  Search
+                </a>
+            </div>
+            <div class="col-xl-1 col-md-6 ">
+              <a href="login.html" class="btn btn-light btn-user btn-block" style="font-size:16pt;color:#5DB2FC">
+                  Clear </a>
+            </div>
+          </div>
+        </form>
+
+
+          <!-- Content Row -->
+
+
+          <div class="row" id="staticGraph" >
+
+            <!-- Area Chart -->
+            <div class="col">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+
+                <!-- Card Body -->
+                <div class="card-body">
+
+                  <div class="row">
+                     <div class="col-xl-5 col-md-4"  id="x1">
+
+                       <label style="color:black;font-weight:bold" class="headerB2">Over all</label>
+
+                       <div class="card-body" style="text-align:left">
+                         <canvas id="doughnutChart" style="height: 270px; max-width: 320px; margin: 0px auto;"></canvas>
+
+                       </div>
+
+
+
+
+                       <div class="col">
+
+                         <table class="table table-borderless" style="width:200px;margin:-15px;color:#000000;">
+                          <tr>
+                            <td>
+                              <div class="text-center">
+
+                              </div>
+                            </td>
+                            <td>Choronic Case</td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <div class="text-center">
+                                <canvas id="RED1" style="height: 70px; max-width: 70px; margin: -15px auto;"><jsp:text/></canvas>
+                                <h6 style="margin-top:-40px"><span class="label green badge">20%</span></h6>
+                              </div>
+                            </td>
+                            <td>Acute Case</td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <div class="text-center">
+                                <canvas id="BLUE1" style="height: 70px; max-width: 70px; margin: -15px auto;"><jsp:text/></canvas>
+                                <h6 style="margin-top:-40px"><span class="label green badge">10%</span></h6>
+                              </div>
+                            </td>
+                            <td>Change Machine</td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <div class="text-center">
+                                <canvas id="YELLOW1" style="height: 70px; max-width: 70px; margin: -15px auto;"><jsp:text/></canvas>
+                                <h6 style="margin-top:-40px"><span class="label green badge">2%</span></h6>
+                              </div>
+                            </td>
+                            <td>Return Machine</td>
+                          </tr>
+                         </table>
+                       </div>
+
+
+
+                     </div>
+                     <div class="col-xl-7 col-md-8" id="x2">
+                      <div class="row">
+
+                        <div class="col-2">
+                            <span style="color:black;font-weight:bold" class="headerB2">By Case</span>
+                        </div>
+                        <div class="col-4">
+                          <jsp:text/>
+                        </div>
+                        <div style="text-align:right" class="col-2">
+                            Filter
+                        </div>
+                        <div class="col-2" >
+
+
+                              <script>
+                                      <![CDATA[
+
+                              function displayChoronic() {
+                                document.getElementById("demo").innerHTML = "Chronic Case";
+                                var element = document.getElementById("demo");
+                                element.classList.add("btn-success");
+
+                                renderData();
+
+                              }
+                              function displayAcute() {
+                                document.getElementById("demo").innerHTML = "Acute Case";
+                                  var element = document.getElementById("demo");
+                                  element.classList.add("btn-danger");
+                                renderData();
+
+
+
+                              }
+                              function displayChange() {
+                                document.getElementById("demo").innerHTML = "Change Machine";
+                                var element = document.getElementById("demo");
+                                element.classList.add("btn-blue");
+                                renderData();
+
+                              }
+                              function displayReturn() {
+                                document.getElementById("demo").innerHTML = "Return Machine";
+                                var element = document.getElementById("demo");
+                                element.classList.add("btn-warning");
+                                renderData();
+
+                              }
+                              ]]>
+                              </script>
+                              <style>
+                              a.a1:hover{background-color:#3CB878;color: white}
+                              a.a2:hover{background-color:#e74a3b;color: white}
+                              a.a3:hover{background-color:#309FF7;color: white}
+                              a.a4:hover{background-color:#f6c23e;color: white}
+                              </style>
+
+                            <div class="dropdown" >
+                              <button type="button" style="font-size:16pt" class="btn btn-success dropdown-toggle" id="demo" data-toggle="dropdown" aria-expanded="false">Chronic Case</button>
+                              <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);font-size:16pt">
+                                <a class="dropdown-item a1"  style="font-size:16pt" href="#" onclick="displayChoronic()" id="c1">Chronic Case</a>
+                                <a class="dropdown-item a2" style="font-size:16pt"  href="#" onclick="displayAcute()">Acute Case</a>
+                                <a class="dropdown-item a3" style="font-size:16pt"  href="#" onclick="displayChange()">Change Machine </a>
+                                <a class="dropdown-item a4" style="font-size:16pt" href="#" onclick="displayReturn()">Return Machine</a>
+                              </div>
+                            </div>
+                        </div>
+                      </div>
+                        <div class="row">
+                          <div class="card-body">
+                            <div class="table table-borderless" style="width:650px">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4"><div class="row"><div class="col-sm-12"><table class="table" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                  <thead style="font-size:16pt;">
+                                    <tr role="row">
+                                      <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">Order</th>
+                                      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending">Case ID</th>
+                                      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending">Customer Name</th>
+                                      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending">Address</th>
+                                      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Active</th>
+                                    </tr>
+                                  </thead>
+
+                                  <tbody style="font-size:16pt;color:black" id="data">
+                                    <jsp:text/>
+                                  </tbody>
+                                </table></div></div></div>
+                              </div>
+
+                          </div>
+
+                        </div>
+                      </div>
+
+
+
+                  </div>
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+              </div>
+            </div>
+
+            <!-- Pie Chart -->
+
+          </div>
+
+          <!-- Content Row -->
+
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+
+
+    </div>
+
+
+    </div>
+
+  <a class="scroll-to-top rounded" href="#page-top" style="display: inline;">
+    <i class="fas fa-angle-up"><jsp:text/><jsp:text/></i>
+  </a>
+
+
+
+ <spring:url value="${urls.getForLookupPath('/resources/scripts/application/cases/viewReport.js')}" var="setup" />
+    <script type="text/javascript"  src="${setup}" ><!-- required for FF3 and Opera --></script>
+</div>

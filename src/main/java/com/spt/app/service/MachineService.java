@@ -9,7 +9,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 public interface MachineService {
 		public ResponseEntity<String> findAllMachine();
-		// public ResponseEntity<String> deletePosition(String json);
-		// public ResponseEntity<String> insertPosition(String json);
-		// public ResponseEntity<String> updatePosition(String json);
+		public ResponseEntity<String> findById(Long id);
+		public ResponseEntity<String> insert(String json);
+		public ResponseEntity<String> insertList(String json);
+		public ResponseEntity<String> update(String json);
 }

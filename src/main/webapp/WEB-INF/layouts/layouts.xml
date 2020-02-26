@@ -12,11 +12,13 @@
   </definition>
 
   <definition name="defaultMaster" template="/WEB-INF/layouts/defaultMaster.jspx">
-    <put-attribute name="header" value="/WEB-INF/views/header.jspx" />
-    <put-attribute name="menu" value="/WEB-INF/views/menu.jspx" />
+   <put-attribute name="header" value="/WEB-INF/views/header.jspx" />
     <put-attribute name="footer" value="/WEB-INF/views/footer.jspx" />
   </definition>
 
+  
+  <definition name="popup" template="/WEB-INF/layouts/defaultWithoutLib.jspx">
+  </definition>
 
   <definition name="public" template="/WEB-INF/layouts/default.jspx">
     <put-attribute name="header" value="/WEB-INF/views/header.jspx" />

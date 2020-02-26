@@ -33,7 +33,7 @@ public abstract class  AbstractEngineService {
 
 	protected String EngineServer = "localhost:8080/Engine/rest";
     protected static Properties connectProperties = null;
-    private static  String tokenUrl = "http://58.181.168.159:8081/getToken";
+    private static  String tokenUrl = "http://localhost:8081/getToken";
 
     protected String webServicesString = "";
     protected String resultString = "";
@@ -438,15 +438,21 @@ public abstract class  AbstractEngineService {
 
 			MultipartFile multipathFile = multipartHttpServletRequest.getFile("image");
 			String json =  multipartHttpServletRequest.getParameter("json");
-        	File convFile = new File(multipathFile.getOriginalFilename());
-			multipathFile.transferTo(convFile);
+          
+        	
 			MediaType mediaType = MediaType.MULTIPART_FORM_DATA;
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(mediaType);
             headers.add("Authorization", "Bearer " + token.replace("\"", ""));
-			MultiValueMap<String, Object> body = new LinkedMultiValueMap<String, Object>();  
-			FileSystemResource file = new FileSystemResource(convFile);
-			body.add("file", file);
+			MultiValueMap<String, Object> body = new LinkedMultiValueMap<String, Object>();
+            File convFile = null;
+            if(multipathFile!=null){
+                 convFile = new File(multipathFile.getOriginalFilename());
+                 multipathFile.transferTo(convFile);  
+                 FileSystemResource file = new FileSystemResource(convFile);
+                 body.add("file", file);
+            }   
+            
             LOGGER.debug("json : {}",json);
 			body.add("json",json);
 
@@ -456,7 +462,7 @@ public abstract class  AbstractEngineService {
 			converter.setSupportedMediaTypes(Arrays.asList(mediaType));
 			restTemplate.getMessageConverters().add(converter);
 			responseEntity = restTemplate.postForEntity(url, entity, String.class);
-			 convFile.delete();
+			if(multipathFile!=null)convFile.delete();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

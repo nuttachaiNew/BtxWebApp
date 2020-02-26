@@ -1,0 +1,216 @@
+<div xmlns:spring="http://www.springframework.org/tags"   xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"  xmlns:form="http://www.springframework.org/tags/form"  xmlns:c="http://java.sun.com/jsp/jstl/core"  xmlns:jsp="http://java.sun.com/JSP/Page"    version="2.0">
+  <jsp:directive.page contentType="text/html;charset=UTF-8" />
+  <jsp:output omit-xml-declaration="yes" />
+    <spring:url value="/resources/images/cancel.png" var="img_cancel"/>
+    <spring:url value="/resources/images/checked.png" var="img_checked"/>
+
+  <c:set scope="request" var="LB_CODE"><spring:message code="LB_CODE"/></c:set>
+  <c:set scope="request" var="LB_NAME"><spring:message code="LB_NAME"/></c:set>
+  <c:set scope="request" var="LB_SAVED_DATE"><spring:message code="LB_SAVED_DATE"/></c:set>
+  <c:set scope="request" var="LB_RECIEVE_DATE"><spring:message code="LB_RECIEVE_DATE"/></c:set>
+  <c:set scope="request" var="LB_DELETE"><spring:message code="LB_DELETE"/></c:set>
+  <spring:url value="/resources/images/user.png" var="img_user" />
+
+  <style>
+              .Pend{
+                color:#F26C4F;
+              }
+              .Rejec{
+                color:#FFA700;
+              }
+              .Approve{
+                color:#3CB878;
+              }
+              .searchblue{
+                text-align:center;
+                color:#219FEC;
+              }
+              .editblue{
+                text-align:center;
+                color:#5DB2FC;
+              }
+              .editgray{
+                text-align:center;
+                color:#909798;
+              }
+                 .icon {color: white!important;}
+
+              </style>
+
+ <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="menuboom navbar-nav bg-gradient-light sidebar sidebar-light accordion" id="accordionSidebar">
+
+       <div class="container-fuild" style="padding-top: 0px;">
+      <div class="row" style="text-align:center">
+      <div class="col-12">
+      <br/>
+      <span>
+      <img src="${img_user}" class="rounded-circle" width="100" height="100" id="profileImage" />
+
+      </span>
+      </div>
+      <div class="col-12">
+      <p class="mr-2 d-none d-lg-inline text-light-600 xx-large" id="profileName" style="color:#219FEC">Valerie Luna</p><br/>
+      <p class="mr-2 d-none d-lg-inline text-light-600 large" id="profileRole" style="color:black">CS</p><br/>
+      <p class="mr-2 d-none d-lg-inline text-light-600 large" id="profileArea" >Baxter Area</p>
+      <div class="col-12">
+        <jsp:text/>
+      </div>
+        <jsp:text/>
+      </div>
+      <hr class="sidebar-divider my-0" />
+
+      <!-- Nav Item - Dashboard -->
+
+<ul class="nav nav-pills" id="menubarbu">
+              <li class="nav-item" id="Dashboard">
+                <a class="nav-link text-center" href="/BaxterApplication/casemanagements/dashboard" style="color:#219FEC">
+                  <i class="fas fa-fw fa-tachometer-alt icon" style="color:#5DB2FC!important"><jsp:text/></i>
+                  <span>Dashboard</span>
+                </a>
+
+              </li>
+              <li class="nav-item" id="ViewCase">
+                <a class="nav-link text-center collapse-inner rounded" href="/BaxterApplication/casemanagements/listviewcase" style="color:#F64236">
+                  <i class="fas fa-align-justify icon case" style="color:#F26C4F!important"><jsp:text/></i>
+                  <span>View Case</span>
+                </a>
+             </li>
+
+       <li class="nav-item" id="depositView">
+        <a class="nav-link activeVC text-center collapse-inner rounded" href="/BaxterApplication/casemanagements/depositlist" style="color:white;background-color:#FFA700">
+          <i class="far fa-calendar-alt icon" style="color:white!important"><jsp:text/></i>
+          <span>Return Deposit</span>
+        </a>
+       </li>
+
+        <li class="nav-item" id="ViewReport">
+        <a class="nav-link text-center" href="/BaxterApplication/casemanagements/viewReport" style="color:#5ADA79">
+          <i style="color:#3CB878!important" class="far fa-chart-bar icon"><jsp:text/></i>
+          <span>View Report</span></a>
+      </li>
+       <li class="nav-item" id="viewProduct">
+        <a class="nav-link text-center" href="/BaxterApplication/machines/setupMachine" >
+          <i class="fas fa-cog icon"  style="color:red!important"><jsp:text/></i>
+          <span style="color:red!important">Manage Product</span></a>
+      </li>
+
+        <li class="nav-item" id="logout">
+        <a id="logout" href="#" class="nav-link text-center" onlick="submitlogout()" style="color:#5ADA79;">
+          <i style="color:#5ADA79!important" ><jsp:text/></i>
+          <span>Logout</span></a>
+      </li>
+
+
+</ul>
+
+      <div class="text-center d-none d-md-inline">
+        <jsp:text/>
+      </div>
+
+    </div></div>
+
+</ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content" style="background-color:#5DB2FC">
+
+        <!-- Topbar -->
+
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid" >
+
+          <!-- Page Heading -->
+            <jsp:include page="../appbar.jspx">
+                <jsp:param name="title" value="Return Deposit"/>
+            </jsp:include>
+
+          <hr/>
+
+
+<!-- Modal -->
+
+          <form class="user">
+              <div class="row">
+
+                <!-- Area Chart -->
+                <div class="col">
+                  <div class="card shadow mb-4">
+
+                <div class="card-body">
+                  <div class="table">
+                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
+                      <div class="row">
+                        <div class="col-sm-12">
+                      <table class="table table-sm dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;color:#000000">
+                      <thead>
+                        <tr role="row" style="color:#868686" >
+                          <th>Case ID</th>
+                          <th class="text-primary">Create Date <i class="fas fa-caret-down"><jsp:text/></i></th>
+                          <th>Customer Name</th>
+                          <th class="text-primary">Type <i class="fas fa-caret-down"><jsp:text/></i></th>
+                          <th>Amount</th>
+                          <th>Deposit By</th>
+                          <th class="text-primary">Manage</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                       <jsp:text/>
+                      </tbody>
+
+                    </table>
+                    <!-- end of table -->
+
+                  </div>
+                </div>
+              </div>
+                  </div>
+                </div>
+                <!-- end card body -->
+              </div>
+                </div>
+
+                <!-- col  -->
+
+              </div>
+            </form>
+
+
+          </div>
+
+          <!-- Content Row -->
+
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top" style="display: inline;">
+    <i class="fas fa-angle-up"><jsp:text/></i>
+  </a>
+
+
+  <spring:url value="${urls.getForLookupPath('/resources/scripts/application/cases/depositList.js')}" var="setup" />
+    <script type="text/javascript"  src="${setup}" ><!-- required for FF3 and Opera --></script>
+
+</div>

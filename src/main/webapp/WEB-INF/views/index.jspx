@@ -6,7 +6,9 @@
   
   <spring:url value="/resources/images/user.png" var="img_user" />
 <div class="container-fluid">
-      <div class="row">
+   
+  <!--   <div class="col-sm-12">
+       <div class="row">
           <div class="form-group">
              <div class="col-sm-12">
                 <lable class="control-label white" >Profile Settings</lable>
@@ -16,7 +18,7 @@
           <div class="form-group" style="margin-top:2%;">
              <div class="col-sm-6">
             <jsp:text/>
-            <div class="panel panel-default" style="height: 510px;">
+            <div class="panel panel-default modal-blue" style="height: 510px;">
               <div class="panel-body">
                 <div class="form-group">
                   <i class="fa fa-cog"><jsp:text/></i> &#160;&#160;&#160; General
@@ -64,7 +66,7 @@
           </div>
            <div style="margin-left:-2%" class="col-sm-6">
             <jsp:text/>
-              <div class="panel panel-default" style="height: 300px;">
+              <div class="panel panel-default modal-blue" style="height: 300px;">
               <div class="panel-body">
                  <i class="fa fa-building-o"><jsp:text/></i> &#160;&#160;&#160; Work
                  <div class="form-group">
@@ -77,7 +79,7 @@
               </div>
             </div>
 
-              <div class="panel panel-default" style="height: 200px;margin-top:-2%;">
+              <div class="panel panel-default modal-blue" style="height: 200px;margin-top:-2%;">
               <div class="panel-body">
               <i class="fa fa-shield"><jsp:text/></i> &#160;&#160;&#160; Security Login
                  <div class="form-group">
@@ -103,6 +105,10 @@
             <button class="btn btn-danger" id="logout"> <i class="fa fa-sign-out"><jsp:text/></i> Log out</button>
           </div>
       </div>
+    </div>
+
+ -->
+     
 </div>
 
     <spring:url value="${urls.getForLookupPath('/resources/scripts/application/index/setup.js')}" var="setup" />

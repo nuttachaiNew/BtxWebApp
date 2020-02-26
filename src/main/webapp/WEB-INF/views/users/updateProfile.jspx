@@ -1,0 +1,396 @@
+<div xmlns:spring="http://www.springframework.org/tags"   xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"  xmlns:form="http://www.springframework.org/tags/form"  xmlns:c="http://java.sun.com/jsp/jstl/core"  xmlns:jsp="http://java.sun.com/JSP/Page"    version="2.0">
+  <jsp:directive.page contentType="text/html;charset=UTF-8" />
+  <jsp:output omit-xml-declaration="yes" />
+
+
+  <c:set scope="request" var="LB_CODE"><spring:message code="LB_CODE"/></c:set>
+  <c:set scope="request" var="LB_NAME"><spring:message code="LB_NAME"/></c:set>
+  <c:set scope="request" var="LB_SAVED_DATE"><spring:message code="LB_SAVED_DATE"/></c:set>
+  <c:set scope="request" var="LB_RECIEVE_DATE"><spring:message code="LB_RECIEVE_DATE"/></c:set>
+  <c:set scope="request" var="LB_DELETE"><spring:message code="LB_DELETE"/></c:set>
+<!--  -->
+
+
+    <spring:url value="/resources/vendor/chart.js/Chart.js" var="chart_js_url" />
+    <spring:url value="/resources/vendor/chart.js/Chart.min.js" var="Chart_min_js"/>
+
+
+    <spring:url value="/resources/js/demo/chart-area-demo.js" var="chart_area_demo_js" />
+    <spring:url value="/resources/js/demo/chart-pie-demo.js" var="chart_pie_demo_js" />
+    <spring:url value="/resources/js/demo/chart-bar-demo.js" var="chart_bar_demo_js" />
+
+    <script src="${chart_js_url}"><!-- required for FF3 and Opera --></script>
+
+    <style>
+         /* .icon {color: white!important;} */
+
+
+         /* #Dashboard{ background-color: #5DB2FC; color: white!important; } */
+         i.case:hover{background-color:#1cc88a;color: white}
+         .Wait{
+           color:orange;
+         }
+         .Rejec{
+           color:orange;
+         }
+         .Approve{
+           color:green;
+         }
+         .searchblue{
+           text-align:center;
+           color:#5DB2FC;
+         }
+         .editblue{
+           text-align:center;
+           color:#5DB2FC;
+         }
+         .editgray{
+           text-align:center;
+           color:#909798;
+         }
+            .container{
+
+    padding-top: 0px;
+
+      }
+    /*  div#imagePreview {
+         content:url(http://placehold.it/350x150);
+      }​*/
+       </style>
+
+       <div id="wrapper">
+
+           <!-- Sidebar -->
+           <jsp:include page="../sidebar.jspx"/>
+           <!-- End of Sidebar -->
+
+         <div id="content-wrapper" class="d-flex flex-column" style="background-color:#5DB2FC">
+          <div id="content">
+            <div class="container-fluid">
+                <!-- Page Heading -->
+                <jsp:include page="../appbar.jspx">
+                    <jsp:param name="title" value="Profile Setting"/>
+                </jsp:include>
+
+              <!-- Content Row -->
+     <hr/>
+     <div class="row">
+
+       <!-- Content Column -->
+       <div class="col-lg-6 mb-4">
+
+         <!-- Project Card Example -->
+         <div class="card shadow mb-4">
+           <div class="card-body py-3">
+             <h6 class="m-0 font-weight-bold text-primary">
+               <i class="fas fa-cog" style="vertical-align: middle"><jsp:text/></i>
+               <span class="ml-2" style="vertical-align: middle">General</span>
+             </h6>
+           </div>
+           <div class="card-body" style="padding: 20px 80px">
+
+          
+             <style>
+
+
+             .avatar-upload {
+               position: relative;
+               max-width: 205px;
+               margin: 10px auto 30px;
+             }
+             .avatar-upload .avatar-edit {
+               position: absolute;
+               right: 12px;
+               z-index: 1;
+               top: 70%;
+             }
+             .avatar-upload .avatar-edit input {
+               display: none;
+             }
+             .avatar-upload .avatar-edit input + label {
+               display: inline-block;
+               width: 34px;
+               height: 34px;
+               margin-bottom: 0;
+               border-radius: 100%;
+               background: #FFFFFF;
+               border: 1px solid transparent;
+               box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+               cursor: pointer;
+               font-weight: normal;
+               transition: all 0.2s ease-in-out;
+             }
+             .avatar-upload .avatar-edit input + label:hover {
+               background: #f1f1f1;
+               border-color: #d6d6d6;
+             }
+             .avatar-upload .avatar-edit input + label:after {
+               /* content: "\f040";
+               font-family: 'FontAwesome'; */
+               color: #757575;
+               position: absolute;
+               top: 10px;
+               left: 0;
+               right: 0;
+               text-align: center;
+               margin: auto;
+             }
+             .avatar-upload .avatar-preview {
+               width: 192px;
+               height: 192px;
+               position: relative;
+               border-radius: 100%;
+               border: 6px solid #F8F8F8;
+               box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+             }
+             .avatar-upload .avatar-preview > div {
+               width: 100%;
+               height: 100%;
+               border-radius: 100%;
+               background-size: cover;
+               background-repeat: no-repeat;
+               background-position: center;
+             }
+             </style>
+             <div class="avatar-upload">
+                 <div class="avatar-edit">
+                     <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg"/>
+                     <label for="imageUpload"><jsp:text/><i class="fas fa-pencil-alt" style="margin-left:30%;margin-top:25%">  <jsp:text/></i></label>
+                 </div>
+                 <div class="avatar-preview">
+                   <div id="imagePreview" >
+                      <jsp:text/>
+
+                   </div>
+                 </div>
+             </div>
+
+
+         <br/>
+    <form class="user">
+
+           <div class="form-group">
+             <input type="text" class="form-control form-control-user" id="txtFirstName" placeholder="Name"/>
+           </div>
+           <div class="form-group">
+             <input type="text" class="form-control form-control-user" id="txtLastName" placeholder="Surname"/>
+           </div>
+           <div class="form-group">
+             <input type="text" class="form-control form-control-user" id="txtEmail" placeholder="bu@baxter.com"/>
+           </div>
+           <div class="form-group">
+             <input type="text" class="form-control form-control-user" id="txtTelNo" placeholder="Tel No"/>
+           </div>
+
+           <a  class="btn btn-primary btn-user btn-block" style="color:white;font-size:16pt" data-toggle="modal" id="btnSave">
+             Save
+           </a>
+           <hr/>
+
+         </form>
+         <div class="modal fade" id="SaveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="display: none;" aria-hidden="true">
+             <div class="modal-dialog modal-sm" role="document">
+                 <div class="modal-content">
+                   <div class="modal-header bg-success" style="color:white;">
+                     <div class="container" style="text-align:center">
+                       <div class="row">
+                         <div class="col-12">
+                           <i class="far fa-check-circle fa-5x"><jsp:text/></i>
+                         </div>
+                         <div class="col-12">
+                           <h5 class="modal-title" id="exampleModalLabel">Saved Complete</h5>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                   <div class="modal-body">
+                     <div class="modal-body">
+                         <div class="container" style="text-align:center">
+                               <center>
+                                 <a href="" style="width:150px" data-toggle="modal" data-target="#SaveModal" class="btn btn-success btn-user btn-block">
+                                   OK
+                                 </a>
+                               </center>
+                         </div>
+                   </div>
+                   </div>
+
+                 </div>
+               </div>
+           </div>
+
+
+
+
+
+
+
+
+           </div>
+         </div>
+
+         <!-- Color System -->
+
+
+       </div>
+
+       <div class="col-lg-6 mb-4">
+         <div class="card shadow mb-4">
+           <div class="card-body py-3">
+             <h6 class="m-0 font-weight-bold text-danger">
+                 <i class="fas fa-briefcase" style="vertical-align: middle"><jsp:text/></i>
+                 <span class="ml-2" style="vertical-align: middle">Work</span>
+             </h6>
+           </div>
+           <div class="card-body">
+             <div class="card-body"><div class="card-body"><div class="card-body">
+             <form class="user">
+               <div class="form-group">
+                 <input type="text" class="form-control form-control-user" id="area" aria-describedby="emailHelp" placeholder="Area"/>
+               </div>
+
+             </form>
+
+           </div></div></div></div>
+         </div>
+         <div class="card shadow mb-4">
+           <div class="card-body py-3">
+             <h6 class="m-0 font-weight-bold text-success">
+                 <i class="fas fa-shield-alt" style="vertical-align: middle"><jsp:text/></i>
+                 <span class="ml-2" style="vertical-align: middle">Security Login</span>
+             </h6>
+           </div>
+           <div class="card-body" style="padding: 40px 80px">
+                   <form class="user" id="BeforeChange">
+                     <div class="form-group">
+                       <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="E-mail"/>
+
+                     </div>
+                      <div class="form-group">
+                                    <input type="email" class="form-control form-control-user" id="exampleInputPassword" aria-describedby="emailHelp" placeholder="Password"/>
+                          </div>
+                   </form>
+                   <form class="user" id="AfterChange" style="display:none">
+                     <div class="form-group">
+                       <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="E-mail"/>
+                     </div>
+                      <div class="form-group">
+                        <input type="password" class="form-control form-control-user" id="exampleInputPassword" aria-describedby="emailHelp" placeholder="Password"/>
+                      </div>
+                      <div class="form-group">
+                        <input type="password" class="form-control form-control-user" id="NewPasswordd" placeholder="New Password"/>
+                      </div>
+                      <div class="form-group">
+                        <input type="password" class="form-control form-control-user" id="RNPassword"  placeholder="Renew"/>
+                        <br/><br/>
+                        <p style="font-size:16pt">
+                        * รหัสผ่านต้องมีอักขระอย่างน้อย 8 ตัว <br/>
+                        * รหัสผ่านต้องประกอบไปด้วยอักษรภาษาอังกฤษพิมพ์ใหญ่, อักษรภาษาอังกฤษพิมพ์เล็ก, ตัวเลขอารบิก และอักขระพิเศษเหล่านี้อย่างละ 1 ตัว<br/>
+                        * รหัสผ่านใหม่สามารถใช้ซ้ำกับรหัสผ่านเดิมได้เพียง 4 ครั้ง<br/>
+                      </p>
+                      </div>
+                   </form>
+
+
+             <p class="mb-0 small" onclick="changeText1()" id="ChangeP" data-toggle="modal" data-target="#ChangePassModal-" style="text-align: right;color:#5DB2FC;font-size:16pt;">Change Password</p>
+             <p class="mb-0 small" onclick="changeText2()"  id="SaveC" style="text-align: right;color:#5DB2FC;display:none">Save Change</p>
+
+
+           </div>
+         </div>
+         <div class="card shadow mb-4" id="digitalSignDiv">
+           <div class="card-header py-3">
+             <h6 class="m-0 font-weight-bold text-warning"><i class="fas fa-pen"><jsp:text/></i><![CDATA[&nbsp;]]>Digital Signature</h6>
+           </div>
+           <div class="card-body">
+             <style>
+             .avatar-pic {
+                width: 150px;
+                }
+             </style>
+             <form class="md-form">
+              <div class="file-field">
+                <div class="z-depth-1-half mb-4">
+
+                </div>
+                <div class="d-flex justify-content-center">
+                  <div class="btn btn-mdb-color btn-rounded float-left">
+                    <span>Choose file<![CDATA[&nbsp;]]></span>
+                    <input id="dsFile"  type="file"/> 
+                  </div>
+                </div>
+              </div>
+            </form>
+             <div class="col-sm-4" ><center><button type="button" class="btn btn-primary btn-user btn-block" id="saveDs"> save </button></center> </div>
+         </div>
+         </div>
+
+       </div>
+
+     </div>
+
+              <div class="modal fade" id="ChangePassModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header" style="background-color:#04AEDC;color:white">
+                        <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">×</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="modal-body">
+                        <form class="user" style="margin-left:15%;margin-right:15%">
+                        <div class="form-group">
+                          <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Current Password"/>
+                        </div>
+                        <div class="form-group">
+                          <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="New Password"/>
+                        </div>
+                        <div class="form-group">
+                          <input type="repassword" class="form-control form-control-user" id="exampleInputrePassword" placeholder="Retype NewPassword"/>
+                        </div>
+
+                        <a href="index.html" class="btn btn-info btn-user btn-block">
+                          Save
+                        </a>
+                      </form>
+
+                      </div>
+                    </div>
+                      <div class="modal-footer">
+                        <jsp:text/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              <br/>
+            </div>
+          </div>
+        </div>
+        <div class="row" >
+          <div class="col-5">
+            <jsp:text/>
+          </div>
+          <div class="col-4">
+            <a href="#" id="logout" class="btn btn-danger btn-icon-split">
+                  <span class="icon text-white-50">
+                    <i class="fas fa-sign-out-alt"><jsp:text/></i>
+                  </span>
+                  <span class="text" style="font-size:16pt">Log out</span>
+                </a>
+          </div>
+          <div class="col-3">
+            <jsp:text/>
+          </div>
+        </div>
+        <br/>
+
+        </div>
+
+
+ <spring:url value="${urls.getForLookupPath('/resources/scripts/application/users/updateProfile.js')}" var="setup" />
+    <script type="text/javascript"  src="${setup}" ><!-- required for FF3 and Opera --></script>
+
+</div>

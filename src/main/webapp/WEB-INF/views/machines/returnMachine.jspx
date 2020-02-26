@@ -1,0 +1,349 @@
+<div xmlns:spring="http://www.springframework.org/tags"   xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"  xmlns:form="http://www.springframework.org/tags/form"  xmlns:c="http://java.sun.com/jsp/jstl/core"  xmlns:jsp="http://java.sun.com/JSP/Page"    version="2.0">
+  <jsp:directive.page contentType="text/html;charset=UTF-8" />
+  <jsp:output omit-xml-declaration="yes" />
+
+
+  <c:set scope="request" var="LB_CODE"><spring:message code="LB_CODE"/></c:set>
+  <c:set scope="request" var="LB_NAME"><spring:message code="LB_NAME"/></c:set>
+  <c:set scope="request" var="LB_SAVED_DATE"><spring:message code="LB_SAVED_DATE"/></c:set>
+  <c:set scope="request" var="LB_RECIEVE_DATE"><spring:message code="LB_RECIEVE_DATE"/></c:set>
+  <c:set scope="request" var="LB_DELETE"><spring:message code="LB_DELETE"/></c:set>
+
+  <style>
+     /* .icon {color: white!important;} */
+
+     #Returntracking  { background-color: orange!important; color: white!important; }
+
+     /* #Dashboard{ background-color: #219FEC; color: white!important; } */
+     i.case:hover{background-color:#1cc88a;color: white}
+     .Wait{
+       color:orange;
+     }
+     .Rejec{
+       color:orange;
+     }
+     .Approve{
+       color:green;
+     }
+     .searchblue{
+       text-align:center;
+       color:#219FEC;
+     }
+     .editblue{
+       text-align:center;
+       color:#219FEC;
+     }
+     .editgray{
+       text-align:center;
+       color:#909798;
+     }
+
+
+   </style>
+
+   <div id="wrapper">
+
+     <ul class="menuboom navbar-nav bg-gradient-light sidebar sidebar-light accordion" id="accordionSidebar">
+
+       <!-- Sidebar - Brand -->
+       <div class="container-fluid">
+       <div class="row" style="text-align:center">
+       <div class="col-12">
+       <br/>
+       <span>
+         <img src="https://images.unsplash.com/photo-1544868501-b2f493d76e35?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=668&amp;q=80" class="rounded-circle" width="100" height="100"/>
+       </span>
+       </div>
+       <div class="col-12">
+       <p class="mr-2 d-none d-lg-inline text-light-600 xx-large" style="color:#219FEC">คุณทัช</p><br/>
+       <p class="mr-2 d-none d-lg-inline text-light-600 large" style="color:black">TS</p><br/>
+       <p class="mr-2 d-none d-lg-inline text-light-600 large">Baxter Area</p>
+       <div class="col-12">
+         <jsp:text/>
+       </div>
+       </div>
+
+
+       <!-- Divider -->
+       <hr class="sidebar-divider my-0"/>
+
+       <!-- Nav Item - Dashboard -->
+       <style>
+         i.case:hover{background-color:#1cc88a;color: white}
+       </style>
+       <ul class="nav nav-pills" id="menubarbu">
+         <li class="nav-item" id="Dashboard">
+           <a class="nav-link text-center" href="/BaxterApplication/casemanagements/dashboard" style="color:#219FEC">
+             <i class="fas fa-fw fa-tachometer-alt icon" style="color:#5DB2FC!important"><jsp:text/></i>
+             <span>Dashboard</span>
+           </a>
+
+         </li>
+         <li class="nav-item" id="ViewCase">
+           <a class="nav-link text-center collapse-inner rounded" href="/BaxterApplication/casemanagements/listviewcase" style="color:#F26C4F">
+             <i class="fas fa-align-justify icon case" style="color:#F26C4F!important"><jsp:text/></i>
+             <span>View Case</span>
+           </a>
+          </li>
+             <li class="nav-item" id="ManageMachine">
+               <a class="nav-link text-center collapse-inner rounded" style="color:#F26C4F">
+                 <i class="fas fa-cog icon" style="color:#F26C4F"><jsp:text/></i>
+                 <span>Manage Product</span></a>
+             </li>
+             <li class="nav-item" id="Returntracking">
+               <a class="nav-link text-center" href="Product-Tracking-CS.html" style="color:white">
+                 <i style="color:white!important" class="fas fa-exchange-alt"><jsp:text/></i>
+                 <span>Swap/Return <br/>Machine</span></a>
+             </li>
+             <li class="nav-item" id="ViewReport">
+             <a class="nav-link text-center" href="/BaxterApplication/casemanagements/viewReport" style="color:#3CB878">
+               <i class="far fa-chart-bar icon" style="color:#3CB878!important"><jsp:text/></i>
+               <span>View Report</span></a>
+           </li>
+               <li class="nav-item" id="logout">
+               <a id="logout" href="#" class="nav-link text-center" onlick="submitlogout()" style="color:#5ADA79;">
+                 <i style="color:#5ADA79!important" ><jsp:text/></i>
+                 <span>Logout</span></a>
+             </li>
+
+
+       </ul>
+       <div class="text-center d-none d-md-inline">
+         <jsp:text/>
+       </div>
+       </div></div>
+     </ul>
+
+
+     <!-- Content Wrapper -->
+     <div id="content-wrapper" class="d-flex flex-column" style="background-color:#219FEC">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <div class="container-fluid" >
+
+          <br/>
+          <div class="row d-sm-flex align-items-center justify-content-between" style="padding-top:5px">
+            <div class="col-8"> <h1 class="h6 text-light b2"><i class="fas fa-chevron-left icon"><jsp:text/></i><![CDATA[&nbsp;]]><![CDATA[&nbsp;]]>Manage Machine</h1></div>
+            <div class="col-2">
+              <h1 class="h6 text-light"><i class="fas fa-bell"><jsp:text/></i>   Notification</h1></div>
+              <div class="col-2"><h1 class="h6 text-light"><i class="fas fa-cog"><jsp:text/></i>   Settings</h1></div>
+          </div>
+          <hr/>
+
+          <div class="row">
+            <div class="col-lg-12 mb-4">
+              <div class="card shadow ">
+                <div class="card-body">
+                  <table class="table-sm table-borderless">
+                          <tbody><tr>
+                            <td style="width:30px"></td>
+                            <td style="width:1%;color:orange">
+                                <i class="far fa-arrow-alt-circle-right fa-2x"><jsp:text/></i>
+                            </td>
+                            <td>
+                              <h5 style="color:black;" class="b2">Swap/Return Machine</h5>
+                            </td>
+
+                            <td></td>
+                            <td></td>
+                            <td style="text-align:right;font-size:9pt;width:70%">
+
+                              Date: <span style="color:black">CR0518/01/01</span> <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]>
+
+                            </td>
+                          </tr>
+                        </tbody>
+                    </table>
+
+                  <hr style=" border-color:gray;"/>
+                  <div class="card-body">
+                      <div class="row">
+                        <div class="col-8" style="text-align:left">
+                          <h6 class="b2">Product No.</h6><br/>
+                          <div class="row">
+                            <div class="col-md-6 col-12">
+                              <div class="dropdown">
+                                <button type="button" style="border: 1px solid #d1d3e2;width:100%;" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Phayathai</button>
+                                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
+                                  <a class="dropdown-item" href="#">Option A</a>
+                                  <a class="dropdown-item" href="#">Option B</a>
+                                  <a class="dropdown-item" href="#">Option C</a>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                              <a href="" class="btn btn-blue btn-info btn-user btn-block" style="width:150px">
+                              Search
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-4"><jsp:text/></div>
+                      </div>
+                      <div class="row">
+                          <div class="col-6">
+                            <h6 class="b2 py-3">
+                              Product Detail
+                            </h6>
+                            <table class="table table-borderless">
+                              <tbody><tr>
+                                <td style="font-weight:bold;text-align:right">
+                                  Product No.
+                                </td>
+                                <td>
+                                  Product No.
+                                </td>
+                              </tr>
+                              <tr>
+                                <td style="font-weight:bold;text-align:right">
+                                  Product Name
+                                </td>
+                                <td>
+                                  Product Name
+                                </td>
+                              </tr>
+                              <tr>
+                                <td style="font-weight:bold;text-align:right">
+                                  Serial No.
+                                </td>
+                                <td>
+                                  Serial No.
+                                </td>
+                              </tr>
+                              <tr>
+                                <td style="font-weight:bold;text-align:right">
+                                  Status
+                                </td>
+                                <td>
+                                  Status
+                                </td>
+                              </tr>
+                              <tr>
+                                <td style="font-weight:bold;text-align:right">
+                                  Date
+                                </td>
+                                <td>
+                                  Active Date <br/>
+                                  Return Date
+                                </td>
+                              </tr>
+                              <tr>
+                                <td style="font-weight:bold;text-align:right">
+                                  Customer Type
+                                </td>
+                                <td>
+                                  Customer Type
+                                </td>
+                              </tr>
+                            </tbody></table>
+                          </div>
+                          <div class="col-6">
+                            <h6 class="b2 py-3">
+                            Status
+                            </h6>
+                            <table class="table table-sm table-borderless" style="color:black;margin-top:2%">
+                                    <tbody>
+                                      <tr>
+                                      <td>
+                                        <div class="form-group">
+                                          <div class="custom-control custom-checkbox small">
+                                            <input type="checkbox" class="custom-control-input" id="Choronicc3"/>
+                                            <label class="custom-control-label" for="Choronicc3" style="font-size:10pt">Accept</label>
+                                          </div>
+                                        </div>
+                                      </td>
+                                      <td>
+                                        <div class="form-group">
+                                          <div class="custom-control custom-checkbox small">
+                                            <input type="checkbox" class="custom-control-input" id="AcuteCasec3"/>
+                                            <label class="custom-control-label" for="AcuteCasec3" style="font-size:10pt">Not Accept</label>
+                                          </div>
+                                        </div>
+                                      </td>
+                                    </tr>
+
+                                  </tbody>
+                            </table>
+                          </div>
+                      </div>
+                  </div>
+                  <br/>
+                  <div class="row">
+                    <div class="col-3"><jsp:text/></div>
+                    <div class="col-6">
+                      <center>
+                      <a href="" class="btn btn-blue btn-info btn-user btn-block" data-toggle="modal" data-target="#SaveModal" style="width:200px">
+
+                        Save
+                      </a>
+                      <div class="modal fade" id="SaveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="display: none;" aria-hidden="true">
+                            <div class="modal-dialog modal-sm" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header bg-success" style="color:white;">
+                                  <div class="container-fluid" style="text-align:center">
+                                    <div class="row">
+                                      <div class="col-12">
+                                        <i class="far fa-check-circle fa-5x"><jsp:text/></i>
+                                      </div>
+                                      <div class="col-12">
+                                        <h5 class="modal-title" id="exampleModalLabel">Save Complete</h5>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="modal-body">
+                                      <div class="container-fluid" style="text-align:center">
+
+                                            <center>
+                                              <a href="" style="width:150px" data-toggle="modal" data-target="#SaveModal" class="btn btn-success btn-user btn-block">
+                                                OK
+                                              </a>
+                                            </center>
+
+                                      </div>
+
+                                </div>
+                              </div>
+
+                              </div>
+                            </div>
+                        </div>
+                      </center>
+                    </div>
+                    <div class="col-3"><jsp:text/></div>
+                  </div>
+                  <br/>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-6">
+              <jsp:text/>
+            </div>
+            <div class="col-6" style="text-align:right;color:white;padding-right:10%">
+               Row per Page   <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]>
+               <label id="per1">10</label> <i class="fas fa-caret-down icon"><jsp:text/></i><![CDATA[&nbsp;]]><![CDATA[&nbsp;]]>
+
+                <a href="#"><i class="fas fa-chevron-left icon"><jsp:text/></i></a>
+                  <label id="fro1">1</label> of <label id="to1">10</label>
+                <a href="#"><i class="fas fa-chevron-right icon"><jsp:text/></i></a>
+            </div>
+          </div>
+
+          <!-- Content Row -->
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+     </div>
+</div>

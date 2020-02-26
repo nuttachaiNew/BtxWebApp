@@ -8,7 +8,9 @@
   <definition name="users/setupUser" extends="default">
     <put-attribute name="body" value="/WEB-INF/views/users/setup.jspx" />
   </definition>
-
+ <definition name="users/updateProfile" extends="defaultMaster">
+    <put-attribute name="body" value="/WEB-INF/views/users/updateProfile.jspx" />
+  </definition>
 
 
 </tiles-definitions>

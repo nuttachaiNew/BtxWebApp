@@ -1,0 +1,922 @@
+<div xmlns:spring="http://www.springframework.org/tags"   xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"  xmlns:form="http://www.springframework.org/tags/form"  xmlns:c="http://java.sun.com/jsp/jstl/core"  xmlns:jsp="http://java.sun.com/JSP/Page"    version="2.0">
+  <jsp:directive.page contentType="text/html;charset=UTF-8" />
+  <jsp:output omit-xml-declaration="yes" />
+
+
+  <c:set scope="request" var="LB_CODE"><spring:message code="LB_CODE"/></c:set>
+  <c:set scope="request" var="LB_NAME"><spring:message code="LB_NAME"/></c:set>
+  <c:set scope="request" var="LB_SAVED_DATE"><spring:message code="LB_SAVED_DATE"/></c:set>
+  <c:set scope="request" var="LB_RECIEVE_DATE"><spring:message code="LB_RECIEVE_DATE"/></c:set>
+  <c:set scope="request" var="LB_DELETE"><spring:message code="LB_DELETE"/></c:set>
+
+
+  <style>
+    #ViewAccount a:hover { background-color: #B01AD8; color: white!important; }
+     * {
+       box-sizing: border-box;
+     }
+
+
+     /* The actual timeline (the vertical ruler) */
+     .timeline {
+       position: relative;
+       max-width: 1200px;
+       margin: 0 auto;
+     }
+
+     /* The actual timeline (the vertical ruler) */
+     .timeline::after {
+       content: '';
+       position: absolute;
+       width: 3px;
+       background-color: #6AD56D;
+       top: 0;
+       bottom: 0;
+       left: 50%;
+       margin-left: -3px;
+     }
+
+     /* Container around content */
+     .containerTL {
+       padding: 10px 20px;
+       position: relative;
+       background-color: inherit;
+       width: 50%;
+     }
+
+     /* The circles on the timeline */
+     .containerTL::after {
+       content: '';
+       position: absolute;
+       width: 25px;
+       height: 25px;
+       right: -12px;
+       background-color: #6AD56D;
+       border: 4px solid #6AD56D;
+       top: 15px;
+       border-radius: 50%;
+       z-index: 1;
+     }
+
+     /* Place the container to the left */
+     .left {
+       left: 0;
+     }
+
+     /* Place the container to the right */
+     .right {
+       left: 50%;
+     }
+
+     /* Add arrows to the left container (pointing right) */
+     .left::before {
+       content: " ";
+       height: 0;
+       position: absolute;
+       top: 22px;
+       width: 0;
+       z-index: 1;
+       right: 30px;
+       border: medium solid white;
+       border-width: 10px 0 10px 10px;
+       border-color: transparent transparent transparent white;
+
+     }
+
+     /* Add arrows to the right container (pointing left) */
+     .right::before {
+       content: " ";
+       height: 0;
+       position: absolute;
+       top: 22px;
+       width: 0;
+       z-index: 1;
+       left: 30px;
+       border: medium solid white;
+       border-width: 10px 10px 10px 0;
+       border-color: transparent white transparent transparent;
+     }
+
+     /* Fix the circle for containers on the right side */
+     .right::after {
+       left: -16px;
+     }
+
+     /* The actual content */
+     .content {
+       padding: 20px 20px;
+       background-color: white;
+       position: relative;
+       border-radius: 6px;
+       border-style: solid;
+       border-width: 1px;
+     }
+
+     /* Media queries - Responsive timeline on screens less than 600px wide */
+     @media screen and (max-width: 600px) {
+       /* Place the timelime to the left */
+       .timeline::after {
+       left: 31px;
+       }
+
+       /* Full-width containers */
+       .containerTL {
+       width: 100%;
+       padding-left: 70px;
+       padding-right: 25px;
+       }
+
+       /* Make sure that all arrows are pointing leftwards */
+       .containerTL::before {
+       left: 60px;
+       border: medium solid white;
+       border-width: 10px 10px 10px 0;
+       border-color: transparent white transparent transparent;
+       }
+
+       /* Make sure all circles are at the same spot */
+       .left::after, .right::after {
+       left: 15px;
+       }
+
+       /* Make all right containers behave like the left ones */
+       .right {
+       left: 0%;
+       }
+     }
+     /* -----------------------------2222----------------------------- */
+     .timeline2 {
+       position: relative;
+       max-width: 1200px;
+       margin: 0 auto;
+     }
+
+     /* The actual timeline2 (the vertical ruler) */
+     .timeline2::after {
+       content: '';
+       position: absolute;
+       width: 1px;
+       background-color: gray;
+       top: 0;
+       bottom: 0;
+       left: 50%;
+       margin-left: -2px;
+     }
+
+     /* Container around content2 */
+     .containerTL2 {
+       padding: 10px 20px;
+       position: relative;
+       background-color: inherit;
+       width: 50%;
+     }
+
+     /* The circles on the timeline2 */
+     .containerTL2::after {
+       content: '';
+       position: absolute;
+       width: 25px;
+       height: 25px;
+       right: -12px;
+       background-color: white;
+       border: 1px solid gray;
+       top: 15px;
+       border-radius: 50%;
+       z-index: 1;
+     }
+
+     /* Place the container to the left */
+     .left2 {
+       left: 0;
+     }
+
+     /* Place the container to the right */
+     .right2 {
+       left: 50%;
+     }
+
+     /* Add arrows to the left container (pointing right) */
+     .left2::before {
+       content: " ";
+       height: 0;
+       position: absolute;
+       top: 22px;
+       width: 0;
+       z-index: 1;
+       right: 30px;
+       border: medium solid white;
+       border-width: 10px 0 10px 10px;
+       border-color: transparent transparent transparent white;
+
+     }
+
+     /* Add arrows to the right container (pointing left) */
+     .right2::before {
+       content: " ";
+       height: 0;
+       position: absolute;
+       top: 22px;
+       width: 0;
+       z-index: 1;
+       left: 30px;
+       border: medium solid white;
+       border-width: 10px 10px 10px 0;
+       border-color: transparent white transparent transparent;
+     }
+
+     /* Fix the circle for containers on the right side */
+     .right2::after {
+       left: -16px;
+     }
+
+     /* The actual content2 */
+     .content2 {
+       padding: 20px 20px;
+       background-color: white;
+       position: relative;
+       border-radius: 6px;
+       border-style: solid;
+       border-width: 0px;
+     }
+
+     /* Media queries - Responsive timeline2 on screens less than 600px wide */
+     @media screen and (max-width: 600px) {
+       /* Place the timelime to the left */
+       .timeline2::after {
+       left: 31px;
+       }
+
+       /* Full-width containers */
+       .containerTL2 {
+       width: 100%;
+       padding-left: 70px;
+       padding-right: 25px;
+       }
+
+       /* Make sure that all arrows are pointing leftwards */
+       .containerTL2::before {
+       left: 60px;
+       border: medium solid white;
+       border-width: 10px 10px 10px 0;
+       border-color: transparent white transparent transparent;
+       }
+
+       /* Make sure all circles are at the same spot */
+       .left2::after, .right2::after {
+       left: 15px;
+       }
+
+       /* Make all right containers behave like the left ones */
+       .right2 {
+       left: 0%;
+       }
+     }
+
+     </style>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="menuboom navbar-nav bg-gradient-light sidebar sidebar-light accordion" id="accordionSidebar">
+
+          <!-- Sidebar - Brand -->
+          <div class="container">
+          <div class="row" style="text-align:center">
+          <div class="col-12">
+
+          <span>
+
+          <img src="https://images.unsplash.com/photo-1544868501-b2f493d76e35?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=668&amp;q=80" class="rounded-circle" width="100" height="100"/>
+          </span>
+          </div>
+            <div class="col-12">
+              <p class="mr-2 d-none d-lg-inline text-light-600 xx-large" style="color:#219FEC">คุณมาร์ค</p><br/>
+              <p class="mr-2 d-none d-lg-inline text-light-600 large" style="color:black">Manager</p><br/>
+              <p class="mr-2 d-none d-lg-inline text-light-600 large">Baxter Area</p>
+              <div class="col-12">
+                <jsp:text/>
+              </div>
+            </div>
+          <hr class="sidebar-divider my-0"/>
+          <ul class="nav nav-pills" id="menubarbu">
+                  <li class="nav-item" id="Dashboard">
+                    <a class="nav-link text-center" href="Dashboard-FN.html" style="color:#219FEC">
+                      <i class="fas fa-fw fa-tachometer-alt icon" style="color:#219FEC!important"><jsp:text/></i>
+                      <span>Dashboard</span>
+                    </a>
+
+                  </li>
+                  <li class="nav-item" id="ViewCase">
+
+                  <a class="nav-link text-center collapse-inner rounded activeVC" href="View-Case-FN1.html" style="color:white">
+                    <i class="fas fa-align-justify icon case" style="color:white!important"><jsp:text/></i>
+                    <span>View Case</span></a>
+                 </li>
+
+
+                  <li class="nav-item" id="ViewReport">
+                    <a class="nav-link text-center" href="View-Report-FN.html" style="color:#5ADA79">
+                      <i class="far fa-chart-bar icon" style="color:#5ADA79!important"><jsp:text/></i>
+                      <span>View Report</span>
+                    </a>
+                  </li>
+                  <li class="nav-item" id="ViewAccount">
+                    <a class="nav-link text-center" href="View-Report-FN.html" style="color:#B01AD8">
+                      <i class="far fa-user-circle" style="color:#B01AD8!important"><jsp:text/></i>
+                      <span>View Account</span>
+                    </a>
+                  </li>
+          </ul>
+
+          <div class="text-center d-none d-md-inline">
+
+          </div>
+
+        </div></div></ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column" style="background-color:#219FEC">
+
+          <!-- Main Content -->
+          <div id="content">
+
+            <!-- Topbar -->
+
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+              <!-- Page Heading -->
+              <br/>
+              <div class="row d-sm-flex align-items-center justify-content-between" style="padding-top:5px">
+               <div class="col-8"> <h1 class="h5 text-light">View Case</h1></div>
+    <div class="col-2">
+      <jsp:text/>
+    </div>
+    <div class="col-2"><h1 class="h6 text-light"><i class="fas fa-cog"><jsp:text/></i>   Settings</h1></div>
+
+              </div>
+
+            <form class="user">
+
+
+
+              </form>
+
+              <!-- Content Row -->
+
+     <hr/>
+
+    <div class="row">
+
+                <!-- Content Column left-->
+                <div class="col-lg-6 mb-4">
+                  <!-- Project Card Example -->
+                  <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                      <div class="row">
+                        <div class="col-4">
+                          <h6 class="m-0 font-weight-bold text-primary">Timeline Status</h6>
+                        </div>
+                        <div class="col-2"><jsp:text/></div>
+                        <div class="col-3">CR0618/13/01</div>
+                        <div class="col-3">Date: 07/06/18</div>
+                      </div>
+                    </div>
+                    <style>
+                    .Sgreen{color: green}
+                    .TLleft{margin-left:55%;text-align:left;margin-top:-14%;font-size:10pt;}
+                    .TLRight{margin-right:55%;text-align:right;margin-top:-14%;font-size:10pt;}
+                    .TLleft2{margin-left:55%;text-align:left;margin-top:-14%;font-size:10pt;}
+                    .TLRight2{margin-right:55%;text-align:right;margin-top:-14%;font-size:10pt;}
+                    </style>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="timeline" style="font-size:8pt;width:100%">
+                        <div class="containerTL right">
+                          <div class="content">
+                            <table class="table table-sm table-borderless" style="text-align:left">
+                              <tbody><tr>
+                                <td><b>Sales</b></td>
+                                <td>
+                                  <span>คุณ น้ำ</span><br/>
+                                  <span>Area Name</span><br/>
+                                  <span><i class="fas fa-phone" style="width:14%;height:50%"><jsp:text/></i>XXX XXX XXXX</span><br/>
+                                  <span><i class="fas fa-envelope" style="width:14%;height:50%"><jsp:text/></i>Sales@baxter.com</span><br/>
+                                </td>
+                              </tr>
+                            </tbody></table>
+                          </div>
+                        </div>
+                        <div class="TLRight" style="">
+                          <span class="Sgreen">  Sent </span>
+                          <br/>
+                          <span>8:30 AM</span>
+                        </div>
+
+                        <div class="containerTL left">
+                          <div class="content">
+                            <table class="table table-sm table-borderless" style="text-align:left">
+                              <tbody><tr>
+                                <td><b>Sales</b></td>
+                                <td>
+                                  <span>คุณ อิง</span><br/>
+                                  <span>Area Name</span><br/>
+                                  <span><i class="fas fa-phone" style="width:14%;height:50%"><jsp:text/></i>XXX XXX XXXX</span><br/>
+                                  <span><i class="fas fa-envelope" style="width:14%;height:50%"><jsp:text/></i>ASN@baxter.com</span><br/>
+                                </td>
+                              </tr>
+                            </tbody></table>
+                          </div>
+                        </div>
+                        <div class="TLleft" style="">
+                          <span class="Sgreen">  Sent </span>
+                          <br/>
+                          <span>8:30 AM</span>
+                        </div>
+
+                        <div class="containerTL right">
+                          <div class="content">
+                            <table class="table table-sm table-borderless" style="text-align:left">
+                              <tbody><tr>
+                                <td><b>Sales</b></td>
+                                <td>
+                                  <span>คุณ น้ำ</span><br/>
+                                  <span>Area Name</span><br/>
+                                  <span><i class="fas fa-phone" style="width:14%;height:50%"><jsp:text/></i>XXX XXX XXXX</span><br/>
+                                  <span><i class="fas fa-envelope" style="width:14%;height:50%"><jsp:text/></i>Sales@baxter.com</span><br/>
+                                </td>
+                              </tr>
+                            </tbody></table>
+                          </div>
+                        </div>
+                        <div class="TLRight" style="">
+                          <span class="Sgreen">  Sent </span>
+                          <br/>
+                          <span>8:30 AM</span>
+                        </div>
+                        <br/> <br/>
+
+                      </div>
+                        <!-- timeline type2 -->
+                      <div class="timeline2" style="font-size:10pt;width:100%">
+
+
+                        <style>
+                        .alleft{text-align: right;}
+                        .alright{text-align: left;}
+                        </style>
+                        <div class="containerTL2 left2 alleft">
+                          <div class="content2">
+                            Wait for check payment <b>Finance</b>
+                          </div>
+                        </div>
+
+
+                        <div class="containerTL2 right2 alright">
+                          <div class="content2">
+                            <b>TS</b> Wait for install product
+                          </div>
+                        </div>
+
+                        <div class="containerTL2 left2 alleft">
+                          <div class="content2">
+                            Wait for service customer <b>CS</b>
+                          </div>
+                        </div>
+
+                        <div class="containerTL2 right2 alright">
+                          <div class="content2">
+                            Waiting for shipment
+                          </div>
+                        </div>
+
+                        <div class="containerTL2 left2 alleft">
+                          <div class="content2">
+                            Customer wait for deliver
+                          </div>
+                        </div>
+
+
+                        <br/> <br/>
+
+
+
+                      </div>
+                    </div>
+
+                    </div>
+
+                  </div>
+                </div>
+                  <!-- Card right -->
+                <div class="col-lg-6 mb-4">
+
+                  <!-- Illustrations -->
+                  <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                      <div class="row">
+                        <div class="col-4">
+                          <h6 class="m-0 font-weight-bold text-primary">Case Detail</h6>
+                        </div>
+                        <div class="col-2"><jsp:text/></div>
+                        <div class="col-3">CR0618/13/01</div>
+                        <div class="col-3">Date: 07/06/18</div>
+                      </div>
+
+                    </div>
+                    <div class="card-body">
+                      <!-- row 1 -->
+                      <div class="row">
+                        <div class="col-4" style="color:green;font-weight:bold">Customer Datail</div>
+                        <div class="col-7"><hr style="color:black!important"/></div>
+                        <div class="col-1"><i class="fas fa-caret-up" data-toggle="collapse" data-target="#CustomerDatail"><jsp:text/></i></div>
+                      </div>
+                      <div id="CustomerDatail" class="collapse show">
+                          <table class="table table-sm table-borderless">
+                            <tbody>
+                              <tr>
+                                <td style="font-weight:bold">Name:</td>
+                                <td>Mana America</td>
+                              </tr>
+                              <tr>
+                                <td style="font-weight:bold">National ID:</td>
+                                <td>X XXXX XXX XXXX</td>
+                              </tr>
+                              <tr>
+                                <td style="font-weight:bold">Current Address:</td>
+                                <td>...</td>
+                              </tr>
+                              <tr>
+                                <td style="font-weight:bold">Tel No.:</td>
+                                <td>XX XXX XXXX</td>
+                              </tr>
+                              <tr>
+                                <td style="font-weight:bold">Customer Type:</td>
+                                <td>Person</td>
+                              </tr>
+
+                            </tbody>
+                          </table>
+                      </div>
+                      <!-- row 2 -->
+                      <div class="row">
+                        <div class="col-4" style="color:red;font-weight:bold">Product Datail</div>
+                        <div class="col-7"><hr style="color:black!important"/></div>
+                        <div class="col-1"><i class="fas fa-caret-up" data-toggle="collapse" data-target="#ProductDetail"><jsp:text/></i></div>
+                      </div>
+                      <div id="ProductDetail" class="collapse show">
+
+                        <span style="font-weight:bold">  Case Type: </span>
+                        <span>Choronic Case</span>
+
+                          <table class="table table-sm table-borderless">
+                            <thead>
+                              <tr>
+                                <th>Order</th>
+                                <th>Product Type</th>
+                                <th>Product Name</th>
+                                <th>Product No.</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>1</td>
+                                <td style="font-weight:bold">Machine</td>
+                                <td>Homechoice 10.4</td>
+                                <td>0005600789</td>
+                              </tr>
+                              <tr>
+                                <td>2</td>
+                                <td style="font-weight:bold">Powercord</td>
+                                <td>Powercord of homechoice</td>
+                                <td>0sdfg00789</td>
+                              </tr>
+                              <tr>
+                                <td>3</td>
+                                <td style="font-weight:bold">Modem</td>
+                                <td>Modem</td>
+                                <td>00056mng89</td>
+                              </tr>
+                              <tr>
+                                <td>4</td>
+                                <td style="font-weight:bold">Hardcase</td>
+                                <td>Homechoice Hardcase 10.4</td>
+                                <td>000iop0989</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                      </div>
+                      <!-- row 3 -->
+                      <div class="row">
+                        <div class="col-4" style="color:#F5BC4B;font-weight:bold">Delivery Datail</div>
+                        <div class="col-7"><hr style="color:black!important"/></div>
+                        <div class="col-1"><i class="fas fa-caret-up" data-toggle="collapse" data-target="#DeliveryDatail"><jsp:text/></i></div>
+                      </div>
+                      <div id="DeliveryDatail" class="collapse show">
+                          <table class="table table-sm table-borderless">
+                            <tbody>
+                              <tr>
+                                <td style="font-weight:bold">Delivery Name:</td>
+                                <td>K.Man</td>
+                              </tr>
+                              <tr>
+                                <td style="font-weight:bold">Delivery Type:</td>
+                                <td>Messanger</td>
+                              </tr>
+                              <tr>
+                                <td style="font-weight:bold">Tel No.:</td>
+                                <td>XX XXX XXXX</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                      </div>
+                      <!-- row 4 -->
+                      <div class="row">
+                        <div class="col-4" style="color:#CB6EFA;font-weight:bold">Documentation</div>
+                        <div class="col-7"><hr style="color:black!important"/></div>
+                        <div class="col-1"><i class="fas fa-caret-up" data-toggle="collapse" data-target="#Documentation"><jsp:text/></i></div>
+                      </div>
+                      <!-- test modal -->
+
+                    <script>
+
+                    <![CDATA[
+
+                    function myID() {
+                      var captionText = document.getElementById("captionImg");
+                      var span = document.getElementsByClassName("close1")[0];
+                      span.onclick = function() {
+                        modal.style.display = "none";
+                      }
+                      var modal = document.getElementById('myModal-ID');
+                      var img = "images/idcard_example.jpg"; //variable of name
+                      var modalImg = document.getElementById("img01");
+
+                      modal.style.display = "block";
+                      modalImg.src = img;
+                      captionText.innerHTML = "idcard_example.jpg";
+
+                    }
+                    function mySlip() {
+                      var captionText = document.getElementById("captionImg2");
+                      var span = document.getElementsByClassName("close2")[0];
+                      span.onclick = function() {
+                        modal.style.display = "none";
+                      }
+                      var modal = document.getElementById('myModal-Slip');
+                      var img = "images/Slip_money.jpg"; //variable of name
+                      var modalImg = document.getElementById("img02");
+
+                      modal.style.display = "block";
+                      modalImg.src = img;
+                      captionText.innerHTML = 'Slip_money.jpg';
+
+                    }
+                    function myModalAgreement() {
+                      var captionText = document.getElementById("captionImg3");
+                      var span = document.getElementsByClassName("close3")[0];
+                      span.onclick = function() {
+                        modal.style.display = "none";
+                      }
+                      var modal = document.getElementById('myModal-Agreement');
+                      var img = "images/agreement.png"; //variable of name
+                      var modalImg = document.getElementById("img03");
+
+                      modal.style.display = "block";
+                      modalImg.src = img;
+                      captionText.innerHTML = 'agreement.pdf';
+
+                    }
+                    function Script() {
+                      var captionText = document.getElementById("captionImg4");
+                      var span = document.getElementsByClassName("close4")[0];
+                      span.onclick = function() {
+                        modal.style.display = "none";
+                      }
+                      var modal = document.getElementById('myModal-Script');
+                      var img = "images/Pre-scriptipn Request-form.png"; //variable of name
+                      var modalImg = document.getElementById("img04");
+
+                      modal.style.display = "block";
+                      modalImg.src = img;
+                      captionText.innerHTML = 'Pre-scriptipn Request-form.pdf';
+
+                    }
+                    function Installation() {
+                      var captionText = document.getElementById("captionImg5");
+                      var span = document.getElementsByClassName("close5")[0];
+                      span.onclick = function() {
+                        modal.style.display = "none";
+                      }
+                      var modal = document.getElementById('myModal-Installation');
+                      var img = "images/Installtion-request.png"; //variable of name
+                      var modalImg = document.getElementById("img05");
+
+                      modal.style.display = "block";
+                      modalImg.src = img;
+                      captionText.innerHTML = 'Installtion-request.pdf';
+
+                    }
+
+                      ]]>
+                    </script>
+
+
+                      <div id="Documentation" class="collapse show">
+                        <div class="row">
+                          <div class="col-5" style="text-align:right">
+                            <button type="button" class="btn btn-md btn-blue btn-info" onclick="myID()">
+                              <div class="container-fuild">Copy of ID card<br/>
+                              <i class="fas fa-search"><jsp:text/></i>
+                            </div>
+                            </button>
+                            <div id="myModal-ID" class="modalBoom">
+                                <span class="closeBoom close1" style="border-radius: 30px;width:50px;height:50px;text-align:center">
+                                  <i class="fas fa-times-circle" style="color:white"><jsp:text/></i>
+                                </span>
+                                <center>
+                                  <h4 id="captionImg" style="color:white">Test</h4>
+                                  <img class="modalBoom-content" id="img01"/>
+                                  <br/><br/>
+                                  <a href="#" style="width:15%" class="btn btn-primary btn-icon-split">
+                                    <span class="text"><h5>Save</h5></span>
+                                  </a>
+                                  <br/><br/>
+                                </center>
+                            </div>
+                          </div>
+
+                          <div class="col-3">
+                            <div class="container-fuild"><button type="button" onclick="mySlip()" class="btn btn-md btn-blue btn-info">
+                              Pay Slip<br/>
+                              <i class="fas fa-search"><jsp:text/></i>
+                              </button></div>
+
+                            <div id="myModal-Slip" class="modalBoom">
+                                <span class="closeBoom close2" style="border-radius: 30px;width:50px;height:50px;text-align:center">
+                                  <i class="fas fa-times-circle" style="color:white"><jsp:text/></i>
+                                </span>
+                                <center>
+                                    <h4 id="captionImg2" style="color:white">Test</h4>
+                                    <img class="modalBoom-content" id="img02"/>
+                                    <br/><br/>
+                                    <a href="#" style="width:15%" class="btn btn-primary btn-icon-split">
+                                      <span class="text"><h5>Save</h5></span>
+                                    </a>
+                                    <br/><br/>
+                                </center>
+                            </div>
+                          </div>
+
+                          <div class="col-4">
+                            <button type="button" onclick="myModalAgreement()" class="btn btn-md btn-blue btn-info">
+                              <div class="container-fuild">
+                              Agreement<br/>
+                              <i class="fas fa-search"><jsp:text/></i>
+                              </div>
+                            </button>
+                            <div id="myModal-Agreement" class="modalBoom">
+                                <span class="closeBoom close3" style="border-radius: 30px;width:50px;height:50px;text-align:center">
+                                  <i class="fas fa-times-circle" style="color:white"><jsp:text/></i>
+                                </span>
+                                <center>
+                                    <h4 id="captionImg3" style="color:white">Test</h4>
+                                    <img class="modalBoom-content" id="img03"/>
+                                    <br/><br/>
+                                    <a href="#" style="width:15%" class="btn btn-primary btn-icon-split">
+                                      <span class="text"><h5>Export as PDF</h5></span>
+                                    </a>
+                                    <br/><br/>
+                                </center>
+                            </div>
+
+
+                          </div>
+                        </div>
+                        <div class="row" style="margin-top:5%">
+                          <div class="col-6" style="text-align:right">
+                            <button type="button" onclick="Script()" class="btn btn-md btn-blue btn-info">
+                              <div class="container-fuild">
+                              Prescription<br/>
+                              <i class="fas fa-search"><jsp:text/></i>
+                            </div>
+                            </button>
+                            <div id="myModal-Script" class="modalBoom">
+                                <span class="closeBoom close4" style="border-radius: 30px;width:50px;height:50px;text-align:center">
+                                  <i class="fas fa-times-circle" style="color:white"><jsp:text/></i>
+                                </span>
+                                <center>
+                                    <h4 id="captionImg4" style="color:white">Test</h4>
+                                    <img class="modalBoom-content" id="img04"/>
+                                    <br/><br/>
+                                    <a href="#" style="width:15%" class="btn btn-primary btn-icon-split">
+                                      <span class="text"><h5>Export as PDF</h5></span>
+                                    </a>
+                                  <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]>
+                                    <a href="#" style="width:15%" class="btn btn-danger btn-icon-split">
+                                      <span class="text"><h5>Save as Excel</h5></span>
+                                    </a>
+                                    <br/><br/>
+
+                                </center>
+                            </div>
+                          </div>
+                          <div class="col-6">
+                            <button type="button" onclick="Installation()" class="btn btn-md btn-blue btn-info">
+                              <div class="container-fuild">
+                              Installation<br/>
+                              <i class="fas fa-search"><jsp:text/></i>
+                            </div>
+                            </button>
+                            <div id="myModal-Installation" class="modalBoom">
+                                <span class="closeBoom close5" style="border-radius: 30px;width:50px;height:50px;text-align:center">
+                                  <i class="fas fa-times-circle" style="color:white"><jsp:text/></i>
+                                </span>
+                                <center>
+                                    <h4 id="captionImg5" style="color:white">Test</h4>
+                                    <img class="modalBoom-content" id="img05"/>
+                                    <br/><br/>
+                                    <a href="#" style="width:15%" class="btn btn-primary btn-icon-split">
+                                      <span class="text"><h5>Export as PDF</h5></span>
+                                    </a>
+                                    <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]>
+                                    <a href="#" style="width:15%" class="btn btn-danger btn-icon-split">
+                                      <span class="text"><h5>Save as Excel</h5></span>
+                                    </a>
+                                    <br/><br/>
+
+                                </center>
+                            </div>
+                          </div>
+
+                        </div>
+
+                      </div>
+
+                      <!-- end row  -->
+                    </div>
+                  </div>
+
+                  <!-- Approach -->
+
+
+                </div>
+                <!-- end case detail -->
+              </div>
+
+              <div class="modal fade" id="ChangePassModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header" style="background-color:#04AEDC;color:white">
+                        <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">×</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="modal-body">
+                        <form class="user" style="margin-left:15%;margin-right:15%">
+                        <div class="form-group">
+                          <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Current Password"/>
+                        </div>
+                        <div class="form-group">
+                          <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="New Password"/>
+                        </div>
+                        <div class="form-group">
+                          <input type="repassword" class="form-control form-control-user" id="exampleInputrePassword" placeholder="Retype NewPassword"/>
+                        </div>
+
+                        <a href="index.html" class="btn btn-info btn-user btn-block">
+                          Save
+                        </a>
+                      </form>
+
+                      </div>
+                    </div>
+                      <div class="modal-footer">
+                        <!-- <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="login.html">Logout</a> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              <!-- Modal -->
+
+
+              <br/>
+              <!-- Content Row -->
+
+
+            </div>
+            <!-- /.container-fluid -->
+
+          </div>
+
+        </div>
+
+      </div>
+</div>

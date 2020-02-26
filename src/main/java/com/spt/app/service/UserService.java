@@ -22,9 +22,9 @@ public interface UserService {
 	public ResponseEntity<String> findAllUser();
 	public ResponseEntity<String> editProfile(MultipartHttpServletRequest multipartHttpServletRequest);
 	public ResponseEntity<String>   getImage(String username);
-	
-
+	public ResponseEntity<String> downloadFile(String caseId,String fileType);
 	public ResponseEntity<String>   insertAppuser(String username);
 	public ResponseEntity<String>   updateAppUser(String username);
+	public ResponseEntity<String>   getDigitalSignature(String username);
 
 }

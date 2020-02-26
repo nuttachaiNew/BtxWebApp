@@ -1,0 +1,885 @@
+<div xmlns:spring="http://www.springframework.org/tags"   xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"  xmlns:form="http://www.springframework.org/tags/form"  xmlns:c="http://java.sun.com/jsp/jstl/core"  xmlns:jsp="http://java.sun.com/JSP/Page"    version="2.0">
+  <jsp:directive.page contentType="text/html;charset=UTF-8" />
+  <jsp:output omit-xml-declaration="yes" />
+    <spring:url value="/resources/images/cancel.png" var="img_cancel"/>
+    <spring:url value="/resources/images/checked.png" var="img_checked"/>
+
+  <c:set scope="request" var="LB_CODE"><spring:message code="LB_CODE"/></c:set>
+  <c:set scope="request" var="LB_NAME"><spring:message code="LB_NAME"/></c:set>
+  <c:set scope="request" var="LB_SAVED_DATE"><spring:message code="LB_SAVED_DATE"/></c:set>
+  <c:set scope="request" var="LB_RECIEVE_DATE"><spring:message code="LB_RECIEVE_DATE"/></c:set>
+  <c:set scope="request" var="LB_DELETE"><spring:message code="LB_DELETE"/></c:set>
+ <style type="text/css">
+   span {
+    font-size: 12px;
+   }
+ </style>
+
+<div class="container reboxing">
+  <jsp:text/>
+  <div class="row">
+        <div class="panel panel-default" name="panelBU">
+        <div class="panel-heading">
+          <h4 class="panel-title text-right">
+            <a data-toggle="collapse" name="toggle" href="#collapseBU">
+                 BU
+                 <span id="iconCollapseAlert"  class="fa fa-caret-down" ><jsp:text/></span> </a>
+          </h4>
+        </div>
+        <div id="collapseBU" class="panel-collapse collapse in">
+          <div class="panel-body">
+              <div class="form-group">
+                  <div class="col-sm-12">
+                      <div class="col-sm-4">
+                        <jsp:text/>
+                        <div class="form-group">
+                           <h4>View Approve Documents</h4> 
+                           <h5><b>ASM Approved</b></h5>
+                        </div>
+                        <div class="form-group">
+                           <div class="col-sm-12">
+                              <div class="col-sm-8  ">
+                                   <img class="img-circle hidden" src="${img_checked}" id="idPass" style="width: 25px;height: 25px;" /> 
+                                <span> Copy Of ID card  </span>
+                              </div>
+                              <div class="col-sm-2">
+                                 <button class="btn btn-sm btn-primary" id="copyId"><span class="fa fa-search"><jsp:text/></span></button>
+                              </div>
+                           </div>
+                            <div class="col-sm-12">
+                              <div class="col-sm-8  ">
+                                 <img class="img-circle hidden" src="${img_checked}" id="payslipPass" style="width: 25px;height: 25px;" /> 
+                                <span> Payslip  </span>
+                              </div>
+                              <div class="col-sm-2">
+                                 <button class="btn btn-sm btn-primary" id="psId"><span class="fa fa-search"><jsp:text/></span></button>
+                              </div>
+                           </div>
+                            <div class="col-sm-12">
+                              <div class="col-sm-8  ">
+                                 <img class="img-circle hidden" src="${img_checked}" id="prescriptionPass" style="width: 25px;height: 25px;" /> 
+                                <span> Prescription  </span>
+                              </div>
+                              <div class="col-sm-2">
+                                 <button class="btn btn-sm btn-primary"><span class="fa fa-search" id="btnPrescription"><jsp:text/></span></button>
+                              </div>
+                           </div>
+                           <div class="form-group">
+                           <div class="col-sm-12">
+                             <h5><b>BU Approved</b></h5>
+                            <div class="col-sm-8  ">
+                                <img class="img-circle hidden" src="${img_checked}" id="dsPass" style="width: 25px;height: 25px;" /> 
+                                <span> Installation Form  </span>
+                              </div>
+                              <div class="col-sm-2">
+                                 <button id="dsId" class="btn btn-sm btn-primary"><span class="fa fa-search"><jsp:text/></span></button>
+                              </div>
+                           </div>
+                        
+                        </div>
+
+                        </div>
+                      </div>
+                      <div class="col-sm-8">
+                        <div class="form-group">
+                           <h5><b>Approve Installation Form </b></h5>
+                        </div>
+                        <div class="form-grop">
+                          <div class="col-sm-12">
+                            <span class="col-sm-4">
+                              Installation Form
+                            </span>
+                            <div class="col-sm-4">
+                              <span>Case ID&#160; : &#160;</span>
+                              <span class="caseNumber"><jsp:text/></span>
+                            </div>
+                            <div class="col-sm-3">
+                              <span>Date&#160; : &#160;</span>
+                              <span class="date"><jsp:text/></span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="col-sm-12">
+                            <span class="col-sm-4">Date :</span>
+                             <div class="col-sm-7">
+                               <input type="text" class="form-control" readonly="true"  id="txtDate" />
+                             </div>
+                          </div>
+                           <div class="col-sm-12">
+                            <span class="col-sm-4">Patient Name :</span>
+                             <div class="col-sm-7">
+                               <input type="text" class="form-control" readonly="true"  id="txtPatientName" />
+                             </div>
+                          </div>
+
+                           <div class="col-sm-12">
+                            <span class="col-sm-4">Installation Place :</span>
+                             <div class="col-sm-7">
+                               <input type="text" class="form-control" readonly="true" id="txtInstallationPlace" />
+                             </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="form-group">
+                             <h5><b>Order</b></h5>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                         <div class="col-sm-2">
+                           <input id="tab-1" type="radio" value="1"   name="tab"   />
+                            <span>
+                              Chronic
+                            </span>
+                         </div>
+                         <div class="col-sm-2">
+                           <input id="tab-1" type="radio"  value="2"  name="tab"   />
+                            <span>
+                              Acute
+                            </span>
+                         </div>  
+                         <div class="col-sm-2">
+                           <input id="tab-1" type="radio"  value="3"  name="tab"   />
+                            <span>
+                              Demo
+                            </span>
+                         </div>  
+
+                         <div class="col-sm-6">
+                           <input id="tab-1" type="radio"  value="4"  name="tab"   />
+                            <span>
+                              เช่ายืมพร้อม Package พร้มรับเครื่องกลับ
+                            </span>
+                         </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="col-sm-12" >
+                            <table class="table table-responsive" style="margin-top: 3%">
+                              <thead>
+                                <tr>
+                                  <th class="black text-center">Order</th>
+                                  <th class="black text-center">Product No.</th>
+                                  <th class="black text-center" >Product Items</th>
+                                  <th class="black text-center">Unit</th>
+
+                                </tr>
+                              </thead>
+                              <tbody name="product">
+                                <jsp:text/>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <div class="col-sm-12"> 
+                          <center>
+                             <button class="btn btn-lg btn-warning" id="reject">Reject </button> &#160;
+                               <button class="btn btn-lg btn-info" id="approve">Approve </button>
+                            <br/>
+
+                            <br/>
+
+                          </center>
+                              
+                          </div>
+                          <div class="form-group" >
+                            <textarea  class="form-control" id="buNote" placeholder="note"><jsp:text/> </textarea>
+                          </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <center><button class="btn btn-info" id="buSend">send</button></center>
+                        </div>
+                      </div>
+                 </div>
+              </div>
+          </div>
+        </div>
+      </div>
+
+       <div class="panel panel-default " name="panelTS">
+        <div class="panel-heading">
+          <h4 class="panel-title text-right">
+            <a data-toggle="collapse" name="toggle" href="#collapseTS">
+                 TS
+                 <span id="iconCollapseAlert"  class="fa fa-caret-down" ><jsp:text/></span> </a>
+          </h4>
+        </div>
+        <div id="collapseTS" class="panel-collapse collapse">
+          <div class="panel-body">
+              <div class="form-group">
+                  <div class="col-sm-12">
+                      <div class="col-sm-12">
+                        <jsp:text/>
+                        <div class="form-group">
+                         <div class="col-sm-12">
+                            <h5>Checklist</h5>
+                            <hr/>
+                         </div>
+                         <div class="col-sm-12" id="checklistRow1">
+                           <jsp:text/>
+                           <div class="col-sm-6" name="machine1">
+                             <jsp:text/>
+                           </div>
+                            <div class="col-sm-6" name="machine2">
+                             <jsp:text/>
+                           </div>
+                         </div>
+                          <div class="col-sm-12" id="checklistRow2">
+                            <jsp:text/>
+                           <div class="col-sm-6" name="machine3">
+                             <jsp:text/>
+                           </div>
+                            <div class="col-sm-6" name="machine4">
+                             <jsp:text/>
+                           </div>
+                         </div>
+                          <div class="col-sm-12" id="checklistRow3">
+                           <jsp:text/>
+                            <jsp:text/>
+                           <div class="col-sm-6" name="machine5">
+                             <jsp:text/>
+                           </div>
+                            <div class="col-sm-6" name="machine6">
+                             <jsp:text/>
+                           </div>
+                         </div>
+                          <div class="col-sm-12" id="checklistRow4">
+                           <jsp:text/>
+                            <jsp:text/>
+                           <div class="col-sm-6" name="machine7">
+                             <jsp:text/>
+                           </div>
+                            <div class="col-sm-6" name="machine8">
+                             <jsp:text/>
+                           </div>
+                         </div>
+                          <div class="col-sm-12" id="checklistRow5">
+                           <jsp:text/>
+                           <div class="col-sm-6" name="machine9">
+                             <jsp:text/>
+                           </div>
+                            <div class="col-sm-6" name="machine10">
+                             <jsp:text/>
+                           </div>
+                         </div>
+
+                         <div class="col-sm-12">
+                            <h5>Document review</h5>
+                         </div>
+                         
+                        </div>
+                      </div>
+                      <div class="col-sm-8">
+                        <jsp:text/>
+                      </div>
+                 </div>
+                   <div class="col-sm-12">
+                     <center>
+                       <button class="btn btn-lg btn-primary">
+                       <img class="img-circle hidden" src="${img_checked}" id="agreement" style="width: 25px;height: 25px;" />  Agreement <span class="fa fa-search"><jsp:text/></span>
+                       </button> &#160; &#160;
+                       <button class="btn btn-lg btn-primary">
+                         <img class="img-circle hidden" src="${img_checked}" style="width: 25px;height: 25px;" /> 
+                         Receipt <span class="fa fa-search"><jsp:text/></span>
+                       </button> &#160; &#160;
+                       <button class="btn btn-lg btn-primary">
+                         <img class="img-circle hidden" src="${img_checked}" style="width: 25px;height: 25px;" /> 
+                         Prescription <span class="fa fa-search"><jsp:text/></span>
+                       </button> &#160; &#160;
+                       <button class="btn btn-lg btn-primary">
+                         <img class="img-circle hidden" src="${img_checked}" style="width: 25px;height: 25px;" /> 
+                         Installation <span class="fa fa-search"><jsp:text/></span>
+                       </button> &#160; &#160;
+
+                     </center>
+                   </div>
+                   <div class="col-sm-12">
+                        <br/>
+                        <br/>
+                        <br/>
+
+                            <center><button class="btn btn-info" id="tsSend" >send</button></center>
+                        </div>
+              </div>
+          </div>
+        </div>
+      </div>
+
+
+<!--  -->
+     <div class="panel panel-default " name="panelFN">
+        <div class="panel-heading">
+          <h4 class="panel-title text-right">
+            <a data-toggle="collapse" name="toggle" href="#collapseFN">
+                 Finance
+                 <span id="iconCollapseAlert"  class="fa fa-caret-down" ><jsp:text/></span> </a>
+          </h4>
+        </div>
+        <div id="collapseFN" class="panel-collapse collapse">
+          <div class="panel-body">
+              <div class="form-group">
+                  <div class="col-sm-12">
+                      <div class="col-sm-4">
+                        <jsp:text/>
+                        <div class="form-group">
+                          <h5>Payslip</h5>
+                        </div>
+                      </div>
+                      <div class="col-sm-8">
+                        <jsp:text/>
+                      </div>
+                 </div>
+              </div>
+          </div>
+        </div>
+      </div>
+
+    
+
+  </div>
+
+<div class="modal fade" id="prescriptionModal" role="dialog" >
+    <div class="modal-dialog modal-md">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+        
+          <div class="col-sm-7">
+            <h3 class="modal-title">Prescription  </h3>
+          </div>
+
+          <div class="col-sm-5">
+            <h5 class="modal-title"> Case Number : <span name="caseNumber"><jsp:text/> </span>  
+             </h5>
+          </div>
+
+        </div>
+        <div class="modal-body marginBottom">
+          <hr/>
+          <div class="row">
+             <div class="form-group">
+            <div class="col-sm-3">
+               <label>Patient Name</label>
+            </div>
+             <div class="col-sm-7">
+                 <label name="patientName"><jsp:text/></label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+             <div class="form-group">
+              <div class="col-sm-3">
+                 <label>Hospital Name</label>
+              </div>
+               <div class="col-sm-7">
+                 <label name="hospitalName"><jsp:text/></label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+              <div class="form-group">
+                <div class="col-sm-3">
+                   <label>Serial Number</label>
+                </div>
+                 <div class="col-sm-7">
+                   <label name="serialNumber"><jsp:text/></label>
+                </div>
+              </div>
+          </div>
+          <hr/>
+          <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#home">Nurse Menu</a></li>
+            <li><a data-toggle="tab" href="#menu1">Make Adjust</a></li>
+            <li><a data-toggle="tab" href="#menu2">Change Programe</a></li>
+          </ul>
+
+        <div class="tab-content">
+          <div id="home" class="tab-pane fade in active">
+             <div class="row">
+               <div class="form-group">
+              <div class="col-sm-4">
+                 <label>Mode :</label>
+              </div>
+               <div class="col-sm-7">
+                   <label name="modes"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+               <div class="form-group">
+              <div class="col-sm-4">
+                 <label>Min Drain VOL :</label>
+              </div>
+               <div class="col-sm-7">
+                   <label name="minDrawVol"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+               <div class="form-group">
+              <div class="col-sm-4">
+                 <label>Min Drain Time :</label>
+              </div>
+               <div class="col-sm-7">
+                   <label name="minDrainTime"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+               <div class="form-group">
+              <div class="col-sm-4">
+                 <label>Neg Of Limit :</label>
+              </div>
+               <div class="col-sm-7">
+                   <label name="negOfLimit"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+               <div class="form-group">
+              <div class="col-sm-4">
+                 <label>Pos Of Limit :</label>
+              </div>
+               <div class="col-sm-7">
+                   <label name="postOfLimit"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+               <div class="form-group">
+              <div class="col-sm-4">
+                 <label>Smart Dwells :</label>
+              </div>
+               <div class="col-sm-7">
+                   <label name="smartDwells"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+               <div class="form-group">
+              <div class="col-sm-4">
+                 <label>Heater Bag Empty :</label>
+              </div>
+               <div class="col-sm-7">
+                   <label name="heaterBagEmpty"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+               <div class="form-group">
+              <div class="col-sm-4">
+                 <label>Tidal Full Drns :</label>
+              </div>
+               <div class="col-sm-7">
+                   <label name="tidalFullDrns"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+             <div class="row">
+               <div class="form-group">
+              <div class="col-sm-4">
+                 <label>Language :</label>
+              </div>
+               <div class="col-sm-7">
+                   <label name="language"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+             <div class="row">
+               <div class="form-group">
+              <div class="col-sm-4">
+                 <label>Flush :</label>
+              </div>
+               <div class="col-sm-7">
+                   <label name="flush"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row">
+               <div class="form-group">
+              <div class="col-sm-4">
+                 <label>Program Locked :</label>
+              </div>
+               <div class="col-sm-7">
+                   <label name="programLocked"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+             <div class="row">
+               <div class="form-group">
+              <div class="col-sm-4">
+                 <label>Weight Reset :</label>
+              </div>
+               <div class="col-sm-7">
+                   <label name="weightReset"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="menu1" class="tab-pane fade">
+             <div class="row">
+               <div class="form-group">
+              <div class="col-sm-6">
+                 <label>Adjust Brightness :</label>
+              </div>
+               <div class="col-sm-6">
+                   <label name="adjustBrightNess"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+               <div class="form-group">
+              <div class="col-sm-6">
+                 <label>Adjust Loudness :</label>
+              </div>
+               <div class="col-sm-6">
+                   <label name="adjustLoudness"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+               <div class="form-group">
+              <div class="col-sm-6">
+                 <label>Auto Dim :</label>
+              </div>
+               <div class="col-sm-6">
+                   <label name="autoDim"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+               <div class="form-group">
+              <div class="col-sm-6">
+                 <label>Set Clock :</label>
+              </div>
+               <div class="col-sm-6">
+                   <label name="setClock"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+               <div class="form-group">
+              <div class="col-sm-6">
+                 <label>Set Date :</label>
+              </div>
+               <div class="col-sm-6">
+                   <label name="setDate"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+               <div class="form-group">
+              <div class="col-sm-6">
+                 <label>I-Drain Time:(LOW-Fill)(Min) :</label>
+              </div>
+               <div class="col-sm-6">
+                   <label name="drainTime"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+               <div class="form-group">
+              <div class="col-sm-6">
+                 <label>I-Drain Alram:(OFF/0-3,000ml) :</label>
+              </div>
+               <div class="col-sm-6">
+                   <label name="drainAlram"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+               <div class="form-group">
+              <div class="col-sm-6">
+                 <label>Confort Control (35-37) :</label>
+              </div>
+               <div class="col-sm-6">
+                   <label name="comfortControl"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+             <div class="row">
+               <div class="form-group">
+              <div class="col-sm-6">
+                 <label>Last manual Drain :</label>
+              </div>
+               <div class="col-sm-6">
+                   <label name="lastManualDrain"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+             <div class="row">
+              <div class="form-group">
+                <div class="col-sm-6">
+                   <label>In Case  Y Pop to</label>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row">
+               <div class="form-group">
+              <div class="col-sm-6">
+                 <label> - UF target (ml) :</label>
+              </div>
+               <div class="col-sm-6">
+                   <label name="ufTarget"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+             <div class="row">
+               <div class="form-group">
+              <div class="col-sm-6">
+                 <label> - Alram (Y/N) :</label>
+              </div>
+               <div class="col-sm-6">
+                   <label name="alram"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="menu2" class="tab-pane fade">
+            <jsp:text/>
+            <div class="row">
+              <div class="form-group">
+              <div class="col-sm-6">
+                 <label class="control-label">CCPD / IPD</label>
+              </div>
+               
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+              <div class="col-sm-6">
+                 <label>Thearapy :</label>
+              </div>
+               <div class="col-sm-6">
+                   <label name="opdThearapy"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+              <div class="col-sm-6">
+                 <label>Total VOL(200ml-80/000 ml) :</label>
+              </div>
+               <div class="col-sm-6">
+                   <label name="opdTotalVol"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+             <div class="row">
+              <div class="form-group">
+              <div class="col-sm-6">
+                 <label>Thearapy Time :</label>
+              </div>
+               <div class="col-sm-6">
+                   <label name="opdThearapyTime"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+              <div class="col-sm-6">
+                 <label>Fill VOL(60ml-3/000 ml) :</label>
+              </div>
+               <div class="col-sm-6">
+                   <label name="opdFillVol"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+              <div class="col-sm-6">
+                 <label>Last Fill VOL(0ml-3/000 ml) :</label>
+              </div>
+               <div class="col-sm-6">
+                   <label name="opdLastFillVol"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+              <div class="col-sm-6">
+                 <label>DEXTROSE (SAME/DIFFERENCE) :</label>
+              </div>
+               <div class="col-sm-6">
+                   <label name="opdDextRose"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+             <div class="row">
+              <div class="form-group">
+              <div class="col-sm-6">
+                 <label>Weight Unit(KG/LG) :</label>
+              </div>
+               <div class="col-sm-6">
+                   <label name="opdWeightUnit"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+              <div class="col-sm-6">
+                 <label>Patient Weight :</label>
+              </div>
+               <div class="col-sm-6">
+                   <label name="opdPatientWeight"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+             <hr/>
+
+         <div class="row">
+              <div class="form-group">
+              <div class="col-sm-6">
+                 <label class="control-label">Tidal</label>
+              </div>
+               
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+              <div class="col-sm-6">
+                 <label>Thearapy :</label>
+              </div>
+               <div class="col-sm-6">
+                   <label name="therapy"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+              <div class="col-sm-6">
+                 <label>Total VOL(200ml-80/000 ml) :</label>
+              </div>
+               <div class="col-sm-6">
+                   <label name="totalOf"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+              <div class="col-sm-6">
+                 <label>Thearapy Time :</label>
+              </div>
+               <div class="col-sm-6">
+                   <label name="therapyTime"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+              <div class="col-sm-6">
+                 <label>Fill VOL(60ml-3/000 ml) :</label>
+              </div>
+               <div class="col-sm-6">
+                   <label name="fillVol"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+             <div class="row">
+              <div class="form-group">
+              <div class="col-sm-6">
+                 <label>Last Fill VOL(0ml-3/000 ml) :</label>
+              </div>
+               <div class="col-sm-6">
+                   <label name="lastFillVol"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+              <div class="col-sm-6">
+                 <label>Full Drain Every(1-99) :</label>
+              </div>
+               <div class="col-sm-6">
+                   <label name="fullDrainEvery"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+              <div class="col-sm-6">
+                 <label>DEXTROSE (SAME/DIFFERENCE)  :</label>
+              </div>
+               <div class="col-sm-6">
+                   <label name="dextRose"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+             <div class="row">
+              <div class="form-group">
+              <div class="col-sm-6">
+                 <label>Weight Unit(KG/LG) :</label>
+              </div>
+               <div class="col-sm-6">
+                   <label name="weightUnit"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+              <div class="col-sm-6">
+                 <label>Patient Weight :</label>
+              </div>
+               <div class="col-sm-6">
+                   <label name="patientWeight"><jsp:text/></label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        </div>
+       
+      </div>
+      
+    </div>
+  </div>
+
+
+   
+<div class="modal fade" id="digitalSignatureModal" role="dialog" >
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Upload Digital Signature</h4>
+        </div>
+        <div class="modal-body marginBottom">
+            <jsp:text/>
+            <div class="form-group">
+              <div class="col-sm-12">
+                <input type="file" id="fileDigitalSignature" />
+              </div>
+            </div>
+
+        </div>
+        <div class="modal-footer marginTop">
+            <br/>
+            <br/>
+            <div class="form-group">
+              <button class="btn btn-primary" id="btnConfirmSave"> 
+                Save
+              </button>
+              <button class="btn btn-danger" data-dismiss="modal"> 
+                 Cancel
+              </button>
+            </div>
+            <!-- <jsp:text/> -->
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
+</div>
+
+
+<!-- load js -->
+    <spring:url value="${urls.getForLookupPath('/resources/scripts/application/cases/manage.js')}" var="setup" />
+    <script type="text/javascript"  src="${setup}" ><!-- required for FF3 and Opera --></script>
+
+</div>

@@ -93,7 +93,7 @@ public class UserController{
         }
     }
 
-       @GetMapping("/getImage")
+    @GetMapping("/getImage")
     public ResponseEntity<String> getImage( @RequestParam(value = "username") String username ) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=utf-8");
@@ -103,6 +103,20 @@ public class UserController{
             return responseEntity;
         } catch (Exception e) {
             LOGGER.error("getImage[Controller] error msg : {}",e.getMessage());
+            return new ResponseEntity<String>("{\"ERROR\":" +e.getMessage()+ "\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/downloadFile")
+    public ResponseEntity<String> downloadFile( @RequestParam(value = "caseId") String caseId,@RequestParam(value = "fileType") String fileType ) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json; charset=utf-8");
+        ResponseEntity<String> responseEntity;
+        try {
+            responseEntity = userService.downloadFile(caseId,fileType);
+            return responseEntity;
+        } catch (Exception e) {
+            LOGGER.error("downloadFile[Controller] error msg : {}",e.getMessage());
             return new ResponseEntity<String>("{\"ERROR\":" +e.getMessage()+ "\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -141,5 +155,22 @@ public class UserController{
         }
 
     }
+
+
+    @GetMapping("/getDigitalSignature")
+    public ResponseEntity<String> getDigitalSignature( @RequestParam(value = "username") String username) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json; charset=utf-8");
+        ResponseEntity<String> responseEntity;
+        try {
+            responseEntity = userService.getDigitalSignature(username);
+            
+            return responseEntity;
+        } catch (Exception e) {
+            LOGGER.error("getDigitalSignature[Controller] error msg : {}",e.getMessage());
+            return new ResponseEntity<String>("{\"ERROR\":" +e.getMessage()+ "\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
 }

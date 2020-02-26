@@ -1,0 +1,225 @@
+<div version="2.0">
+    <style>
+        #top-menu {
+            color: #fff !important;
+            padding-top: 25px;
+        }
+
+        #top-menu a {
+            color: #fff !important;
+        }
+
+        #notiMenu {
+            box-shadow: rgba(0, 0, 0, 0.5) 0 0 5px;
+        }
+
+        @media screen and (max-width: 799px) {
+            #top-menu {
+                position: fixed;
+                background: #fff;
+                color: #5db2fc !important;
+                box-shadow: rgba(0, 0, 0, 0.5) 0 0 5px;
+                top: 0;
+                left: 11px;
+                width: 100vw;
+                padding-top: 15px;
+                padding-bottom: 5px;
+                padding-left: 88px;
+                z-index: 997;
+            }
+
+            #top-menu a {
+                color: #5db2fc !important;
+            }
+
+            #top-menu svg path {
+                fill: #5db2fc !important;
+            }
+
+            .hide-on-sm {
+                display: none;
+            }
+
+            .header-gap {
+                height: 70px;
+            }
+
+            #notiMenu {
+                left: -80px;
+            }
+        }
+    </style>
+
+    <div class="header-gap"></div>
+
+    <div class="row d-sm-flex align-items-center justify-content-between" style="" id="top-menu">
+        <div class="col-6">
+            <label class=" headerB1">${param.title}</label>
+        </div>
+
+        <div class="col-6 text-right">
+            <h1 class="h6" style="position: relative; cursor: pointer; display: inline-block; margin-right: 30px" id="notiButton">
+                <svg xmlns="http://www.w3.org/2000/svg" width="29.274" height="34.967" viewBox="0 0 29.274 34.967">
+                    <defs>
+                        <clipPath id="clip-path">
+                            <rect width="29.274" height="34.967" fill="none" />
+                        </clipPath>
+                    </defs>
+                    <g id="Symbol_7_2" clip-path="url(#clip-path)">
+                        <path id="Path_11" d="M10.01,21.01a3.236,3.236,0,1,0,6.473,0Z"
+                              transform="translate(1.391 10.72)" fill="#fff" />
+                        <path id="Path_12"
+                              d="M17.637,8.819a8.135,8.135,0,0,1,8.132,8.132V28.335H9.505V16.95a8.135,8.135,0,0,1,8.132-8.132Zm0-7.319A2.436,2.436,0,0,0,15.2,3.94v1.9A11.374,11.374,0,0,0,6.253,16.95v9.758L3,29.961v1.626H32.274V29.961l-3.253-3.253V16.95A11.374,11.374,0,0,0,20.077,5.842V3.94a2.436,2.436,0,0,0-2.44-2.44Z"
+                              transform="translate(-3 -1.5)" fill="#fff" />
+                        <rect id="Rectangle_10" width="3.253" height="6.505"
+                              transform="translate(13.011 10.571)" fill="#fff" />
+                        <rect id="Rectangle_11" width="3.253" height="3.253"
+                              transform="translate(13.011 20.329)" fill="#fff" />
+                    </g>
+                </svg>
+
+                <span class="hide-on-sm" style="margin-left:20px">Notification</span>
+
+                <div style="display:inline-block;width:20px;height:20px;background-color:#F26C4F;border-radius: 50px;font-size:13pt;color:White;position: absolute;top:2px;left:20px">
+                    <div style="text-align: center">0</div>
+                </div>
+            </h1>
+
+            <script>
+            $(document).ready(function () {
+                const notiButton = $('#notiButton');
+                const notiMenu = $('#notiMenu');
+                notiButton.click(() => {
+                    notiMenu.toggle()
+                });
+                $(document).click((event) => {
+                    if (notiMenu.has(event.target).length > 0) return;
+                    if (notiButton.has(event.target).length > 0) return;
+                    notiMenu.hide();
+                });
+            });
+            </script>
+
+            <div class="dropdown-menu" style="font-size:16pt!important; width: 400px;" id="notiMenu">
+                <div class="container-fulid" style="color:black;padding:10px;">
+                    Notification
+                    <div id="no1">
+                        <hr class="grayhr90" />
+                        <table class="">
+                            <tr>
+                                <td style="width:30%">
+
+                                    <img style="margin-right:2%"
+                                         src="https://images.unsplash.com/photo-1544868501-b2f493d76e35?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=668&amp;q=80"
+                                         class="rounded-circle" width="50px" height="50px" />
+
+                                    <div style="display:inline-block;width:20px;height:20px;background-color:#F26C4F;border-radius: 50px;font-size:13pt;color:White;margin-left:30px;margin-top:-80px"></div>
+                                </td>
+                                <style> .red {
+                                    color: red;
+                                } </style>
+                                <td style="width:70%">
+                                    <span class="red">Case ID:</span><span> AC0518/01/08</span>
+                                    <span class="red">Pending than 1 day</span>
+                                    <span>08/03/2018  02:30 PM.</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="no2">
+                        <hr class="grayhr90" />
+                        <table class="">
+                            <tr>
+                                <td style="width:30%">
+                                    <img style="margin-right:2%"
+                                         src="https://images.unsplash.com/photo-1544868501-b2f493d76e35?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=668&amp;q=80"
+                                         class="rounded-circle" width="50px" height="50px" />
+                                    <div style="display:inline-block;width:20px;height:20px;background-color:#FFA700;border-radius: 50px;font-size:13pt;color:White;margin-left:30px;margin-top:-80px"></div>
+
+                                </td>
+                                <style> .red {
+                                    color: red;
+                                } </style>
+                                <td style="width:70%">
+                                    <span>Case ID: AN0918/01/08</span>
+                                    <span>Choronic Case Approved</span>
+                                    <span>08/03/2018  02:30 PM.</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="no3">
+                        <hr class="grayhr90" />
+                        <table class="">
+                            <tr>
+                                <td style="width:30%">
+                                    <img style="margin-right:2%"
+                                         src="https://images.unsplash.com/photo-1544868501-b2f493d76e35?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=668&amp;q=80"
+                                         class="rounded-circle" width="50px" height="50px" />
+                                    <div style="display:inline-block;width:20px;height:20px;background-color:#3CB878;border-radius: 50px;font-size:13pt;color:White;margin-left:30px;margin-top:-80px"></div>
+
+                                </td>
+                                <style> .red {
+                                    color: red;
+                                } </style>
+                                <td style="width:70%">
+                                    <span>Case ID: AM0018/01/08</span>
+                                    <span>Choronic Case Reject</span>
+                                    <span>08/03/2018  02:30 PM.</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="no4">
+                        <hr class="grayhr90" />
+                        <table class="">
+                            <tr>
+                                <td style="width:30%">
+                                    <img style="margin-right:2%"
+                                         src="https://images.unsplash.com/photo-1544868501-b2f493d76e35?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=668&amp;q=80"
+                                         class="rounded-circle" width="50px" height="50px" />
+                                </td>
+                                <style> .red {
+                                    color: red;
+                                } </style>
+                                <td style="width:70%">
+                                    <span>Case ID: AC0518/01/08</span>
+                                    <span>Choronic Case Approved</span>
+                                    <span>08/03/2018  02:30 PM.</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <hr class="grayhr90" />
+                    <center><a href="All-Notifaication-BU.html" style="color: #5DB2FC !important;">View all</a></center>
+                </div>
+            </div>
+
+            <a href="/BaxterApplication/users/updateProfile" style="text-decoration: none">
+                <h1 class="h6" style="display: inline-block;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30.412" height="31.265" viewBox="0 0 30.412 31.265">
+                        <defs>
+                            <clipPath id="clip-path">
+                                <rect width="30.411" height="31.265" fill="none" />
+                            </clipPath>
+                        </defs>
+                        <g id="Outline" clip-path="url(#clip-path)">
+                            <g id="Group_5">
+                                <path id="Path_14"
+                                      d="M29.095,19.164a12.182,12.182,0,0,0,.109-1.532,12.182,12.182,0,0,0-.109-1.532l3.3-2.579a.789.789,0,0,0,.188-1L29.454,7.112a.781.781,0,0,0-.688-.391.73.73,0,0,0-.266.047L24.608,8.331A11.421,11.421,0,0,0,21.966,6.8l-.594-4.143A.762.762,0,0,0,20.606,2H14.353a.762.762,0,0,0-.766.657L12.993,6.8a12.01,12.01,0,0,0-2.642,1.532L6.459,6.768a.885.885,0,0,0-.281-.047.774.774,0,0,0-.672.391L2.379,12.521a.771.771,0,0,0,.188,1l3.3,2.579a12.4,12.4,0,0,0-.109,1.532,12.4,12.4,0,0,0,.109,1.532l-3.3,2.579a.789.789,0,0,0-.188,1l3.126,5.409a.781.781,0,0,0,.688.391.73.73,0,0,0,.266-.047l3.892-1.563a11.421,11.421,0,0,0,2.642,1.532l.594,4.143a.762.762,0,0,0,.766.657h6.253a.762.762,0,0,0,.766-.657l.594-4.143a12.01,12.01,0,0,0,2.642-1.532L28.5,28.5a.885.885,0,0,0,.281.047.774.774,0,0,0,.672-.391l3.126-5.409a.789.789,0,0,0-.188-1ZM26,16.491a8.352,8.352,0,0,1,.078,1.141c0,.328-.031.672-.078,1.141l-.219,1.766,1.391,1.094,1.688,1.313-1.094,1.892-1.985-.8-1.626-.657-1.407,1.063a9.155,9.155,0,0,1-1.954,1.141l-1.657.672-.25,1.766-.313,2.11H16.386l-.3-2.11-.25-1.766-1.657-.672a8.87,8.87,0,0,1-1.923-1.11l-1.423-1.094-1.657.672-1.985.8L6.1,22.963,7.788,21.65l1.391-1.094L8.96,18.789c-.047-.485-.078-.844-.078-1.157s.031-.672.078-1.141l.219-1.766L7.788,13.63,6.1,12.317l1.094-1.892,1.985.8,1.626.657,1.407-1.063a9.155,9.155,0,0,1,1.954-1.141L15.823,9l.25-1.766.313-2.11h2.173l.3,2.11L19.106,9l1.657.672a8.87,8.87,0,0,1,1.923,1.11l1.423,1.094,1.657-.672,1.985-.8L28.844,12.3,27.172,13.63l-1.391,1.094Z"
+                                      transform="translate(-2.271 -2)" fill="#fff" />
+                                <path id="Path_15"
+                                      d="M14.253,8a6.253,6.253,0,1,0,6.253,6.253A6.251,6.251,0,0,0,14.253,8Zm0,9.379a3.126,3.126,0,1,1,3.126-3.126A3.136,3.136,0,0,1,14.253,17.379Z"
+                                      transform="translate(0.956 1.379)" fill="#fff" />
+                            </g>
+                        </g>
+                    </svg>
+
+                    <span class="hide-on-sm" style="margin-left:20px">Settings</span>
+                </h1>
+            </a>
+
+        </div>
+
+    </div>
+</div>

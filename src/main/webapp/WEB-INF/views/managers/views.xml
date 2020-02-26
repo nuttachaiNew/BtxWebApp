@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+  <definition name="managers/Dashboard-MG" extends="default">
+    <put-attribute name="body" value="/WEB-INF/views/managers/Dashboard-MG.jspx" />
+  </definition>
+ <definition name="managers/Profile-Setting-MG" extends="defaultMaster">
+    <put-attribute name="body" value="/WEB-INF/views/managers/Profile-Setting-MG.jspx" />
+  </definition>
+   <definition name="managers/View-Account-MG" extends="defaultMaster">
+    <put-attribute name="body" value="/WEB-INF/views/managers/View-Account-MG.jspx" />
+  </definition>
+   <definition name="managers/View-Case-MG" extends="defaultMaster">
+    <put-attribute name="body" value="/WEB-INF/views/managers/View-Case-MG.jspx" />
+  </definition>
+     <definition name="managers/View-Case-MG1" extends="defaultMaster">
+    <put-attribute name="body" value="/WEB-INF/views/managers/View-Case-MG1.jspx" />
+  </definition>
+   <definition name="managers/View-Report-MG" extends="defaultMaster">
+    <put-attribute name="body" value="/WEB-INF/views/managers/View-Report-MG.jspx" />
+  </definition>
+
+
+</tiles-definitions>

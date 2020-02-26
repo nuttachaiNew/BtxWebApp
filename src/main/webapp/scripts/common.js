@@ -4,9 +4,9 @@
 $(document).ready(function () {
 
     // When Focus Element Popover Destroy
-    $('*').focus(function () {
-        $(this).popover('destroy');
-    });
+    // $('*').focus(function () {
+    //     $(this).popover('destroy');
+    // });
 
 });
 

@@ -53,34 +53,35 @@ public class CustomUserDetailsService implements UserDetailsService, PasswordEnc
 			LOGGER.info("User Object : ===================>{}",user);
 			LOGGER.info("UserName : ===================>{}",userName);
 			if(user!=null){
-				this.userName = user.getUsername();
-//				if(user.getIsActive() ==0 ){
-//				    LOGGER.info("==============++ACTIVE =0 ====================");
-//				    throw new UsernameNotFoundException("No user with username '" + userName + "' found!");
-//                }
-				/* Support Detect for Tomcat Attribute */
-				ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-				attr.getRequest().getSession(true).setAttribute("userName",userName);
-				attr.getRequest().getSession(true).setAttribute("userAgent",attr.getRequest().getHeader("User-Agent"));
-		        attr.getRequest().getSession(true).setAttribute("screen_width",String.valueOf(attr.getRequest().getParameter("screen_width")));
-		        attr.getRequest().getSession(true).setAttribute("screen_height",String.valueOf(attr.getRequest().getParameter("screen_height")));
-		  //       attr.getRequest().getSession(true).setAttribute("menu",customUserModel.getValue("MENU"));
-		  //       attr.getRequest().getSession(true).setAttribute("menu_authorize",customUserModel.getValue("MENU_AUTHORIZE"));
-		  //       attr.getRequest().getSession(true).setAttribute("storeId",customUserModel.getValue("STORE_ID"));
-		  //       attr.getRequest().getSession(true).setAttribute("storeCode",customUserModel.getValue("STORE_CODE"));
-		  //       attr.getRequest().getSession(true).setAttribute("storeEngName",customUserModel.getValue("STORE_ENG_NAME"));
-		  //       attr.getRequest().getSession(true).setAttribute("storeLocalName",customUserModel.getValue("STORE_LOCAL_NAME"));
+                try{
+                    this.userName = user.getUsername();
+                    LOGGER.debug("1 get username");
+                    ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+                    LOGGER.debug("2create  attr");
+                
+                    attr.getRequest().getSession(true).setAttribute("userName",userName);
+                    attr.getRequest().getSession(true).setAttribute("userAgent",attr.getRequest().getHeader("User-Agent"));
+                    attr.getRequest().getSession(true).setAttribute("screen_width",String.valueOf(attr.getRequest().getParameter("screen_width")));
+                    attr.getRequest().getSession(true).setAttribute("screen_height",String.valueOf(attr.getRequest().getParameter("screen_height")));
+                    LOGGER.debug("set  attr");
 
-		        /* Add to Bean SESSION SCOPE */
-		        customUserModel.addValue(CustomUserModel.ATTR_CUSTOM_USER, user);
-		        customUserModel.addValue(CustomUserModel.ATTR_CUSTOM_USER_NAME, userName);
-		        
-		        if(user.getAccessToken()==null){
-		        	user.setAccessToken("");
-		        }
-		        LOGGER.info("session : "+attr.getRequest().getSession().getId());
-				return new org.springframework.security.core.userdetails.User(userName, user.getAccessToken(), 
-				             true, user.isAccountNonExpired(), user.isCredentialsNonExpired(), user.isAccountNonLocked() ,user.getAuthorities());
+
+                    /* Add to Bean SESSION SCOPE */
+                    customUserModel.addValue(CustomUserModel.ATTR_CUSTOM_USER, user);
+                    customUserModel.addValue(CustomUserModel.ATTR_CUSTOM_USER_NAME, userName);
+                    LOGGER.debug("customUserModel add value");
+                    
+                    if(user.getAccessToken()==null){
+                        user.setAccessToken("");
+                    }
+                    
+                    LOGGER.info("session : "+attr.getRequest().getSession().getId());
+                    return new org.springframework.security.core.userdetails.User(userName, user.getAccessToken(), 
+                                 true, user.isAccountNonExpired(), user.isCredentialsNonExpired(), user.isAccountNonLocked() ,user.getAuthorities());
+                
+                }catch(Exception e){
+                    throw new RuntimeException(e);
+                }
 			}else{
 				throw new UsernameNotFoundException("No user with username '" + userName + "' found!");
 			}
@@ -107,17 +108,19 @@ public class CustomUserDetailsService implements UserDetailsService, PasswordEnc
 
 
         password = rawPassword.toString();
-        if (ldapAuthen()) {
-            LOGGER.info("is Authentication AD PASS");
+        // if (ldapAuthen()) {
+        //     LOGGER.info("is Authentication AD PASS");
+        //     LOGGER.info("---------------------------------");
+        //     //Action When Ldap
+        //     //restService.saveFlagUserAd(userName);
+        //     return true;
+        // }else {
             LOGGER.info("---------------------------------");
-            //Action When Ldap
-            //restService.saveFlagUserAd(userName);
-            return true;
-        }else {
-            LOGGER.info("---------------------------------");
-            LOGGER.info("---- Match with database authentication ----");
+            LOGGER.info("---- Match with database authentication ---- boolean is : {} ",md5Hash(rawPassword.toString()).equals(encodedPassword));
+
+
             return md5Hash(rawPassword.toString()).equals(encodedPassword);
-        }
+        // }
         
     }
 

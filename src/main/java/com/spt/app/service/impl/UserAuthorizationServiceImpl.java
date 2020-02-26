@@ -42,7 +42,7 @@ public class UserAuthorizationServiceImpl extends AbstractEngineService implemen
             headers.add("Content-Type", "application/json; charset=utf-8");
             headers.add("userName", username);
             HttpEntity<String> entity = new HttpEntity<String>("", headers);
-            String tokenUrl = "http://58.181.168.159:8081/getToken";
+            String tokenUrl = "http://localhost:8081/getToken";
             String token = restTemplate.exchange(tokenUrl, HttpMethod.GET, entity, String.class).getBody();
             LOGGER.debug("token : {}",token.replace("\"", ""));
             headers.add("Authorization", "Bearer " + token.replace("\"", ""));

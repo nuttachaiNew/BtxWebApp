@@ -1,4 +1,10 @@
+  if(session['user'] == "admin" || session['user'] == "temp"  ){
+        window.location.href = session['context']+"/admins/setupAdmin";
+    }else{
+        window.location.href = session['context']+"/casemanagements/dashboard";
+    }
 
+    
 var $txtArea = $("#area");
 var $email = $("#email");
 var $txtFile = $("#file");
@@ -9,7 +15,9 @@ var $txtTelNo = $("#txtTelNo");
 var $btnSave = $("#btnSave");
 var user = null;
 $(document).ready(function () {
-	renderData();
+  
+
+	// renderData();
 });
 
 function getImage(){
@@ -40,7 +48,7 @@ function getUserProfile(){
         dataType: "json",
         async: false
     }).responseJSON;
-	    return json;
+    return json;
 }
 
 function renderData(){
@@ -53,6 +61,9 @@ function renderData(){
 	$txtLastName.val(user.lastName);
 	$txtTelNo.val(user.telephoneNumber);
 	getImage();
+     
+    // if(user.role.name == "BU"){
+    // }
 }
 
 $btnSave.click(function(){
@@ -71,6 +82,7 @@ $btnSave.click(function(){
 	if($txtFile.val()!=""){
 		formData.append("image",$txtFile[0].files[0]);
 	}
+    formData.append("json",JSON.stringify(data));
 	
 
 	$.ajax({

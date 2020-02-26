@@ -1,0 +1,237 @@
+<div xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <style>
+        .sidebar {
+            background: #fff;
+            position: relative;
+        }
+
+        .sidebar .avatar {
+            margin-top: 8px !important;
+        }
+
+        .sidebar .inner {
+            position: absolute;
+            background: #fff;
+            height: 100%;
+            width: 100%;
+            z-index: 999;
+            transition: 200ms;
+        }
+
+        .sidebar .nav-item {
+            width: 100%;
+        }
+
+        .sidebar .nav-item:hover path {
+            fill: #fff !important;
+        }
+
+        .sidebar .nav-item:hover i {
+            color: #fff !important;
+        }
+
+        .sidebar .avatar {
+            margin-top: 20px;
+        }
+
+        .sidebar #profileImage {
+            width: 100px;
+            height: 100px;
+        }
+
+        @media screen and (max-width: 799px) {
+            .sidebar {
+                width: 64px !important;
+            }
+
+            .sidebar .hide-on-mini {
+                display: none !important;
+            }
+
+            .sidebar .inner {
+                position: fixed;
+                width: 64px !important;
+                box-shadow: rgba(0, 0, 0, 0.5) 0 0 5px;
+            }
+
+            .sidebar.expand .inner {
+                width: 14rem !important;
+            }
+
+            .sidebar.expand .hide-on-mini {
+                display: inherit !important;
+            }
+
+            .sidebar #profileImage {
+                width: 50px;
+                height: 50px;
+            }
+        }
+    </style>
+
+    <script>
+    $(document).ready(function () {
+        const sideBar = $('#accordionSidebar');
+        const backdrop = $('#sidebarBackdrop');
+        const navLink = $('.nav-link ');
+        sideBar.click((event) => {
+            if (navLink.has(event.target).length > 0) return;
+            if (window.innerWidth > 799) return;
+            if (sideBar.hasClass('expand')) {
+                sideBar.removeClass('expand');
+                backdrop.hide();
+            } else {
+                sideBar.addClass('expand');
+                backdrop.show();
+            }
+        });
+
+        backdrop.click(() => {
+            sideBar.removeClass('expand');
+            backdrop.hide();
+        })
+    });
+    </script>
+
+    <div class="modal-backdrop" id="sidebarBackdrop" style="display: none; z-index: 998; background: rgba(0, 0, 0, 0.5);">.</div>
+
+    <ul class="navbar-nav bg-gradient-light sidebar sidebar-light accordion" id="accordionSidebar">
+        <div class="inner">
+            <!-- Sidebar - Brand -->
+            <div style="text-align:center">
+                <div class="rounded-circle avatar" style="display: inline-block; overflow: hidden">
+                    <img src="${img_user}" id="profileImage" />
+                </div>
+                <div class="hide-on-mini" style="padding: 12px 0">
+                    <div class="mr-2 text-light-600 xx-large" id="profileName">Valerie Luna</div>
+                    <div class="mr-2 text-light-600 large" id="profileRole" style="color:black">CS</div>
+                    <div class="mr-2 text-light-600 large" id="profileArea">Baxter Area</div>
+                    <div>
+                        <jsp:text />
+                    </div>
+                </div>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider my-0" />
+
+                <!-- Nav Item - Dashboard -->
+                <style>
+                    i.case:hover {
+                        background-color: #F64236 !important;
+                        color: white
+                    }
+                </style>
+
+            </div>
+
+            <ul class="nav nav-pills" id="menubarbu">
+                <li class="nav-item" id="Dashboard">
+                    <a class="nav-link text-center" href="/BaxterApplication/casemanagements/dashboard" style="color:#219FEC">
+                        <div class="input-group">
+                            <div style="width:70px">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="26" viewBox="0 0 26 26">
+                                    <path id="Path_67" data-name="Path 67"
+                                          d="M26.111,5.889V8.778H20.333V5.889h5.778m-14.444,0v8.667H5.889V5.889h5.778M26.111,17.444v8.667H20.333V17.444h5.778M11.667,23.222v2.889H5.889V23.222h5.778M29,3H17.444v8.667H29V3ZM14.556,3H3V17.444H14.556V3ZM29,14.556H17.444V29H29V14.556ZM14.556,20.333H3V29H14.556V20.333Z"
+                                          transform="translate(-3 -3)" fill="#219FEC"
+                                    />
+                                </svg>
+                            </div>
+                            <span class="hide-on-mini">Dashboard</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item" id="ViewCase">
+                    <a class="nav-link text-center collapse-inner"
+                       href="/BaxterApplication/casemanagements/listviewcase" style="color:#F26C4F">
+                        <div class="input-group">
+                            <div style="width:70px">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="22.75"
+                                     viewBox="0 0 26 22.75">
+                                    <path id="Path_9" data-name="Path 9"
+                                          d="M4,21.25H30V18H4Zm0,6.5H30V24.5H4Zm0-13H30V11.5H4ZM4,5V8.25H30V5Z"
+                                          transform="translate(-4 -5)" fill="#f26c4f"
+                                    />
+                                </svg>
+                            </div>
+                            <span class="hide-on-mini">View Case</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item" id="depositView">
+                    <a class="nav-link text-center collapse-inner"
+                       href="/BaxterApplication/casemanagements/depositlist" style="color:#FFA700">
+                        <div class="input-group">
+                            <div style="width:70px">
+                                <i class="far fa-calendar-alt icon" style="color:#FFA700">
+                                    <jsp:text />
+                                </i>
+                            </div>
+                            <span class="hide-on-mini">Return Deposit</span>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="nav-item" id="returnTracking">
+                    <a class="nav-link text-center" href="/BaxterApplication/casemanagements/swapMachine" style="color:orange">
+                        <div class="input-group">
+                            <div style="width:70px">
+                                <i style="color:orange" class="fas fa-exchange-alt">
+                                    <jsp:text />
+                                </i>
+                            </div>
+                            <span>Swap/Return <br />Machine</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item" id="ViewReport">
+                    <a class="nav-link text-center" href="/BaxterApplication/casemanagements/viewReport" style="color:#3CB878">
+                        <div class="input-group">
+                            <div style="width:70px">
+                                <i class="far fa-chart-bar icon" style="color:#3CB878">
+                                    <jsp:text />
+                                </i>
+                            </div>
+                            <span class="hide-on-mini">View Report</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item" id="viewProduct">
+                    <a class="nav-link text-center" href="/BaxterApplication/machines/setupMachine" style="color:#5981BA">
+                        <div class="input-group">
+                            <div style="width:70px">
+                                <i class="fas fa-cog icon" style="color:#5981BA">
+                                    <jsp:text />
+                                </i>
+                            </div>
+                            <span class="hide-on-mini">Manage Product</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item" id="productTracking">
+                    <a class="nav-link text-center" href="/BaxterApplication/machines/productTracking" style="color:#FCA338">
+                        <div class="input-group">
+                            <div style="width:70px">
+                                <i style="color:#FCA338" class="far fa-calendar-alt icon">
+                                    <jsp:text />
+                                </i>
+                            </div>
+                            <span class="hide-on-mini">Product tracking</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item" id="logout">
+                    <a id="logout" href="#" class="nav-link text-center" onlick="submitlogout()" style="color:#5ADA79;">
+                        <div class="input-group">
+                            <div style="width:70px">
+                                <i class="fas fa-sign-out-alt" style="color:#5ADA79">
+                                    <jsp:text />
+                                </i>
+                            </div>
+                            <span class="hide-on-mini">Logout</span>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </ul>
+</div>

@@ -121,6 +121,12 @@ public class UserServiceImpl extends AbstractEngineService implements BaseCommon
 	}
 
 	@Override
+	public ResponseEntity<String> downloadFile(String caseId,String fileType) {
+		        String url = "/files/downloadFile?caseId="+caseId+"&fileType="+fileType;
+		        return getResultStringAndSetUser(url);
+	}
+
+	@Override
 	public ResponseEntity<String> savePut(Long id,Map parameter) {
 		// TODO Auto-generated method stub
 		String url = "/users/"+id;
@@ -234,4 +240,11 @@ public class UserServiceImpl extends AbstractEngineService implements BaseCommon
         }
 	}
 
+
+	@Override
+	public ResponseEntity<String> getDigitalSignature(String username) {
+		        String url = "/files/downloadDigitalSignatureFileUser?username="+username;
+		        LOGGER.debug("url is : {}",url);
+		        return getResultStringAndSetUser(url);
+	}
 }

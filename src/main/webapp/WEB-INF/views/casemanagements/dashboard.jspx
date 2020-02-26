@@ -1,0 +1,470 @@
+<div xmlns:spring="http://www.springframework.org/tags"   xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"  xmlns:form="http://www.springframework.org/tags/form"  xmlns:c="http://java.sun.com/jsp/jstl/core"  xmlns:jsp="http://java.sun.com/JSP/Page"    version="2.0">
+  <jsp:directive.page contentType="text/html;charset=UTF-8" />
+  <jsp:output omit-xml-declaration="yes" />
+
+
+  <c:set scope="request" var="LB_CODE"><spring:message code="LB_CODE"/></c:set>
+  <c:set scope="request" var="LB_NAME"><spring:message code="LB_NAME"/></c:set>
+  <c:set scope="request" var="LB_SAVED_DATE"><spring:message code="LB_SAVED_DATE"/></c:set>
+  <c:set scope="request" var="LB_RECIEVE_DATE"><spring:message code="LB_RECIEVE_DATE"/></c:set>
+  <c:set scope="request" var="LB_DELETE"><spring:message code="LB_DELETE"/></c:set>
+<!--  -->
+
+
+    <spring:url value="/resources/vendor/chart.js/Chart.js" var="chart_js_url" />
+    <spring:url value="/resources/vendor/chart.js/Chart.min.js" var="Chart_min_js"/>
+
+
+    <spring:url value="/resources/js/demo/chart-area-demo.js" var="chart_area_demo_js" />
+    <spring:url value="/resources/js/demo/chart-pie-demo.js" var="chart_pie_demo_js" />
+    <spring:url value="/resources/js/demo/chart-bar-demo.js" var="chart_bar_demo_js" />
+
+    <script src="${chart_js_url}"><!-- required for FF3 and Opera --></script>
+
+
+
+    <style>
+         #Dashboard{ background-color: #72A7E9; }
+         #Dashboard a { color: white !important; }
+         #Dashboard path { fill: white !important; }
+         .circleNew {
+           border: 1px solid #3CB878;
+           padding: 10px;
+           border-radius: 50px;
+           background-color:#3CB878;
+           color:white;
+           text-align:center;
+        }
+        .circleApprove {
+          border: 1px solid #FFA700;
+          padding: 10px;
+          border-radius: 30px;
+          background-color:#FFA700;
+          color:white;
+          text-align:center;
+       }
+       .circleReject {
+         border: 1px solid #F26C4F;
+         padding: 10px;
+         border-radius: 30px;
+         background-color:#F26C4F;
+         color:white;
+         text-align:center;
+      }
+      .GraphRed {
+      border: 1px solid #FD643F;
+      padding: 10px;
+      border-radius: 30px;
+      background-color:#FD643F;
+      color:white;
+      text-align:center;
+      width:10%auto;
+      height:10%auto;
+      }
+      .GraphGreen {
+      border: 1px solid #3ACE91;
+      padding: 10px;
+      border-radius: 30px;
+      background-color:#3ACE91;
+      color:white;
+      text-align:center;
+      width:10%auto;
+      height:10%auto;
+      }
+      .GraphBlue {
+      border: 1px solid #488BF9;
+      padding: 10px;
+      border-radius: 30px;
+      background-color:#488BF9;
+      color:white;
+      text-align:center;
+      width:10%auto;
+      height:10%auto;
+      }
+      .GraphWhite {
+      border: 1px solid #DDE2EB;
+      padding: 10px;
+      border-radius: 30px;
+      background-color:#DDE2EB;
+      color:white;
+      text-align:center;
+      width:10%auto;
+      height:10%auto;
+      }
+
+    </style>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <jsp:include page="../sidebar.jspx"/>
+
+        <div id="content-wrapper" class="d-flex flex-column" style="background-color:#5DB2FC">
+
+          <!-- Main Content -->
+          <div id="content">
+
+            <!-- Topbar -->
+
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+              <!-- Page Heading -->
+              <jsp:include page="../appbar.jspx">
+                <jsp:param name="title" value="Dashboard"/>
+              </jsp:include>
+
+              <!-- Content Row -->
+
+              <hr/>
+              <div class="row" style="height:45px">
+                <div class="col" style="text-align:left">
+                <b style="color:white;" class="headerB2">Case Category</b>
+
+                </div>
+                <div class="col" style="text-align:right">
+                  <div class="dropdown">
+                    <input type="date" class="btn btn-light" value="" id="datePicker1" style="font-size:13pt;color:#5DB2FC" />
+
+                  </div>
+                </div><br/>
+
+              </div>
+
+              <div class="row">
+                <!-- Choronic Case -->
+                <div class="col-lg-3 col-md-6 mb-3" id="divChronic">
+                  <div class="card shadow overflow-hidden">
+                    <div class="card-header" style="margin-buttom:-30%">
+                      <div class="row" style="margin-bottom:-10%">
+                        <table class="table table-borderless">
+                          <tbody>
+                            <tr>
+                              <td style="font-weight:bold"><center>New</center></td>
+                              <td class="approach"  style="font-weight:bold"><center>Complete</center></td>
+                              <td class="reject" style="font-weight:bold"><center>Reject</center></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="card-body" style="margin:-3%" >
+                      <div class="col">
+                        <table class="table table-borderless" >
+                          <tbody>
+                            <tr >
+                              <td>
+                                <center><div class="circleNew" id="chronicNew"  style="width:50px;">0</div></center>
+                              </td>
+                              <td class="approach">
+                                <center><div class="circleApprove approach" id="chronicApprove"  style="width:50px">0</div></center>
+                              </td>
+                              <td  class="reject">
+                                <center><div  class="circleReject reject" id="chronicReject"  style="width:50px">0</div></center>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="card-body bg-success" style="text-align:center;color:white;margin:-0.3%">
+                      Chronic Case
+                    </div>
+                  </div>
+                </div>
+                <!-- Acute Case -->
+                <div class="col-lg-3 col-md-6 mb-3" id="divAcute">
+                  <div class="card shadow overflow-hidden">
+                    <div class="card-header" style="margin-buttom:-30%">
+                      <div class="col" style="margin-bottom:-10%">
+                        <table class="table table-borderless">
+                          <tbody>
+                            <tr>
+                              <td style="font-weight:bold"><center>New</center></td>
+                              <td style="font-weight:bold" class="approach"><center>Complete</center></td>
+                              <td style="font-weight:bold" class="reject" ><center>Reject</center></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div style="margin:-3%" class="card-body">
+                      <div class="col"><table class="table table-borderless">
+                        <tbody>
+                          <tr>
+                            <td><center><div style="width:50px;" id="acuteNew" class="circleNew">0</div></center></td>
+                            <td class="approach"><center><div style="width:50px" id="acuteApprove" class="circleApprove">0</div></center></td>
+                            <td class="reject"><center><div style="width:50px" id="acuteReject" class="circleReject ">0</div></center></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      </div>
+                    </div>
+
+                    <div class="card-body bg-danger" style="text-align:center;color:white;margin:-0.3%">Acute Case</div>
+                  </div>
+                </div>
+                <!-- Change Case -->
+                <div class="col-lg-3 col-md-6 mb-3" id="divSwap">
+                  <div class="card shadow overflow-hidden">
+                    <div class="card-header" style="margin-buttom:-30%">
+                      <div class="row" style="margin-bottom:-10%">
+                        <table class="table table-borderless">
+                          <tbody>
+                            <tr>
+                              <td style="font-weight:bold"><center>New</center></td>
+                              <td style="font-weight:bold" class="approach"><center>Complete</center></td>
+                              <td style="font-weight:bold" class="reject" ><center>Reject</center></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div style="margin:-3%" class="card-body">
+                      <div class="col"><table class="table table-borderless">
+                        <tbody>
+                          <tr>
+                            <td><center><div style="width:50px;" id="changeNew" class="circleNew">0</div></center></td>
+                            <td class="approach"><center><div style="width:50px" id="changeApprove" class="circleApprove" >0</div></center></td>
+                            <td class="reject"><center><div style="width:50px" id="changeReject" class="circleReject reject">0</div></center></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      </div>
+                    </div>
+
+                  <div class="card-body bg-info" style="text-align:center;color:white;margin:-0.3%">Swap Case </div>
+                  </div>
+                </div>
+                 <div class="col-lg-3 col-md-6 mb-3"  id="divReturn">
+                  <div class="card shadow overflow-hidden">
+                    <div class="card-header" style="margin-buttom:-30%">
+                      <div class="row" style="margin-bottom:-10%">
+                        <table class="table table-borderless">
+                          <tbody>
+                            <tr>
+                              <td style="font-weight:bold"><center>New</center></td>
+                              <td style="font-weight:bold" class="approach"><center>Complete</center></td>
+                              <td style="font-weight:bold" class="reject" ><center>Reject</center></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div style="margin:-3%" class="card-body">
+                      <div class="col"><table class="table table-borderless">
+                        <tbody>
+                          <tr>
+                            <td><center><div style="width:50px;" id="returnNew" class="circleNew">0</div></center></td>
+                            <td class="approach"><center><div style="width:50px" id="returnApprove" class="circleApprove" >0</div></center></td>
+                            <td class="reject"><center><div style="width:50px" id="returnReject" class="circleReject reject">0</div></center></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      </div>
+                    </div>
+
+                  <div class="card-body bg-warning" style="text-align:center;color:white;margin:-0.3%">  Return Case</div>
+                  </div>
+                </div>
+              </div>
+                <!-- buttom detail -->
+                <style>
+                .toggle2 {
+                  -webkit-appearance: none;
+                  -moz-appearance: none;
+                  appearance: none;
+                  width: 82px;
+                  height: 32px;
+                  display: inline-block;
+                  position: relative;
+                  border-radius: 50px;
+                  overflow: hidden;
+                  outline: none;
+                  border: none;
+                  cursor: pointer;
+                  background-color: #5DB2FC;
+                  transition: background-color ease 0.3s;
+                 }
+
+                 .toggle2:before {
+                  content: "Onlyme All";
+                  display: block;
+                  position: absolute;
+                  z-index: 2;
+                  width: 28px;
+                  height: 28px;
+                  background: #fff;
+                  left: 2px;
+                  right: 2px;
+                  top: 2px;
+                  border-radius: 50%;
+                  font: 10px/28px Helvetica;
+                  text-transform: uppercase;
+                  font-weight: bold;
+                  text-indent: -45px;
+                  word-spacing: 37px;
+                  color: #fff;
+                  text-shadow: -1px -1px rgba(0,0,0,0.15);
+                  white-space: nowrap;
+                  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+                  transition: all cubic-bezier(0.3, 1.5, 0.7, 1) 0.3s;
+                 }
+
+                 .toggle2:checked {
+                  background-color: #5DB2FC;
+
+                 }
+
+                 .toggle2:checked:before {
+                   left: 59px;
+                 }
+                </style>
+              <div class="row">
+
+
+                <div class="col-lg-6 mb-4">
+                  <div class="card shadow mb-4" style="background-color:#cde5fa!important">
+                        <div class="card-body py-3" style="background-color:#cde5fa!important">
+                          <div class="row">
+                            <div class="col-4">
+                                <div class="m-0 font-weight-bold text-primary headerB2" style="font-style:bold">Activities</div>
+                            </div>
+                            <div class="col-3">
+                              <input class="toggle2" type="checkbox" style="width:90px"/>
+                            </div>
+                            <div class="col-5">
+                              <div class="input-group">
+
+                                   <input placeholder="Search by Name" id="tNAM" class="form-control form-control-user" style="margin-right:15px;border-radius: 2rem;border: 0px;font-size:10pt;color:#5DB2FC!important" type="text"/>
+                                   <div id="searchBtn" style="background-color:#5DB2FC;border-radius: 2rem;border: 0px;width:60px;height:34px; padding-top: 2px; text-align:center">
+                                   <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40.371 40.371" height="30.371" width="30.371" id="baseline-search-24px"><defs><clipPath id="clip-path">
+                                     <rect fill="none" height="19.42" width="19.42"></rect></clipPath></defs><g clip-path="url(#clip-path)" transform="translate(5.046 5.046)" data-name="Symbol 8 – 2" id="Symbol_8_2">
+                                     <path fill="white" transform="translate(-3 -3)" d="M24.027,21.5H22.7l-.471-.454a10.95,10.95,0,1,0-1.177,1.177l.454.471v1.329l8.411,8.394,2.506-2.506Zm-10.093,0a7.57,7.57,0,1,1,7.57-7.57A7.559,7.559,0,0,1,13.934,21.5Z" data-name="Path 17" id="Path_17"></path></g>
+                                     <path fill="none" d="M0,0H40.371V40.371H0Z" data-name="Path 18" id="Path_18"></path>
+                                   </svg>
+                                 </div>
+                              </div>
+                            </div>
+                        </div>
+                        </div>
+                       <div id="renderActivity" style="background-color:#cde5fa!important">
+                        <jsp:text/>
+                       </div>
+                            <!--  -->
+                      <!--   <div class="text-center" style="margin:3%">
+                           <form class="user text-center">
+
+                         </form>
+                        </div> -->
+                  </div>
+
+                </div>
+                <!-- end left -->
+                <div class="col-lg-6 mb-4">
+                  <div class="card shadow mb-4" style="background-color:#cde5fa!important">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-body py-3" style="background-color:#cde5fa!important">
+                      <div class="row">
+                        <div class="col-xl-6 col-sm-4" style="text-align:left">
+                          <h6 class="m-0 font-weight-bold text-primary headerB2">Static Graph</h6>
+                        </div>
+                        <div class="col-xl-6 col-sm-8" style="text-align:right">
+                          <div class="row">
+                            <div class="col-3" style="text-align:right">
+                              <h6 class="m-0 text-primary">Filter</h6>
+                            </div>
+                            <div class="col-9" style="color:#1FD5F1">
+                              <div class="col-9" style="color:#1FD5F1">
+                                <div class="dropdown">
+                                  <input type="date" id="datePicker2" class="btn btn-light" style="border-style:solid 1px;font-size:13pt;color:#5DB2FC"/>
+
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body" id="graph" style="background-color:#cde5fa!important">
+                      <div class="row">
+
+
+                        <div class="col-6">
+
+                          <table class="table table-borderless" style="width:200px;margin:-15px;color:#000000;">
+                           <tr>
+                             <td>
+                               <div class="text-center">
+                                 <canvas id="GREEN1" style="height: 70px; max-width: 70px; margin: -15px auto;"><jsp:text/></canvas>
+                                 <h6 style="margin-top:-40px"><span class="label green badge">19%</span></h6>
+                               </div>
+                             </td>
+                             <td>Choronic Case</td>
+                           </tr>
+                           <tr>
+                             <td>
+                               <div class="text-center">
+                                 <canvas id="RED1" style="height: 70px; max-width: 70px; margin: -15px auto;"><jsp:text/></canvas>
+                                 <h6 style="margin-top:-40px"><span class="label green badge">20%</span></h6>
+                               </div>
+                             </td>
+                             <td>Acute Case</td>
+                           </tr>
+                           <tr>
+                             <td>
+                               <div class="text-center">
+                                 <canvas id="BLUE1" style="height: 70px; max-width: 70px; margin: -15px auto;"><jsp:text/></canvas>
+                                 <h6 style="margin-top:-40px"><span class="label green badge">10%</span></h6>
+                               </div>
+                             </td>
+                             <td>Change Machine</td>
+                           </tr>
+                           <tr>
+                             <td>
+                               <div class="text-center">
+                                 <canvas id="YELLOW1" style="height: 70px; max-width: 70px; margin: -15px auto;"><jsp:text/></canvas>
+                                 <h6 style="margin-top:-40px"><span class="label green badge">2%</span></h6>
+                               </div>
+                             </td>
+                             <td>Return Machine</td>
+                           </tr>
+                          </table>
+                        </div>
+
+                        <div class="col-6">
+
+
+                          <div class="card-body" style="text-align:left">
+                              <canvas id="doughnutChart" style="height: 219px; max-width: 300px; margin: 10px auto;"></canvas>
+                           </div>
+                        </div>
+                      </div>
+
+
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+
+
+          </div>
+
+
+
+        </div>
+    </div>
+
+
+      <script src="https://canvasjs.com/assets/script/canvasjs.min.js"><!-- required for FF3 and Opera --></script>
+      <spring:url value="${urls.getForLookupPath('/resources/scripts/application/cases/dashboard.js')}" var="setup" />
+    <script type="text/javascript"  src="${setup}" ><!-- required for FF3 and Opera --></script>
+
+</div>

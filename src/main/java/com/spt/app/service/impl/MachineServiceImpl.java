@@ -36,4 +36,44 @@ public class MachineServiceImpl extends AbstractEngineService implements Machine
 			String url = "/api/machines/findAllMachine";
 	        return getResultStringAndSetUser(url);
 	}
+
+	@Override
+	public ResponseEntity<String> findById(Long id) {
+			String url = "/api/machines/findById?id="+id;
+	        return getResultStringAndSetUser(url);
+	}
+
+	@Override
+	public ResponseEntity<String> insert(String json){
+        try{
+			String url = "/api/machines/insert";
+            return postWithStringJson(json, HttpMethod.POST, url);
+        }catch(Exception e){
+			e.printStackTrace();
+        	throw new RuntimeException(e.getMessage());
+        }
+	}
+
+	@Override
+	public ResponseEntity<String> insertList(String json){
+        try{
+			String url = "/api/machines/insertList";
+            return postWithStringJson(json, HttpMethod.POST, url);
+        }catch(Exception e){
+			e.printStackTrace();
+        	throw new RuntimeException(e.getMessage());
+        }
+	}
+
+	@Override
+	public ResponseEntity<String> update(String json){
+        try{
+			String url = "/api/machines/update";
+            return postWithStringJson(json, HttpMethod.POST, url);
+        }catch(Exception e){
+			e.printStackTrace();
+        	throw new RuntimeException(e.getMessage());
+        }
+	}
+
 }
